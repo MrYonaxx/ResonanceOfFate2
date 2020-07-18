@@ -1,0 +1,384 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c46c2f1b127d9446a53a2d77ba1b646, type: 3}
+  m_Name: PartyData
+  m_EditorClassIdentifier: 
+  characterStatControllers:
+  - characterData: {fileID: 11400000, guid: 3deef4d54c1d73b41a76b9faf6c7e120, type: 2}
+    hp: 812
+    hpMax: 812
+    scratch: 0
+    characterBaseStat:
+      HpMax: 812
+      Attack: 0
+      Defense: 0
+      MotionSpeed: 0
+      AimSpeed: 0
+      AimAcceleration: 0
+      MinAimDistance: 0
+      MaxAimDistance: 0
+      MaxMagazine: 0
+      Speed: 0
+      Jump: 1
+      Gravity: 0
+      GravityMax: 0
+      Mass: 0
+      KnockbackTime: 0
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    characterBonusStat:
+      HpMax: 0
+      Attack: 0
+      Defense: 0
+      MotionSpeed: 0
+      AimSpeed: 0
+      AimAcceleration: 0
+      MinAimDistance: 0
+      MaxAimDistance: 0
+      MaxMagazine: 0
+      Speed: 0
+      Jump: 1
+      Gravity: 0
+      GravityMax: 0
+      Mass: 0
+      KnockbackTime: 0
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    characterPercentageBonusStat:
+      HpMax: 1
+      Attack: 1
+      Defense: 1
+      MotionSpeed: 1
+      AimSpeed: 1
+      AimAcceleration: 1
+      MinAimDistance: 1
+      MaxAimDistance: 1
+      MaxMagazine: 1
+      Speed: 1
+      Jump: 1
+      Gravity: 1
+      GravityMax: 1
+      Mass: 1
+      KnockbackTime: 1
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    weaponEquipped: 0
+    weapons: []
+  - characterData: {fileID: 11400000, guid: 3750f2cff06b4e24db07e69c394c2c80, type: 2}
+    hp: 757
+    hpMax: 757
+    scratch: 0
+    characterBaseStat:
+      HpMax: 757
+      Attack: 0
+      Defense: 0
+      MotionSpeed: 0
+      AimSpeed: 0
+      AimAcceleration: 0
+      MinAimDistance: 0
+      MaxAimDistance: 0
+      MaxMagazine: 0
+      Speed: 0
+      Jump: 1
+      Gravity: 0
+      GravityMax: 0
+      Mass: 0
+      KnockbackTime: 0
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    characterBonusStat:
+      HpMax: 0
+      Attack: 0
+      Defense: 0
+      MotionSpeed: 0
+      AimSpeed: 0
+      AimAcceleration: 0
+      MinAimDistance: 0
+      MaxAimDistance: 0
+      MaxMagazine: 0
+      Speed: 0
+      Jump: 1
+      Gravity: 0
+      GravityMax: 0
+      Mass: 0
+      KnockbackTime: 0
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    characterPercentageBonusStat:
+      HpMax: 1
+      Attack: 1
+      Defense: 1
+      MotionSpeed: 1
+      AimSpeed: 1
+      AimAcceleration: 1
+      MinAimDistance: 1
+      MaxAimDistance: 1
+      MaxMagazine: 1
+      Speed: 1
+      Jump: 1
+      Gravity: 1
+      GravityMax: 1
+      Mass: 1
+      KnockbackTime: 1
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    weaponEquipped: 0
+    weapons: []
+  - characterData: {fileID: 11400000, guid: 4ff74728f6cfea14c8141b0a4356808a, type: 2}
+    hp: 668
+    hpMax: 668
+    scratch: 0
+    characterBaseStat:
+      HpMax: 668
+      Attack: 0
+      Defense: 0
+      MotionSpeed: 0
+      AimSpeed: 0
+      AimAcceleration: 0
+      MinAimDistance: 0
+      MaxAimDistance: 0
+      MaxMagazine: 0
+      Speed: 0
+      Jump: 1
+      Gravity: 0
+      GravityMax: 0
+      Mass: 0
+      KnockbackTime: 0
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    characterBonusStat:
+      HpMax: 0
+      Attack: 0
+      Defense: 0
+      MotionSpeed: 0
+      AimSpeed: 0
+      AimAcceleration: 0
+      MinAimDistance: 0
+      MaxAimDistance: 0
+      MaxMagazine: 0
+      Speed: 0
+      Jump: 1
+      Gravity: 0
+      GravityMax: 0
+      Mass: 0
+      KnockbackTime: 0
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    characterPercentageBonusStat:
+      HpMax: 1
+      Attack: 1
+      Defense: 1
+      MotionSpeed: 1
+      AimSpeed: 1
+      AimAcceleration: 1
+      MinAimDistance: 1
+      MaxAimDistance: 1
+      MaxMagazine: 1
+      Speed: 1
+      Jump: 1
+      Gravity: 1
+      GravityMax: 1
+      Mass: 1
+      KnockbackTime: 1
+      KnockbackResistance: 0
+      StunTime: 0
+      StunResistance: 0
+      LaunchImpulse: 0
+      LaunchResistance: 0
+      RecoveryTime: 0
+      attackDataStat:
+        damage: 0
+        damageVariance: 0
+        knockbackDamage: 0
+        knockbackDamageVariance: 0
+        launchDamage: 0
+        launchDamageVariance: 0
+        stunDamage: 0
+        stunDamageVariance: 0
+        accuracy: 0
+        accuracyVariance: 0
+        AttackElement: []
+        AttackStatus: []
+      customStats:
+        customStats: []
+      ElementalResistances: []
+      StatusResistances: []
+    weaponEquipped: 0
+    weapons: []

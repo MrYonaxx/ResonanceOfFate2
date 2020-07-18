@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58cba562d3cbac48b58e4085fcc91b0, type: 3}
+  m_Name: Zephyr_Stat_Growth
+  m_EditorClassIdentifier: 
+  growthStat:
+    StatEditor:
+    - columnName: Basic
+      statDictionary:
+      - statName: HPMax
+        statValue: 62.9
+        modifiable: 0
+      - statName: Attack
+        statValue: 0
+        modifiable: 0
+      - statName: Defense
+        statValue: 0
+        modifiable: 0
+      - statName: Motion Speed
+        statValue: 0
+        modifiable: 0
+      columnNameCenter: Weapon
+      statDictionary2:
+      - statName: Aim Speed
+        statValue: 0
+        modifiable: 0
+      - statName: Aim Acceleration
+        statValue: 0
+        modifiable: 0
+      - statName: Min Aim Distance
+        statValue: 0
+        modifiable: 0
+      - statName: Max Aim Distance
+        statValue: 0
+        modifiable: 0
+      - statName: Max Magazine
+        statValue: 1
+        modifiable: 0
+      columnNameRight: Character
+      statDictionary3:
+      - statName: Speed
+        statValue: 0
+        modifiable: 0
+      - statName: Jump
+        statValue: 0
+        modifiable: 0
+      - statName: Gravity
+        statValue: 0
+        modifiable: 0
+      - statName: Gravity Max
+        statValue: 0
+        modifiable: 0
+      - statName: Mass
+        statValue: 0
+        modifiable: 0
+    - columnName: Attack
+      statDictionary:
+      - statName: Damage
+        statValue: 0
+        modifiable: 0
+      - statName: Knockback Damage
+        statValue: 0
+        modifiable: 0
+      - statName: Launch Damage
+        statValue: 0
+        modifiable: 0
+      - statName: Stun Damage
+        statValue: 0
+        modifiable: 0
+      - statName: Accuracy
+        statValue: 0
+        modifiable: 0
+      columnNameCenter: Attack Variance
+      statDictionary2:
+      - statName: Damage Variance
+        statValue: 0
+        modifiable: 0
+      - statName: Knockback Variance
+        statValue: 0
+        modifiable: 0
+      - statName: Launch Variance
+        statValue: 0
+        modifiable: 0
+      - statName: Stun Variance
+        statValue: 0
+        modifiable: 0
+      - statName: Accuracy Variance
+        statValue: 0
+        modifiable: 0
+      columnNameRight: Defense
+      statDictionary3:
+      - statName: Knockback Time
+        statValue: 0
+        modifiable: 0
+      - statName: Knockback Resistance
+        statValue: 0
+        modifiable: 0
+      - statName: Launch Resistance
+        statValue: 0
+        modifiable: 0
+      - statName: Stun Resistance
+        statValue: 0
+        modifiable: 0
+      - statName: Recovery Time
+        statValue: 0
+        modifiable: 0
+    Stats:
+    - statName: HPMax
+      statValue: 62.9
+      modifiable: 0
+    - statName: Attack
+      statValue: 0
+      modifiable: 0
+    - statName: Defense
+      statValue: 0
+      modifiable: 0
+    - statName: Motion Speed
+      statValue: 0
+      modifiable: 0
+    - statName: Aim Speed
+      statValue: 0
+      modifiable: 0
+    - statName: Aim Acceleration
+      statValue: 0
+      modifiable: 0
+    - statName: Min Aim Distance
+      statValue: 0
+      modifiable: 0
+    - statName: Max Aim Distance
+      statValue: 0
+      modifiable: 0
+    - statName: Max Magazine
+      statValue: 1
+      modifiable: 0
+    - statName: Speed
+      statValue: 0
+      modifiable: 0
+    - statName: Jump
+      statValue: 0
+      modifiable: 0
+    - statName: Gravity
+      statValue: 0
+      modifiable: 0
+    - statName: Gravity Max
+      statValue: 0
+      modifiable: 0
+    - statName: Mass
+      statValue: 0
+      modifiable: 0
+    - statName: Damage
+      statValue: 0
+      modifiable: 0
+    - statName: Knockback Damage
+      statValue: 0
+      modifiable: 0
+    - statName: Launch Damage
+      statValue: 0
+      modifiable: 0
+    - statName: Stun Damage
+      statValue: 0
+      modifiable: 0
+    - statName: Accuracy
+      statValue: 0
+      modifiable: 0
+    - statName: Damage Variance
+      statValue: 0
+      modifiable: 0
+    - statName: Knockback Variance
+      statValue: 0
+      modifiable: 0
+    - statName: Launch Variance
+      statValue: 0
+      modifiable: 0
+    - statName: Stun Variance
+      statValue: 0
+      modifiable: 0
+    - statName: Accuracy Variance
+      statValue: 0
+      modifiable: 0
+    - statName: Knockback Time
+      statValue: 0
+      modifiable: 0
+    - statName: Knockback Resistance
+      statValue: 0
+      modifiable: 0
+    - statName: Launch Resistance
+      statValue: 0
+      modifiable: 0
+    - statName: Stun Resistance
+      statValue: 0
+      modifiable: 0
+    - statName: Recovery Time
+      statValue: 0
+      modifiable: 0
+    manual: 1
+    statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}
+  statDebug: 
+  level: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f0000003000000031000000
+  value: []
+  baseValue: 757

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81c8113a3b386a48907ac139bd07e41, type: 3}
+  m_Name: Input_PS4
+  m_EditorClassIdentifier: 
+  buttonA: PS4_X
+  buttonB: PS4_Circle
+  buttonX: PS4_Square
+  buttonY: PS4_Triangle
+  buttonRB: PS4_R1
+  buttonLB: PS4_L1
+  stickLeftHorizontal: PS4_HorizontalLeft
+  stickLeftVertical: PS4_VerticalLeft
+  stickRightHorizontal: PS4_HorizontalRight
+  stickRightVertical: PS4_VerticalRight
+  dpadHorizontal: PS4_HorizontalPad
+  rightTrigger: PS4_R2
+  leftTrigger: 
