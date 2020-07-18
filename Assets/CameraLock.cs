@@ -41,6 +41,8 @@ namespace VoiceActing
         Camera cameraDefault;
         [SerializeField]
         Camera cameraAction;
+        [SerializeField]
+        Animator canvasAction;
 
         [SerializeField]
         Transform cameraScreen;
@@ -99,7 +101,7 @@ namespace VoiceActing
         private void Awake()
         {
             Application.targetFrameRate = -1;
-            globalCamera.AssignCamera(cameraDefault, cameraAction);
+            globalCamera.AssignCamera(cameraDefault, cameraAction, canvasAction);
         }
 
 

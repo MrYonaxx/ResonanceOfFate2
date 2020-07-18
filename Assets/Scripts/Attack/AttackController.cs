@@ -57,8 +57,6 @@ namespace VoiceActing
         [Title("Debug")]
         [SerializeField]
         Transform targetDebug;
-        [SerializeField]
-        Animator texture;
 
         [SerializeField]
         AttackData attackData;
@@ -110,7 +108,7 @@ namespace VoiceActing
             if(stopTime == true)
                 feedbackManager.SetMotionSpeed(0f);
             target = newTarget;
-            texture.SetBool("Appear", true);
+            //texture.SetBool("Appear", true);
             globalCamera.ActivateCameraAction(true);
             Transform cam = globalCamera.GetCameraAction();
             cam.SetParent(cameraParent, false);
@@ -157,7 +155,7 @@ namespace VoiceActing
         {
             feedbackManager.SetMotionSpeed(1f);
             globalCamera.ActivateCameraAction(false);
-            texture.SetBool("Appear", false);
+            //texture.SetBool("Appear", false);
             OnEndAction.Invoke();
             //this.gameObject.SetActive(false);
         }

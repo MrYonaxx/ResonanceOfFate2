@@ -18520,11 +18520,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6794507681875572126, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6794507682071954783, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -24213,7 +24208,6 @@ MonoBehaviour:
   stopTime: 0
   baseDirection: 1
   targetDebug: {fileID: 383889792}
-  texture: {fileID: 909314092}
   attackData:
     attackProcessor: {fileID: 0}
     attackDataStat:
@@ -29610,6 +29604,16 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7791283385911039802, guid: c91058c96fcf5db48b068685324e65a7,
         type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791283385911039802, guid: c91058c96fcf5db48b068685324e65a7,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791283385911039802, guid: c91058c96fcf5db48b068685324e65a7,
+        type: 3}
       propertyPath: targetDebug
       value: 
       objectReference: {fileID: 180052279}
@@ -29624,6 +29628,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7791283385911039802, guid: c91058c96fcf5db48b068685324e65a7,
         type: 3}
+    - target: {fileID: 7791283385911039802, guid: c91058c96fcf5db48b068685324e65a7,
+        type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 7791283386935059674}
+    - target: {fileID: 7791283385911039802, guid: c91058c96fcf5db48b068685324e65a7,
+        type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"attackCollision","value":$eref:0'
+      objectReference: {fileID: 0}
     - target: {fileID: 7791283386537981236, guid: c91058c96fcf5db48b068685324e65a7,
         type: 3}
       propertyPath: targetDebug
@@ -29728,6 +29742,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c91058c96fcf5db48b068685324e65a7, type: 3}
+--- !u!114 &7791283386935059674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4298019502772997915, guid: c91058c96fcf5db48b068685324e65a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7791283386935059673}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0aaeef2dd703c04db0973369aa30449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8645882300679575416
 PrefabInstance:
   m_ObjectHideFlags: 0

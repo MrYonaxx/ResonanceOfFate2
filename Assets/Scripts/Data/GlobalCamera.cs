@@ -36,6 +36,9 @@ namespace VoiceActing
         AudioListener actionListener;
 
 
+        [SerializeField]
+        Animator canvasAction;
+
         Camera cameraActive;
         Vector3 forward = Vector3.forward;
         Quaternion rotation = Quaternion.identity;
@@ -56,11 +59,12 @@ namespace VoiceActing
          *                FUNCTIONS                 *
         \* ======================================== */
 
-        public void AssignCamera(Camera camDefault, Camera camAction)
+        public void AssignCamera(Camera camDefault, Camera camAction, Animator canvas)
         {
             cameraDefault = camDefault;
             cameraAction = camAction;
             cameraActive = cameraDefault;
+            canvasAction = canvas;
             defaultListener = camDefault.GetComponent<AudioListener>();
             actionListener = camAction.GetComponent<AudioListener>();
         }
@@ -71,6 +75,7 @@ namespace VoiceActing
             actionListener.enabled = b;
             cameraDefault.enabled = !b;
             defaultListener.enabled = !b;
+            canvasAction.SetBool("Appear", b);
             if (b == true)
                 cameraActive = cameraAction;
             else
