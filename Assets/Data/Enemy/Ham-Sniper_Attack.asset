@@ -35,13 +35,13 @@ MonoBehaviour:
       columnNameCenter: Weapon
       statDictionary2:
       - statName: Aim Speed
-        statValue: 1
+        statValue: 0.5
         modifiable: 0
       - statName: Aim Acceleration
         statValue: 0
         modifiable: 0
       - statName: Min Aim Distance
-        statValue: 10
+        statValue: 20
         modifiable: 0
       - statName: Max Aim Distance
         statValue: 1
@@ -131,13 +131,13 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Aim Speed
-      statValue: 1
+      statValue: 0.5
       modifiable: 0
     - statName: Aim Acceleration
       statValue: 0
       modifiable: 0
     - statName: Min Aim Distance
-      statValue: 10
+      statValue: 20
       modifiable: 0
     - statName: Max Aim Distance
       statValue: 1
@@ -205,5 +205,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 0
+    manual: 1
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}
