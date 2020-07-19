@@ -167,16 +167,13 @@ namespace VoiceActing
 
 
 
-
-
         public float GetAimSpeed(Vector3 user, Vector3 target)
         {
             float distance = (new Vector2(user.x, user.z) - new Vector2(target.x, target.z)).magnitude;
             float multiplier;
-
             multiplier = 1 - ((distance - GetMinAimDistance()) / (GetMaxAimDistance() - GetMinAimDistance()));
-            if (multiplier <= 0.2f)
-                multiplier = 0.2f;
+            if (multiplier <= 0.1f)
+                multiplier = 0.1f;
             return GetAimSpeed() * multiplier;
         }
 

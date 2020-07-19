@@ -26,6 +26,10 @@ namespace VoiceActing
 
         bool isMoving = false;
 
+        [Title("Parameter")]
+        [SerializeField]
+        bool aimSpeedFix = true;
+
 
         #endregion
 
@@ -83,7 +87,7 @@ namespace VoiceActing
                     navmeshController.StopMove();
                     isMoving = false;
                 }
-                return enemy.CharacterStatController.GetAimSpeed();
+                return GetAimSpeed(enemy, target);
             }
             navmeshController.MoveToTarget(target.transform);
             if (isMoving == false)
@@ -92,6 +96,14 @@ namespace VoiceActing
                 isMoving = true;
             }
             return -enemy.CharacterStatController.GetAimSpeed();
+        }
+
+
+        private float GetAimSpeed(Enemy enemy, Character target)
+        {
+            if (aimSpeedFix == true)
+                return enemy.CharacterStatController.GetAimSpeed();
+            return enemy.CharacterStatController.GetAimSpeed(enemy.transform.position, target.transform.position);
         }
 
         #endregion

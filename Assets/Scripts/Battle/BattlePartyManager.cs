@@ -36,8 +36,8 @@ namespace VoiceActing
         Transform hudTransform;
         [SerializeField]
         PlayerHUD playerHudPrefab;
-        [SerializeField]
-        TextPopupManager textPopupManager;
+        /*[SerializeField]
+        TextPopupManager textPopupManager;*/
 
 
 
@@ -137,7 +137,6 @@ namespace VoiceActing
                 timePlayer.Add(100f);
 
                 party[i].CharacterTriAttack.OnTimeChanged += playerHUDs[i].GaugeTriAttack.DrawGauge;
-                party[i].CharacterDamage.OnHit += textPopupManager.DrawDamagePopup;
                 party[i].CharacterStatController.OnHPChanged += playerHUDs[i].HpGauge.DrawGauge;
                 party[i].CharacterStatController.OnScratchChanged += playerHUDs[i].ScratchGauge.DrawGauge;
             }

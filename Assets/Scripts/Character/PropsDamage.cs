@@ -49,8 +49,8 @@ namespace VoiceActing
             set { characterStatController = value; }
         }
 
-        public delegate void HitAction(DamageMessage damageMessage);
         public event HitAction OnHit;
+        public event Action OnDead;
 
         #endregion
 

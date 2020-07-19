@@ -365,14 +365,12 @@ namespace VoiceActing
 
         private void EndShoot()
         {
-
-            aimReticle.ShowAimReticle();
+            //aimReticle.ShowAimReticle();
             if (c.CharacterTriAttack.IsTriAttacking == true)
             {
                 // Le joueur est en train de courir
                 if (cameraLock.GetTarget() == null) // On lock une nouvelle cible si la précédente est morte
                 {
-                    Debug.Log("Hey");
                     cameraLock.LockOn(true);
                     battleTarget.TargetEnemy();
                 }

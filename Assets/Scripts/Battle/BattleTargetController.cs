@@ -13,7 +13,7 @@ using Sirenix.OdinInspector;
 namespace VoiceActing
 {
     // Target Controller pour le joueur
-    public class BattleTargetController: MonoBehaviour, ITargetableListener
+    public class BattleTargetController: MonoBehaviour, IListListener<ITargetable>
     {
         #region Attributes 
 
@@ -61,6 +61,10 @@ namespace VoiceActing
         {
             globalTargetable.AddListener(this);
         }
+        private void OnDestroy()
+        {
+            globalTargetable.RemoveListener(this);
+        }
 
         public void Update()
         {
@@ -70,13 +74,13 @@ namespace VoiceActing
             }*/
         }
 
-        public void OnTargetAdd(ITargetable target)
+        public void OnListAdd(ITargetable target)
         {
             if (targetable.Count == 0)
                 TargetRight();
         }
 
-        public void OnTargetRemove(ITargetable target)
+        public void OnListRemove(ITargetable target)
         {
             Untarget();
         }
@@ -200,6 +204,7 @@ namespace VoiceActing
         {
             aimReticle.SetTarget(null);
             cameraLock.SetTarget(null);
+            cameraLock.LockOn(false);
             OnTargeted.Invoke(null);
         }
 

@@ -42,14 +42,6 @@ namespace VoiceActing
         [SerializeField]
         AudioClip airborneClip;
 
-        /*[Title("Rotation")]
-        [SerializeField]
-        Transform originalParent = null;
-        [SerializeField]
-        Transform rotationParent = null;
-        [SerializeField]
-        Transform spriteTransform = null;*/
-
 
         private CharacterStatController characterStatController;
         public CharacterStatController CharacterStatController
@@ -72,11 +64,8 @@ namespace VoiceActing
         private IEnumerator rotationCoroutine;
         private IEnumerator knockbackCoroutine;
 
-        public delegate void Action();
-        public delegate void HitAction(DamageMessage damageMessage);
 
         public event HitAction OnHit;
-
         public event Action OnLaunch;
         public event Action OnSmackdown;
         public event Action OnDead;
@@ -110,7 +99,8 @@ namespace VoiceActing
                 Death(attackData);
                 return;
             }
-            shakeSprite.Shake(0.05f, 0.2f);
+            if(msg.damageRaw + msg.damageScratch > 0)
+                shakeSprite.Shake(0.05f, 0.2f);
             if (isKnockback == false && msg.knockback == true)
                 Knockback();
             else if (isKnockback == true)

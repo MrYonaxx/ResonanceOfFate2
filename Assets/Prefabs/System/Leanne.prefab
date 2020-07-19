@@ -300,7 +300,6 @@ MonoBehaviour:
   stopTime: 1
   baseDirection: 1
   targetDebug: {fileID: 0}
-  texture: {fileID: 0}
   attackData:
     attackProcessor: {fileID: 0}
     attackDataStat:
@@ -1737,6 +1736,7 @@ GameObject:
   - component: {fileID: 5681165762849826300}
   - component: {fileID: 5681165762849826275}
   - component: {fileID: 5681165762849826301}
+  - component: {fileID: 7667221403298531730}
   m_Layer: 14
   m_Name: Leanne
   m_TagString: Player
@@ -1751,7 +1751,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5681165762849826277}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 0.5, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1914,6 +1914,19 @@ MonoBehaviour:
   recoveryTime: 0.5
   statMass: Mass
   airborneClip: {fileID: 0}
+--- !u!114 &7667221403298531730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681165762849826277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c5309274e62604b8fec5e5f09b38a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalDamageable: {fileID: 11400000, guid: a1cb591ce9e86d8409393a7db72098d4, type: 2}
 --- !u!1 &5681165762851066540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,7 +2699,6 @@ MonoBehaviour:
   stopTime: 1
   baseDirection: 1
   targetDebug: {fileID: 0}
-  texture: {fileID: 0}
   attackData:
     attackProcessor: {fileID: 0}
     attackDataStat:
@@ -2808,7 +2820,6 @@ MonoBehaviour:
   stopTime: 1
   baseDirection: 1
   targetDebug: {fileID: 0}
-  texture: {fileID: 0}
   attackData:
     attackProcessor: {fileID: 0}
     attackDataStat:

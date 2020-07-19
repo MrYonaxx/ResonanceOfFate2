@@ -126,8 +126,6 @@ namespace VoiceActing
         public void SetTarget(Transform newTarget)
         {
             lockTarget = newTarget;
-            if (lockTarget == null)
-                LockOn(false);
         }
 
         public Transform GetTarget()

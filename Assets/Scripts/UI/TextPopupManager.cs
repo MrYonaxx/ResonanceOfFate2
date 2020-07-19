@@ -13,7 +13,7 @@ using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public class TextPopupManager: MonoBehaviour
+    public class TextPopupManager: MonoBehaviour, IListListener<IDamageable>
     {
         #region Attributes 
 
@@ -22,6 +22,8 @@ namespace VoiceActing
         \* ======================================== */
         [SerializeField]
         GlobalCamera globalCamera;
+        [SerializeField]
+        GlobalDamageable globalDamageable;
         [SerializeField]
         TypeDictionary damageType;
 
@@ -62,6 +64,23 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
+        private void Awake()
+        {
+            globalDamageable.AddListener(this);
+        }
+        private void OnDestroy()
+        {
+            globalDamageable.RemoveListener(this);
+        }
+
+        public void OnListAdd(IDamageable enemy)
+        {
+            enemy.OnHit += DrawDamagePopup;
+        }
+        public void OnListRemove(IDamageable enemy)
+        {
+            enemy.OnHit -= DrawDamagePopup;
+        }
 
         public void DrawDamagePopup(DamageMessage damage)
         {

@@ -12,12 +12,15 @@ using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
+    // Generic Scriptable Object ?
+    // Apparamment faut faire des shenanigan pour que ça marche mais why not
+
     [CreateAssetMenu(fileName = "GlobalTargetable", menuName = "System/GlobalTargetable", order = 1)]
     public class GlobalTargetable: ScriptableObject
     {
 
         //!\ S'assurer que Clear la liste au changement de scene /!\
-        List<ITargetableListener> targetableListeners = new List<ITargetableListener>();
+        List<IListListener<ITargetable>> targetableListeners = new List<IListListener<ITargetable>>();
 
         //!\ S'assurer que Clear la liste au changement de scene /!\
         List<ITargetable> targetsList = new List<ITargetable>();
@@ -32,7 +35,7 @@ namespace VoiceActing
             targetsList.Add(target);
             for(int i = targetableListeners.Count - 1; i >= 0; i--)
             {
-                targetableListeners[i].OnTargetAdd(target);
+                targetableListeners[i].OnListAdd(target);
             }
         }
 
@@ -41,17 +44,17 @@ namespace VoiceActing
             targetsList.Remove(target);
             for (int i = targetableListeners.Count - 1; i >= 0; i--)
             {
-                targetableListeners[i].OnTargetRemove(target);
+                targetableListeners[i].OnListRemove(target);
             }
         }
 
 
-        public void AddListener(ITargetableListener newListener)
+        public void AddListener(IListListener<ITargetable> newListener)
         {
             targetableListeners.Add(newListener);
         }
 
-        public void RemoveListener(ITargetableListener newListener)
+        public void RemoveListener(IListListener<ITargetable> newListener)
         {
             targetableListeners.Remove(newListener);
         }

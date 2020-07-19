@@ -21,6 +21,9 @@ namespace VoiceActing
         \* ======================================== */
         [SerializeField]
         CharacterData characterData;
+        [SerializeField]
+        WeaponData explosionAttackData;
+        [Space]
 
         [SerializeField]
         protected Transform characterCenter;
@@ -36,8 +39,9 @@ namespace VoiceActing
             set { characterStatController = value; }
         }
 
+
         [SerializeField]
-        private WeaponData explosionAttackData;
+        private Animator explosionAnimation;
         [SerializeField]
         private AttackCollider explosion;
 
@@ -45,8 +49,6 @@ namespace VoiceActing
         public bool IsDead { get { return isDead; } }
 
 
-        public delegate void Action();
-        public delegate void HitAction(DamageMessage damageMessage);
         public event HitAction OnHit;
         public event Action OnDead;
 
@@ -92,7 +94,7 @@ namespace VoiceActing
         private void Death()
         {
             if(OnDead != null) OnDead.Invoke();
-            explosion.gameObject.SetActive(true);
+            explosionAnimation.enabled = true;
             explosion.SetAttackData(new AttackData(explosionAttackData.AttackProcessor, characterStatController, explosionAttackData));
         }
 

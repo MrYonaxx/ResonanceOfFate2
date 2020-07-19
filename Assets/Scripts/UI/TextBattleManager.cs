@@ -12,7 +12,7 @@ using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public class TextBattleManager: MonoBehaviour
+    public class TextBattleManager: MonoBehaviour, IListListener<EnemyController>
     {
         #region Attributes 
 
@@ -21,6 +21,10 @@ namespace VoiceActing
         \* ======================================== */
         [SerializeField]
         BattleEnemyManager battleEnemyManager;
+        [SerializeField]
+        GlobalEnemyList globalEnemyList;
+
+        [Space]
         [SerializeField]
         Animator textLaunch;
         [SerializeField]
@@ -44,20 +48,31 @@ namespace VoiceActing
          *                FUNCTIONS                 *
         \* ======================================== */
 
-        private void Start()
+        private void Awake()
         {
             SubscribeEnemy();
+            globalEnemyList.AddListener(this);
+        }
+
+        private void OnDestroy()
+        {
+            globalEnemyList.RemoveListener(this);
+        }
+
+        public void OnListAdd(EnemyController enemy)
+        {
+            enemy.Enemy.CharacterDamage.OnLaunch += LaunchTrigger;
+            enemy.Enemy.CharacterDamage.OnSmackdown += SmackdownTrigger;
+        }
+        public void OnListRemove(EnemyController enemy)
+        {
+            enemy.Enemy.CharacterDamage.OnLaunch -= LaunchTrigger;
+            enemy.Enemy.CharacterDamage.OnSmackdown -= SmackdownTrigger;
         }
 
         private void SubscribeEnemy()
         {
-            List<EnemyController> enemies = battleEnemyManager.GetEnemies();
-            for (int i = 0;i < enemies.Count; i++)
-            {
-                enemies[i].Enemy.CharacterDamage.OnLaunch += LaunchTrigger;
-                enemies[i].Enemy.CharacterDamage.OnSmackdown += SmackdownTrigger;
-                battleEnemyManager.OnWin += WinTrigger;
-            }
+            battleEnemyManager.OnWin += WinTrigger;
         }
 
 
@@ -75,17 +90,6 @@ namespace VoiceActing
             textWin.SetTrigger("Feedback");
         }
 
-
-
-        private void OnDestroy()
-        {
-            List<EnemyController> enemies = battleEnemyManager.GetEnemies();
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                enemies[i].Enemy.CharacterDamage.OnLaunch -= LaunchTrigger;
-                enemies[i].Enemy.CharacterDamage.OnSmackdown -= SmackdownTrigger;
-            }
-        }
 
         #endregion
 

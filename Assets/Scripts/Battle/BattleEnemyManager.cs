@@ -12,7 +12,7 @@ using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public class BattleEnemyManager: MonoBehaviour, IEnemyListener
+    public class BattleEnemyManager: MonoBehaviour, IListListener<EnemyController>
     {
         #region Attributes 
 
@@ -80,30 +80,16 @@ namespace VoiceActing
             enemyHealthBar = new List<EnemyHealthBar>(enemyList.Count);
             globalEnemyList.AddListener(this);
         }
-
-        /*private void Start()
+        private void OnDestroy()
         {
-            InitializeEnemies();            
+            globalEnemyList.RemoveListener(this);
         }
 
-        private void InitializeEnemies()
-        {
-            enemyHealthBar = new List<EnemyHealthBar>(enemyList.Count);
-            for (int i = 0; i < enemyList.Count;i++ )
-            {
-                enemyHealthBar.Add(Instantiate(healthBarPrefab, healthBarCanvas));
-                //AddEnemy(ne)
-
-            }
-        }*/
-
-
-
-        public void OnTargetAdd(EnemyController enemy)
+        public void OnListAdd(EnemyController enemy)
         {
             AddEnemy(enemy);
         }
-        public void OnTargetRemove(EnemyController enemy)
+        public void OnListRemove(EnemyController enemy)
         {
             for (int i = 0; i < enemyList.Count; i++)
             {

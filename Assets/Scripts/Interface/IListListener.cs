@@ -12,10 +12,10 @@ using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public interface ITargetableListener
+    public interface IListListener <T>
     {
-        void OnTargetAdd(ITargetable newTarget);
-        void OnTargetRemove(ITargetable newTarget);
+        void OnListAdd(T newTarget);
+        void OnListRemove(T newTarget);
     } 
 
 } // #PROJECTNAME# namespace
