@@ -96,40 +96,6 @@ namespace VoiceActing
 
         }
 
-        /*private void OnTriggerEnter(Collider collision)
-        {
-            if (CheckTag(collision) == true)
-            {
-                Debug.Log("Bonjour : " + collision.gameObject);
-                targetable.Add(collision.gameObject.GetComponent<ITargetable>());
-                if (targetable.Count == 1)
-                {
-                    indexSelection = 0;
-                    Target();
-                }
-            }
-        }
-        private void OnTriggerExit(Collider collision)
-        {
-            if (CheckTag(collision) == true)
-            {
-                Debug.Log("Adieu : " + collision.gameObject.name);
-                targetable.Remove(collision.gameObject.GetComponent<ITargetable>());
-                if (targetable.Count == 0)
-                {
-                    indexSelection = 0;
-                    //indexSelection = 0;
-                    Untarget();
-                    return;
-                }
-                else if (indexSelection >= targetable.Count)
-                {
-                    indexSelection = targetable.Count-1;
-                }
-                Target();
-            }
-        }*/
-
 
         private bool CheckTag(Collider collision)
         {
@@ -215,6 +181,15 @@ namespace VoiceActing
             //cameraLock.SetTarget(targetable[indexSelection].CharacterCenter);
         }
 
+        private void CalculateTargetDistance()
+        {
+            //List<float>
+        }
+
+        private void CalculateTargetScreenPos()
+        {
+            List<float> posX = new List<float>();
+        }
 
 
         #endregion
