@@ -24,6 +24,10 @@ namespace VoiceActing
             get;
         }
 
+        Transform TargetDirection
+        {
+            get;
+        }
         // delegate void Action();
         //public event Action OnDead;
 

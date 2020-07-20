@@ -30,6 +30,14 @@ namespace VoiceActing
         }
 
         [SerializeField]
+        private Transform targetDirection;
+        public Transform TargetDirection
+        {
+            get { return targetDirection; }
+        }
+
+
+        [SerializeField]
         ShakeSprite shakeSprite;
 
         /*private bool isKnockback;

@@ -23,8 +23,8 @@ namespace VoiceActing
         CharacterData characterData;
         [SerializeField]
         WeaponData explosionAttackData;
-        [Space]
 
+        [Title("Targetable")]
         [SerializeField]
         protected Transform characterCenter;
         public Transform CharacterCenter
@@ -39,7 +39,15 @@ namespace VoiceActing
             set { characterStatController = value; }
         }
 
+        [SerializeField]
+        private Transform targetDirection;
+        public Transform TargetDirection
+        {
+            get { return targetDirection; }
+        }
 
+
+        [Title("Targetable")]
         [SerializeField]
         private Animator explosionAnimation;
         [SerializeField]
@@ -83,8 +91,9 @@ namespace VoiceActing
             if (OnHit != null) OnHit.Invoke(msg);
 
             //shakeSprite.Shake(0.05f, 0.2f);
-            if (characterStatController.Hp <= 0)
+            if (characterStatController.Hp <= 0 || characterStatController.Scratch == characterStatController.Hp)
             {
+                characterStatController.Hp = 0;
                 Death();
                 //Destroy(this.gameObject);
                 return;

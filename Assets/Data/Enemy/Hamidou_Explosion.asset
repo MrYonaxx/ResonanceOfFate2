@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: 
   attackType: 0
   scratchDamage: 0
-  attackProcessor: {fileID: 0}
+  attackProcessor: {fileID: 11400000, guid: 7ee63f799196b1f4c844b33a217266f1, type: 2}
   baseStat:
     StatEditor:
     - columnName: Basic

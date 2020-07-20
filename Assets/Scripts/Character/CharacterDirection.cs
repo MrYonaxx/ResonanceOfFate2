@@ -20,18 +20,21 @@ namespace VoiceActing
          *               ATTRIBUTES                 *
         \* ======================================== */
         [SerializeField]
+        GlobalCamera cameraScreen;
+        [SerializeField]
         SpriteRenderer spriteRenderer;
+
+        [Title("Indicateur de direction")]
         [SerializeField]
         Transform directionTransform;
+        public Transform DirectionTransform { get { return directionTransform; } }
+
         [SerializeField]
         SpriteRenderer directionSprite;
         [SerializeField]
         Animator directionAnimator;
 
-        [SerializeField]
-        GlobalCamera cameraScreen;
 
-        //int direction = -1;
         Vector3 right;
         Vector3 left;
         #endregion

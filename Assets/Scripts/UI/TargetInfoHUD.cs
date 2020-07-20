@@ -23,6 +23,8 @@ namespace VoiceActing
         [SerializeField]
         BattleTargetController battleTargetController;
         [SerializeField]
+        BattlePartyManager battlePartyManager;
+        [SerializeField]
         Animator animator;
 
         [Title("BaseInfo")]
@@ -41,7 +43,7 @@ namespace VoiceActing
 
 
 
-        CharacterDirection targetDirection;
+        Transform targetDirection;
         Transform player;
 
 
@@ -67,6 +69,8 @@ namespace VoiceActing
         private void Awake()
         {
             battleTargetController.OnTargeted += DrawTargetInfo;
+            battlePartyManager.OnCharacterChange += SetPlayer;
+            SetPlayer(battlePartyManager.GetCharacter());
         }
 
         private void Update()
@@ -74,11 +78,16 @@ namespace VoiceActing
             if (player == null)
                 return;
             if (targetDirection == null)
+            {
                 directionTarget = Vector2.zero;
+                return;
+            }
             else
-                directionTarget = new Vector2(-targetDirection.GetDirection().up.x, -targetDirection.GetDirection().up.z);
-            directionCharacter = new Vector2(targetDirection.transform.position.x - player.position.x, targetDirection.transform.position.z - player.position.z);
-            playerPosition.localEulerAngles = new Vector3(0,0,Vector2.SignedAngle(directionTarget, directionCharacter));
+            {
+                directionTarget = new Vector2(-targetDirection.up.x, -targetDirection.up.z);
+                directionCharacter = new Vector2(targetDirection.position.x - player.position.x, targetDirection.position.z - player.position.z);
+                playerPosition.localEulerAngles = new Vector3(0, 0, Vector2.SignedAngle(directionTarget, directionCharacter));
+            }
         }
 
 
@@ -87,9 +96,11 @@ namespace VoiceActing
             animator.SetTrigger("Disappear");
             if (characterStat == null)
             {
+                targetDirection = null;
                 //Hide(); 
                 return;
             }
+            targetDirection = characterStat.TargetDirection;
             animator.SetTrigger("Appear");
             textTargetName.text = characterStat.CharacterStatController.CharacterData.CharacterName;
             if (characterStat.CharacterStatController.Level <= 0)
@@ -110,6 +121,10 @@ namespace VoiceActing
 
         }
 
+        public void SetPlayer(PlayerCharacter playerCharacter)
+        {
+            SetPlayer(playerCharacter.transform);
+        }
         public void SetPlayer(Transform playerPos)
         {
             player = playerPos;

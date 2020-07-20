@@ -38,6 +38,11 @@ namespace VoiceActing
             set { characterStatController = value; CharacterDamage.CharacterStatController = value; }
         }
 
+        private Transform targetDirection;
+        public Transform TargetDirection
+        {
+            get { return targetDirection; }
+        }
 
 
         [Space]
@@ -90,6 +95,7 @@ namespace VoiceActing
         \* ======================================== */
         protected void Awake()
         {
+            targetDirection = characterDirection.DirectionTransform;
             if (characterData != null)
             {
                 characterStatController = new CharacterStatController(characterData);

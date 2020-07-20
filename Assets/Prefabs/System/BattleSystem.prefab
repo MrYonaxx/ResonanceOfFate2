@@ -18242,8 +18242,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -24177,6 +24177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleTargetController: {fileID: 6794507680761689765}
+  battlePartyManager: {fileID: 6794507681747555110}
   animator: {fileID: 6794507681548152499}
   textTargetName: {fileID: 6794507680241408306}
   textTargetLevel: {fileID: 6794507681692443066}

@@ -50,6 +50,9 @@ namespace VoiceActing
         List<float> timePlayer = new List<float>();
         List<PlayerHUD> playerHUDs = new List<PlayerHUD>();
 
+        public delegate void ActionCharacterChange(PlayerCharacter playerCharacter);
+        public event ActionCharacterChange OnCharacterChange;
+
 
         #endregion
 
@@ -95,6 +98,7 @@ namespace VoiceActing
         {
             playerHUDs[indexSelection].HudSelected(false);
             indexSelection = newIndex;
+            SelectCharacter();
             FocusCamera();
         }
 
@@ -232,6 +236,7 @@ namespace VoiceActing
             indexSelection -= 1;
             if (indexSelection < 0)
                 indexSelection = partySize - 1;
+            SelectCharacter();
         }
 
 
@@ -261,6 +266,7 @@ namespace VoiceActing
             indexSelection += 1;
             if (indexSelection >= partySize)
                 indexSelection = 0;
+            SelectCharacter();
         }
 
         public void FocusCamera()
@@ -269,6 +275,14 @@ namespace VoiceActing
             mainCamera.SetFocus(party[indexSelection].CharacterCenter);
             mainCamera.SetTarget(null);
         }
+
+
+
+        private void SelectCharacter()
+        {
+            if (OnCharacterChange != null) OnCharacterChange.Invoke(party[indexSelection]);
+        }
+
 
 
 
