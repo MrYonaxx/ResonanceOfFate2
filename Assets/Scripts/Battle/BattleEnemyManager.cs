@@ -191,6 +191,7 @@ namespace VoiceActing
             }
             else
             {
+                Debug.Log("The end");
                 OnEndAttacks.Invoke();
             }
         }

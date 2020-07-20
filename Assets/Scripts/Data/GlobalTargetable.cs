@@ -29,23 +29,35 @@ namespace VoiceActing
             get { return targetsList; }
         }
 
+        List<ITargetable> targetsListEnemy = new List<ITargetable>();
+        public List<ITargetable> TargetsListEnemy
+        {
+            get { return targetsListEnemy; }
+        }
 
-        public void AddTargetable(ITargetable target)
+
+
+
+        public void AddTargetable(ITargetable target, bool isEnemy = false)
         {
             targetsList.Add(target);
             for(int i = targetableListeners.Count - 1; i >= 0; i--)
             {
                 targetableListeners[i].OnListAdd(target);
             }
+            if (isEnemy == true)
+                targetsListEnemy.Add(target);
         }
 
-        public void RemoveTargetable(ITargetable target)
+        public void RemoveTargetable(ITargetable target, bool isEnemy = false)
         {
             targetsList.Remove(target);
             for (int i = targetableListeners.Count - 1; i >= 0; i--)
             {
                 targetableListeners[i].OnListRemove(target);
             }
+            if (isEnemy == true)
+                targetsListEnemy.Remove(target);
         }
 
 

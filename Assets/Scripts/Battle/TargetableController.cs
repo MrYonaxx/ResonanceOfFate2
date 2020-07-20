@@ -15,6 +15,8 @@ namespace VoiceActing
     public class TargetableController: SerializedMonoBehaviour
     {
         [SerializeField]
+        bool targetIsEnemy = true;
+        [SerializeField]
         ITargetable targetable;
         [SerializeField]
         GlobalTargetable globalTargetable;
@@ -57,14 +59,14 @@ namespace VoiceActing
         {
             // A refactor sans doute
             targetable.CharacterStatController.OnHPChanged += CheckDeath;
-            globalTargetable.AddTargetable(targetable);
+            globalTargetable.AddTargetable(targetable, targetIsEnemy);
             hasBeenRemoved = false;
         }
 
 
         public void Untargetable() 
         {
-            globalTargetable.RemoveTargetable(targetable);
+            globalTargetable.RemoveTargetable(targetable, targetIsEnemy);
             hasBeenRemoved = true;
         }
 

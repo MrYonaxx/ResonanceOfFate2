@@ -84,6 +84,7 @@ namespace VoiceActing
             globalFeedback.SetMotionSpeed(1f);
             AudioManager.Instance.SwitchToBattle(false);
             cameraLock.SetFocus(partyManager.GetCharacter().CharacterCenter.transform);
+            inputController.ResumeInput();
         }
 
 

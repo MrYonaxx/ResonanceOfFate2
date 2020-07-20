@@ -47,7 +47,7 @@ namespace VoiceActing
         {
             if (collider.gameObject.tag != this.tag)
             {
-                Debug.Log(collider.gameObject.name);
+                //Debug.Log(collider.gameObject.name);
                 CheckDamage(collider);
                 /*for (int i = 0; i < numCollisionEvents; i++)
                 {

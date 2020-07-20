@@ -39,6 +39,11 @@ namespace VoiceActing
         GlobalCamera globalCamera;
         [SerializeField]
         Camera cameraDefault;
+        public Camera CameraDefault
+        {
+            get { return cameraDefault; }
+        }
+
         [SerializeField]
         Camera cameraAction;
         [SerializeField]

@@ -366,14 +366,15 @@ namespace VoiceActing
         private void EndShoot()
         {
             //aimReticle.ShowAimReticle();
+            if (cameraLock.GetTarget() == null) // On lock une nouvelle cible si la précédente est morte
+            {
+                Debug.Log("Hrm hrm");
+                battleTarget.TargetNearestEnemy();
+                cameraLock.LockOn(true);
+            }
             if (c.CharacterTriAttack.IsTriAttacking == true)
             {
                 // Le joueur est en train de courir
-                if (cameraLock.GetTarget() == null) // On lock une nouvelle cible si la précédente est morte
-                {
-                    cameraLock.LockOn(true);
-                    battleTarget.TargetEnemy();
-                }
                 timeData.TimeFlow = true;
                 aimReticle.ResetAim(c);
                 if (triAttackManager.IsTriAttacking) // Si on tri attack on va check si les copains peuvent taper
@@ -798,6 +799,18 @@ namespace VoiceActing
         public void StopInput()
         {
             InputState = InputState.NoInput;
+        }
+
+        public void ResumeInput()
+        {
+            if (c.CharacterTriAttack.IsTriAttacking == true)
+            {
+                InputState = InputState.TriAttack;
+            }
+            else
+            {
+                InputState = InputState.Default;
+            }
         }
 
 
