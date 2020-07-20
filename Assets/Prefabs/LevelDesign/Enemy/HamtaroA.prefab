@@ -5736,11 +5736,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfde21d858f5c8345a737ee1f3fe1ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
   spriteRenderer: {fileID: 4540024628648264612}
   directionTransform: {fileID: 4540024627974508692}
   directionSprite: {fileID: 0}
   directionAnimator: {fileID: 0}
-  cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
 --- !u!114 &4540024627708215524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5810,7 +5810,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4540024627708215529}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.3
   m_Speed: 0.01
   m_Acceleration: 0
   avoidancePriority: 50
@@ -5857,6 +5857,8 @@ MonoBehaviour:
   navmeshController: {fileID: 4540024627708215454}
   targetController: {fileID: 8003739277006344177}
   aimSpeedFix: 1
+  moveIfObstruction: 1
+  stopAimIfObstruction: 0
 --- !u!114 &4540024627708215454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5896,6 +5898,7 @@ MonoBehaviour:
     - Name: targetable
       Entry: 10
       Data: 0
+  targetIsEnemy: 1
   globalTargetable: {fileID: 11400000, guid: 7121129389509ef47a6a3fec0f939b42, type: 2}
 --- !u!114 &143156596
 MonoBehaviour:

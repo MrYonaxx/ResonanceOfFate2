@@ -160,21 +160,28 @@ namespace VoiceActing
 
         private void SelectAttack()
         {
-            // Plein de if hp <  et de check de status
-            //indexAttack = Random.Range(0, attackControllers.Length);
             if (indexAttack >= 0)
                 enemy.CharacterStatController.RemoveStat(enemyBehaviors[indexAttack].GetWeaponData().BaseStat, StatModifierType.Flat);
             indexAttack = Random.Range(0, enemyBehaviors.Length);
-            target = enemyBehaviors[indexAttack].SelectTarget(enemy);
-            if (target == null)
+            for (int i = 0; i < enemyBehaviors.Length; i++)
             {
-                indexAttack = -1;
+                target = enemyBehaviors[indexAttack].SelectTarget(enemy);
+                if (target != null)
+                {
+                    // Pattern sélectionné
+                    enemy.CharacterStatController.AddStat(enemyBehaviors[indexAttack].GetWeaponData().BaseStat, StatModifierType.Flat);
+                    if (OnAttackSelected != null) OnAttackSelected.Invoke(target);
+                    return;
+                }
+                indexAttack += 1;
+                if (indexAttack >= enemyBehaviors.Length)
+                    indexAttack = 0;
             }
-            else
-            {
-                enemy.CharacterStatController.AddStat(enemyBehaviors[indexAttack].GetWeaponData().BaseStat, StatModifierType.Flat);
-                if (OnAttackSelected != null) OnAttackSelected.Invoke(target);
-            }
+            // Si on en est là c'est que y'a personne à dérailler
+            // Executer le pattern par défaut
+
+            //!\ Placeholder
+            indexAttack = -1;
         }
 
         public void PerformAction()

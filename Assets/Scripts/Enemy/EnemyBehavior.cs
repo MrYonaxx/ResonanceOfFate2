@@ -50,6 +50,10 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
+        public virtual bool HasTarget()
+        {
+            return true;
+        }
 
         public virtual Character SelectTarget(Enemy enemy)
         {

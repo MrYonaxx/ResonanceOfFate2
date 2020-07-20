@@ -155,6 +155,7 @@ namespace VoiceActing
         {
             feedbackManager.SetMotionSpeed(1f);
             globalCamera.ActivateCameraAction(false);
+            globalCamera.GetCameraAction().SetParent(null, false);
             //texture.SetBool("Appear", false);
             OnEndAction.Invoke();
             //this.gameObject.SetActive(false);

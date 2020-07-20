@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 524b3261de8728c409f7a8321bb1faac, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fca56c7271b1b6f49ba73a41089108d5, type: 2}
 --- !u!4 &9104564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4336855849495251169, guid: 8960167d67fc82a4d9e0e3c49dc3d98d,
@@ -1424,7 +1424,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &499341062
 Transform:
@@ -1746,7 +1746,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &614462635
 Transform:
@@ -2777,6 +2777,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 4336855849495251170, guid: 8960167d67fc82a4d9e0e3c49dc3d98d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4336855849495251199, guid: 8960167d67fc82a4d9e0e3c49dc3d98d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3118,7 +3123,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1656818093
 Transform:
@@ -3373,7 +3378,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2024108620
 Transform:
@@ -3466,7 +3471,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2041084547
 Transform:
@@ -3559,7 +3564,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2042258294
 Transform:

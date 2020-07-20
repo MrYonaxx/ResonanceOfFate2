@@ -86,7 +86,7 @@ MonoBehaviour:
       columnNameCenter: Attack Variance
       statDictionary2:
       - statName: Damage Variance
-        statValue: 100
+        statValue: 30
         modifiable: 0
       - statName: Knockback Variance
         statValue: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
       statValue: 100
       modifiable: 0
     - statName: Damage Variance
-      statValue: 100
+      statValue: 30
       modifiable: 0
     - statName: Knockback Variance
       statValue: 0

@@ -68,7 +68,7 @@ MonoBehaviour:
     - columnName: Attack
       statDictionary:
       - statName: Damage
-        statValue: 100
+        statValue: 0
         modifiable: 0
       - statName: Knockback Damage
         statValue: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
       statValue: 3
       modifiable: 0
     - statName: Damage
-      statValue: 100
+      statValue: 0
       modifiable: 0
     - statName: Knockback Damage
       statValue: 0

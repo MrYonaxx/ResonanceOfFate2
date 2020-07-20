@@ -45,6 +45,12 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
+        /*public override bool HasTarget()
+        {
+            if (targetController.GetTarget().Count == 0)
+                return false;
+            return true;
+        }*/
 
         public override Character SelectTarget(Enemy enemy)
         {       

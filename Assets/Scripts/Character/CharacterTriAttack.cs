@@ -160,7 +160,7 @@ namespace VoiceActing
 
             direction = destination - characterTransform.position;
             directionNormalize = direction.normalized;
-            time = (direction.magnitude / (speed * Time.deltaTime)) / 60f;// Pas framerate machin
+            time = (direction.magnitude / (speed * Time.deltaTime)) / 60f;// Pas framerate machin < ------------------ Il est là le problème
             if(debugMarker != null)
                 debugMarker.transform.position = destination;
 
@@ -181,7 +181,7 @@ namespace VoiceActing
                 if (isJumping == true)
                     UpdateJumpTriAttack();
                 else
-                    characterMovement.MoveCharacterWorld(directionNormalize.x, directionNormalize.z, speed); // Pas framerate machin
+                    characterMovement.MoveCharacterWorld(directionNormalize.x, directionNormalize.z, speed); // Pas framerate machin < ------------------ Il est là le problème
                 if (OnTimeChanged != null) OnTimeChanged.Invoke(totalDistance - (currentDistance - (new Vector2(destination.x, destination.z) - PositionToVector2()).magnitude), totalDistance);
                 CheckIntersection();
                 yield return null;
