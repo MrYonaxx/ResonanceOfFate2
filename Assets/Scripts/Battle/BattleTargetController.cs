@@ -193,7 +193,6 @@ namespace VoiceActing
 
         public void TargetNearestEnemy()
         {
-            Debug.Log("Allo?");
             targetable = globalTargetable.TargetsListEnemy;
             if(targetable.Count == 0)
             {

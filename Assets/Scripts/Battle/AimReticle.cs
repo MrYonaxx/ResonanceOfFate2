@@ -387,6 +387,9 @@ namespace VoiceActing
 
         }
 
+        /// <summary>
+        /// Reset aim for everyone
+        /// </summary>
         public void ResetAim()
         {
             for (int i = 0; i < charaAiming.Count; i++)

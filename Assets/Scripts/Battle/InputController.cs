@@ -353,8 +353,7 @@ namespace VoiceActing
                 aimReticle.StopAim(c);
                 if (battleEnemyManager.CheckEnemyAttack() == true)
                 {
-                    timeData.TimeFlow = false;
-                    StopInput();
+                    EnemyAttack();
                 }
                 else
                 {
@@ -368,7 +367,7 @@ namespace VoiceActing
             //aimReticle.ShowAimReticle();
             if (cameraLock.GetTarget() == null) // On lock une nouvelle cible si la précédente est morte
             {
-                Debug.Log("Hrm hrm");
+                aimReticle.ResetAim();
                 battleTarget.TargetNearestEnemy();
                 cameraLock.LockOn(true);
             }
@@ -654,7 +653,7 @@ namespace VoiceActing
                     battlePartyManager.CurrentCharacterInactive();
                     if (battleEnemyManager.CheckEnemyAttack() == true)
                     {
-                        StopInput();
+                        EnemyAttack();
                         return;
                     }
                 }
@@ -673,7 +672,7 @@ namespace VoiceActing
                     battlePartyManager.CurrentCharacterInactive();
                     if (battleEnemyManager.CheckEnemyAttack() == true)
                     {
-                        StopInput();
+                        EnemyAttack();
                         return;
                     }
                 }
@@ -780,8 +779,7 @@ namespace VoiceActing
         {
             if (battleEnemyManager.CheckEnemyAttack() == true)
             {
-                timeData.TimeFlow = false;
-                StopInput();
+                EnemyAttack();
             }
             else
             {
@@ -791,6 +789,7 @@ namespace VoiceActing
 
         public void NewTurn()
         {
+            aimReticle.ShowAimReticle();
             PlaySound(switchCharacterClip);
             InputState = InputState.Default;
             SwitchCharactersRight();
@@ -813,6 +812,12 @@ namespace VoiceActing
             }
         }
 
+        private void EnemyAttack()
+        {
+            aimReticle.HideAimReticle();
+            timeData.TimeFlow = false;
+            StopInput();
+        }
 
 
         public void PlaySound(AudioClip s)

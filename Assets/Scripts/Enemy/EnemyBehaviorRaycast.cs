@@ -66,9 +66,9 @@ namespace VoiceActing
             for (int i = 0; i < targetable.Count; i++)
             {
                 int layerMask = (1 << 13) | (1 << 17);
-                RaycastHit hit;
+                //RaycastHit hit;
                 Vector3 direction = (enemy.CharacterCenter.position - targetable[i].CharacterCenter.position);
-                if (!Physics.Raycast(enemy.CharacterCenter.position, direction, out hit, direction.magnitude, layerMask))
+                if (!Physics.Raycast(enemy.CharacterCenter.position, direction, direction.magnitude, layerMask))
                 {
                     characterTargetable.Add(i);
                 }
@@ -132,8 +132,8 @@ namespace VoiceActing
             if(moveIfObstruction || stopAimIfObstruction)
             {
                 int layerMask = (1 << 13) | (1 << 17);
-                RaycastHit hit;
-                if (Physics.Raycast(enemy.CharacterCenter.position, -direction, out hit, direction.magnitude, layerMask))
+                //RaycastHit hit;
+                if (Physics.Raycast(enemy.CharacterCenter.position, -direction, direction.magnitude, layerMask))
                 {
                     return true;
                 }

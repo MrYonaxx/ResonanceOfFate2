@@ -41,23 +41,25 @@ namespace VoiceActing
         public void AddTargetable(ITargetable target, bool isEnemy = false)
         {
             targetsList.Add(target);
-            for(int i = targetableListeners.Count - 1; i >= 0; i--)
+            if (isEnemy == true)
+                targetsListEnemy.Add(target);
+            for (int i = targetableListeners.Count - 1; i >= 0; i--)
             {
                 targetableListeners[i].OnListAdd(target);
             }
-            if (isEnemy == true)
-                targetsListEnemy.Add(target);
+
         }
 
         public void RemoveTargetable(ITargetable target, bool isEnemy = false)
         {
             targetsList.Remove(target);
+            if (isEnemy == true)
+                targetsListEnemy.Remove(target);
             for (int i = targetableListeners.Count - 1; i >= 0; i--)
             {
                 targetableListeners[i].OnListRemove(target);
             }
-            if (isEnemy == true)
-                targetsListEnemy.Remove(target);
+
         }
 
 
