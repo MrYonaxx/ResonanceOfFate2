@@ -33,6 +33,8 @@ namespace VoiceActing
         \* ======================================== */
         [SerializeField]
         CharacterController cursor;
+        [SerializeField]
+        GameObject cursorObject;
 
         [SerializeField]
         GlobalCamera globalCamera;
@@ -82,6 +84,9 @@ namespace VoiceActing
 
         AudioSource audioSource;
 
+        int layerMask = (1 << 13);
+        RaycastHit hit;
+
         #endregion
 
         #region GettersSetters 
@@ -96,7 +101,7 @@ namespace VoiceActing
         }
         public Vector3 GetCursorPositionV3()
         {
-            return cursor.transform.position - this.transform.localPosition;
+            return cursorObject.transform.position;// - this.transform.localPosition;
         }
 
         #endregion
@@ -121,8 +126,8 @@ namespace VoiceActing
             audioSource.Stop();
             isActive = false;
             intersection = false;
-            cursor.transform.localPosition = Vector3.zero;
-            cursor.gameObject.SetActive(false);
+            cursor.transform.localPosition = this.transform.localPosition;
+            cursorObject.gameObject.SetActive(false);
             HideIntersection();
             for (int i = 0; i < heroActionLines.Count; i++)
                 HideLine(i);
@@ -135,7 +140,7 @@ namespace VoiceActing
             {
                 AudioManager.Instance.PlaySound(heroActionStartClip);
                 isActive = true;
-                cursor.gameObject.SetActive(true);
+                cursorObject.gameObject.SetActive(true);
                 if (lineUpdateCoroutine != null)
                     StopCoroutine(lineUpdateCoroutine);
                 lineUpdateCoroutine = UpdateLineCoroutine();
@@ -159,7 +164,6 @@ namespace VoiceActing
             Vector3 move = right * directionX + forward * directionZ;
             move *= (speedCursor);
             cursor.Move(move * Time.deltaTime);
-            cursor.Move(new Vector3(0, -200 * Time.deltaTime, 0));
 
             if (directionX != 0 || directionZ != 0)
             {
@@ -170,13 +174,15 @@ namespace VoiceActing
                                  new Vector2(allyTransform[0].transform.position.x, allyTransform[0].transform.position.z),
                                  new Vector2((allyTransform[1].transform.position - allyTransform[0].transform.position).x, (allyTransform[1].transform.position - allyTransform[0].transform.position).z)))
                 {
-                    DrawLine(1, allyTransform[0].transform.position + offset, allyTransform[1].transform.position + offset);
+                    //DrawLine(1, allyTransform[0].transform.position + offset, allyTransform[1].transform.position + offset);
                     if (intersection == false)
                     {
+                        DrawLineRaycast(1, allyTransform[0].transform.position, allyTransform[1].transform.position);
                         FeedbackLine(1);
                         FeedbackLine(0);
                         intersection = true;
                     }
+                    DrawIntersection(new Vector3((cursor.transform.position - this.transform.position).x, 0, (cursor.transform.position - this.transform.position).z) * intersectionT);
                 }
                 else
                 {
@@ -187,7 +193,7 @@ namespace VoiceActing
                         HideIntersection();
                     }
                 }
-                DrawLine(0, this.transform.position, cursor.transform.position);
+                DrawLineRaycast(0, this.transform.position, cursor.transform.position);
             }
             else
             {
@@ -197,8 +203,10 @@ namespace VoiceActing
 
         public void SetCursor(Vector3 position)
         {
-            cursor.transform.position = position + this.transform.localPosition;
-            DrawLine(0, this.transform.position, cursor.transform.position);
+            cursor.transform.position = position;
+            //cursor.transform.localPosition.y = this.transform.position.y;
+            //DrawLine(0, this.transform.position, cursor.transform.position);
+            DrawLineRaycast(0, this.transform.position, cursor.transform.position);
             if (lineUpdateCoroutine != null)
                 StopCoroutine(lineUpdateCoroutine);
             lineUpdateCoroutine = UpdateLineCoroutine();
@@ -226,7 +234,6 @@ namespace VoiceActing
             else if (rs != 0 && (0 <= t && t <= 1) && (0 <= u && u <= 1))
             {
                 intersectionT = t;
-                DrawIntersection((cursorSegment) * t);
                 return true;
             }
             return false;
@@ -239,11 +246,14 @@ namespace VoiceActing
         }
 
 
-        private void DrawIntersection(Vector2 intersec)
+        private void DrawIntersection(Vector3 intersec)
         {
             intersectionPrefab.gameObject.SetActive(true);
-            intersectionPrefab.transform.localPosition = new Vector3(intersec.x, 0, intersec.y);
-            intersectionPrefab.transform.rotation = globalCamera.Rotation();
+            if (Physics.Raycast(this.transform.position + intersec, Vector3.down, out hit, 10f, layerMask))
+            {
+                intersectionPrefab.transform.position = hit.point + offset;
+            }
+                //intersectionPrefab.transform.localPosition = new Vector3(intersec.x, 0, intersec.y);
             //intersectionPrefab.transform.localPosition = new Vector3(intersectionPrefab.transform.localPosition.x, 0, intersectionPrefab.transform.localPosition.z);
             intersectionPrefab.SetTrigger("Feedback");
             feedback.StartAfterImage();
@@ -266,7 +276,7 @@ namespace VoiceActing
 
 
         // Line Draw
-        private void DrawLine(int lineID, Vector3 startLine, Vector3 endLine)
+        /*private void DrawLine(int lineID, Vector3 startLine, Vector3 endLine)
         {
             HeroActionLine lineToRender = GetLine(lineID);
             Vector3 direction = endLine - startLine;
@@ -282,6 +292,34 @@ namespace VoiceActing
             {
                 lineToRender.line[i].gameObject.SetActive(false);
             }
+        }*/
+
+        private void DrawLineRaycast(int lineID, Vector3 startLine, Vector3 endLine)
+        {
+            HeroActionLine lineToRender = GetLine(lineID);
+            Vector3 direction = endLine - startLine;
+            float size = 0;
+            int index = 0;
+            while (size < (direction.magnitude - spriteOffset))
+            {
+                size += spriteOffset;
+                if (Physics.Raycast(startLine + (direction * size / direction.magnitude), Vector3.down, out hit, 10f, layerMask))
+                {
+                    AddSpriteToLine(lineToRender, index, hit.point);
+                    index += 1;
+                    //AddSpriteToLine(lineToRender, index, startLine + (direction * size / direction.magnitude));
+                }
+            }
+            for (int i = index; i < lineToRender.line.Count; i++)
+            {
+                lineToRender.line[i].gameObject.SetActive(false);
+            }
+
+            // Draw Cursor
+            if (Physics.Raycast(endLine, Vector3.down, out hit, 10f, layerMask))
+                cursorObject.transform.position = hit.point + offset;
+            else 
+                cursorObject.transform.position = endLine + offset - this.transform.localPosition;
         }
 
         private void AddSpriteToLine(HeroActionLine lineToRender, int index, Vector3 pos)
@@ -291,7 +329,7 @@ namespace VoiceActing
                 lineToRender.line.Add(Instantiate(spritePrefab, this.transform));
             }
             lineToRender.line[index].gameObject.SetActive(true);
-            lineToRender.line[index].transform.position = pos;
+            lineToRender.line[index].transform.position = pos + offset;
         }
 
         private void HideLine(int lineID)
@@ -347,10 +385,22 @@ namespace VoiceActing
                     //spriteDirection = lineToRender.line[feedbackID].transform;
                     lineToRender.line[feedbackID].SetTrigger("DirectionFeedback");
                 }
+                UpdateOtherLines();
                 yield return null;
             }
         }
 
+        private void UpdateOtherLines()
+        {
+            for(int i = 0; i < heroActionLines.Count; i++)
+            {
+                for (int j = 0; j < heroActionLines[i].line.Count; j++)
+                {
+                    heroActionLines[i].line[j].transform.rotation = globalCamera.Rotation();
+                }
+            }
+            intersectionPrefab.transform.rotation = globalCamera.Rotation();
+        }
 
         #endregion
 

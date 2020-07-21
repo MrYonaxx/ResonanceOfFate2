@@ -61,7 +61,10 @@ namespace VoiceActing
 
         Vector3 destination;
         Vector3 direction;
-        Vector3 directionNormalize;
+        //Vector3 directionNormalize;
+
+        Vector3 actualMovePosition;
+        Vector3 previousMovePosition;
 
 
         bool isTriAttacking = false;
@@ -157,10 +160,12 @@ namespace VoiceActing
             isJumping = false;
             destination = positions[0];
             positions.RemoveAt(0);
+            previousMovePosition = Vector3.zero;
+            actualMovePosition = Vector3.zero;
 
             direction = destination - characterTransform.position;
-            directionNormalize = direction.normalized;
-            time = (direction.magnitude / (speed * Time.deltaTime)) / 60f;// Pas framerate machin < ------------------ Il est là le problème
+           // directionNormalize = direction.normalized;
+            time = (direction.magnitude / speed) / 60f;// Pas framerate machin < ------------------ Il est là le problème
             if(debugMarker != null)
                 debugMarker.transform.position = destination;
 
@@ -177,11 +182,11 @@ namespace VoiceActing
             t = 0f;
             while (t < time)
             {
-                t += (Time.deltaTime * characterAnimation.GetMotionSpeed());
+                t += Time.deltaTime * characterAnimation.GetMotionSpeed();
                 if (isJumping == true)
                     UpdateJumpTriAttack();
                 else
-                    characterMovement.MoveCharacterWorld(directionNormalize.x, directionNormalize.z, speed); // Pas framerate machin < ------------------ Il est là le problème
+                    UpdateMovement();// Pas framerate machin < ------------------ Il est là le problème
                 if (OnTimeChanged != null) OnTimeChanged.Invoke(totalDistance - (currentDistance - (new Vector2(destination.x, destination.z) - PositionToVector2()).magnitude), totalDistance);
                 CheckIntersection();
                 yield return null;
@@ -226,6 +231,23 @@ namespace VoiceActing
                     i -= 1;
                 }
             }
+        }
+
+
+
+
+        private void UpdateMovement()
+        {
+            //float actualT = (t / time);
+            actualMovePosition = direction * (t / time);
+            Vector3 movement = actualMovePosition - previousMovePosition;
+            characterMovement.MoveCharacterManual(movement.x, 0, movement.z, true);
+            previousMovePosition = actualMovePosition;
+            /*actualJumpPosition = BezierCurve((t - timeJump) / (time - timeJump), startJump, heightJump, endJump);
+            Vector3 jumpMovement = actualJumpPosition - previousJumpPosition;
+
+            characterMovement.MoveCharacterManual(jumpMovement.x, jumpMovement.y, jumpMovement.z);
+            previousJumpPosition = actualJumpPosition;*/
         }
 
 

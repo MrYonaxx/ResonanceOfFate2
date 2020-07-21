@@ -134,6 +134,30 @@ namespace VoiceActing
             }
         }
 
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            //Debug.Log(hit.gameObject + " - " + hit.normal);
+            /*if (hit.normal.y == 0)
+            {
+                Debug.Log(hit.gameObject);
+            }*/
+            if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
+            {
+                //Rigidbody body = hit.rigidbody;
+                //body.AddForce(hit.normal);
+                //hit. .Move(hit.normal);
+                /*Debug.Log("Allo");
+                Debug.Log(hit.normal);
+                if (hit.normal.y > 0) // Collision avec un enemy durant une chute
+                {
+                    Debug.Log(hit.normal);
+                    //(hit.moveDirection.x, 0, hit.moveDirection.z);
+                    MoveCharacterManual(hit.normal.x * Time.deltaTime, -0.0001f, hit.normal.z * Time.deltaTime);
+                    Debug.Log(hit.gameObject);
+                }*/
+            }
+        }
+
         /// <summary>
         /// Move Character relative to world
         /// </summary>
@@ -287,14 +311,17 @@ namespace VoiceActing
         /// </summary>
         /// <param name="directionX"></param>
         /// <param name="directionZ"></param>
-        public void MoveCharacterManual(float speedX, float speedY, float speedZ)
+        public void MoveCharacterManual(float speedX, float speedY, float speedZ, bool updateDirection = false)
         {
             Vector3 move = new Vector3(speedX, speedY, speedZ);
-            characterController.Move(move * characterAnimation.GetMotionSpeed());
+            characterController.Move(move);
 
-            /*Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
-            characterDirection.GetDirection().rotation = rotation;
-            characterDirection.GetDirection().eulerAngles = new Vector3(90, characterDirection.GetDirection().localEulerAngles.y, characterDirection.GetDirection().localEulerAngles.z);*/
+            if (updateDirection == true && move.magnitude != 0)
+            {
+                Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
+                characterDirection.GetDirection().rotation = rotation;
+                characterDirection.GetDirection().eulerAngles = new Vector3(90, characterDirection.GetDirection().localEulerAngles.y, characterDirection.GetDirection().localEulerAngles.z);
+            }
         }
 
 
