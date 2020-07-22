@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.AI;
 
 namespace VoiceActing
 {
@@ -19,10 +20,13 @@ namespace VoiceActing
         /* ======================================== *\
          *               ATTRIBUTES                 *
         \* ======================================== */
+        [Title("Data")]
         [SerializeField]
         GlobalEnemyList enemyList;
         [SerializeField]
         GlobalTimeData timeData;
+
+        [Title("Enemy")]
 
         [SerializeField]
         Enemy enemy;
@@ -31,11 +35,18 @@ namespace VoiceActing
             get { return enemy; }
         }
 
-        Character target;
+        [SerializeField]
+        private NavMeshAgent navMeshAgent;
+        public NavMeshAgent NavMeshAgent
+        {
+            get { return navMeshAgent; }
+        }
 
         [SerializeField]
         EnemyBehavior[] enemyBehaviors;
 
+
+        Character target;
 
         bool pause = false;
         bool attackCharged = false;
@@ -75,6 +86,17 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
+
+        [ExecuteInEditMode]
+        private void Reset()
+        {
+            enemy = GetComponent<Enemy>();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
+
+
+
+
         bool hasBeenRemoved = false;
         bool applicationQuit = false;
         private void Start()

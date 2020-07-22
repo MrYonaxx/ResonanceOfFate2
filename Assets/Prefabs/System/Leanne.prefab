@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1264615592}
   - component: {fileID: 1264615591}
   - component: {fileID: 1264615590}
-  m_Layer: 20
+  m_Layer: 19
   m_Name: HeroActionCursor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1882,7 +1882,7 @@ CharacterController:
   m_Height: 1
   m_Radius: 0.2
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.58, z: 0}
@@ -1953,6 +1953,7 @@ MonoBehaviour:
   speed: 1
   gravity: 2
   startAcceleration: 5
+  rotationSpeed: 2
   startMoveAnimation: {fileID: 7400000, guid: e5d0b391a48441946ae5be59fe395f28, type: 2}
   endMoveAnimation: {fileID: 7400000, guid: 5b10520fe90a6a641aa7328e835772d4, type: 2}
   jumpAnimation: {fileID: 7400000, guid: 9bcf9c67e1218b3439b2a4079490a3a2, type: 2}

@@ -5102,7 +5102,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6045471455026718633}
   - component: {fileID: 6045471455026718627}
-  - component: {fileID: 6045471455026718631}
   - component: {fileID: 6045471455026718624}
   - component: {fileID: 6045471455026718628}
   - component: {fileID: 6045471455026718626}
@@ -5159,22 +5158,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.24, z: 0}
---- !u!54 &6045471455026718631
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6045471455026718632}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &6045471455026718624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5403,11 +5386,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfde21d858f5c8345a737ee1f3fe1ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
   spriteRenderer: {fileID: 6045471455429895397}
   directionTransform: {fileID: 6045471454802311125}
   directionSprite: {fileID: 0}
   directionAnimator: {fileID: 0}
-  cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
 --- !u!114 &6045471455026718626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5427,6 +5410,7 @@ MonoBehaviour:
   speed: 2
   gravity: 1
   startAcceleration: 1
+  rotationSpeed: 2
   startMoveAnimation: {fileID: 0}
   endMoveAnimation: {fileID: 7400000, guid: 4310143de4314564abb28ac9630f1b85, type: 2}
   jumpAnimation: {fileID: 0}
@@ -5505,6 +5489,7 @@ MonoBehaviour:
   enemyList: {fileID: 11400000, guid: c16b7185a4584364ab96ebebe40ae724, type: 2}
   timeData: {fileID: 11400000, guid: 2a0aacab1e1b9b5429e5ea75d3a4cfca, type: 2}
   enemy: {fileID: 6045471455026718624}
+  navMeshAgent: {fileID: 6045471455026718625}
   enemyBehaviors:
   - {fileID: 6045471455026718635}
 --- !u!114 &6045471455026718687
@@ -5563,6 +5548,7 @@ MonoBehaviour:
     - Name: targetable
       Entry: 10
       Data: 0
+  targetIsEnemy: 1
   globalTargetable: {fileID: 11400000, guid: 7121129389509ef47a6a3fec0f939b42, type: 2}
 --- !u!114 &3176339048838415750
 MonoBehaviour:

@@ -58,6 +58,10 @@ namespace VoiceActing
 
 
 
+        int navMeshPriority = 1;
+
+
+
 
         #endregion
 
@@ -117,6 +121,10 @@ namespace VoiceActing
             enemyList[i].OnAttackSelected += enemyHealthBar[i].DrawTarget;
             enemyList[i].OnAttackCharged += QueueAttack;
             enemyList[i].OnAttackInterrupted += CancelQueue;
+
+
+            enemyList[i].NavMeshAgent.avoidancePriority = navMeshPriority;
+            navMeshPriority += 1;
         }
 
         public void RemoveEnemy(int i)

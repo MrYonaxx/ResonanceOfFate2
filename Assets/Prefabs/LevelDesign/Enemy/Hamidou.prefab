@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1845341173150412202}
   - component: {fileID: 1845341173150412192}
-  - component: {fileID: 1845341173150412196}
   - component: {fileID: 1845341173150412195}
   - component: {fileID: 1845341173150412199}
   - component: {fileID: 1845341173150412198}
@@ -146,7 +145,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845341173150412203}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.679, z: 2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
@@ -174,26 +173,10 @@ CharacterController:
   m_Height: 0.4
   m_Radius: 0.1
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.23, z: 0}
---- !u!54 &1845341173150412196
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845341173150412203}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &1845341173150412195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +262,7 @@ MonoBehaviour:
   speed: 2
   gravity: 1
   startAcceleration: 1
+  rotationSpeed: 100
   startMoveAnimation: {fileID: 0}
   endMoveAnimation: {fileID: 7400000, guid: 86facd5a43618d54b8cc277d7d61a00f, type: 2}
   jumpAnimation: {fileID: 0}
@@ -362,6 +346,7 @@ MonoBehaviour:
     - Name: targetable
       Entry: 10
       Data: 0
+  targetIsEnemy: 1
   globalTargetable: {fileID: 11400000, guid: 7121129389509ef47a6a3fec0f939b42, type: 2}
 --- !u!114 &2781694450396743734
 MonoBehaviour:
@@ -1049,6 +1034,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1845341174360813772}
   - component: {fileID: 1845341174360813774}
+  - component: {fileID: 2523754547130503394}
   m_Layer: 10
   m_Name: HamidouSprite
   m_TagString: Untagged
@@ -1120,6 +1106,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2523754547130503394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845341174360813773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d9fe2b98989f24ea45a3ce413f5435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1845341174756375164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1539,7 @@ MonoBehaviour:
   enemyList: {fileID: 11400000, guid: c16b7185a4584364ab96ebebe40ae724, type: 2}
   timeData: {fileID: 11400000, guid: 2a0aacab1e1b9b5429e5ea75d3a4cfca, type: 2}
   enemy: {fileID: 1845341173150412195}
+  navMeshAgent: {fileID: 1845341173150412194}
   enemyBehaviors:
   - {fileID: 9121458846181501534}
 --- !u!114 &9121458846181501534

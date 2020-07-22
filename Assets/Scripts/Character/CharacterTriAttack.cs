@@ -79,6 +79,7 @@ namespace VoiceActing
             get { return isJumping; }
         }
 
+        private float timeCollision = 0f;
         float timeJump = 0f;
         Vector3 startJump;
         Vector3 endJump;
@@ -86,6 +87,9 @@ namespace VoiceActing
 
         Vector3 actualJumpPosition;
         Vector3 previousJumpPosition;
+
+        private IEnumerator triAttackCoroutine;
+
 
 
         List<float> intersectionTime = new List<float>();
@@ -156,8 +160,10 @@ namespace VoiceActing
                 AudioManager.Instance.SwitchToBattle(true);
                 CalculateTotalTime();
                 characterAnimation.State = CharacterState.Dash;
+                characterMovement.OnCollisionWall += CallWallCollision;
             }
             isJumping = false;
+            timeCollision = 0;
             destination = positions[0];
             positions.RemoveAt(0);
             previousMovePosition = Vector3.zero;
@@ -189,35 +195,44 @@ namespace VoiceActing
                     UpdateMovement();// Pas framerate machin < ------------------ Il est là le problème
                 if (OnTimeChanged != null) OnTimeChanged.Invoke(totalDistance - (currentDistance - (new Vector2(destination.x, destination.z) - PositionToVector2()).magnitude), totalDistance);
                 CheckIntersection();
+                CheckCollision();
                 yield return null;
             }
-            EndTriAttack();
+            EndTriAttackCoroutine();
         }
 
         //   E N D
-        private void EndTriAttack()
+        private void EndTriAttackCoroutine()
         {
-            AudioManager.Instance.PlaySound(landClip);
-            characterMovement.CharacterDirection.ShowDirectionSprite();
-            characterMovement.StopJump();
-            characterMovement.HasGravity = true;
-            characterRotation.RotationConstraint(true);
+            FinalizeTriAttack();
             if (positions.Count != 0) // On repart
             {
                 StartTriAttack();
             }
             else // On s'arrête
             {
-                isTriAttacking = false;
-                characterMovement.EndMove();
-                if (OnEndAction != null) OnEndAction.Invoke(idAttacker);
+                EndTriAttack();
             }
         }
 
 
 
-
-
+        private void FinalizeTriAttack()
+        {
+            AudioManager.Instance.PlaySound(landClip);
+            characterMovement.CharacterDirection.ShowDirectionSprite();
+            characterMovement.StopJump();
+            characterMovement.HasGravity = true;
+            characterRotation.RotationConstraint(true);
+        }
+        private void EndTriAttack()
+        {
+            characterAfterImage.EndAfterImage();
+            characterMovement.OnCollisionWall -= CallWallCollision;
+            isTriAttacking = false;
+            characterMovement.EndMove();
+            if (OnEndAction != null) OnEndAction.Invoke(idAttacker);
+        }
 
 
         private void CheckIntersection()
@@ -238,21 +253,32 @@ namespace VoiceActing
 
         private void UpdateMovement()
         {
-            //float actualT = (t / time);
             actualMovePosition = direction * (t / time);
             Vector3 movement = actualMovePosition - previousMovePosition;
             characterMovement.MoveCharacterManual(movement.x, 0, movement.z, true);
             previousMovePosition = actualMovePosition;
-            /*actualJumpPosition = BezierCurve((t - timeJump) / (time - timeJump), startJump, heightJump, endJump);
-            Vector3 jumpMovement = actualJumpPosition - previousJumpPosition;
-
-            characterMovement.MoveCharacterManual(jumpMovement.x, jumpMovement.y, jumpMovement.z);
-            previousJumpPosition = actualJumpPosition;*/
         }
 
 
+        private void CheckCollision()
+        {
+            if (timeCollision >= 0.2f) 
+            {
+                StopAllCoroutines();
+                characterAnimation.PlayTrigger("Hit");
+                FinalizeTriAttack();
+                EndTriAttack();
+            }
+            else
+            {
+                timeCollision -= Time.deltaTime;
+            }
+        }
 
-
+        public void CallWallCollision()
+        {
+            timeCollision += (Time.deltaTime * 5);
+        }
 
         public void Jump()
         {
@@ -297,6 +323,13 @@ namespace VoiceActing
             float a = 1 - time;
             Vector3 bezierPoint = (a * a * pos0) + (2 * a * time * pos1) + (time * time * pos2);
             return bezierPoint;
+        }
+
+
+        // OKazou
+        private void OnDestroy()
+        {
+            characterMovement.OnCollisionWall -= CallWallCollision;
         }
 
         #endregion

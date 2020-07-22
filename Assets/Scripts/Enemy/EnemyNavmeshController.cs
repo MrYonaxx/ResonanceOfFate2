@@ -21,7 +21,7 @@ namespace VoiceActing
          *               ATTRIBUTES                 *
         \* ======================================== */
         [SerializeField]
-        CharacterMovement characterMovement;
+        protected CharacterMovement characterMovement;
         [SerializeField]
         NavMeshAgent navMeshAgent;
 
@@ -49,20 +49,23 @@ namespace VoiceActing
             navMeshAgent.updateRotation = false;
         }
 
-        public void MoveToTarget(Transform target)
+        public virtual void MoveToTarget(Transform target)
         {
             navMeshAgent.destination = target.position;
             destinationVelocity = navMeshAgent.desiredVelocity;
-
             characterMovement.MoveCharacterWorld(destinationVelocity.x, destinationVelocity.z, 0.5f);
             navMeshAgent.velocity = characterMovement.Velocity();
         }
 
-        public void StopMove()
+        public virtual void StopMove()
         {
             characterMovement.EndMove();
             navMeshAgent.velocity = Vector3.zero;
+            //navMeshAgent.avoidancePriority += 50;
         }
+
+
+      
 
         #endregion
 
