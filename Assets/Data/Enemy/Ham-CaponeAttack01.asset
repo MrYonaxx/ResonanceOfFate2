@@ -41,10 +41,10 @@ MonoBehaviour:
         statValue: 0
         modifiable: 0
       - statName: Min Aim Distance
-        statValue: 10
+        statValue: 7
         modifiable: 0
       - statName: Max Aim Distance
-        statValue: 10
+        statValue: 7
         modifiable: 0
       - statName: Max Magazine
         statValue: 0
@@ -137,10 +137,10 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Min Aim Distance
-      statValue: 10
+      statValue: 7
       modifiable: 0
     - statName: Max Aim Distance
-      statValue: 10
+      statValue: 7
       modifiable: 0
     - statName: Max Magazine
       statValue: 0
@@ -205,5 +205,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 0
+    manual: 1
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}

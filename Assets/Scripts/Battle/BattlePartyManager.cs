@@ -322,6 +322,16 @@ namespace VoiceActing
 
 
 
+        private void OnDestroy()
+        {
+            for (int i = 0; i < partyData.CharacterStatControllers.Count; i++)
+            {
+                party[i].CharacterStatController.OnHPChanged -= playerHUDs[i].HpGauge.DrawGauge;
+                party[i].CharacterStatController.OnScratchChanged -= playerHUDs[i].ScratchGauge.DrawGauge;
+            }
+        }
+
+
         #endregion
 
     } 

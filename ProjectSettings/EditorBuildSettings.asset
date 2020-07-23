@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene2.unity
     guid: f711e7a99b067b94cbb6a548412860e0
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/HamsterForest1.unity
+    guid: f06b91c8584c45c42b39120ba4c83bf6
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/HamsterForest2.unity
+    guid: b7ae8593200d94f4d8f3cb03720a2bb1
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/HamsterForest2.1.unity
+    guid: ecbd7f1faae4b0c42bc25122c6239110
   m_configObjects: {}

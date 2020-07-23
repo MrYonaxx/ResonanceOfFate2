@@ -227,6 +227,7 @@ namespace VoiceActing
         }
         private void EndTriAttack()
         {
+            positions.Clear();
             characterAfterImage.EndAfterImage();
             characterMovement.OnCollisionWall -= CallWallCollision;
             isTriAttacking = false;
