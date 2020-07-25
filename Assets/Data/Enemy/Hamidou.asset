@@ -20,7 +20,7 @@ MonoBehaviour:
     - columnName: Basic
       statDictionary:
       - statName: HPMax
-        statValue: 250
+        statValue: 150
         modifiable: 0
       - statName: Attack
         statValue: 1
@@ -118,7 +118,7 @@ MonoBehaviour:
         modifiable: 0
     Stats:
     - statName: HPMax
-      statValue: 250
+      statValue: 150
       modifiable: 0
     - statName: Attack
       statValue: 1
