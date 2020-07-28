@@ -21,6 +21,9 @@ namespace VoiceActing
         [SerializeField]
         GlobalCamera globalCamera;
 
+        List<int> defaultChildOrder;
+        List<SpriteRenderer> childSprite;
+        SpriteRenderer spriteRenderer;
         bool constraint = true;
 
         #endregion
@@ -39,10 +42,15 @@ namespace VoiceActing
          *                FUNCTIONS                 *
         \* ======================================== */
 
+        private void Start()
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
         private void Update()
         {
             this.transform.rotation = globalCamera.Rotation();
-            //spriteRenderer.sortingOrder = -(int)((cameraScreen.transform.position - this.transform.position).magnitude * 1000);
+            //SortOrder();
             if (constraint == true)
             {
                 if (this.transform.eulerAngles.x > 180 && this.transform.eulerAngles.x < 350)
@@ -63,7 +71,15 @@ namespace VoiceActing
             constraint = b;
         }
 
-
+        // c'est soit ça soit des quad
+        /*private void SortOrder()
+        {
+            spriteRenderer.sortingOrder = 9999 - (int)((this.transform.position - globalCamera.Position()).sqrMagnitude * 10);
+            for(int i = 0; i < childSprite.Count; i++)
+            {
+                //childSprite
+            }
+        }*/
 
         #endregion
 

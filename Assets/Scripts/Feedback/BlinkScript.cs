@@ -9,30 +9,27 @@ namespace VoiceActing {
         Renderer renderer;
         private IEnumerator blinkCoroutine;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            renderer = GetComponent<Renderer>();
-            renderer.material.color = new Color(0, 1, 1, 0.5f);
-        }
 
-        /*public void Blink(AttackBehavior attack)
+        [ContextMenu("Blink")]
+        public void Blink()
         {
+            if(renderer == null)
+                renderer = GetComponent<Renderer>();
             if (blinkCoroutine != null)
                 StopCoroutine(blinkCoroutine);
-            blinkCoroutine = BlinkCoroutine(attack.BlinkTarget, attack.BlinkTargetColor);
+            blinkCoroutine = BlinkCoroutine(1f, Color.white);
             StartCoroutine(blinkCoroutine);
-        }*/
+        }
 
         private IEnumerator BlinkCoroutine(float time, Color blinkColor)
         {
             flash = 1;
             float t = 0f;
             renderer.material.SetColor("_Color", blinkColor);
-            while (t < time)
+            while (t < 1f)
             {
-                flash = Mathf.Lerp(1, 0, (t / time));
-                t += Time.deltaTime;
+                flash = Mathf.Lerp(1, 0, t);
+                t += Time.deltaTime * time;
                 renderer.material.SetFloat("_FlashAmount", flash);
                 yield return null;
             }

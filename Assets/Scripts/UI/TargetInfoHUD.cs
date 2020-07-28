@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -37,10 +38,27 @@ namespace VoiceActing
         [SerializeField]
         TextMeshProUGUI textTargetLabel;
 
+        [Title("Health")]
+        [SerializeField]
+        Image healthBar;
+        [SerializeField]
+        Image scratchBar;
+        [SerializeField]
+        Transform scratchTransform;
+
         [Title("Player Position")]
         [SerializeField]
         RectTransform playerPosition;
 
+        [Title("BodyPart")]
+        [SerializeField]
+        List<RectTransform> bodyLayer = new List<RectTransform>();
+        [SerializeField]
+        CircleGaugeDrawer bodyPartDrawer;
+
+        List<CircleGaugeDrawer> gaugeDrawers = new List<CircleGaugeDrawer>();
+
+        ITargetable previousTarget;
 
 
         Transform targetDirection;
@@ -93,9 +111,21 @@ namespace VoiceActing
 
         public void DrawTargetInfo(ITargetable characterStat)
         {
+            if (previousTarget != null)
+            {
+                previousTarget.CharacterStatController.OnHPChanged -= DrawHealth;
+                previousTarget.CharacterStatController.OnScratchChanged -= DrawScratch;
+                List<BodyPartController> bodyPart = characterStat.GetBodyParts();
+                for (int i = 0; i < bodyPart.Count; i++) // Potentiel memoryLeak là (en gros ça ne prend pas en compte les body part remove entre l'abonnement et le désabonnement)
+                {
+                    bodyPart[i].StatController.OnHPChanged -= gaugeDrawers[i].DrawHealth;
+                    bodyPart[i].StatController.OnScratchChanged -= gaugeDrawers[i].DrawScratch;
+                }
+            }
             animator.SetTrigger("Disappear");
             if (characterStat == null)
             {
+                previousTarget = null;
                 targetDirection = null;
                 //Hide(); 
                 return;
@@ -106,20 +136,56 @@ namespace VoiceActing
             if (characterStat.CharacterStatController.Level <= 0)
             {
                 textTargetLevel.gameObject.SetActive(false);
-                return;
             }
             else
             {
                 textTargetLevel.gameObject.SetActive(true);
                 textTargetLevelDigit.text = characterStat.CharacterStatController.Level.ToString();
             }
-
+            characterStat.CharacterStatController.OnHPChanged += DrawHealth;
+            characterStat.CharacterStatController.OnScratchChanged += DrawScratch;
+            previousTarget = characterStat;
+            DrawHealth(characterStat.CharacterStatController.Hp, characterStat.CharacterStatController.GetHPMax());
+            DrawScratch(characterStat.CharacterStatController.Scratch, characterStat.CharacterStatController.Hp);
+            DrawBodyPart(characterStat.GetBodyParts());
         }
 
-        public void DrawHealth()
+        public void DrawHealth(float hp, float hpMax)
         {
-
+            healthBar.fillAmount = (hp / hpMax);
+            scratchTransform.localEulerAngles = new Vector3(0, 0, (1- (hp / hpMax)) * 360f);
         }
+
+        public void DrawScratch(float scratch, float hp)
+        {
+            scratchBar.fillAmount = (scratch / hp);
+            scratchBar.fillAmount = Mathf.Clamp(scratchBar.fillAmount, 0, 1f - (scratchTransform.localEulerAngles.z / 360f));
+        }
+
+
+        public void DrawBodyPart(List<BodyPartController> bodyPart)
+        {
+            int maxLayer = 1;
+            for(int i = 0; i < bodyPart.Count; i++)
+            {
+                if (i >= gaugeDrawers.Count)
+                    gaugeDrawers.Add(Instantiate(bodyPartDrawer));
+                gaugeDrawers[i].gameObject.SetActive(true);
+                gaugeDrawers[i].transform.SetParent(bodyLayer[bodyPart[i].Layer-1]);
+                gaugeDrawers[i].CreateGauge(bodyPart[i].AngleMin, bodyPart[i].AngleMax);
+                gaugeDrawers[i].DrawHealth(bodyPart[i].StatController.Hp, bodyPart[i].StatController.GetHPMax());
+
+                bodyPart[i].StatController.OnHPChanged += gaugeDrawers[i].DrawHealth;
+                bodyPart[i].StatController.OnScratchChanged += gaugeDrawers[i].DrawScratch;
+
+                if (maxLayer < bodyPart[i].Layer)
+                    maxLayer = bodyPart[i].Layer;
+            }
+            playerPosition.sizeDelta = bodyLayer[maxLayer-1].sizeDelta;
+            for (int i = bodyPart.Count; i < gaugeDrawers.Count; i++)
+                gaugeDrawers[i].gameObject.SetActive(false);
+        }
+
 
         public void SetPlayer(PlayerCharacter playerCharacter)
         {

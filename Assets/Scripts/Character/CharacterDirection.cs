@@ -29,11 +29,19 @@ namespace VoiceActing
         Transform directionTransform;
         public Transform DirectionTransform { get { return directionTransform; } }
 
-        [SerializeField]
-        SpriteRenderer directionSprite;
-        [SerializeField]
-        Animator directionAnimator;
+        /*[SerializeField]
+        SpriteRenderer directionSprite;*/
+        //[SerializeField]
+        Animator directionAnimator = null;
 
+        [Title("Parameter")]
+        [SerializeField]
+        bool flipScale = false;
+        [SerializeField]
+        bool animationDirection = false;
+        [ShowIf("animationDirection", true)]
+        [SerializeField]
+        Animator animator;
 
         Vector3 right;
         Vector3 left;
@@ -75,8 +83,8 @@ namespace VoiceActing
 
         private void Start()
         {
-            right = new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
-            left= new Vector3(-1, this.transform.localScale.y, this.transform.localScale.z);
+            right = new Vector3(-spriteRenderer.transform.localScale.x, spriteRenderer.transform.localScale.y, spriteRenderer.transform.localScale.z);
+            left= new Vector3(spriteRenderer.transform.localScale.x, spriteRenderer.transform.localScale.y, spriteRenderer.transform.localScale.z);
         }
 
         private void Update()
@@ -100,28 +108,52 @@ namespace VoiceActing
             {
                 //Debug.Log("Ham " + finalAngle);
                 //spriteRenderer.transform.localScale = right
-                spriteRenderer.flipX = true;
+                if (flipScale == true)
+                {
+                    spriteRenderer.transform.localScale = right;
+                }
+                else if (animationDirection == true)
+                {
+                    animator.SetBool("Flip", true);
+                }
+                else
+                {
+                    spriteRenderer.flipX = true;
+                }
                 //spriteRendererAction.flipX = true;
             }
             else if (finalAngle >= 0)
             {
-                //Debug.Log("Stram " + finalAngle);
-                spriteRenderer.flipX = false;
-                //spriteRendererAction.flipX = false;
+                if (flipScale == true)
+                {
+                    spriteRenderer.transform.localScale = left;
+                }
+                else if (animationDirection == true)
+                {
+                    animator.SetBool("Flip", false);
+                }
+                else
+                {
+                    spriteRenderer.flipX = false;
+                }
             }
 
         }
 
         public void HideDirectionSprite()
         {
-            directionSprite.enabled = false;
+            directionTransform.gameObject.SetActive(false);
+            //directionSprite.enabled = false;
         }
         public void ShowDirectionSprite()
         {
-            directionSprite.enabled = true;
+            directionTransform.gameObject.SetActive(true);
+            //directionSprite.enabled = true;
         }
         public void Selected(bool b)
         {
+            if (directionAnimator == null)
+                directionAnimator = directionTransform.GetComponent<Animator>();
             directionAnimator.SetBool("Selected", b);
         }
 

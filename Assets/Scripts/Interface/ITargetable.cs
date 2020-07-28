@@ -28,8 +28,8 @@ namespace VoiceActing
         {
             get;
         }
-        // delegate void Action();
-        //public event Action OnDead;
+
+        List<BodyPartController> GetBodyParts();
 
     } 
 

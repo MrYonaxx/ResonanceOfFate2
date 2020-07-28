@@ -280,7 +280,7 @@ namespace VoiceActing
                 finalIndex = finalTarget.Count - 1;
             else if (finalIndex >= finalTarget.Count)
                 finalIndex = 0;
-            Debug.Log(finalIndex);
+            //Debug.Log(finalIndex);
             Target(finalTarget[finalIndex]);
 
         }

@@ -112,6 +112,11 @@ namespace VoiceActing
             }
         }
 
+        public virtual List<BodyPartController> GetBodyParts()
+        {
+            return null;
+        }
+
         #endregion
 
     } 

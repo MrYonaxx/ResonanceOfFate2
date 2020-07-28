@@ -38,6 +38,14 @@ namespace VoiceActing
         [SerializeField]
         string statMass;
 
+        [Title("Body Part")]
+        [SerializeField]
+        List<BodyPartController> bodyPartControllers;
+        public List<BodyPartController> BodyPartControllers
+        {
+            get { return bodyPartControllers; }
+        }
+
         [Title("Sound (A dégager)")]
         [SerializeField]
         AudioClip airborneClip;
@@ -49,6 +57,14 @@ namespace VoiceActing
             get { return characterStatController; }
             set { characterStatController = value; }
         }
+
+        [SerializeField]
+        private CharacterBodyPartController characterBodyPartController;
+        public CharacterBodyPartController CharacterBodyPartController
+        {
+            get { return characterBodyPartController; }
+        }
+
 
         float knockbackCurrentTime = 0f;
         float feverTime = 0;
@@ -85,11 +101,19 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
+
+        private void Start()
+        {
+            characterBodyPartController = new CharacterBodyPartController(characterStatController, bodyPartControllers);
+        }
+
         public void Damage(Vector3 pos, AttackData attackData)
         {
             if (isDead == true)
                 return;
-            DamageMessage msg = attackData.AttackProcessor.ProcessAttack(attackData.AttackDataStat, characterStatController);
+
+            DamageMessage msg = characterBodyPartController.Damage(attackData, characterMovement.CharacterDirection.DirectionTransform);
+            //DamageMessage msg = attackData.AttackProcessor.ProcessAttack(attackData.AttackDataStat, characterStatController);
             msg.SetDamagePosition(pos);
 
             if (OnHit != null) OnHit.Invoke(msg);

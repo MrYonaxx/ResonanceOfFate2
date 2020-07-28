@@ -21,14 +21,19 @@ namespace VoiceActing
          *               ATTRIBUTES                 *
         \* ======================================== */
         [SerializeField]
-        RawImage rawImage;
+        Camera cam;
+        [SerializeField]
+        RawImage transitionCanvas;
+        [SerializeField]
+        RawImage previousCanvas;
 
+        [SerializeField]
+        int sliceNumber = 10;
 
         Texture texture;
         public Material mat;
         List<TriData> triData;
-
-        CanvasRenderer canvasRenderer;
+        float t = 0f;
 
         #endregion
 
@@ -45,22 +50,6 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-        /*private void OnDrawGizmos()
-        {
-            GL.PushMatrix();
-            texture = rawImage.mainTexture;
-            mat = rawImage.material;
-
-            GL.LoadOrtho();
-            GL.Begin(GL.TRIANGLES); // Triangle
-            mat.SetPass(0);
-            GL.Color(new Color(1, 1, 1, 1));
-            GL.Vertex3(0.50f, 0.25f, 0);
-            GL.Vertex3(0.25f, 0.25f, 0);
-            GL.Vertex3(0.375f, 0.5f, 0);
-            GL.End();
-            GL.PopMatrix();
-        }*/
         public class TriData
         {
             public List<Vector3> vertices;
@@ -72,12 +61,6 @@ namespace VoiceActing
 
             public TriData(Vector2 pointA, Vector2 pointB, Vector2 pointC, Vector2 pointD)
             {
-                /*Debug.Log("=============");
-                Debug.Log(pointA.x + "   " + pointA.y);
-                Debug.Log(pointC.x + "   " + pointC.y);
-                Debug.Log(pointB.x + "   " + pointB.y);
-                Debug.Log(pointD.x + "   " + pointD.y);
-                Debug.Log("=============");*/
                 vertices = new List<Vector3>();
                 uv = new List<Vector3>();
 
@@ -99,17 +82,12 @@ namespace VoiceActing
                 uv.Add(new Vector3(pointB.x, -pointB.y + 1f));
 
 
-
-
                 vertices.Add(new Vector3((pointA.x * 2) - 1, (pointA.y * 2) - 1, 0));
                 uv.Add(new Vector3(pointA.x, -pointA.y + 1f));
                 vertices.Add(new Vector3((pointC.x * 2) - 1, (pointC.y * 2) - 1, 0));
                 uv.Add(new Vector3(pointC.x, -pointC.y + 1f));
 
-
-
                 direction = new Vector2(pointA.x - 0.5f, pointA.y - 0.5f);
-
 
                 matrixTransform = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector4(1, 1, 1));
             }
@@ -124,31 +102,28 @@ namespace VoiceActing
         private void SliceNaive()
         {
             triData = new List<TriData>();
-            int lineNumber = 10;
-            float xPadding = 0.1f;
-            float yPadding = 0.1f;
-            bool canCreateTriangle = false;
-
+            //int lineNumber = 10;
+            float xPadding = 1f / sliceNumber;
+            float yPadding = 1f / sliceNumber;
             List<Vector2> previousPointX = new List<Vector2>();
             List<Vector2> pointX = new List<Vector2>();
 
             /////////////////    =========   Ligne 0
-            for(int i = 0; i < lineNumber; i++)
+            for(int i = 0; i < sliceNumber; i++)
             {
                 if (i == 0)
                     previousPointX.Add(new Vector2(0, 0f));
-                else if (i == lineNumber-1)
+                else if (i == sliceNumber - 1)
                     previousPointX.Add(new Vector2(1f, 0f));
                 else
                     previousPointX.Add(new Vector2(i * xPadding + Random.Range(-xPadding * 0.8f, xPadding * 0.8f), 0f));
             }
-            canCreateTriangle = true;
 
 
             ////////////////   =========   Ligne X
-            for (int j = 1; j < lineNumber; j++)
+            for (int j = 1; j < sliceNumber; j++)
             {
-                for (int i = 0; i < lineNumber; i++)
+                for (int i = 0; i < sliceNumber; i++)
                 {
                     float y = j * yPadding + Random.Range(-yPadding * 0.8f, yPadding * 0.8f);
 
@@ -157,22 +132,13 @@ namespace VoiceActing
                         pointX.Add(new Vector2(0, y));
                         continue;
                     }
-                    else if (i == lineNumber - 1)
+                    else if (i == sliceNumber - 1)
                         pointX.Add(new Vector2(1f, y));
                     else
                         pointX.Add(new Vector2(i * xPadding + Random.Range(-xPadding * 0.8f, xPadding * 0.8f), y));
                     triData.Add(new TriData(previousPointX[i - 1], previousPointX[i], pointX[i - 1], pointX[i]));
                 }
 
-
-                /*if(canCreateTriangle == true)
-                {
-                    for (int i = 0; i < pointX.Count-1; i++)
-                    {
-                        
-                    }
-                }*/
-                //canCreateTriangle = !canCreateTriangle;
 
                 previousPointX.Clear();
                 for (int i = 0; i < pointX.Count; i++)
@@ -201,24 +167,6 @@ namespace VoiceActing
             }*/
         }
 
-        private void Start()
-        {
-            SliceNaive();
-
-            texture = rawImage.mainTexture;
-            mat = rawImage.material;
-
-            var shader = Shader.Find("J/Shatter");
-            mat = new Material(shader);
-            mat.SetFloat("_ScreenRatio", 1);
-            mat.SetFloat("_Alpha", 1);
-            mat.hideFlags = HideFlags.HideAndDontSave;
-
-            mat.mainTexture = texture;
-            Debug.Log(triData.Count);
-        }
-
-
         private void OnPostRender()
         {
             if (triData == null)
@@ -235,10 +183,8 @@ namespace VoiceActing
 
             GL.MultiTexCoord(0, new Vector3(0.5f, 0.5f, 0));
             GL.Vertex3(0f, 0f, 0);
-
             GL.MultiTexCoord(0, new Vector3(1f, 0.5f, 0));
             GL.Vertex3(1f, 0, 0);
-
             GL.MultiTexCoord(0, new Vector3(0.75f, 1f, 0));
             GL.Vertex3(0.5f, -1f, 0);
 
@@ -250,15 +196,20 @@ namespace VoiceActing
 
             GL.MultiTexCoord(0, new Vector3(0f, 0.5f, 0));
             GL.Vertex3(-1f, 0f, 0);
-
             GL.MultiTexCoord(0, new Vector3(0.5f, 0.5f, 0));
             GL.Vertex3(0f, 0, 0);
-
             GL.MultiTexCoord(0, new Vector3(0.25f, 1f, 0));
             GL.Vertex3(-0.5f, -1f, 0);
             
             GL.End();*/
-
+            t += Time.deltaTime;
+            if (t >= 1)
+            {
+                Debug.Log("Loop");
+                t = 1f;
+                this.enabled = false;
+                return;
+            }
             for (int i = 0; i < triData.Count; i++)
             {
                 GL.Begin(GL.QUADS);
@@ -274,59 +225,37 @@ namespace VoiceActing
 
 
                 //triData[i].SetMatrix(triData[i].matrixTransform * Matrix4x4.Scale(new Vector3(0.97f, 0.97f, 0.97f)));
-                triData[i].matrixTransform = triData[i].matrixTransform * Matrix4x4.Translate(triData[i].direction * 0.2f);
-                triData[i].matrixTransform = triData[i].matrixTransform * Matrix4x4.Rotate(Quaternion.identity);
+                triData[i].matrixTransform = triData[i].matrixTransform * Matrix4x4.Translate(triData[i].direction * 0.1f);
+                triData[i].matrixTransform = triData[i].matrixTransform * Matrix4x4.Rotate(Quaternion.Euler(triData[i].rotation * Random.Range(1f,2f)));
                 triData[i].matrixTransform = triData[i].matrixTransform * Matrix4x4.Scale(new Vector3(1.02f, 1.02f, 1.02f));
                 GL.MultMatrix(triData[i].matrixTransform);
                 GL.End();
             }
 
             GL.PopMatrix();
-            //for (int i = 0; i < triData.Count; i++)
-            //{
-
-            /*var c = m_triData[i].Center;
-            c.x *= screenratio;
-            m_triData[i].Matrix = Matrix4x4.Translate(m_triData[i].Dir * offset);
-            m_triData[i].Matrix = m_triData[i].Matrix * Matrix4x4.Translate(c);
-            m_triData[i].Matrix = m_triData[i].Matrix * Matrix4x4.Rotate(Quaternion.Euler(m_triData[i].Rotation * rotation));
-            m_triData[i].Matrix = m_triData[i].Matrix * Matrix4x4.Scale(new Vector3(0.97f, 0.97f, 0.97f));
-            m_triData[i].Matrix = m_triData[i].Matrix * Matrix4x4.Translate(-c);
-
-            GL.MultMatrix(m_triData[i].Matrix);
-
-            GL.End();*/
-            //}
-
-
-
         }
 
-        /*public void ShatterScreen()
+        public void ShatterScreen()
         {
-            texture = rawImage.mainTexture;
-            mat = rawImage.material;
-            //rawImage.mainTexture.bl
-            //m_triData[index].vertices
-            GL.LoadOrtho();
-            mat.SetPass(0);
+            Debug.Log("Hey");
+            SliceNaive();
 
+            texture = transitionCanvas.mainTexture;
+            mat = transitionCanvas.material;
 
             var shader = Shader.Find("J/Shatter");
             mat = new Material(shader);
             mat.SetFloat("_ScreenRatio", 1);
             mat.SetFloat("_Alpha", 1);
             mat.hideFlags = HideFlags.HideAndDontSave;
+
             mat.mainTexture = texture;
 
-            GL.Begin(GL.TRIANGLES);
-            GL.MultiTexCoord(0, new Vector4(0, 0.2f, 0.3f, 0.5f));
-            GL.Vertex(new Vector3(0,0.1f,0.2f));
-            //GL.MultMatrix(m_triData[i].Matrix);
-            GL.End();
-        }*/
+            cam.enabled = false;
+            transitionCanvas.gameObject.SetActive(false);
+            previousCanvas.gameObject.SetActive(false);
 
-
+        }
 
         /*IEnumerator RenderTriangles()
         {

@@ -47,6 +47,14 @@ namespace VoiceActing
          *                FUNCTIONS                 *
         \* ======================================== */
 
+        public override List<BodyPartController> GetBodyParts()
+        {
+            //Debug.Log(CharacterDamage.CharacterBodyPartController.BodyPart[0]);
+            if (CharacterDamage.CharacterBodyPartController == null)
+                return CharacterDamage.BodyPartControllers;
+            return CharacterDamage.CharacterBodyPartController.BodyPart;
+        }
+
         #endregion
 
     } 

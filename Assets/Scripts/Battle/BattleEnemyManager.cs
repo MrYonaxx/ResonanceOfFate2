@@ -110,7 +110,7 @@ namespace VoiceActing
                 enemyHealthBar.Add(Instantiate(healthBarPrefab, healthBarCanvas));
             enemyHealthBar[i].SetTarget(enemyList[i].Enemy.HealthBar);
             enemyHealthBar[i].gameObject.SetActive(true);
-            //enemyList[i].Enemy.CharacterDamage.OnHit += textPopupManager.DrawDamagePopup;
+
             enemyList[i].Enemy.CharacterDamage.OnDead += EnemyDefeated;
             enemyList[i].Enemy.CharacterStatController.OnHPChanged += enemyHealthBar[i].HealthGauge.DrawGauge;
             enemyList[i].Enemy.CharacterStatController.OnScratchChanged += enemyHealthBar[i].ScratchGauge.DrawGauge;

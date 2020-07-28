@@ -107,6 +107,11 @@ namespace VoiceActing
             explosion.SetAttackData(new AttackData(explosionAttackData.AttackProcessor, characterStatController, explosionAttackData));
         }
 
+        public virtual List<BodyPartController> GetBodyParts()
+        {
+            return null;
+        }
+
         #endregion
 
     } 
