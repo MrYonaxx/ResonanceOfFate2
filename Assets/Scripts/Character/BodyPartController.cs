@@ -95,7 +95,7 @@ namespace VoiceActing
             get { return statController; }
         }
 
-
+        bool isDestroyed = false;
 
 
 
@@ -135,15 +135,19 @@ namespace VoiceActing
             {
                 objectToDisappear[i].SetActive(false);
             }*/
-            statController.Hp = 0;
-            BodyPartDestroyed b = Instantiate(bodyPartDestroyed, this.transform.position, Quaternion.identity);
-            b.CreateBodyPart(sprite);
-            for (int i = 0; i < linkedBodyPart.Count; i++)
+            if (isDestroyed == false)
             {
-                linkedBodyPart[i].PartDestroy();
+                statController.Hp = 0;
+                BodyPartDestroyed b = Instantiate(bodyPartDestroyed, this.transform.position, Quaternion.identity);
+                b.CreateBodyPart(sprite);
+                for (int i = 0; i < linkedBodyPart.Count; i++)
+                {
+                    linkedBodyPart[i].PartDestroy();
+                }
+                onDestroy.Invoke();
+                isDestroyed = true;
+                this.gameObject.SetActive(false);
             }
-            onDestroy.Invoke();
-            this.gameObject.SetActive(false);
         }
     } 
 

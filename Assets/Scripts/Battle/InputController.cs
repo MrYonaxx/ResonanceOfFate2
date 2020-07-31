@@ -21,7 +21,8 @@ namespace VoiceActing
         HeroAction,
         HeroActionTri,
         TriAttack,
-        NoInput
+        NoInput,
+        Skip
     } 
 
     public class InputController: MonoBehaviour
@@ -76,6 +77,7 @@ namespace VoiceActing
 
         bool reverseDirection = false;
         bool padDown = false;
+        bool preventB = false;
 
 
         private InputState inputState = InputState.Default;
@@ -211,6 +213,9 @@ namespace VoiceActing
                 case InputState.TriAttack:
                     UpdateTriAttack();
                     break;
+                case InputState.Skip:
+                    InputSkip();
+                    break;
             }
         }
 
@@ -220,6 +225,7 @@ namespace VoiceActing
             InputMovement();
             InputAim();
             InputHeroAction();
+            InputSkip();
             InputTriAttackMode();
             InputSwitchCharacters();
             InputSwitchTargets();
@@ -307,6 +313,27 @@ namespace VoiceActing
         }
 
 
+        private void InputSkip()
+        {
+            if(Input.GetButton(control.buttonB) && preventB == false)
+            {
+                InputState = InputState.Skip;
+                timeData.TimeFlow = true;
+                if (battlePartyManager.ReducePlayerTime(150f) == true) // Donc le perso n'a plus de time
+                {
+                    c.CharacterMovement.Move(0, 0);
+                    NextTurn();
+                    preventB = true;
+                }
+            }
+            else if(Input.GetButtonUp(control.buttonB))
+            {
+                preventB = false;
+                InputState = InputState.Default;
+                timeData.TimeFlow = false;
+            }
+        }
+
 
         // =================================================================================
         // Shoot
@@ -358,6 +385,7 @@ namespace VoiceActing
                 else
                 {
                     InputState = InputState.Default;
+                    preventB = true;
                 }
             }
         }
@@ -473,6 +501,7 @@ namespace VoiceActing
                 c.CharacterHeroAction.Desactivate();
                 cameraLock.SetState(0); // Set default
                 InputState = InputState.Default;
+                preventB = true;
             }
         }
 
@@ -536,6 +565,7 @@ namespace VoiceActing
                 triAttackManager.CancelTriAttack();
                 cameraLock.SetState(0); // Set default
                 InputState = InputState.Default;
+                preventB = true;
             }
         }
 
@@ -643,12 +673,15 @@ namespace VoiceActing
         {
             if (Input.GetButtonDown(control.buttonRB))
             {
+                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
+                    return;*/
+
                 if (inputState != InputState.HeroActionTri)
                 {
                     InputState = InputState.Default;
                     c.CharacterHeroAction.Desactivate();
                 }
-                if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
+                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
                 {
                     battlePartyManager.CurrentCharacterInactive();
                     if (battleEnemyManager.CheckEnemyAttack() == true)
@@ -656,18 +689,27 @@ namespace VoiceActing
                         EnemyAttack();
                         return;
                     }
+                }*/
+                if (battleEnemyManager.CheckEnemyAttack() == true)
+                {
+                    battlePartyManager.CurrentCharacterInactive();
+                    EnemyAttack();
+                    return;
                 }
                 PlaySound(switchCharacterClip);
                 SwitchCharactersRight();
             }
             else if (Input.GetButtonDown(control.buttonLB))
             {
+                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
+                    return;*/
+
                 if (inputState != InputState.HeroActionTri)
                 {
                     InputState = InputState.Default;
                     c.CharacterHeroAction.Desactivate();
                 }
-                if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
+                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
                 {
                     battlePartyManager.CurrentCharacterInactive();
                     if (battleEnemyManager.CheckEnemyAttack() == true)
@@ -675,6 +717,12 @@ namespace VoiceActing
                         EnemyAttack();
                         return;
                     }
+                }*/
+                if (battleEnemyManager.CheckEnemyAttack() == true)
+                {
+                    battlePartyManager.CurrentCharacterInactive();
+                    EnemyAttack();
+                    return;
                 }
                 PlaySound(switchCharacterClip);
                 SwitchCharactersLeft();
@@ -814,6 +862,7 @@ namespace VoiceActing
 
         private void EnemyAttack()
         {
+            preventB = false;
             aimReticle.HideAimReticle();
             timeData.TimeFlow = false;
             StopInput();

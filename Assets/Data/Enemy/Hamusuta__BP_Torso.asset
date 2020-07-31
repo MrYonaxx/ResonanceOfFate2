@@ -20,7 +20,7 @@ MonoBehaviour:
     - columnName: 
       statDictionary:
       - statName: HPMax
-        statValue: 1
+        statValue: 400
         modifiable: 0
       - statName: Defense
         statValue: 1
@@ -37,7 +37,7 @@ MonoBehaviour:
       statDictionary3: []
     Stats:
     - statName: HPMax
-      statValue: 1
+      statValue: 400
       modifiable: 0
     - statName: Defense
       statValue: 1
@@ -48,5 +48,5 @@ MonoBehaviour:
     - statName: Launch Resistance
       statValue: 20
       modifiable: 0
-    manual: 1
+    manual: 0
     statModel: {fileID: 11400000, guid: 46000a1f7fa50fe41806b23172b86095, type: 2}

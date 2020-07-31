@@ -49,7 +49,7 @@ namespace VoiceActing
 
         public void UpdateCommand(InputState newIndex)
         {
-            if ((int)newIndex == index)
+            if ((int)newIndex == index || (int) newIndex >= commandUI.Length)
                 return;
             commandUI[index].SetActive(false);
             index = (int)newIndex;

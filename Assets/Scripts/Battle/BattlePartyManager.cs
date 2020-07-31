@@ -179,6 +179,8 @@ namespace VoiceActing
             playerHUDs[indexSelection].GaugeMoveTime.DrawGauge(timePlayer[indexSelection], 100f);
             if (timePlayer[indexSelection] <= 0)
             {
+                timePlayer[indexSelection] = 0f;
+                playerHUDs[indexSelection].GaugeMoveTime.DrawGauge(timePlayer[indexSelection], 100f);
                 playerHUDs[indexSelection].HudInactive(true);
                 return true;
             }

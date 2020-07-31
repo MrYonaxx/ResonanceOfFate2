@@ -127,7 +127,7 @@ namespace VoiceActing
                     if(reverse == false)
                         party[j].CharacterTriAttack.AddTriAttackPosition(party[(j + i) % party.Count].transform.position);
                     else
-                        party[j].CharacterTriAttack.AddTriAttackPosition(party[((j + party.Count )- i)  % party.Count].transform.position);
+                        party[j].CharacterTriAttack.AddTriAttackPosition(party[((j + (party.Count*99))- i)  % party.Count].transform.position); // Le *99 c'est un peu viteuf, c'est pour éviter le -1
                 }
             }
             for (int i = 0; i < party.Count; i++)

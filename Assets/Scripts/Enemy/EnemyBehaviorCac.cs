@@ -90,6 +90,12 @@ namespace VoiceActing
 
         }
 
+        public override void InterruptBehavior()
+        {
+            isMoving = false;
+            navmeshController.StopMove();
+        }
+
         public override float UpdateBehavior(Enemy enemy, Character target)
         {
             Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);

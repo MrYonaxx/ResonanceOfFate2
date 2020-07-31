@@ -197,7 +197,7 @@ namespace VoiceActing
             if (move.magnitude > 0)
             {
                 Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
-                characterDirection.GetDirection().rotation = Quaternion.RotateTowards(characterDirection.GetDirection().rotation, rotation, rotationSpeed * Time.deltaTime);
+                characterDirection.GetDirection().rotation = Quaternion.RotateTowards(characterDirection.GetDirection().rotation, rotation, rotationSpeed * characterAnimation.GetMotionSpeed() * Time.deltaTime);
                 characterDirection.GetDirection().eulerAngles = new Vector3(90, characterDirection.GetDirection().localEulerAngles.y, characterDirection.GetDirection().localEulerAngles.z);
                 //characterDirection.GetDirection().rotation = rotation;
 
