@@ -53,12 +53,13 @@ namespace VoiceActing
         {
             navMeshAgent.destination = target.position;
             destinationVelocity = navMeshAgent.desiredVelocity;
-            characterMovement.MoveCharacterWorld(destinationVelocity.x, destinationVelocity.z, 0.5f);
+            characterMovement.MoveCharacterWorld(destinationVelocity.x, destinationVelocity.z);
             navMeshAgent.velocity = characterMovement.Velocity();
         }
 
         public virtual void StopMove()
         {
+            characterMovement.CharacterAnimation.PlayTrigger("EndMove");
             characterMovement.EndMove();
             navMeshAgent.velocity = Vector3.zero;
             //navMeshAgent.avoidancePriority += 50;

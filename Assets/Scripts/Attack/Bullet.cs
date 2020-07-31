@@ -19,6 +19,10 @@ namespace VoiceActing
         /* ======================================== *\
          *               ATTRIBUTES                 *
         \* ======================================== */
+        /*[SerializeField]
+        Transform muzzle = null;*/
+        [SerializeField]
+        Transform muzzleAnimation = null;
         [SerializeField]
         GameObject onHitParticle = null;
 
@@ -62,12 +66,14 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-        public void Play()
+        public void Play(Transform target)
         {
+            this.transform.LookAt(target);
+            //muzzle.LookAt(target);
             part.Play();
             if (gunSound != null)
-                //.Instance.PlaySound()
                 gunSound.PlayOneShot(gunSound.clip);
+            Instantiate(muzzleAnimation, this.transform.position, Quaternion.identity);
         }
 
         void OnParticleCollision(GameObject other)

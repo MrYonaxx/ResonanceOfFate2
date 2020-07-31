@@ -68,6 +68,12 @@ namespace VoiceActing
         {
 
         }
+
+        public virtual void InterruptBehavior()
+        {
+
+        }
+
         public virtual float UpdateBehavior(Enemy enemy, Character target)
         {
             return 0;

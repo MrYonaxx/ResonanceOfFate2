@@ -115,7 +115,7 @@ namespace VoiceActing
             {
                 previousTarget.CharacterStatController.OnHPChanged -= DrawHealth;
                 previousTarget.CharacterStatController.OnScratchChanged -= DrawScratch;
-                List<BodyPartController> bodyPart = characterStat.GetBodyParts();
+                List<BodyPartController> bodyPart = previousTarget.GetBodyParts();
                 for (int i = 0; i < bodyPart.Count; i++) // Potentiel memoryLeak là (en gros ça ne prend pas en compte les body part remove entre l'abonnement et le désabonnement)
                 {
                     bodyPart[i].StatController.OnHPChanged -= gaugeDrawers[i].DrawHealth;

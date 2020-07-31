@@ -92,11 +92,6 @@ namespace VoiceActing
 
         public override float UpdateBehavior(Enemy enemy, Character target)
         {
-            /*if(target.CharacterDamage.IsDead == true) // placebo
-            {
-                target = SelectTarget(enemy);
-                return -9999;
-            }*/
             Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);
             if (direction.magnitude < enemy.CharacterStatController.GetMinAimDistance())
             {

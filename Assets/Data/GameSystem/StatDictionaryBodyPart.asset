@@ -22,9 +22,17 @@ MonoBehaviour:
       statValue: 1
       modifiable: 1
     columnNameCenter: 
-    statDictionary2: []
+    statDictionary2:
+    - statName: Knockback Resistance
+      statValue: 0
+      modifiable: 1
+    - statName: Launch Resistance
+      statValue: 0
+      modifiable: 1
     columnNameRight: 
     statDictionary3: []
   statNames:
   - HPMax
   - Defense
+  - Knockback Resistance
+  - Launch Resistance

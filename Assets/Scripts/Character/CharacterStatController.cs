@@ -67,6 +67,9 @@ namespace VoiceActing
         public event ActionStat OnHPChanged;
         public event ActionStat OnScratchChanged;
 
+        public delegate void ActionStatChanged(CharacterStatController characterStatController);
+        public event ActionStatChanged OnStatChanged;
+
         [HorizontalGroup("HP", LabelWidth = 150, PaddingLeft = 10, PaddingRight = 10, Width = 0.75f)]
         [HideLabel]
         [ProgressBar(0, "GetHPMax", Height = 20, R = 1, B = 0.15f)]
@@ -192,6 +195,7 @@ namespace VoiceActing
                 // faire l'opération pas optimisé
             }*/
             statController.Add(stat, addType);
+            if(OnStatChanged != null) OnStatChanged.Invoke(this);
         }
         public void RemoveStat(StatController stat, StatModifierType addType)
         {
@@ -201,8 +205,21 @@ namespace VoiceActing
                 // faire l'opération pas optimisé
             }*/
             statController.Remove(stat, addType);
+            if (OnStatChanged != null) OnStatChanged.Invoke(this);
         }
 
+
+        public void AddStat(string statName, float statValue, StatModifierType addType)
+        {
+            statController.AddStat(new Stat(statName, statValue), addType);
+            if (OnStatChanged != null) OnStatChanged.Invoke(this);
+        }
+
+        public void RemoveStat(string statName, float statValue, StatModifierType addType)
+        {
+            statController.RemoveStat(new Stat(statName, statValue), addType);
+            if (OnStatChanged != null) OnStatChanged.Invoke(this);
+        }
 
         #endregion
 

@@ -119,7 +119,6 @@ namespace VoiceActing
             directionEnemy = new Vector2(enemyDirection.up.x, enemyDirection.up.z);
             directionPlayer = new Vector2(enemyDirection.position.x - attackData.AttackDataStat.UserPosition.x, enemyDirection.position.z - attackData.AttackDataStat.UserPosition.z);
             attackAngle = Vector2.SignedAngle(directionEnemy, directionPlayer) + 180f;
-            Debug.Log(attackAngle);
 
             // Check parmis les bodyPart lequel correspond
             DamageMessage damageMessage = new DamageMessage();
@@ -128,13 +127,13 @@ namespace VoiceActing
             {
                 if(bodyPart[i].CheckHit(attackAngle) == true)
                 {
-                    Debug.Log("Hit");
                     // Enlève des points de vies au bodyPart correspondant
                     hitBody = false;
                     damageMessage = bodyPart[i].Damage(attackData);
                     // Check si la partie est détruite et on la vire de la liste
-                    if(bodyPart[i].PartDestroy())
+                    if(bodyPart[i].StatController.Hp <= 0)
                     {
+                        bodyPart[i].PartDestroy();
                         bodyPart.RemoveAt(i);
                         if(OnPartDestroy != null) OnPartDestroy.Invoke();
                     }
@@ -146,6 +145,14 @@ namespace VoiceActing
 
 
             return damageMessage;
+        }
+
+        public void DestroyBodyPart(BodyPartController part)
+        {
+            part.PartDestroy();
+            bodyPart.Remove(part);
+            if (OnPartDestroy != null) OnPartDestroy.Invoke();
+
         }
 
         #endregion

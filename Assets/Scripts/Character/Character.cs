@@ -99,8 +99,14 @@ namespace VoiceActing
             if (characterData != null)
             {
                 characterStatController = new CharacterStatController(characterData);
+                //characterStatController.OnStatChanged += CallStatChange;
                 CharacterDamage.CharacterStatController = characterStatController;
             }
+        }
+
+        public void CallStatChange(CharacterStatController stat)
+        {
+            characterMovement.SetSpeed(stat.GetStat("Speed"));
         }
 
         public virtual List<BodyPartController> GetBodyParts()

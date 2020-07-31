@@ -36,6 +36,10 @@ namespace VoiceActing
         }
         [SerializeField]
         CharacterAnimation characterAnimation;
+        public CharacterAnimation CharacterAnimation
+        {
+            get { return characterAnimation; }
+        }
 
         [Title("Parameter")]
         [SerializeField]
@@ -100,6 +104,13 @@ namespace VoiceActing
         /* ======================================== *\
          *           GETTERS AND SETTERS            *
         \* ======================================== */
+        public void SetSpeed(float newSpeed)
+        {
+            speed = newSpeed;
+        }
+
+
+
         public bool IsGrounded()
         {
             return characterController.isGrounded;
@@ -174,8 +185,10 @@ namespace VoiceActing
         /// </summary>
         /// <param name="directionX"></param>
         /// <param name="directionZ"></param>
-        public void MoveCharacterWorld(float directionX, float directionZ, float moveSpeed)
+        public void MoveCharacterWorld(float directionX, float directionZ, float moveSpeed = -1)
         {
+            if (moveSpeed == -1)
+                moveSpeed = speed;
             Vector3 move = new Vector3(directionX, 0, directionZ);
             move.Normalize();
             move *= moveSpeed;
@@ -266,9 +279,12 @@ namespace VoiceActing
 
 
         public void EndMove()
-        { 
-            characterAnimation.PlayAnim(endMoveAnimation.name);
-            StartCoroutine(EndMoveCoroutine(endMoveAnimation.length));
+        {
+            if (endMoveAnimation != null)
+            {
+                characterAnimation.PlayAnim(endMoveAnimation.name);
+                StartCoroutine(EndMoveCoroutine(endMoveAnimation.length));
+            }
         }
 
         private IEnumerator EndMoveCoroutine(float time)

@@ -38,7 +38,7 @@ namespace VoiceActing
         }
 
 
-        public void Play()
+        public void Play(Transform target)
         {
             //this.gameObject.SetActive(true)
         }

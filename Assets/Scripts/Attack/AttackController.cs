@@ -24,41 +24,54 @@ namespace VoiceActing
         AttackDataStat bonusAttackData;
 
         [Space]
-        [SerializeField]
-        Transform muzzle;
-        [SerializeField]
-        Transform cameraParent;
+        /*[SerializeField]
+        Transform muzzle;*/
 
         [Space]
-        //[R (typeof(IAttackCollision))]
         [Sirenix.Serialization.OdinSerialize]
         IAttackCollision attackCollision;
-        [SerializeField]
-        GameObject muzzleAnimation;
+        /*[SerializeField]
+        GameObject muzzleAnimation;*/
 
-        [Space]
         [SerializeField]
         GlobalFeedbackManager feedbackManager;
         [SerializeField]
         GlobalCamera globalCamera;
 
+        [Title("Camera")]
+        [SerializeField]
+        Transform cameraParent;
+        [SerializeField] // Transform a placé sur la target (Pour les effets de camera nécessitant la position du joueur)
+        Transform cameraLockTransform;
+        [SerializeField]
+        Transform[] cameraSecondaryParent;
+
         [Title("Parameter")]
-        [SerializeField]
-        bool stayOnGround = true;
-        [SerializeField]
-        bool fixDirection = false;
-        [SerializeField]
-        bool stopTime = true;
         [SerializeField]
         [MinValue(-1)]
         [MaxValue(1)]
         int baseDirection = 1;
 
+        [HorizontalGroup("Parameter1")]
+        [SerializeField]
+        bool stayOnGround = true;
+        [HorizontalGroup("Parameter1")]
+        [SerializeField]
+        bool fixDirection = false;
+
+        [HorizontalGroup("Parameter2")]
+        [SerializeField]
+        bool stopTime = true;
+        [HorizontalGroup("Parameter2")]
+        [SerializeField] // Si false, il faut placer le cameraLockTransform via les scripts (utile pour les AoE par exemple qui ne vise pas un personnage en particulier)
+        bool manualTarget = false;
+
+
         [Title("Debug")]
         [SerializeField]
         Transform targetDebug;
 
-        [SerializeField]
+
         AttackData attackData;
 
         Transform target;
@@ -108,14 +121,24 @@ namespace VoiceActing
             if(stopTime == true)
                 feedbackManager.SetMotionSpeed(0f);
             target = newTarget;
-            //texture.SetBool("Appear", true);
             globalCamera.ActivateCameraAction(true);
             Transform cam = globalCamera.GetCameraAction();
             cam.SetParent(cameraParent, false);
             cam.localPosition = Vector3.zero;
             cam.localEulerAngles = Vector3.zero;
-            TurnToTarget(target);
-            //attackCollision.SetAttackData(attackData);
+
+            if (cameraLockTransform != null)
+            {
+                if (manualTarget == false)
+                    cameraLockTransform.position = newTarget.position;
+                Vector3 lockPreviousTransform = cameraLockTransform.position;
+                TurnToTarget(cameraLockTransform);
+                cameraLockTransform.position = lockPreviousTransform;
+            }
+            else
+            {
+                TurnToTarget(newTarget);
+            }
         }
 
         public void SetDirection(int direction)
@@ -139,16 +162,15 @@ namespace VoiceActing
                 this.transform.localEulerAngles = new Vector3(0, this.transform.eulerAngles.y, this.transform.eulerAngles.z);
         }
 
+        // Appelé par les anim, le nom est une erreur mais supprimer casserai quelques anims
         public void CreateBullet()
         {
-            muzzle.LookAt(target);
-            attackCollision.Play();
-            Instantiate(muzzleAnimation, muzzle.transform.position, Quaternion.identity);
+            attackCollision.Play(target);
         }
 
         public void AttackActive()
         {
-            attackCollision.Play();
+            attackCollision.Play(target);
         }
 
         public void EndAttack()
@@ -156,9 +178,7 @@ namespace VoiceActing
             feedbackManager.SetMotionSpeed(1f);
             globalCamera.ActivateCameraAction(false);
             globalCamera.GetCameraAction().SetParent(null, false);
-            //texture.SetBool("Appear", false);
             OnEndAction.Invoke();
-            //this.gameObject.SetActive(false);
         }
 
         public void StopAttack()
@@ -167,6 +187,20 @@ namespace VoiceActing
             EndAttack();
         }
 
+
+        public void SetSecondaryCamera(int camNb)
+        {
+            Transform cam = globalCamera.GetCameraAction();
+            cam.SetParent(cameraSecondaryParent[camNb], false);
+            cam.localPosition = Vector3.zero;
+            cam.localEulerAngles = Vector3.zero;
+            
+        }
+
+        public void SetLockPosition(Vector3 position)
+        {
+            cameraLockTransform.position = position;
+        }
 
 
         #endregion

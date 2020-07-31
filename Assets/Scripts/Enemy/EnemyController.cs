@@ -13,6 +13,13 @@ using UnityEngine.AI;
 
 namespace VoiceActing
 {
+    [System.Serializable]
+    public class EnemyBehaviorPhase
+    {
+        [SerializeField]
+        public EnemyBehavior[] enemyBehaviors;
+    }
+
     public class EnemyController: MonoBehaviour
     {
         #region Attributes 
@@ -42,15 +49,19 @@ namespace VoiceActing
             get { return navMeshAgent; }
         }
 
+
         [SerializeField]
-        EnemyBehavior[] enemyBehaviors;
+        List<EnemyBehaviorPhase> enemyBehaviors;
+
+        EnemyBehavior currentBehavior;
 
 
         Character target;
 
         bool pause = false;
         bool attackCharged = false;
-        int indexAttack = -1;
+        //int indexAttack = -1;
+        int phase = 0;
 
         private float aimTime = 0;
         public float AimTime
@@ -150,13 +161,13 @@ namespace VoiceActing
             }
             else if (timeData.TimeFlow == true && pause == true)
             {
-                if (indexAttack >= 0)
-                    enemyBehaviors[indexAttack].ResumeBehavior();
+                if (currentBehavior != null)
+                    currentBehavior.ResumeBehavior();
                 pause = false;
                 return;
             }
 
-            if (indexAttack == -1) // Pas d'attaque donc on va en chercher une 
+            if (currentBehavior == null) // Pas d'attaque donc on va en chercher une 
             {
                 SelectAttack();
                 return;
@@ -164,7 +175,7 @@ namespace VoiceActing
 
             if (timeData.TimeFlow == true)
             {
-                AimTime += (enemyBehaviors[indexAttack].UpdateBehavior(enemy, target) * Time.deltaTime) * enemy.CharacterAnimation.GetMotionSpeed();
+                AimTime += (currentBehavior.UpdateBehavior(enemy, target) * Time.deltaTime) * enemy.CharacterAnimation.GetMotionSpeed();
                 if (aimTime >= 1f && attackCharged == false)
                 {
                     attackCharged = true;
@@ -182,40 +193,48 @@ namespace VoiceActing
 
         private void SelectAttack()
         {
-            if (indexAttack >= 0)
-                enemy.CharacterStatController.RemoveStat(enemyBehaviors[indexAttack].GetWeaponData().BaseStat, StatModifierType.Flat);
-            indexAttack = Random.Range(0, enemyBehaviors.Length);
-            for (int i = 0; i < enemyBehaviors.Length; i++)
+            if (currentBehavior != null)
+                enemy.CharacterStatController.RemoveStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
+            EnemyBehavior[] behaviors = enemyBehaviors[phase].enemyBehaviors;
+            int indexAttack = Random.Range(0, behaviors.Length);
+            for (int i = 0; i < behaviors.Length; i++)
             {
-                target = enemyBehaviors[indexAttack].SelectTarget(enemy);
+                target = behaviors[indexAttack].SelectTarget(enemy);
                 if (target != null)
                 {
                     // Pattern sélectionné
-                    enemy.CharacterStatController.AddStat(enemyBehaviors[indexAttack].GetWeaponData().BaseStat, StatModifierType.Flat);
+                    currentBehavior = behaviors[indexAttack];
+                    enemy.CharacterStatController.AddStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
                     if (OnAttackSelected != null) OnAttackSelected.Invoke(target);
                     return;
                 }
                 indexAttack += 1;
-                if (indexAttack >= enemyBehaviors.Length)
+                if (indexAttack >= behaviors.Length)
                     indexAttack = 0;
             }
             // Si on en est là c'est que y'a personne à dérailler
             // Executer le pattern par défaut
 
             //!\ Placeholder
-            indexAttack = -1;
+            //indexAttack = -1;
         }
 
         public void PerformAction()
         {
             // J'ai besoin de générer un attack data avec les stats de l'ennemi et les stats de l'arme
-            AttackData enemyAttackData = new AttackData(enemyBehaviors[indexAttack].GetWeaponData().AttackProcessor, enemy.CharacterStatController, enemyBehaviors[indexAttack].GetWeaponData());
+            AttackData enemyAttackData = new AttackData(currentBehavior.GetWeaponData().AttackProcessor, enemy.CharacterStatController, currentBehavior.GetWeaponData());
 
-            enemy.CharacterAction.Action(enemyAttackData, enemyBehaviors[indexAttack].GetAttackController(), target.CharacterCenter);
+            enemy.CharacterAction.OnEndAction += NextPattern;
+            enemy.CharacterAction.Action(enemyAttackData, currentBehavior.GetAttackController(), target.CharacterCenter);
+
+        }
+
+        public void NextPattern()
+        {
+            enemy.CharacterAction.OnEndAction -= NextPattern;
             ResetBehavior();
             SelectAttack();
         }
-
 
 
 
@@ -225,33 +244,41 @@ namespace VoiceActing
         {
             if (pause == false)
             {
-                if (indexAttack >= 0)
-                    enemyBehaviors[indexAttack].PauseBehavior();
+                if (currentBehavior != null)
+                    currentBehavior.PauseBehavior();
                 pause = true;
             }
         }
 
         private void ResetBehavior()
         {
-            if (indexAttack >= 0)
+            if (currentBehavior != null)
             {
                 AimTime = 0;
-                enemy.CharacterStatController.RemoveStat(enemyBehaviors[indexAttack].GetWeaponData().BaseStat, StatModifierType.Flat);
-                indexAttack = -1;
+                enemy.CharacterStatController.RemoveStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
+                currentBehavior.InterruptBehavior();
+                currentBehavior = null;
                 attackCharged = false;
             }
 
         }
-        private void InterruptBehavior()
+        public void InterruptBehavior()
         {
-            if (indexAttack >= 0)
+            if (currentBehavior != null)
             {
                 AimTime = 0;
-                enemy.CharacterStatController.RemoveStat(enemyBehaviors[indexAttack].GetWeaponData().BaseStat, StatModifierType.Flat);
-                indexAttack = -1;
+                enemy.CharacterStatController.RemoveStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
+                currentBehavior.InterruptBehavior();
+                currentBehavior = null;
                 attackCharged = false;
                 if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this);
             }
+
+        }
+
+        public void ChangePhase(int newPhase)
+        {
+            phase = newPhase;
 
         }
 

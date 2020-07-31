@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
-  boolDebug: 1
 --- !u!1 &2326957098315361387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4944,6 +4943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aaeef2dd703c04db0973369aa30449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzleAnimation: {fileID: 9122660244593664107, guid: c0ba11c2796d2af4b8e7f8d0c72ff2cd,
+    type: 3}
   onHitParticle: {fileID: 822693832}
 --- !u!82 &1905809297
 AudioSource:

@@ -90,6 +90,10 @@ namespace VoiceActing
         {
             animator.Play(animationName, 0);
         }
+        public void PlayAnimBool(string boolName)
+        {
+            animator.SetBool(boolName, true);
+        }
         public void PlayTrigger(string triggerName)
         {
             animator.SetTrigger(triggerName);

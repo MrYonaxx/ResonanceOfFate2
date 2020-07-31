@@ -15,7 +15,7 @@ namespace VoiceActing
     public interface IAttackCollision
     {
         void SetAttackData(AttackData attack);
-        void Play();
+        void Play(Transform target);
     } 
 
 } // #PROJECTNAME# namespace

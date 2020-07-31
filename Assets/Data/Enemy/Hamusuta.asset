@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterFace: {fileID: 0}
   characterName: 'Guard HA-MU-SU-TA '
-  characterLevel: 0
+  characterLevel: 17
   statController:
     StatEditor:
     - columnName: Basic
@@ -108,7 +108,7 @@ MonoBehaviour:
         statValue: 25
         modifiable: 0
       - statName: Launch Resistance
-        statValue: 0
+        statValue: 25
         modifiable: 0
       - statName: Stun Resistance
         statValue: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
       statValue: 25
       modifiable: 0
     - statName: Launch Resistance
-      statValue: 0
+      statValue: 25
       modifiable: 0
     - statName: Stun Resistance
       statValue: 0
@@ -204,5 +204,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 1
+    manual: 0
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}

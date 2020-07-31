@@ -5153,6 +5153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aaeef2dd703c04db0973369aa30449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muzzleAnimation: {fileID: 0}
   onHitParticle: {fileID: 8632996020427025046, guid: bac3adcf32d64cb439972867461be11c,
     type: 3}
 --- !u!82 &2022533663865788953
@@ -5518,34 +5519,17 @@ MonoBehaviour:
     accuracyVariance: 0
     AttackElement: []
     AttackStatus: []
-  muzzle: {fileID: 7674421136852708042}
-  cameraParent: {fileID: 7674421136557898268}
-  muzzleAnimation: {fileID: 7196501695904101145, guid: d14547895feb5ee43bf2fc0b18ef3455,
-    type: 3}
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  cameraParent: {fileID: 7674421136557898268}
+  cameraLockTransform: {fileID: 0}
+  cameraSecondaryParent: []
+  baseDirection: 1
   stayOnGround: 1
   fixDirection: 1
   stopTime: 0
-  baseDirection: 1
+  manualTarget: 0
   targetDebug: {fileID: 0}
-  attackData:
-    attackProcessor: {fileID: 0}
-    attackDataStat:
-      attackType: 0
-      scratchDamage: 0
-      damage: 0
-      damageVariance: 0
-      knockbackDamage: 0
-      knockbackDamageVariance: 0
-      launchDamage: 0
-      launchDamageVariance: 0
-      stunDamage: 0
-      stunDamageVariance: 0
-      accuracy: 0
-      accuracyVariance: 0
-      AttackElement: []
-      AttackStatus: []
 --- !u!95 &7674421136215575280
 Animator:
   serializedVersion: 3
@@ -5676,8 +5660,9 @@ MonoBehaviour:
   cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
   spriteRenderer: {fileID: 7674421136693592741}
   directionTransform: {fileID: 7674421136045101461}
-  directionSprite: {fileID: 0}
-  directionAnimator: {fileID: 0}
+  flipScale: 0
+  animationDirection: 0
+  animator: {fileID: 0}
 --- !u!114 &7674421136290415077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5696,6 +5681,7 @@ MonoBehaviour:
   knockbackTime: 1
   recoveryTime: 0.5
   statMass: Mass
+  bodyPartControllers: []
   airborneClip: {fileID: 8300000, guid: 4c591fc7fb861954299f5e349d0e5097, type: 3}
 --- !u!114 &7674421136290415074
 MonoBehaviour:
@@ -5778,7 +5764,8 @@ MonoBehaviour:
   enemy: {fileID: 7674421136290415072}
   navMeshAgent: {fileID: 7674421136290415073}
   enemyBehaviors:
-  - {fileID: 7674421136290415004}
+  - enemyBehaviors:
+    - {fileID: 7674421136290415004}
 --- !u!114 &7674421136290415004
 MonoBehaviour:
   m_ObjectHideFlags: 0

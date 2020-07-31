@@ -13,6 +13,8 @@ namespace VoiceActing {
         [ContextMenu("Blink")]
         public void Blink()
         {
+            if (this.gameObject.activeInHierarchy == false)
+                return;
             if(renderer == null)
                 renderer = GetComponent<Renderer>();
             if (blinkCoroutine != null)

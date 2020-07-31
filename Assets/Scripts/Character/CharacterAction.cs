@@ -83,7 +83,9 @@ namespace VoiceActing
 
         private void Action(AttackController attack, Transform target)
         {
+            //user.gameObject.SetActive(false);
             user.enabled = false;
+            user.transform.position += new Vector3(0, 5000, 0);
             attack.gameObject.SetActive(true);
             attack.CreateAttack(target);
             attack.SetDirection(direction.GetDirectionInt());
@@ -99,7 +101,9 @@ namespace VoiceActing
 
         public void ActionEnd()
         {
+            //user.gameObject.SetActive(true);
             user.enabled = true;
+            user.transform.position -= new Vector3(0, 5000, 0);
             currentAttack.OnEndAction -= ActionEnd;
             currentAttack = null;
             if(OnEndAction != null) OnEndAction.Invoke();

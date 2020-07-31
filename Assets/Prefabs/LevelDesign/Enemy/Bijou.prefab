@@ -5389,8 +5389,9 @@ MonoBehaviour:
   cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
   spriteRenderer: {fileID: 6045471455429895397}
   directionTransform: {fileID: 6045471454802311125}
-  directionSprite: {fileID: 0}
-  directionAnimator: {fileID: 0}
+  flipScale: 0
+  animationDirection: 0
+  animator: {fileID: 0}
 --- !u!114 &6045471455026718626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5407,7 +5408,7 @@ MonoBehaviour:
   characterController: {fileID: 6045471455026718627}
   characterDirection: {fileID: 6045471455026718628}
   characterAnimation: {fileID: 6045471455429895393}
-  speed: 2
+  speed: 1
   gravity: 1
   startAcceleration: 1
   rotationSpeed: 2
@@ -5432,6 +5433,7 @@ MonoBehaviour:
   knockbackTime: 1
   recoveryTime: 0.5
   statMass: Mass
+  bodyPartControllers: []
   airborneClip: {fileID: 8300000, guid: 4c591fc7fb861954299f5e349d0e5097, type: 3}
 --- !u!114 &6045471455026718685
 MonoBehaviour:
@@ -5491,7 +5493,8 @@ MonoBehaviour:
   enemy: {fileID: 6045471455026718624}
   navMeshAgent: {fileID: 6045471455026718625}
   enemyBehaviors:
-  - {fileID: 6045471455026718635}
+  - enemyBehaviors:
+    - {fileID: 6045471455026718635}
 --- !u!114 &6045471455026718687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5642,33 +5645,17 @@ MonoBehaviour:
     accuracyVariance: 0
     AttackElement: []
     AttackStatus: []
-  muzzle: {fileID: 0}
-  cameraParent: {fileID: 6045471455297068124}
-  muzzleAnimation: {fileID: 0}
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  cameraParent: {fileID: 6045471455297068124}
+  cameraLockTransform: {fileID: 0}
+  cameraSecondaryParent: []
+  baseDirection: 1
   stayOnGround: 1
   fixDirection: 1
   stopTime: 0
-  baseDirection: 1
+  manualTarget: 0
   targetDebug: {fileID: 0}
-  attackData:
-    attackProcessor: {fileID: 0}
-    attackDataStat:
-      attackType: 0
-      scratchDamage: 0
-      damage: 0
-      damageVariance: 0
-      knockbackDamage: 0
-      knockbackDamageVariance: 0
-      launchDamage: 0
-      launchDamageVariance: 0
-      stunDamage: 0
-      stunDamageVariance: 0
-      accuracy: 0
-      accuracyVariance: 0
-      AttackElement: []
-      AttackStatus: []
 --- !u!95 &6045471455101562033
 Animator:
   serializedVersion: 3

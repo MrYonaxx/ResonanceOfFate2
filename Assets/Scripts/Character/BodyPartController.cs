@@ -8,30 +8,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(BlinkScript))]
     public class BodyPartController: MonoBehaviour
     {
 
+        [HorizontalGroup("Render")]
+        [HideLabel]
         [SerializeField]
-        protected float angleMin;
-        public float AngleMin
-        {
-            get { return angleMin; }
-        }
+        SpriteRenderer sprite;
+        [HorizontalGroup("Render")]
+        [HideLabel]
+        [SerializeField]
+        BlinkScript blink;
 
         [SerializeField]
-        protected float angleMax;
-        public float AngleMax
-        {
-            get { return angleMax; }
-        }
+        [HideLabel]
+        BodyPartDestroyed bodyPartDestroyed;
 
-        [SerializeField]
-        protected bool aerialPart;
-
+        [Title("Parameter")]
         [SerializeField]
         [ProgressBar(0, 3)]
         protected int layer = 1;
@@ -39,25 +39,67 @@ namespace VoiceActing
         {
             get { return layer; }
         }
+        [HorizontalGroup("Angle")]
+        [SerializeField]
+        protected float angleMin;
+        public float AngleMin
+        {
+            get { return angleMin; }
+        }
+        [HorizontalGroup("Angle")]
+        [SerializeField]
+        protected float angleMax;
+        public float AngleMax
+        {
+            get { return angleMax; }
+        }
+
+        //[SerializeField]
+        //protected bool aerialPart;
+
+
 
         /*[SerializeField]
         StatController statData;*/
-        [SerializeField]
-        List<StatModifier> bodyPartBonus;
 
+        [Space]
+        [HorizontalGroup("List")]
         [SerializeField]
+        List<BodyPartController> linkedBodyPart;
+
+        /*[Space]
+        [HorizontalGroup("List")]
+        [SerializeField]
+        List<GameObject> objectToDisappear;*/
+
+        /*[Space]
+        [HorizontalGroup("List")]
+        [SerializeField]
+        List<StatModifier> bodyPartBonus;*/
+
+
+        [Space]
+        [Title("Stats")]
+        [HideLabel]
+        [SerializeField]
+        CharacterData partData;
+
+        [Space]
+        [SerializeField]
+        UnityEvent onDestroy;
+
+
         protected CharacterStatController statController;
         public CharacterStatController StatController
         {
             get { return statController; }
         }
 
-        [SerializeField]
-        SpriteRenderer sprite;
-        [SerializeField]
-        BlinkScript blink;
-        [SerializeField]
-        BodyPartDestroyed bodyPartDestroyed;
+
+
+
+
+
 
         [ExecuteInEditMode]
         private void Reset()
@@ -68,10 +110,10 @@ namespace VoiceActing
 
         public virtual void InitializeBodyPart()
         {
-            //statController = new CharacterStatController()
+            statController = new CharacterStatController(partData);
             /*for (int i = 0; i < bodyPartBonus.Count; i++)
             {
-                statController.StatController.AddStat(new Stat(bodyPartBonus[i].StatName, bodyPartBonus[i].StatValue), bodyPartBonus[i].ModifierType);
+                characterStatController.StatController.AddStat(new Stat(bodyPartBonus[i].StatName, bodyPartBonus[i].StatValue), bodyPartBonus[i].ModifierType);
             }*/
         }
 
@@ -85,23 +127,23 @@ namespace VoiceActing
             //statController.AddStat()
             blink.Blink();
             return attackData.AttackProcessor.ProcessAttack(attackData.AttackDataStat, statController);
-            /*DamageMessage msg = 
-            if (statController.Hp <= 0)
-                PartDestroy()
-            return msg;*/
         }
 
-        public virtual bool PartDestroy()
+        public virtual void PartDestroy()
         {
-            if (statController.Hp <= 0)
+            /*for (int i = 0; i < objectToDisappear.Count; i++)
             {
-                // On fait des trucs
-                BodyPartDestroyed b = Instantiate(bodyPartDestroyed, this.transform.position, Quaternion.identity);
-                b.CreateBodyPart(sprite);
-                this.gameObject.SetActive(false);
-                return true;
+                objectToDisappear[i].SetActive(false);
+            }*/
+            statController.Hp = 0;
+            BodyPartDestroyed b = Instantiate(bodyPartDestroyed, this.transform.position, Quaternion.identity);
+            b.CreateBodyPart(sprite);
+            for (int i = 0; i < linkedBodyPart.Count; i++)
+            {
+                linkedBodyPart[i].PartDestroy();
             }
-            return false;
+            onDestroy.Invoke();
+            this.gameObject.SetActive(false);
         }
     } 
 

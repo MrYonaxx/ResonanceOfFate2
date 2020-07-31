@@ -222,8 +222,9 @@ MonoBehaviour:
   cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
   spriteRenderer: {fileID: 1845341173284105958}
   directionTransform: {fileID: 1845341172846345686}
-  directionSprite: {fileID: 0}
-  directionAnimator: {fileID: 0}
+  flipScale: 0
+  animationDirection: 0
+  animator: {fileID: 0}
 --- !u!114 &1845341173150412198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +243,7 @@ MonoBehaviour:
   knockbackTime: 1
   recoveryTime: 0.5
   statMass: Mass
+  bodyPartControllers: []
   airborneClip: {fileID: 8300000, guid: 4c591fc7fb861954299f5e349d0e5097, type: 3}
 --- !u!114 &1845341173150412193
 MonoBehaviour:
@@ -259,7 +261,7 @@ MonoBehaviour:
   characterController: {fileID: 1845341173150412192}
   characterDirection: {fileID: 1845341173150412199}
   characterAnimation: {fileID: 1845341173284105954}
-  speed: 2
+  speed: 0.5
   gravity: 1
   startAcceleration: 1
   rotationSpeed: 100
@@ -437,34 +439,17 @@ MonoBehaviour:
     accuracyVariance: 0
     AttackElement: []
     AttackStatus: []
-  muzzle: {fileID: 0}
-  cameraParent: {fileID: 1845341173419808351}
-  muzzleAnimation: {fileID: 7196501695904101145, guid: d14547895feb5ee43bf2fc0b18ef3455,
-    type: 3}
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  cameraParent: {fileID: 1845341173419808351}
+  cameraLockTransform: {fileID: 0}
+  cameraSecondaryParent: []
+  baseDirection: 1
   stayOnGround: 1
   fixDirection: 1
   stopTime: 0
-  baseDirection: 1
+  manualTarget: 0
   targetDebug: {fileID: 0}
-  attackData:
-    attackProcessor: {fileID: 0}
-    attackDataStat:
-      attackType: 0
-      scratchDamage: 0
-      damage: 0
-      damageVariance: 0
-      knockbackDamage: 0
-      knockbackDamageVariance: 0
-      launchDamage: 0
-      launchDamageVariance: 0
-      stunDamage: 0
-      stunDamageVariance: 0
-      accuracy: 0
-      accuracyVariance: 0
-      AttackElement: []
-      AttackStatus: []
 --- !u!95 &1845341173212669631
 Animator:
   serializedVersion: 3
@@ -1541,7 +1526,8 @@ MonoBehaviour:
   enemy: {fileID: 1845341173150412195}
   navMeshAgent: {fileID: 1845341173150412194}
   enemyBehaviors:
-  - {fileID: 9121458846181501534}
+  - enemyBehaviors:
+    - {fileID: 9121458846181501534}
 --- !u!114 &9121458846181501534
 MonoBehaviour:
   m_ObjectHideFlags: 0

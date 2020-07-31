@@ -148,7 +148,8 @@ namespace VoiceActing
             {
                 float multiplier = GetMultiplier(magazineNumber);
                 for(int i = 0; i < statModifiers.Count; i++)
-                    character.StatController.AddStat(new Stat(statModifiers[i].StatName, statModifiers[i].StatValue * multiplier), statModifiers[i].ModifierType);
+                    character.AddStat(statModifiers[i].StatName, statModifiers[i].StatValue * multiplier, statModifiers[i].ModifierType);
+                //character.StatController.AddStat(new Stat(statModifiers[i].StatName, statModifiers[i].StatValue * multiplier), statModifiers[i].ModifierType);
             }
         }
 
@@ -159,7 +160,8 @@ namespace VoiceActing
             {
                 float multiplier = GetMultiplier(magazineNumber);
                 for (int i = 0; i < statModifiers.Count; i++)
-                    character.StatController.RemoveStat(new Stat(statModifiers[i].StatName, statModifiers[i].StatValue * multiplier), statModifiers[i].ModifierType);
+                    character.RemoveStat(statModifiers[i].StatName, statModifiers[i].StatValue * multiplier, statModifiers[i].ModifierType);
+                //character.StatController.RemoveStat(new Stat(statModifiers[i].StatName, statModifiers[i].StatValue * multiplier), statModifiers[i].ModifierType);
             }
         }
 

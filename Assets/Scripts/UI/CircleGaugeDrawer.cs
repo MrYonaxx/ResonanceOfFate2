@@ -39,7 +39,7 @@ namespace VoiceActing
 
         public void DrawHealth(float hp, float hpMax)
         {
-            if (hp == 0)
+            if (hp <= 0)
                 gauge.gameObject.SetActive(false);
             healthBar.fillAmount = (hp / hpMax) * (gauge.fillAmount - fillOffset);
             scratchBar.rectTransform.localEulerAngles = new Vector3(0, 0, -gauge.fillAmount * 360f);
