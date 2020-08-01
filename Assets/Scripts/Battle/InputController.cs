@@ -80,7 +80,7 @@ namespace VoiceActing
         bool preventB = false;
 
 
-        private InputState inputState = InputState.Default;
+        private InputState inputState = InputState.NoInput;
         public InputState InputState
         {
             get { return inputState; }

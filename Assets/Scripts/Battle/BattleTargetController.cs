@@ -171,7 +171,7 @@ namespace VoiceActing
 
             aimReticle.SetTarget(targetable[indexSelection].CharacterCenter);
             cameraLock.SetTarget(targetable[indexSelection].CharacterCenter);
-            OnTargeted.Invoke(targetable[indexSelection]);
+            if (OnTargeted != null) OnTargeted.Invoke(targetable[indexSelection]);
         }
 
         public void Target(ITargetable newTarget)
@@ -179,7 +179,7 @@ namespace VoiceActing
             currentTarget = newTarget;
             aimReticle.SetTarget(currentTarget.CharacterCenter);
             cameraLock.SetTarget(currentTarget.CharacterCenter);
-            OnTargeted.Invoke(currentTarget);
+            if(OnTargeted != null) OnTargeted.Invoke(currentTarget);
         }
 
         public void Untarget()
@@ -187,7 +187,7 @@ namespace VoiceActing
             aimReticle.SetTarget(null);
             cameraLock.SetTarget(null);
             cameraLock.LockOn(false);
-            OnTargeted.Invoke(null);
+            if (OnTargeted != null) OnTargeted.Invoke(null);
         }
 
 

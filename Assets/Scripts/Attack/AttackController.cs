@@ -141,6 +141,19 @@ namespace VoiceActing
             }
         }
 
+        public void StartAnimation()
+        {
+            if (anim == null)
+                anim = GetComponent<Animator>();
+            anim.SetTrigger("Start");
+            anim.SetInteger("Animation", Random.Range(0, 2));
+            globalCamera.ActivateCameraAction(true);
+            Transform cam = globalCamera.GetCameraAction();
+            cam.SetParent(cameraParent, false);
+            cam.localPosition = Vector3.zero;
+            cam.localEulerAngles = Vector3.zero;
+        }
+
         public void SetDirection(int direction)
         {
             if (fixDirection == true)
