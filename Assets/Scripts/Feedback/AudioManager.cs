@@ -26,6 +26,8 @@ namespace VoiceActing
         [SerializeField]
         private AudioSource audioMusic;
         [SerializeField]
+        private AudioSource audioMusic2;
+        [SerializeField]
         private AudioSource audioSound;
         [SerializeField]
         private AudioSource audioVoice;
@@ -70,6 +72,20 @@ namespace VoiceActing
             audioMusic.Play();
             StopAllCoroutines();
             StartCoroutine(PlayMusicCoroutine(timeFade));
+        }
+
+        public void PlayMusic(AudioClip music, AudioClip musicBattle, int timeFade = 1)
+        {
+            if (music == audioMusic.clip)
+            {
+                //audioMusic.volume = musicVolumeMax;
+                return;
+            }
+            audioMusic2.clip = musicBattle;
+            audioMusic.clip = music;
+            audioMusic.Play();
+            audioMusic2.Play();
+            StopAllCoroutines();
         }
 
         private IEnumerator PlayMusicCoroutine(int timeFade)

@@ -53,6 +53,7 @@ namespace VoiceActing
         private IEnumerator LoadStart()
         {
             yield return null;
+            hud.SetActive(false);
             yield return null;
             InitializeBattle();
         }
