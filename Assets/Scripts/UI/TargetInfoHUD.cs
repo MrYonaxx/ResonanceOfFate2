@@ -116,10 +116,13 @@ namespace VoiceActing
                 previousTarget.CharacterStatController.OnHPChanged -= DrawHealth;
                 previousTarget.CharacterStatController.OnScratchChanged -= DrawScratch;
                 List<BodyPartController> bodyPart = previousTarget.GetBodyParts();
-                for (int i = 0; i < bodyPart.Count; i++) // Potentiel memoryLeak là (en gros ça ne prend pas en compte les body part remove entre l'abonnement et le désabonnement)
+                if (bodyPart != null)
                 {
-                    bodyPart[i].StatController.OnHPChanged -= gaugeDrawers[i].DrawHealth;
-                    bodyPart[i].StatController.OnScratchChanged -= gaugeDrawers[i].DrawScratch;
+                    for (int i = 0; i < bodyPart.Count; i++) // Potentiel memoryLeak là (en gros ça ne prend pas en compte les body part remove entre l'abonnement et le désabonnement)
+                    {
+                        bodyPart[i].StatController.OnHPChanged -= gaugeDrawers[i].DrawHealth;
+                        bodyPart[i].StatController.OnScratchChanged -= gaugeDrawers[i].DrawScratch;
+                    }
                 }
             }
             animator.SetTrigger("Disappear");
@@ -165,8 +168,11 @@ namespace VoiceActing
 
         public void DrawBodyPart(List<BodyPartController> bodyPart)
         {
+            int lenght = 0;
+            if (bodyPart != null)
+                lenght = bodyPart.Count;
             int maxLayer = 1;
-            for(int i = 0; i < bodyPart.Count; i++)
+            for(int i = 0; i < lenght; i++)
             {
                 if (i >= gaugeDrawers.Count)
                     gaugeDrawers.Add(Instantiate(bodyPartDrawer));
@@ -182,7 +188,7 @@ namespace VoiceActing
                     maxLayer = bodyPart[i].Layer;
             }
             playerPosition.sizeDelta = bodyLayer[maxLayer-1].sizeDelta;
-            for (int i = bodyPart.Count; i < gaugeDrawers.Count; i++)
+            for (int i = lenght; i < gaugeDrawers.Count; i++)
                 gaugeDrawers[i].gameObject.SetActive(false);
         }
 

@@ -223,6 +223,7 @@ namespace VoiceActing
             characterMovement.CharacterDirection.ShowDirectionSprite();
             characterMovement.StopJump();
             characterMovement.HasGravity = true;
+            characterAnimation.State = CharacterState.Idle;
             characterRotation.RotationConstraint(true);
         }
         private void EndTriAttack()
@@ -232,6 +233,7 @@ namespace VoiceActing
             characterMovement.OnCollisionWall -= CallWallCollision;
             isTriAttacking = false;
             characterMovement.EndMove();
+            characterAnimation.State = CharacterState.Dash;
             if (OnEndAction != null) OnEndAction.Invoke(idAttacker);
         }
 

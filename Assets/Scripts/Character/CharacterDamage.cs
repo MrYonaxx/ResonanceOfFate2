@@ -168,8 +168,8 @@ namespace VoiceActing
             }
             else if(airborne == true && bounce == false && attackData.AttackDataStat.UserPosition.y - 1 < this.transform.position.y) // Under the character
             {
-                characterMovement.ResetSpeedY();
-                characterMovement.Jump(1f);
+                //characterMovement.ResetSpeedY();
+                characterMovement.Jump(1.1f);
                 if (airborneClip != null)
                     AudioManager.Instance.PlaySound(airborneClip);
             }

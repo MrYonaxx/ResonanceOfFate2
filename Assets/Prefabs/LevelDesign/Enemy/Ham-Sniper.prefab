@@ -5153,7 +5153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aaeef2dd703c04db0973369aa30449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzleAnimation: {fileID: 0}
+  muzzleAnimation: {fileID: 7196501695904101149, guid: d14547895feb5ee43bf2fc0b18ef3455,
+    type: 3}
   onHitParticle: {fileID: 8632996020427025046, guid: bac3adcf32d64cb439972867461be11c,
     type: 3}
 --- !u!82 &2022533663865788953

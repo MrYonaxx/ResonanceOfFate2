@@ -72,7 +72,11 @@ namespace VoiceActing
         public void OnListAdd(ITargetable target)
         {
             if (targetable.Count == 0)
+            {
                 TargetRight();
+                cameraLock.LockOn(false);
+            }
+                //TargetRight();
         }
 
         public void OnListRemove(ITargetable target)

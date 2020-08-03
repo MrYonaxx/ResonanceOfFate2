@@ -21,6 +21,8 @@ namespace VoiceActing
          *               ATTRIBUTES                 *
         \* ======================================== */
         [SerializeField]
+        int entranceID = 0;
+        [SerializeField]
         string zoneName;
 
         #endregion

@@ -26,8 +26,8 @@ namespace VoiceActing
         Transform healthBarCanvas;
         [SerializeField]
         EnemyHealthBar healthBarPrefab;
-        [SerializeField]
-        TextPopupManager textPopupManager;
+        //[SerializeField]
+        //TextPopupManager textPopupManager;
 
         [BoxGroup("Debug")]
         [SerializeField]
