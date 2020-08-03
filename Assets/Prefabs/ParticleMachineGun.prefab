@@ -4945,7 +4945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleAnimation: {fileID: 9122660244593664107, guid: c0ba11c2796d2af4b8e7f8d0c72ff2cd,
     type: 3}
-  onHitParticle: {fileID: 822693832}
+  onHitParticle: {fileID: 2326957098315361387}
 --- !u!82 &1905809297
 AudioSource:
   m_ObjectHideFlags: 0

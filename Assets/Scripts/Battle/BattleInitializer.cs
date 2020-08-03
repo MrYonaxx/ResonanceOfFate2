@@ -74,8 +74,14 @@ namespace VoiceActing
 
         public void InitializeBattleForReal()
         {
-            input.InputState = InputState.Default;
             hud.SetActive(true);
+            StartCoroutine(Wait());
+        }
+
+        private IEnumerator Wait()
+        {
+            yield return new WaitForSeconds(1);
+            input.InputState = InputState.Default;
         }
 
         #endregion

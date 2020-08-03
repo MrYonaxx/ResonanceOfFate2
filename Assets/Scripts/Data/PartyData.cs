@@ -41,6 +41,7 @@ namespace VoiceActing
             get { return characterGrowths; }
         }
 
+
         // Playable Characters
         // Stat
         // Weapons
@@ -54,6 +55,15 @@ namespace VoiceActing
         // Inventory
 
         // System (Config / options)
+
+
+        [SerializeField]
+        private int nextZoneEntrance;
+        public int NextZoneEntrance
+        {
+            get { return nextZoneEntrance; }
+            set { nextZoneEntrance = value; }
+        }
 
 
         public class PartyInitialized

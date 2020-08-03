@@ -23,21 +23,25 @@ namespace VoiceActing
         [SerializeField]
         List<PlayerData> debugPartyData = new List<PlayerData>();
 
+        [Title("Parameter")]
+        [SerializeField]
+        List<Transform> entranceTransforms = new List<Transform>();
+        [SerializeField]
+        List<PlayerCharacter> party = new List<PlayerCharacter>();
+
+        [Title("Data")]
         [SerializeField]
         PartyData partyData;
         [SerializeField]
         CameraLock mainCamera;
-        [SerializeField]
-        List<PlayerCharacter> party = new List<PlayerCharacter>();
-
+        [SerializeField] // à bouger dans un SO probablement
+        List<Vector3> playerPositionOffset = new List<Vector3>();
 
         [Title("UI")]
         [SerializeField]
         Transform hudTransform;
         [SerializeField]
         PlayerHUD playerHudPrefab;
-        /*[SerializeField]
-        TextPopupManager textPopupManager;*/
 
 
 
@@ -123,6 +127,7 @@ namespace VoiceActing
                     partyData.CharacterGrowths.Add(new CharacterGrowthController(debugPartyData[i].CharacterGrowth, partyData.CharacterStatControllers[i]));
                     partyData.CharacterEquipement.Add(new CharacterEquipementController(debugPartyData[i].WeaponEquipped, debugPartyData[i].WeaponLevels, partyData.CharacterStatControllers[i], partyData.CharacterGrowths[i]));
                 }
+                partyData.NextZoneEntrance = 999;
             }
         }
 
@@ -143,6 +148,13 @@ namespace VoiceActing
                 party[i].CharacterTriAttack.OnTimeChanged += playerHUDs[i].GaugeTriAttack.DrawGauge;
                 party[i].CharacterStatController.OnHPChanged += playerHUDs[i].HpGauge.DrawGauge;
                 party[i].CharacterStatController.OnScratchChanged += playerHUDs[i].ScratchGauge.DrawGauge;
+
+                if (entranceTransforms.Count > partyData.NextZoneEntrance) 
+                {
+                    party[i].transform.position = entranceTransforms[partyData.NextZoneEntrance].position + (Quaternion.Euler(0, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]);
+                    //Debug.Log(Quaternion.Euler(entranceTransforms[partyData.NextZoneEntrance].eulerAngles.x, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]);
+                    party[i].CharacterDirection.SetDirection(entranceTransforms[partyData.NextZoneEntrance]);
+                }
             }
             partySize = partyData.CharacterStatControllers.Count;
         }

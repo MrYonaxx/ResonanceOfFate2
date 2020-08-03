@@ -75,6 +75,12 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
+        public void SetDirection(Transform direction)
+        {
+            //directionTransform.LookAt(target);
+            directionTransform.eulerAngles = direction.eulerAngles;
+        }
+
         public void LookAt(Transform target)
         {
             directionTransform.LookAt(target);

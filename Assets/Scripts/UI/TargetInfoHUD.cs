@@ -27,6 +27,8 @@ namespace VoiceActing
         BattlePartyManager battlePartyManager;
         [SerializeField]
         Animator animator;
+        [SerializeField]
+        GlobalCamera globalCamera;
 
         [Title("BaseInfo")]
         [SerializeField]
@@ -51,6 +53,8 @@ namespace VoiceActing
         RectTransform playerPosition;
 
         [Title("BodyPart")]
+        [SerializeField]
+        RectTransform orientation;
         [SerializeField]
         List<RectTransform> bodyLayer = new List<RectTransform>();
         [SerializeField]
@@ -105,6 +109,10 @@ namespace VoiceActing
                 directionTarget = new Vector2(-targetDirection.up.x, -targetDirection.up.z);
                 directionCharacter = new Vector2(targetDirection.position.x - player.position.x, targetDirection.position.z - player.position.z);
                 playerPosition.localEulerAngles = new Vector3(0, 0, Vector2.SignedAngle(directionTarget, directionCharacter));
+
+
+                orientation.localEulerAngles = new Vector3(0, 0, -Vector2.SignedAngle(directionTarget, new Vector2(globalCamera.TransformDefault().forward.x, globalCamera.TransformDefault().forward.z)));
+                //Debug.Log(targetDirection.up);
             }
         }
 

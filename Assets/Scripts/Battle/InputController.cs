@@ -184,6 +184,7 @@ namespace VoiceActing
                 battlePartyManager.GetCharacter(i).CharacterTriAttack.OnEndAction += EndTriAttack;
             }
             c = battlePartyManager.GetCharacter();
+            timeData.TimeFlow = false;
         }
 
         private void Update()
@@ -848,6 +849,12 @@ namespace VoiceActing
             InputState = InputState.NoInput;
         }
 
+        public void StopInputAndTime()
+        {
+            InputState = InputState.NoInput;
+            timeData.TimeFlow = false;
+        }
+
         public void ResumeInput()
         {
             if (c.CharacterTriAttack.IsTriAttacking == true)
@@ -865,7 +872,7 @@ namespace VoiceActing
             preventB = false;
             aimReticle.HideAimReticle();
             timeData.TimeFlow = false;
-            StopInput();
+            StopInputAndTime();
         }
 
 

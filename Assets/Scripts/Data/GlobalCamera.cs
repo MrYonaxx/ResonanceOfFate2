@@ -99,6 +99,10 @@ namespace VoiceActing
         {
             return cameraActive.transform.right;
         }
+        public Transform TransformDefault()
+        {
+            return cameraDefault.transform;
+        }
 
         public Quaternion Rotation()
         {
