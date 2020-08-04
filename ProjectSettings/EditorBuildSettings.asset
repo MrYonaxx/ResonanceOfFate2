@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HamsterForest/HamsterForest2.1.unity
     guid: ecbd7f1faae4b0c42bc25122c6239110
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/HamsterForest3.unity
+    guid: 94610394f5c5aee4d8f3ed7bf9595e9d
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/HamsterForest3.1.unity
+    guid: a1a57febe73e60e4c93dc302f2daca47
   m_configObjects: {}

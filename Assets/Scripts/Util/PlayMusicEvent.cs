@@ -20,9 +20,20 @@ namespace VoiceActing
         [SerializeField]
         AudioClip battle;
 
+        bool wait = false;
+
         public void OnEnable()
         {
-            AudioManager.Instance.PlayMusic(normal, battle);
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayMusic(normal, battle);
+            else
+                wait = true;
+        }
+
+        private void Start()
+        {
+            if(wait == true)
+                AudioManager.Instance.PlayMusic(normal, battle);
         }
 
     } 

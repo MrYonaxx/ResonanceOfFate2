@@ -90,6 +90,7 @@ namespace VoiceActing
                 characterMovement.MoveCharacterWorld(this.transform.up.x, this.transform.up.z);
                 yield return null;
             }
+            Debug.Log(partyData.NextZoneEntrance);
             SceneManager.LoadScene(zoneName);
         }
 

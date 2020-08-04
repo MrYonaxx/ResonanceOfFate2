@@ -110,6 +110,7 @@ namespace VoiceActing
 
         private void Awake()
         {
+            Debug.Log(partyData.NextZoneEntrance);
             CreateDebugParty();
             InitializeCharacters();
         }
@@ -157,6 +158,7 @@ namespace VoiceActing
                 }
             }
             partySize = partyData.CharacterStatControllers.Count;
+            mainCamera.transform.position = party[indexSelection].CharacterCenter.position;
         }
 
         private void Start()

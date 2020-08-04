@@ -65,6 +65,7 @@ namespace VoiceActing
         private void OnDestroy()
         {
             globalTargetable.RemoveListener(this);
+            Untarget();
         }
 
 
