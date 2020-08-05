@@ -32,6 +32,8 @@ namespace VoiceActing
         [SerializeField]
         GlobalFeedbackManager globalFeedback;
 
+
+        bool appear = true;
         Animator animator;
         float characterMotionSpeed = 1;
 
@@ -83,6 +85,25 @@ namespace VoiceActing
             globalFeedback.RemoveCharacter(this);
         }
 
+
+        public void UserAppear()
+        {
+            if (appear == false)
+            {
+                appear = true;
+                //user.enabled = true;
+                this.transform.position -= new Vector3(0, 5000, 0);
+            }
+        }
+        public void UserDisappear()
+        {
+            if (appear == true)
+            {
+                appear = false;
+                //user.enabled = false;
+                this.transform.position += new Vector3(0, 5000, 0);
+            }
+        }
 
 
 

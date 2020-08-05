@@ -13,6 +13,8 @@ using UnityEditor;
 
 namespace VoiceActing
 {
+    public delegate void FeverAction(AttackController controller);
+
     public class AttackController: SerializedMonoBehaviour
     {
         #region Attributes 
@@ -79,7 +81,7 @@ namespace VoiceActing
 
         public delegate void EndAction();
         public event EndAction OnEndAction;
-
+        public event FeverAction OnFeverAction;
 
 
         #endregion
@@ -186,8 +188,24 @@ namespace VoiceActing
             attackCollision.Play(target);
         }
 
+
+        // Utilisé par les players pour le fever time
+        public void EndAttackFever()
+        {
+            anim.speed = 0;
+            if (OnFeverAction != null)
+            {
+                OnFeverAction.Invoke(this);
+            }
+            else
+            {
+                EndAttack();
+            }
+        }
+
         public void EndAttack()
         {
+            anim.speed = 1;
             feedbackManager.SetMotionSpeed(1f);
             globalCamera.ActivateCameraAction(false);
             globalCamera.GetCameraAction().SetParent(null, false);

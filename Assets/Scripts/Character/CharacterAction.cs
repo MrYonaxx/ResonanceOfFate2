@@ -19,8 +19,8 @@ namespace VoiceActing
         /* ======================================== *\
          *               ATTRIBUTES                 *
         \* ======================================== */
-        [SerializeField]
-        SpriteRenderer user;
+        //[SerializeField]
+        //SpriteRenderer user;
         [SerializeField]
         CharacterDirection direction;
         [SerializeField]
@@ -35,6 +35,7 @@ namespace VoiceActing
         AttackController attackControllerDashForward;
         [SerializeField]
         AttackController attackControllerJump;
+
 
         AttackController currentAttack = null;
 
@@ -60,7 +61,13 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-
+        public void SubscribeAttackControllers(FeverAction feverAction)
+        {
+            attackControllerIdle.OnFeverAction += feverAction;
+            attackControllerDashForward.OnFeverAction += feverAction;
+            attackControllerDash.OnFeverAction += feverAction;
+            attackControllerJump.OnFeverAction += feverAction;
+        }
 
         public void StartShoot(AttackData attackData, Transform target)
         {
@@ -83,9 +90,7 @@ namespace VoiceActing
 
         private void Action(AttackController attack, Transform target)
         {
-            //user.gameObject.SetActive(false);
-            user.enabled = false;
-            user.transform.position += new Vector3(0, 5000, 0);
+            characterAnimation.UserDisappear();
             attack.gameObject.SetActive(true);
             attack.CreateAttack(target);
             attack.SetDirection(direction.GetDirectionInt());
@@ -101,13 +106,12 @@ namespace VoiceActing
 
         public void ActionEnd()
         {
-            //user.gameObject.SetActive(true);
-            user.enabled = true;
-            user.transform.position -= new Vector3(0, 5000, 0);
+            characterAnimation.UserAppear();
             currentAttack.OnEndAction -= ActionEnd;
             currentAttack = null;
             if(OnEndAction != null) OnEndAction.Invoke();
         }
+
 
 
         public void ForceStopAction()
@@ -123,6 +127,7 @@ namespace VoiceActing
             Vector2 directionTarget = new Vector2(transform.position.x, transform.position.z) - new Vector2(target.position.x, target.position.z);
             return Vector2.Angle(directionCharacter, directionTarget);
         }
+
 
         private void OnDestroy()
         {

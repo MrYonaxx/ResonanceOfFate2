@@ -82,9 +82,18 @@ namespace VoiceActing
                 cameraActive = cameraDefault;
         }
 
+        public Transform GetCameraDefault()
+        {
+            return cameraDefault.transform;
+        }
         public Transform GetCameraAction()
         {
             return cameraAction.transform;
+        }
+
+        public Camera CameraAction()
+        {
+            return cameraAction;
         }
 
         public Vector3 Position()

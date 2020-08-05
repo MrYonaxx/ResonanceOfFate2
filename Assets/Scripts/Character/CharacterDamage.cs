@@ -67,10 +67,13 @@ namespace VoiceActing
 
 
         float knockbackCurrentTime = 0f;
-        float feverTime = 0;
 
         private bool isKnockback;
         public bool IsKnockback { get { return isKnockback; } }
+
+        private bool isInvulnerable;
+        public bool IsInvulnerable { get { return isInvulnerable; } set { isInvulnerable = value; } }
+
         private bool isDead;
         public bool IsDead { get { return isDead; } }
 
@@ -84,6 +87,7 @@ namespace VoiceActing
         public event HitAction OnHit;
         public event Action OnLaunch;
         public event Action OnSmackdown;
+        public event Action OnHitAerial;
         public event Action OnDead;
 
         #endregion
@@ -109,7 +113,7 @@ namespace VoiceActing
 
         public void Damage(Vector3 pos, AttackData attackData)
         {
-            if (isDead == true)
+            if (isDead == true || isInvulnerable == true)
                 return;
 
             DamageMessage msg = characterBodyPartController.Damage(attackData, characterMovement.CharacterDirection.DirectionTransform);
@@ -169,9 +173,13 @@ namespace VoiceActing
             else if(airborne == true && bounce == false && attackData.AttackDataStat.UserPosition.y - 1 < this.transform.position.y) // Under the character
             {
                 //characterMovement.ResetSpeedY();
-                characterMovement.Jump(1.1f);
+                if(characterMovement.SpeedY < 0)
+                    characterMovement.ResetSpeedY();
+                if (characterMovement.SpeedY > 5f)
+                    characterMovement.Jump(0.5f);
                 if (airborneClip != null)
                     AudioManager.Instance.PlaySound(airborneClip);
+                if (OnHitAerial != null) OnHitAerial.Invoke();
             }
             else if (airborne == true && bounce == false && attackData.AttackDataStat.UserPosition.y + 1 >= this.transform.position.y) // Smackdown
             {

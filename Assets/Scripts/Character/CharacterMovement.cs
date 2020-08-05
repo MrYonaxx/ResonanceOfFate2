@@ -94,6 +94,11 @@ namespace VoiceActing
 
 
         float speedY = 0;
+        public float SpeedY
+        {
+            get { return speedY; }
+        }
+
 
         public event Action OnCollisionWall;
 

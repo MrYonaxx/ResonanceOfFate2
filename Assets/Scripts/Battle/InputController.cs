@@ -22,7 +22,9 @@ namespace VoiceActing
         HeroActionTri,
         TriAttack,
         NoInput,
-        Skip
+        Skip,
+        FeverDecision,
+        FeverAim
     } 
 
     public class InputController: MonoBehaviour
@@ -45,6 +47,8 @@ namespace VoiceActing
         TriAttackManager triAttackManager;
         [SerializeField]
         AimReticle aimReticle;
+        [SerializeField]
+        FeverTimeManager feverTimeManager;
         [SerializeField]
         GlobalFeedbackManager globalFeedbackManager;
 
@@ -175,6 +179,7 @@ namespace VoiceActing
         private void Start()
         {
             Controller();
+            feverTimeManager.OnFeverDecision += CallFeverDecision;
             triAttackManager.SetParty(battlePartyManager.GetParty());
             battleEnemyManager.OnEndAttacks += NewTurn;
             for (int i = 0; i < battlePartyManager.GetParty().Count; i++)
@@ -182,6 +187,8 @@ namespace VoiceActing
                 battlePartyManager.GetCharacter(i).CharacterAction.OnEndAction += EndShoot;
                 battlePartyManager.GetCharacter(i).CharacterTriAttack.IdAttacker = i;
                 battlePartyManager.GetCharacter(i).CharacterTriAttack.OnEndAction += EndTriAttack;
+
+                battlePartyManager.GetCharacter(i).CharacterAction.SubscribeAttackControllers(feverTimeManager.CheckFever);
             }
             c = battlePartyManager.GetCharacter();
             timeData.TimeFlow = false;
@@ -216,6 +223,13 @@ namespace VoiceActing
                     break;
                 case InputState.Skip:
                     InputSkip();
+                    break;
+
+                case InputState.FeverDecision:
+                    InputFeverDecision();
+                    break;
+                case InputState.FeverAim:
+                    InputFeverAim();
                     break;
             }
         }
@@ -365,7 +379,10 @@ namespace VoiceActing
                     StopTimeComboCoroutine();
                     aimReticle.PauseAim();
                     aimReticle.HideAimReticle();
+                    feverTimeManager.AssignShooter(c);
+                    feverTimeManager.AssignTarget(battleEnemyManager.GetEnemyController(aimReticle.TargetAim));
                     c.CharacterAction.StartShoot(c.CharacterEquipement.GetWeaponAttackData(aimReticle.GetBulletNumber(c)), aimReticle.TargetAim);
+                    InputState = InputState.NoInput;
                 }
             }
         }
@@ -400,14 +417,21 @@ namespace VoiceActing
                 battleTarget.TargetNearestEnemy();
                 cameraLock.LockOn(true);
             }
+
             if (c.CharacterTriAttack.IsTriAttacking == true)
             {
                 // Le joueur est en train de courir
                 timeData.TimeFlow = true;
+                cameraLock.SetState(3);
                 aimReticle.ResetAim(c);
+                InputState = InputState.TriAttack;
                 if (triAttackManager.IsTriAttacking) // Si on tri attack on va check si les copains peuvent taper
                 {
                     ComboTriAttack();
+                }
+                else
+                {
+                    feverTimeManager.ClearShooters();
                 }
             }
             else
@@ -418,6 +442,7 @@ namespace VoiceActing
                 cameraLock.SetTarget(null);
                 cameraLock.SetState(0);
                 aimReticle.StopAim(c);
+                feverTimeManager.ResetFill();
                 NextTurn();
             }
         }
@@ -591,6 +616,11 @@ namespace VoiceActing
                     return;
                 }
             }
+           
+            // C'est imbitable c'est le spaghetti          
+            // Si il n'y a pas de combo Tri attack on vide la liste pour que l'attaque combinée ne soit pas possible         
+            feverTimeManager.ClearShooters();
+
             aimReticle.ResumeAim();
             globalFeedbackManager.SetMotionSpeed(1f); // Pas nécessaire mais on sait jamais
             GetCharacter(triAttackManager.IndexLeader);
@@ -603,6 +633,10 @@ namespace VoiceActing
         private IEnumerator TimeComboCoroutine()
         {
             yield return new WaitForSeconds(2f);
+            // C'est imbitable c'est le spaghetti          
+            // Si il n'y a pas de combo Tri attack on vide la liste pour que l'attaque combinée ne soit pas possible         
+            feverTimeManager.ClearShooters();
+
             aimReticle.ResumeAim();
             globalFeedbackManager.SetMotionSpeed(1f);
             GetCharacter(triAttackManager.IndexLeader);
@@ -638,7 +672,8 @@ namespace VoiceActing
             battlePartyManager.CharacterInactive(id);
             aimReticle.StopAim(battlePartyManager.GetCharacter(id));
             triAttackManager.EndTriAttack();
-            if (triAttackManager.IsTriAttacking == true) // La tri attack n'est pas fini
+            StartCoroutine(EndTriAttackLag(id));
+            /*if (triAttackManager.IsTriAttacking == true) // La tri attack n'est pas fini
             {
                 if (id == battlePartyManager.GetIndexSelection()) // C'est le joueur qu'on contrôle donc on switch vers un perso qui lui est en train de triAttaquer
                 {
@@ -662,35 +697,56 @@ namespace VoiceActing
                 battlePartyManager.HideOrder();
                 cameraLock.SetState(0);
                 NextTurn();
+                feverTimeManager.ResetFill();
+            }*/
+        }
+
+        private IEnumerator EndTriAttackLag(int id)
+        {
+            if (triAttackManager.IsTriAttacking == true) // La tri attack n'est pas fini
+            {
+                yield return new WaitForSeconds(0.4f);
+                if (id == battlePartyManager.GetIndexSelection()) // C'est le joueur qu'on contrôle donc on switch vers un perso qui lui est en train de triAttaquer
+                {
+                    for (int i = 0; i < battlePartyManager.GetParty().Count - 1; i++)
+                    {
+                        SwitchCharactersRight();
+                        if (c.CharacterTriAttack.IsTriAttacking == true)
+                        {
+                            cameraLock.SetTarget(aimReticle.TargetAim);
+                            yield break;
+                        }
+                    }
+                }
+
+            }
+            else // La tri attack est fini on reset
+            {
+                cameraBlur.SetBool("Blur", false);
+                cameraLock.LockOn(false);
+                cameraLock.SetState(0);
+                yield return new WaitForSeconds(0.4f);
+                timeData.TimeFlow = false;
+                battlePartyManager.HideOrder();
+                NextTurn();
+                feverTimeManager.ResetFill();
             }
         }
 
 
 
-
         // =================================================================================
         // Switch Characters
+        #region SwitchCharacter
         private void InputSwitchCharacters()
         {
             if (Input.GetButtonDown(control.buttonRB))
             {
-                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
-                    return;*/
-
                 if (inputState != InputState.HeroActionTri)
                 {
                     InputState = InputState.Default;
                     c.CharacterHeroAction.Desactivate();
                 }
-                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
-                {
-                    battlePartyManager.CurrentCharacterInactive();
-                    if (battleEnemyManager.CheckEnemyAttack() == true)
-                    {
-                        EnemyAttack();
-                        return;
-                    }
-                }*/
                 if (battleEnemyManager.CheckEnemyAttack() == true)
                 {
                     battlePartyManager.CurrentCharacterInactive();
@@ -702,23 +758,11 @@ namespace VoiceActing
             }
             else if (Input.GetButtonDown(control.buttonLB))
             {
-                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
-                    return;*/
-
                 if (inputState != InputState.HeroActionTri)
                 {
                     InputState = InputState.Default;
                     c.CharacterHeroAction.Desactivate();
                 }
-                /*if (battlePartyManager.GetPlayerTime(battlePartyManager.GetIndexSelection()) < 100)
-                {
-                    battlePartyManager.CurrentCharacterInactive();
-                    if (battleEnemyManager.CheckEnemyAttack() == true)
-                    {
-                        EnemyAttack();
-                        return;
-                    }
-                }*/
                 if (battleEnemyManager.CheckEnemyAttack() == true)
                 {
                     battlePartyManager.CurrentCharacterInactive();
@@ -767,10 +811,12 @@ namespace VoiceActing
             c = battlePartyManager.GetCharacter(i);
             SubscribeNewCharacter();
         }
-
+        #endregion
+        // =================================================================================
 
         // =================================================================================
         // Switch Targets
+        #region SwitchTarget 
         private void InputSwitchTargets()
         {
             if (Input.GetAxis(control.dpadHorizontal) > 0 && padDown == false)
@@ -809,7 +855,6 @@ namespace VoiceActing
 
         private IEnumerator SwitchTargetSlowMo()
         {
-            //InputState = InputState.NoInput;
             float t = 0f;
             while(t < 1f)
             {
@@ -819,10 +864,79 @@ namespace VoiceActing
             }
             globalFeedbackManager.SetMotionSpeed(1);
             switchTargetSlowMoCoroutine = null;
-            //InputState = InputState.TriAttack;
         }
+        #endregion
+        // =================================================================================
+
+
 
         // =================================================================================
+        // Fever Time
+        #region FeverTime 
+        private void InputFeverDecision()
+        {
+            AcceptFeverTime();
+            CancelFeverTime();
+        }
+
+        public void CallFeverDecision()
+        {
+            inputState = InputState.FeverDecision;
+        }
+
+        public void CancelFeverTime()
+        {
+            if (Input.GetButtonDown(control.buttonB))
+            {
+                feverTimeManager.RefuseFeverAim();
+            }
+        }
+
+        public void AcceptFeverTime()
+        {
+            if(Input.GetButtonDown(control.buttonA))
+            {
+                feverTimeManager.StartFeverAim();
+                cameraLock.SetState(5);
+                inputState = InputState.FeverAim;
+                aimReticle.StopAim(c);
+            }
+        }
+
+
+        // ====================================
+        // Fever Time aim
+
+        private void InputFeverAim()
+        {
+            FeverTimeShoot();
+        }
+
+        public void FeverTimeShoot()
+        {
+            if (Input.GetButtonDown(control.buttonA))
+            {
+                if(feverTimeManager.ShootFeverTime() == true)
+                {
+                    inputState = InputState.NoInput;
+                }
+            }
+        }
+        public void EndFeverTime()
+        {
+
+            cameraLock.SetState(5);
+        }
+
+
+
+        #endregion
+        // =================================================================================
+
+
+
+
+
 
         public void NextTurn()
         {

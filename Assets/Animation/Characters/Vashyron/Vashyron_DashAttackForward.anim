@@ -482,7 +482,7 @@ AnimationClip:
     - time: 1.4166666
       value: {fileID: -6271834274829396275, guid: abd7414737c53884db1d80732d9055eb,
         type: 3}
-    - time: 1.5
+    - time: 1.5166667
       value: {fileID: 0}
     - time: 1.6666666
       value: {fileID: 0}
@@ -1788,7 +1788,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.5
-    functionName: EndAttack
+    functionName: EndAttackFever
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

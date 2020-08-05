@@ -25,6 +25,8 @@ namespace VoiceActing
         public Vector3 PivotRotation;
         [SerializeField]
         public float SmoothCamera;
+        [SerializeField]
+        public Vector3 RotationOffset;
     }
 
 
@@ -230,18 +232,12 @@ namespace VoiceActing
         {
             Vector3 originalRot = pivot.localEulerAngles;
             pivot.LookAt(lockTarget.position);
-            Vector3 newRot = pivot.localEulerAngles;
+            Vector3 newRot = pivot.localEulerAngles + cameraStates[stateIndex].RotationOffset;
             transform.localEulerAngles = originalRot;
-            //transform.rotation = Quaternion.Lerp(transform.rotation, NewRot, speed * Time.deltaTime);
-            //this.transform.loo
-            //Quaternion rotation = Quaternion.LookRotation((lockTarget.position - cameraScreen.position).normalized);
-            //Debug.Log(lockTarget.position - cameraScreen.position);
             float x = Mathf.LerpAngle(pivot.localEulerAngles.x, newRot.x, smoothRotation);
             float y = Mathf.LerpAngle(pivot.localEulerAngles.y, newRot.y, smoothRotation);
             float z = Mathf.LerpAngle(pivot.localEulerAngles.z, newRot.z, smoothRotation);
             pivot.localEulerAngles = new Vector3(x, y, z);
-            //pivot.rotation = Quaternion.Lerp(pivot.rotation, rotation, smoothRotation);
-            //pivot.localEulerAngles = new Vector3(pivot.localEulerAngles.x, pivot.localEulerAngles.y, 0);
         }
 
 
@@ -252,8 +248,6 @@ namespace VoiceActing
         {
             if (lockOn == true)
                 return;
-            //valueX = Mathf.Abs(valueX);
-           // valueY = Mathf.Abs(valueY);
             if (Mathf.Abs(valueX) > 0.5f)
             {
                 horizontalAxis += valueX * horizontalSensibility * Time.deltaTime;

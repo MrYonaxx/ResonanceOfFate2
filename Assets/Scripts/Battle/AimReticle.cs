@@ -26,6 +26,7 @@ namespace VoiceActing
         [SerializeField]
         TypeDictionary weaponData;
 
+        [Title("Parameter")]
         [SerializeField]
         [ValueDropdown("GetStatList")]
         private string statMagazineNumber;
@@ -42,6 +43,14 @@ namespace VoiceActing
         }
 #endif
 
+
+        [SerializeField]
+        int bonusMagazine = 0;
+        [SerializeField]
+        float speedMultiplier = 1;
+
+
+        [Title("Ui")]
         [SerializeField]
         RectTransform reticlePosition;
 
@@ -262,9 +271,9 @@ namespace VoiceActing
 
         private void UpdateFill(int index)
         {
-            if (magazineNumber[index] < charaAiming[index].CharacterStatController.GetStat(statMagazineNumber))
+            if (magazineNumber[index] < charaAiming[index].CharacterStatController.GetStat(statMagazineNumber) + bonusMagazine)
             {
-                float filAmount = charaAiming[index].CharacterStatController.GetAimSpeed(charaAiming[index].transform.position, targetAim.transform.position);
+                float filAmount = charaAiming[index].CharacterStatController.GetAimSpeed(charaAiming[index].transform.position, targetAim.transform.position) * speedMultiplier;
                 imageFill[index].fillAmount += ((filAmount * currentFillMultiplier[index]) * maxAmount) * Time.deltaTime;
                 if (index == indexMainCharacter)
                 {

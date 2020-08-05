@@ -705,34 +705,17 @@ MonoBehaviour:
     accuracyVariance: 0
     AttackElement: []
     AttackStatus: []
-  muzzle: {fileID: 7791283386519834573}
-  cameraParent: {fileID: 7791283386802441214}
-  muzzleAnimation: {fileID: 7196501695904101145, guid: d14547895feb5ee43bf2fc0b18ef3455,
-    type: 3}
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  cameraParent: {fileID: 7791283386802441214}
+  cameraLockTransform: {fileID: 0}
+  cameraSecondaryParent: []
+  baseDirection: 1
   stayOnGround: 0
   fixDirection: 0
   stopTime: 1
-  baseDirection: 1
+  manualTarget: 0
   targetDebug: {fileID: 0}
-  attackData:
-    attackProcessor: {fileID: 0}
-    attackDataStat:
-      attackType: 0
-      scratchDamage: 0
-      damage: 0
-      damageVariance: 0
-      knockbackDamage: 0
-      knockbackDamageVariance: 0
-      launchDamage: 0
-      launchDamageVariance: 0
-      stunDamage: 0
-      stunDamageVariance: 0
-      accuracy: 0
-      accuracyVariance: 0
-      AttackElement: []
-      AttackStatus: []
 --- !u!95 &7791283385751833308
 Animator:
   serializedVersion: 3
@@ -1177,34 +1160,17 @@ MonoBehaviour:
     accuracyVariance: 0
     AttackElement: []
     AttackStatus: []
-  muzzle: {fileID: 7791283386198640294}
-  cameraParent: {fileID: 7791283385575248735}
-  muzzleAnimation: {fileID: 7196501695904101145, guid: d14547895feb5ee43bf2fc0b18ef3455,
-    type: 3}
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  cameraParent: {fileID: 7791283385575248735}
+  cameraLockTransform: {fileID: 0}
+  cameraSecondaryParent: []
+  baseDirection: 1
   stayOnGround: 0
   fixDirection: 0
   stopTime: 1
-  baseDirection: 1
+  manualTarget: 0
   targetDebug: {fileID: 0}
-  attackData:
-    attackProcessor: {fileID: 0}
-    attackDataStat:
-      attackType: 0
-      scratchDamage: 0
-      damage: 0
-      damageVariance: 0
-      knockbackDamage: 0
-      knockbackDamageVariance: 0
-      launchDamage: 0
-      launchDamageVariance: 0
-      stunDamage: 0
-      stunDamageVariance: 0
-      accuracy: 0
-      accuracyVariance: 0
-      AttackElement: []
-      AttackStatus: []
 --- !u!95 &7791283385911039803
 Animator:
   serializedVersion: 3
@@ -2181,34 +2147,17 @@ MonoBehaviour:
     accuracyVariance: 0
     AttackElement: []
     AttackStatus: []
-  muzzle: {fileID: 7791283385574657784}
-  cameraParent: {fileID: 7791283385693310136}
-  muzzleAnimation: {fileID: 7196501695904101145, guid: d14547895feb5ee43bf2fc0b18ef3455,
-    type: 3}
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  cameraParent: {fileID: 7791283385693310136}
+  cameraLockTransform: {fileID: 0}
+  cameraSecondaryParent: []
+  baseDirection: 1
   stayOnGround: 1
   fixDirection: 0
   stopTime: 1
-  baseDirection: 1
+  manualTarget: 0
   targetDebug: {fileID: 0}
-  attackData:
-    attackProcessor: {fileID: 0}
-    attackDataStat:
-      attackType: 0
-      scratchDamage: 0
-      damage: 0
-      damageVariance: 0
-      knockbackDamage: 0
-      knockbackDamageVariance: 0
-      launchDamage: 0
-      launchDamageVariance: 0
-      stunDamage: 0
-      stunDamageVariance: 0
-      accuracy: 0
-      accuracyVariance: 0
-      AttackElement: []
-      AttackStatus: []
 --- !u!95 &7791283386537981237
 Animator:
   serializedVersion: 3
@@ -2350,34 +2299,17 @@ MonoBehaviour:
     accuracyVariance: 0
     AttackElement: []
     AttackStatus: []
-  muzzle: {fileID: 7791283386706409730}
-  cameraParent: {fileID: 7791283387149786641}
-  muzzleAnimation: {fileID: 7196501695904101145, guid: d14547895feb5ee43bf2fc0b18ef3455,
-    type: 3}
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
   globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  cameraParent: {fileID: 7791283387149786641}
+  cameraLockTransform: {fileID: 0}
+  cameraSecondaryParent: []
+  baseDirection: 1
   stayOnGround: 1
   fixDirection: 0
   stopTime: 1
-  baseDirection: 1
+  manualTarget: 0
   targetDebug: {fileID: 0}
-  attackData:
-    attackProcessor: {fileID: 0}
-    attackDataStat:
-      attackType: 0
-      scratchDamage: 0
-      damage: 0
-      damageVariance: 0
-      knockbackDamage: 0
-      knockbackDamageVariance: 0
-      launchDamage: 0
-      launchDamageVariance: 0
-      stunDamage: 0
-      stunDamageVariance: 0
-      accuracy: 0
-      accuracyVariance: 0
-      AttackElement: []
-      AttackStatus: []
 --- !u!95 &7791283386588426935
 Animator:
   serializedVersion: 3
@@ -3555,8 +3487,9 @@ MonoBehaviour:
   cameraScreen: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
   spriteRenderer: {fileID: 7791283386014501966}
   directionTransform: {fileID: 7791283387467705059}
-  directionSprite: {fileID: 7791283387467705058}
-  directionAnimator: {fileID: 7791283387467705061}
+  flipScale: 0
+  animationDirection: 0
+  animator: {fileID: 0}
 --- !u!114 &7791283387438669552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3573,9 +3506,9 @@ MonoBehaviour:
   characterController: {fileID: 7791283387438669564}
   characterDirection: {fileID: 7791283387438669565}
   characterAnimation: {fileID: 7791283386014501952}
-  speed: 1.2
+  speed: 1.5
   gravity: 2
-  startAcceleration: 4
+  startAcceleration: 5
   rotationSpeed: 2
   startMoveAnimation: {fileID: 7400000, guid: 66ca86a0e5b4eed41a8f4ca601940933, type: 2}
   endMoveAnimation: {fileID: 7400000, guid: 92cffbd05536e834695e3c2441de8af2, type: 2}
@@ -3592,7 +3525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484fca72f4134e74c98463143761ca82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  user: {fileID: 7791283386014501966}
   direction: {fileID: 7791283387438669565}
   characterAnimation: {fileID: 7791283386014501952}
   attackControllerIdle: {fileID: 7791283386588426934}
@@ -3637,6 +3569,7 @@ MonoBehaviour:
   knockbackTime: 0.5
   recoveryTime: 0.5
   statMass: Mass
+  bodyPartControllers: []
   airborneClip: {fileID: 0}
 --- !u!114 &3481117706117622561
 MonoBehaviour:

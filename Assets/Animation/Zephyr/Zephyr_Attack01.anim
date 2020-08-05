@@ -521,7 +521,7 @@ AnimationClip:
     - time: 1.3333334
       value: {fileID: -5411140339897380136, guid: eed99932d38893f4da78fa38cb22fe76,
         type: 3}
-    - time: 1.3833333
+    - time: 1.4
       value: {fileID: 0}
     attribute: m_Sprite
     path: ZephyrSprite
@@ -612,7 +612,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.4
+    m_StopTime: 1.4166666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1967,7 +1967,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.3833333
-    functionName: EndAttack
+    functionName: EndAttackFever
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

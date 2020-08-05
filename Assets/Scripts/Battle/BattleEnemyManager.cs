@@ -102,6 +102,21 @@ namespace VoiceActing
             }
         }
 
+
+        // Retourne l'ennemy controller correspondant au characterCenter (accessible via ITargetable)
+        public EnemyController GetEnemyController(Transform targetCenter)
+        {
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                if(enemyList[i].Enemy.CharacterCenter == targetCenter)
+                {
+                    return enemyList[i];
+                }
+            }
+            // La target qu'on vise n'est pas un enemy donc null
+            return null;
+        }
+
         public void AddEnemy(EnemyController newEnemy)
         {
             enemyList.Add(newEnemy);
