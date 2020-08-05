@@ -60,12 +60,34 @@ namespace VoiceActing
 
         public void DrawBullet(int number)
         {
+            if (number == 0)
+            {
+                return;
+            }
             if(listBullets.Count <= number)
                 listBullets.Add(Instantiate(bulletPrefab, panelBullet));
             listBullets[number - 1].sprite = bulletSprite;
             listBullets[number - 1].color = bulletColor;
             listBullets[number - 1].rectTransform.sizeDelta = new Vector2(width + offsetX * number, listBullets[number - 1].rectTransform.sizeDelta.y);
             listBullets[number - 1].gameObject.SetActive(true);
+        }
+
+        public void DrawAllBullet(int number)
+        {
+            if (number == 0)
+            {
+                HideBullet();
+                return;
+            }
+            for (int i = 0; i < number; i++)
+            {
+                if (listBullets.Count <= number)
+                    listBullets.Add(Instantiate(bulletPrefab, panelBullet));
+                listBullets[i].sprite = bulletSprite;
+                listBullets[i].color = bulletColor;
+                listBullets[i].rectTransform.sizeDelta = new Vector2(width + offsetX * number, listBullets[i].rectTransform.sizeDelta.y);
+                listBullets[i].gameObject.SetActive(true);
+            }
         }
 
         public void HideBullet()

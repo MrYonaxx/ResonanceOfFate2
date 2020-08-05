@@ -36,6 +36,14 @@ namespace VoiceActing
         [SerializeField]
         AttackController attackControllerJump;
 
+        // Fever ==============
+        [Title("Fever")] // Peut etre a bouger mais flemme
+        [SerializeField]
+        GameObject feverAim;
+        [SerializeField]
+        AttackController attackControllerFever;
+        bool feverSubscription;
+        // Fever ==============
 
         AttackController currentAttack = null;
 
@@ -127,6 +135,43 @@ namespace VoiceActing
             Vector2 directionTarget = new Vector2(transform.position.x, transform.position.z) - new Vector2(target.position.x, target.position.z);
             return Vector2.Angle(directionCharacter, directionTarget);
         }
+
+
+
+        // Fever ===============================================================================================
+
+        public void ShowFeverAim(bool b)
+        {
+            feverAim.gameObject.SetActive(b);
+        }
+        // Crée une action dans le mode default et n'est pas considéré comme une current Attack
+        public void FeverAction(AttackData data, Transform target, Action endCall)
+        {
+            characterAnimation.UserDisappear();
+            attackControllerFever.gameObject.SetActive(true);
+            attackControllerFever.CreateAttack(target);
+            attackControllerFever.SetDirection(direction.GetDirectionInt());
+            attackControllerFever.SetAttackData(data);
+            if(feverSubscription == false)
+            {
+                feverSubscription = true;
+                attackControllerFever.OnEndAction += endCall;
+            }
+            //
+        }
+        // Juste pour l'aestethic (ça marche pas)
+        public void RotateFever()
+        {
+            //attackControllerFever.transform.Rotate(new Vector3(0, -20, 0));
+        }
+        // Juste pour l'aestethic (ça marche pas)
+        public void ForceStopFever()
+        {
+            attackControllerFever.gameObject.SetActive(false);
+            //attackControllerFever.transform.Rotate(new Vector3(0, -20, 0));
+        }
+
+        // Fever ===============================================================================================
 
 
         private void OnDestroy()

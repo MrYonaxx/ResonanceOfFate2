@@ -137,6 +137,23 @@ namespace VoiceActing
             set { accuracyVariance = value; }
         }
 
+        [VerticalGroup("AttackData/Left")]
+        [SerializeField]
+        private float feverValue = 0;
+        public float FeverValue
+        {
+            get { return feverValue; }
+            set { feverValue = value; }
+        }
+        [VerticalGroup("AttackData/Right")]
+        [SerializeField]
+        private float feverValueMax = 0;
+        public float FeverValueMax
+        {
+            get { return feverValueMax; }
+            set { feverValueMax = value; }
+        }
+
         [Title("Element")]
         [HorizontalGroup("AttackElement")]
         [SerializeField]
@@ -178,6 +195,9 @@ namespace VoiceActing
 
             accuracy += attackDataStat.Accuracy;
             accuracyVariance += attackDataStat.AccuracyVariance;
+
+            feverValue += attackDataStat.FeverValue;
+            feverValueMax += attackDataStat.FeverValueMax;
         }
 
     } 

@@ -47,6 +47,7 @@ namespace VoiceActing
             }
         }
 
+        bool triAttackReverse = false;
 
         #endregion
 
@@ -136,15 +137,41 @@ namespace VoiceActing
                 party[i].CharacterTriAttack.StartTriAttack();
             }
             ResonancePoint = 0;
+            triAttackReverse = reverse;
         }
 
-        public void EndTriAttack()
+        public void EndTriAttack(int id)
         {
             if(isTriAttacking == true)
             {
                 numberAttacker -= 1;
                 if (numberAttacker == 0)
+                {
                     isTriAttacking = false;
+                }
+                else
+                {
+                    if (id == indexLeader)
+                    {
+                        for(int i = 0; i < party.Count; i++)
+                        {
+                            if (triAttackReverse == true)
+                                indexLeader -= 1;
+                            else
+                                indexLeader += 1;
+
+                            if (indexLeader >= party.Count)
+                                indexLeader = 0;
+                            else if (indexLeader < 0)
+                                indexLeader = party.Count - 1;
+
+                            if (party[indexLeader].CharacterTriAttack.IsTriAttacking == true)
+                                return;
+                        }
+
+                    }
+                }
+           
             }
         }
 

@@ -186,6 +186,16 @@ namespace VoiceActing
                 currentFillMultiplier.Add(1);
         }
 
+
+        public void SetIndexMainCharacter(PlayerCharacter chara)
+        {
+            for (int i = 0; i < charaAiming.Count; i++)
+            {
+                if(charaAiming[i] == chara)
+                    indexMainCharacter = i;
+            }
+            if (OnCharge != null) OnCharge.Invoke(magazineNumber[indexMainCharacter], charaAiming[indexMainCharacter]);
+        }
         public void SetIndexMainCharacter(int i)
         {
             indexMainCharacter = i;
@@ -251,6 +261,7 @@ namespace VoiceActing
                 imageDelimitation[i].Rotate(rotation * i);
 
                 bulletDrawer[i].SetBulletType(charaAiming[i].CharacterEquipement.GetWeaponType());
+                bulletDrawer[i].DrawAllBullet(magazineNumber[i]);
             }
             for(int i = charaAiming.Count; i < imageFill.Count; i++)
             {
@@ -344,10 +355,24 @@ namespace VoiceActing
 
         public void StopAim(PlayerCharacter c)
         {
-            ResetAim(c);
-            charaAiming.Remove(c);
+            for (int i = 0; i < charaAiming.Count; i++)
+            {
+                if (c == charaAiming[i])
+                {
+                    // On retire puis on reassigne les valeurs
+                    ResetAim(i);
+                    for (int k = i; k < charaAiming.Count-1; k++)
+                    {                  
+                        magazineNumber[k] = magazineNumber[k + 1];
+                        currentFillMultiplier[k] = currentFillMultiplier[k + 1];
+                    }
+                    charaAiming.RemoveAt(i);
+                    break;
+                }
+            }
             if (charaAiming.Count == 0)
             {
+                CreateFill();
                 aimSound.Stop();
                 if (fillCoroutine != null)
                     StopCoroutine(fillCoroutine);
@@ -391,6 +416,7 @@ namespace VoiceActing
                 if (c == charaAiming[i])
                 {
                     ResetAim(i);
+                    break;
                 }
             }
 

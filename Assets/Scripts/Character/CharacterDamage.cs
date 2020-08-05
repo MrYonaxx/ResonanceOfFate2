@@ -12,6 +12,7 @@ using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
+    public delegate void ActionInt(int value);
     public class CharacterDamage: MonoBehaviour, IDamageable
     {
         #region Attributes 
@@ -87,7 +88,7 @@ namespace VoiceActing
         public event HitAction OnHit;
         public event Action OnLaunch;
         public event Action OnSmackdown;
-        public event Action OnHitAerial;
+        public event ActionInt OnHitAerial;
         public event Action OnDead;
 
         #endregion
@@ -172,14 +173,20 @@ namespace VoiceActing
             }
             else if(airborne == true && bounce == false && attackData.AttackDataStat.UserPosition.y - 1 < this.transform.position.y) // Under the character
             {
-                //characterMovement.ResetSpeedY();
-                if(characterMovement.SpeedY < 0)
+                if (characterMovement.SpeedY <= 0)
+                {
                     characterMovement.ResetSpeedY();
-                if (characterMovement.SpeedY > 5f)
-                    characterMovement.Jump(0.5f);
+                    //characterMovement.Jump(2f);
+                }
+                if (characterMovement.SpeedY < 4f)
+                {
+                    //characterMovement.ResetSpeedY();
+                    characterMovement.Jump(1.5f);
+                }
+
                 if (airborneClip != null)
                     AudioManager.Instance.PlaySound(airborneClip);
-                if (OnHitAerial != null) OnHitAerial.Invoke();
+                if (OnHitAerial != null) OnHitAerial.Invoke((int)Random.Range(attackData.AttackDataStat.FeverValue, attackData.AttackDataStat.FeverValueMax));
             }
             else if (airborne == true && bounce == false && attackData.AttackDataStat.UserPosition.y + 1 >= this.transform.position.y) // Smackdown
             {

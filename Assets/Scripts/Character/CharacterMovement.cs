@@ -160,7 +160,7 @@ namespace VoiceActing
             }
             else if(isJumping == true)
             {
-                speedY -=( 0.1f * characterAnimation.GetMotionSpeed());
+                speedY -=(6 * Time.deltaTime) * characterAnimation.GetMotionSpeed();
                 characterController.Move(new Vector3(0, (speedY * characterAnimation.GetMotionSpeed()) * Time.deltaTime, 0));
             }
         }

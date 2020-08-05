@@ -68,6 +68,9 @@ namespace VoiceActing
         [SerializeField] // Si false, il faut placer le cameraLockTransform via les scripts (utile pour les AoE par exemple qui ne vise pas un personnage en particulier)
         bool manualTarget = false;
 
+        [HorizontalGroup("Parameter3")]
+        [SerializeField]
+        bool actionMode = true;
 
         [Title("Debug")]
         [SerializeField]
@@ -79,8 +82,8 @@ namespace VoiceActing
         Transform target;
         Animator anim;
 
-        public delegate void EndAction();
-        public event EndAction OnEndAction;
+        //public delegate void EndAction();
+        public event Action OnEndAction;
         public event FeverAction OnFeverAction;
 
 
@@ -123,11 +126,15 @@ namespace VoiceActing
             if(stopTime == true)
                 feedbackManager.SetMotionSpeed(0f);
             target = newTarget;
-            globalCamera.ActivateCameraAction(true);
-            Transform cam = globalCamera.GetCameraAction();
-            cam.SetParent(cameraParent, false);
-            cam.localPosition = Vector3.zero;
-            cam.localEulerAngles = Vector3.zero;
+
+            if (actionMode == true)
+            {
+                globalCamera.ActivateCameraAction(true);
+                Transform cam = globalCamera.GetCameraAction();
+                cam.SetParent(cameraParent, false);
+                cam.localPosition = Vector3.zero;
+                cam.localEulerAngles = Vector3.zero;
+            }
 
             if (cameraLockTransform != null)
             {
@@ -203,13 +210,21 @@ namespace VoiceActing
             }
         }
 
+        public void SetAnimSpeed(float speed = 1f)
+        {
+            anim.speed = speed;
+        }
+
         public void EndAttack()
         {
             anim.speed = 1;
             feedbackManager.SetMotionSpeed(1f);
-            globalCamera.ActivateCameraAction(false);
-            globalCamera.GetCameraAction().SetParent(null, false);
-            OnEndAction.Invoke();
+            if (actionMode == true)
+            {
+                globalCamera.ActivateCameraAction(false);
+                globalCamera.GetCameraAction().SetParent(null, false);
+            }
+            if(OnEndAction != null) OnEndAction.Invoke();
         }
 
         public void StopAttack()

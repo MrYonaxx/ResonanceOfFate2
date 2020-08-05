@@ -442,6 +442,7 @@ namespace VoiceActing
                 cameraLock.SetTarget(null);
                 cameraLock.SetState(0);
                 aimReticle.StopAim(c);
+                feverTimeManager.ClearShooters();
                 feverTimeManager.ResetFill();
                 NextTurn();
             }
@@ -606,7 +607,7 @@ namespace VoiceActing
                 if (aimReticle.GetBulletNumber(c) >= 1)
                 {
                     aimReticle.PauseAim();
-                    aimReticle.SetIndexMainCharacter(battlePartyManager.GetIndexSelection());
+                    aimReticle.SetIndexMainCharacter(battlePartyManager.GetCharacter());
                     globalFeedbackManager.SetMotionSpeed(0.1f);
                     InputState = InputState.TriAttack;
                     cameraLock.SetTarget(aimReticle.TargetAim);
@@ -616,24 +617,27 @@ namespace VoiceActing
                     return;
                 }
             }
-           
-            // C'est imbitable c'est le spaghetti          
+               
             // Si il n'y a pas de combo Tri attack on vide la liste pour que l'attaque combinée ne soit pas possible         
             feverTimeManager.ClearShooters();
 
-            aimReticle.ResumeAim();
-            globalFeedbackManager.SetMotionSpeed(1f); // Pas nécessaire mais on sait jamais
             GetCharacter(triAttackManager.IndexLeader);
             battlePartyManager.SetIndexSelection(triAttackManager.IndexLeader);
+
+            aimReticle.ResumeAim();
+            aimReticle.SetIndexMainCharacter(battlePartyManager.GetCharacter());
+
+            globalFeedbackManager.SetMotionSpeed(1f);
+            InputState = InputState.TriAttack;
             cameraLock.SetTarget(aimReticle.TargetAim);
             timeComboCoroutine = null;
-            InputState = InputState.TriAttack;
+
         }
 
         private IEnumerator TimeComboCoroutine()
         {
             yield return new WaitForSeconds(2f);
-            // C'est imbitable c'est le spaghetti          
+            
             // Si il n'y a pas de combo Tri attack on vide la liste pour que l'attaque combinée ne soit pas possible         
             feverTimeManager.ClearShooters();
 
@@ -671,7 +675,7 @@ namespace VoiceActing
         {
             battlePartyManager.CharacterInactive(id);
             aimReticle.StopAim(battlePartyManager.GetCharacter(id));
-            triAttackManager.EndTriAttack();
+            triAttackManager.EndTriAttack(id);
             StartCoroutine(EndTriAttackLag(id));
             /*if (triAttackManager.IsTriAttacking == true) // La tri attack n'est pas fini
             {
@@ -775,6 +779,10 @@ namespace VoiceActing
         }
 
 
+        private void UnsubscribeNewCharacter()
+        {
+            c.CharacterDirection.Selected(false);
+        }
 
         private void SwitchCharactersLeft()
         {
@@ -792,12 +800,6 @@ namespace VoiceActing
             SubscribeNewCharacter();
         }
 
-
-
-        private void UnsubscribeNewCharacter()
-        {
-            c.CharacterDirection.Selected(false);
-        }
         private void SubscribeNewCharacter()
         {
             c.CharacterDirection.Selected(true);
@@ -899,7 +901,7 @@ namespace VoiceActing
                 feverTimeManager.StartFeverAim();
                 cameraLock.SetState(5);
                 inputState = InputState.FeverAim;
-                aimReticle.StopAim(c);
+                //aimReticle.StopAim(c);
             }
         }
 

@@ -63,7 +63,7 @@ MonoBehaviour:
         statValue: 0
         modifiable: 0
       - statName: Mass
-        statValue: 0
+        statValue: 1
         modifiable: 0
     - columnName: Attack
       statDictionary:
@@ -157,7 +157,7 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Mass
-      statValue: 0
+      statValue: 1
       modifiable: 0
     - statName: Damage
       statValue: 0
@@ -204,5 +204,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 0
+    manual: 1
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}

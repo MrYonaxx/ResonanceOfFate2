@@ -51,7 +51,12 @@ namespace VoiceActing
         [Title("Feedback")]
         [SerializeField]
         Animator feverOutlineFeedback;
-
+        [SerializeField]
+        GameObject feverDecisionButton;
+        [SerializeField]
+        List<GameObject> feverButton;
+        [SerializeField]
+        AttackController tripleFeverAnim;
 
         AttackController attackController;
         //[SerializeField]
@@ -59,12 +64,13 @@ namespace VoiceActing
 
         bool feverUpdate = false;
         private float feverTimeValue = 0f;
-        private float feverTimeMaxValue = 10f;
+        private float feverTimeMaxValue = 200f;
 
         public event Action OnFeverDecision;
         public event Action OnFeverEnd;
 
         //[SerializeField]
+        PlayerCharacter currentCharacter;
         List<PlayerCharacter> playerCharacters = new List<PlayerCharacter>();
 
         private IEnumerator feverCoroutine;
@@ -107,7 +113,8 @@ namespace VoiceActing
 
         public void AssignShooter(PlayerCharacter shooter)
         {
-            playerCharacters.Add(shooter);
+            currentCharacter = shooter;
+            //playerCharacters.Add(shooter);
         }
         public void ClearShooters()
         {
@@ -132,15 +139,17 @@ namespace VoiceActing
                 StopCoroutine(feverCoroutine);
         }
 
-        public void AddFill()
+        public void AddFill(int value)
         {
-            if (playerCharacters.Count == 0)
+            if (value <= 0)
                 return;
-            if (playerCharacters[playerCharacters.Count-1].CharacterAnimation.State == CharacterState.Jump) // si le perso qui vise n'est pas au sol ça marche pas
+            //if (playerCharacters.Count == 0 )
+            //    return;
+            if (currentCharacter.CharacterAnimation.State == CharacterState.Jump) // si le perso qui vise n'est pas au sol ça marche pas
                 return;
             if (globalCamera.GetCameraAction().gameObject.activeInHierarchy == false) // On ne peut pas ajouter du fever time si une action n'est pas en cours
                 return;
-            feverTimeValue += Random.Range(10, 20);
+            feverTimeValue += value;
             feverUpdate = true;
             DrawFill();
             StopCoroutine();
@@ -150,8 +159,10 @@ namespace VoiceActing
 
         public void ResetFill()
         {
+            //playerCharacters.Clear();
             feverTimeValue = 0;
             StopCoroutine();
+            reticlePosition.gameObject.SetActive(false);
         }
 
         private void DrawFill()
@@ -194,10 +205,16 @@ namespace VoiceActing
             attackController = attack;
             if (feverUpdate == true && feverTimeValue >= feverTimeMaxValue)
             {
+                playerCharacters.Add(currentCharacter);
                 targetAim.CharacterDamage.IsInvulnerable = true; // Pour que targetAim ne se prenne pas une balle perdue et foute tout en l'air
                 feverOutlineFeedback.SetTrigger("Appear");
+                feverDecisionButton.gameObject.SetActive(true);
                 feedbackManager.SetMotionSpeed(0f);
                 OnFeverDecision.Invoke();
+
+                for (int i = 0; i < feverButton.Count; i++)
+                    feverButton[i].SetActive(false);
+                feverButton[playerCharacters.Count - 1].SetActive(true);
 
                 StopCoroutine();
                 feverCoroutine = CameraCoroutine();
@@ -242,6 +259,7 @@ namespace VoiceActing
 
         public void StartFeverAim()
         {
+            feverDecisionButton.gameObject.SetActive(false);
             feverOutlineFeedback.SetTrigger("Start");
             feverUpdate = false;
             targetAim.CharacterAnimation.SetCharacterMotionSpeed(0.8f);
@@ -251,12 +269,16 @@ namespace VoiceActing
             aimReticleFever.SetTarget(targetAim.CharacterCenter);
             aimReticleFever.AddCharacterAiming(playerCharacters[playerCharacters.Count-1]);
             aimReticleFever.StartAim();
+            aimReticleFever.SetMainColor(playerCharacters[playerCharacters.Count - 1].CharacterEquipement.GetWeapon());
             globalCamera.ActivateCameraAction(false);
             globalCamera.GetCameraAction().SetParent(null, false);
+            attackController.SetAnimSpeed(); // Set la vitesse de l'anim a 1 puisque l'anim se fige au début du fever time
             for(int i = 0; i < playerCharacters.Count; i++)
             {
-                playerCharacters[i].CharacterAnimation.UserAppear();
-                playerCharacters[i].CharacterAnimation.PlayTrigger("FeverAim");
+                playerCharacters[i].CharacterDirection.LookAt(targetAim.transform);
+                playerCharacters[i].CharacterAction.ShowFeverAim(true);
+                playerCharacters[i].CharacterAnimation.UserDisappear();
+                //playerCharacters[i].CharacterAnimation.PlayTrigger("FeverAim");
             }
             StopCoroutine();
             feverCoroutine = FeverTimeCoroutine();
@@ -275,8 +297,7 @@ namespace VoiceActing
             yield return new WaitForSeconds(0.5f);
             aimReticleFever.HideAimReticle();
             yield return new WaitForSeconds(0.5f);
-            //if(OnFeverEnd != null) OnFeverEnd.Invoke();
-            CancelFeverAim();
+            EndShootFeverTime();
         }
 
 
@@ -288,10 +309,7 @@ namespace VoiceActing
             cam.localPosition = Vector3.zero;
             cam.localEulerAngles = Vector3.zero;
             aimReticleFever.StopAim();
-            for (int i = 0; i < playerCharacters.Count; i++)
-            {
-                playerCharacters[i].CharacterAnimation.PlayTrigger("Idle");
-            }
+            //playerCharacters.Clear();
         }
 
 
@@ -305,6 +323,7 @@ namespace VoiceActing
         }
         public void RefuseFeverAim()
         {
+            feverDecisionButton.gameObject.SetActive(false);
             targetAim.CharacterDamage.IsInvulnerable = false;
             feverOutlineFeedback.SetTrigger("Disappear");
             CancelFeverAim();
@@ -316,17 +335,51 @@ namespace VoiceActing
             if(aimReticleFever.GetBulletNumber(playerCharacters[playerCharacters.Count-1]) >= 1)
             {
                 StopCoroutine();
+                targetAim.CharacterAnimation.SetCharacterMotionSpeed(1f);
                 PlayerCharacter c = playerCharacters[playerCharacters.Count - 1];
-                c.CharacterAction.StartShoot(c.CharacterEquipement.GetWeaponAttackData(aimReticleFever.GetBulletNumber(c)), aimReticleFever.TargetAim);
+                for (int i = 0; i < playerCharacters.Count; i++)
+                {
+                    playerCharacters[i].CharacterAction.ShowFeverAim(false);
+                    playerCharacters[i].CharacterAction.FeverAction(playerCharacters[i].CharacterEquipement.GetWeaponAttackData(aimReticleFever.GetBulletNumber(c)), 
+                                                                    aimReticleFever.TargetAim, 
+                                                                    EndShootFeverTime);
+                }
+                if (playerCharacters.Count >= 3)
+                {
+                    tripleFeverAnim.CreateAttack(targetAim.CharacterCenter);
+                }
+                else
+                {
+                    c.CharacterAction.RotateFever();
+                }
+
                 aimReticleFever.StopAim();
+                aimReticleFever.HideAimReticle();
                 return true;
             }
             return false;
         }
 
+        public void EndShootFeverTime()
+        {
+            for (int i = 0; i < playerCharacters.Count; i++)
+            {
+                playerCharacters[i].CharacterAnimation.UserAppear();
+                playerCharacters[i].CharacterAction.ShowFeverAim(false);
+            }
+            playerCharacters.Clear();
+            ResetFill();
+            CancelFeverAim();
+        }
 
-
-
+        public void ForceStopFever()
+        {
+            for (int i = 0; i < playerCharacters.Count; i++)
+            {
+                playerCharacters[i].CharacterAction.ForceStopFever();
+            }
+            EndShootFeverTime();
+        }
 
 
         #endregion

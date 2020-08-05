@@ -25,6 +25,8 @@ namespace VoiceActing
         BattlePartyManager partyManager;
         [SerializeField]
         BattleEnemyManager enemyManager;
+        [SerializeField]
+        FeverTimeManager feverTimeManager;
 
         [Space]
         [SerializeField]
@@ -62,8 +64,8 @@ namespace VoiceActing
         public void EndBattle()
         {
             inputController.StopInput();
+            feverTimeManager.ForceStopFever();
             partyManager.StopPlayers();
-
             aimReticle.StopAim();
             aimReticle.HideAimReticle();
             aimReticle.enabled = false;
