@@ -23,5 +23,6 @@ MonoBehaviour:
   stickRightHorizontal: HorizontalRight
   stickRightVertical: VerticalRight
   dpadHorizontal: HorizontalPad
+  dpadVertical: VerticalPad
   rightTrigger: Trigger
   leftTrigger: 

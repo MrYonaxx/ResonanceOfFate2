@@ -43803,6 +43803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags: 00000000
   bannedObject: []
+  targetable: []
 --- !u!65 &1595463851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52633,6 +52634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags: 00000000
   bannedObject: []
+  targetable: []
 --- !u!114 &711390485163836852 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7674421135659987820, guid: 864b7d91b439113499efdb423262dc70,
@@ -57625,6 +57627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags: 00000000
   bannedObject: []
+  targetable: []
 --- !u!4 &4540024626539274953
 Transform:
   m_ObjectHideFlags: 0
@@ -66401,6 +66404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags: 00000000
   bannedObject: []
+  targetable: []
 --- !u!23 &7106482063519558852
 MeshRenderer:
   m_ObjectHideFlags: 0

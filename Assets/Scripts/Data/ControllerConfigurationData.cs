@@ -34,6 +34,8 @@ public class ControllerConfigurationData : ScriptableObject
 
     [SerializeField]
     public string dpadHorizontal;
+    [SerializeField]
+    public string dpadVertical;
 
     [SerializeField]
     public string rightTrigger;

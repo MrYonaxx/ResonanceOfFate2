@@ -77,6 +77,6 @@ namespace VoiceActing
 
             #endregion
 
-        } 
+    } 
 
 } // #PROJECTNAME# namespace

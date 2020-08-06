@@ -27,7 +27,7 @@ namespace VoiceActing
         FeverAim
     } 
 
-    public class InputController: MonoBehaviour
+    public class InputController: BaseInputController
     {
         #region Attributes 
 
@@ -101,14 +101,14 @@ namespace VoiceActing
 
 
 
-        ControllerConfigurationData control;
+        //ControllerConfigurationData control;
 
-        [SerializeField]
-        ControllerConfigurationData controllerConfig;
-        [SerializeField]
-        ControllerConfigurationData controllerConfigPS4;
+        //[SerializeField]
+        //ControllerConfigurationData controllerConfig;
+        //[SerializeField]
+        //ControllerConfigurationData controllerConfigPS4;
 
-        string controllerA = "A";
+       /* string controllerA = "A";
         string controllerB = "B";
         string controllerX = "X";
         string controllerY = "Y";
@@ -123,9 +123,9 @@ namespace VoiceActing
         string controllerRightVertical = "ControllerRightVertical";
 
         string controllerDPadHorizontal = "ControllerDPadHorizontal";
-        string controllerTrigger = "ControllerTrigger";
+        string controllerTrigger = "ControllerTrigger";*/
 
-        protected void Controller()
+        /*protected void Controller()
         {
             control = controllerConfig;
             string[] controllers;
@@ -139,25 +139,7 @@ namespace VoiceActing
                     control = controllerConfigPS4;
                 }
             }
-            /*if (controllerConfig != null)
-            {
-                controllerA = controllerConfig.controllerA + "_" + playerID;
-                controllerB = controllerConfig.controllerB + "_" + playerID;
-                controllerX = controllerConfig.controllerX + "_" + playerID;
-                controllerY = controllerConfig.controllerY + "_" + playerID;
-            }
-            else
-            {
-                controllerA += "_" + playerID;
-                controllerB += "_" + playerID;
-                controllerX += "_" + playerID;
-                controllerY += "_" + playerID;
-            }
-            controllerR1 += "_" + playerID;
-            controllerL1 += "_" + playerID;
-            controllerLeftHorizontal += "_" + playerID;
-            controllerLeftVertical += "_" + playerID;*/
-        }
+        }*/
 
 
 
@@ -178,7 +160,7 @@ namespace VoiceActing
         \* ======================================== */
         private void Start()
         {
-            Controller();
+            base.Start();
             feverTimeManager.OnFeverDecision += CallFeverDecision;
             triAttackManager.SetParty(battlePartyManager.GetParty());
             battleEnemyManager.OnEndAttacks += NewTurn;

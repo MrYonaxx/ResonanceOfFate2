@@ -32,6 +32,8 @@ namespace VoiceActing
         [SerializeField]
         List<GameObject> bannedObject = new List<GameObject>();
 
+        [Title("Debug")]
+        [SerializeField]
         List<Character> targetable = new List<Character>();
 
         #endregion

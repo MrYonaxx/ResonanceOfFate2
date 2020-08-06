@@ -30,7 +30,6 @@ namespace VoiceActing
             set { characterStatController = value; }
         }
 
-        int currentWeaponLevel = 0;
         List<CharacterWeaponLevel> weaponLevels = new List<CharacterWeaponLevel>();
         public List<CharacterWeaponLevel> WeaponLevels
         {
@@ -50,6 +49,8 @@ namespace VoiceActing
             get { return characterGrowthController; }
         }
 
+
+        int currentWeaponLevel = 0;
         #endregion
 
         #region GettersSetters 
@@ -66,16 +67,42 @@ namespace VoiceActing
          *                FUNCTIONS                 *
         \* ======================================== */
         // Equipement
-        public CharacterEquipementController(List<WeaponData> weaponDatas)
+        /*public CharacterEquipementController(List<WeaponData> weaponDatas)
         {
             weapons = weaponDatas;
-        }
+        }*/
+        /*public CharacterEquipementController(List<WeaponData> weaponDatas, List<CharacterWeaponLevelData> weaponLevelDatas, CharacterStatController statController, CharacterGrowthController growth)
+        {
+            weapons = weaponDatas;
+            for (int i = 0; i < weaponLevelDatas.Count; i++)
+            {
+                weaponLevels.Add(new CharacterWeaponLevel(weaponLevelDatas[i]));
+            }
+            characterStatController = statController;
+            characterGrowthController = growth;
+            EquipWeapon(0);
+            SetNewLevel();
+        }*/
+
         public CharacterEquipementController(List<WeaponData> weaponDatas, List<CharacterWeaponLevelData> weaponLevelDatas, CharacterStatController statController, CharacterGrowthController growth)
         {
             weapons = weaponDatas;
             for (int i = 0; i < weaponLevelDatas.Count; i++)
             {
                 weaponLevels.Add(new CharacterWeaponLevel(weaponLevelDatas[i]));
+            }
+            characterStatController = statController;
+            characterGrowthController = growth;
+            EquipWeapon(0);
+            SetNewLevel();
+        }
+
+        public CharacterEquipementController(List<WeaponData> weaponDatas, List<CharacterWeaponLevelData> weaponLevelDatas, List<int> totalExp, CharacterStatController statController, CharacterGrowthController growth)
+        {
+            weapons = weaponDatas;
+            for (int i = 0; i < weaponLevelDatas.Count; i++)
+            {
+                weaponLevels.Add(new CharacterWeaponLevel(weaponLevelDatas[i], totalExp[i]));
             }
             characterStatController = statController;
             characterGrowthController = growth;
@@ -136,6 +163,10 @@ namespace VoiceActing
 
 
 
+
+
+
+
         private void SetWeaponAttackProperty()
         {
             int weaponType = weapons[weaponEquipped].GetWeaponType();
@@ -184,6 +215,15 @@ namespace VoiceActing
         public int GetWeaponNextExp()
         {
             return weaponLevels[currentWeaponLevel].NextExperience;
+        }
+        public List<int> GetWeaponTotalExp()
+        {
+            List<int> res = new List<int>(weaponLevels.Count);
+            for (int i = 0; i < weaponLevels.Count; i++)
+            {
+                res.Add(weaponLevels[i].TotalExperience);
+            }
+            return res;
         }
 
 

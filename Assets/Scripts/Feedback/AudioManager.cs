@@ -97,9 +97,11 @@ namespace VoiceActing
             {
                 timeFade -= 1;
                 audioMusic.volume += speedFade;
+                audioMusic2.volume += speedFade;
                 yield return null;
             }
             audioMusic.volume = musicVolumeMax;
+            audioMusic2.volume = musicVolumeMax;
         }
 
 
@@ -120,9 +122,11 @@ namespace VoiceActing
             {
                 timeFade -= 1;
                 audioMusic.volume -= speedFade;
+                audioMusic2.volume -= speedFade;
                 yield return null;
             }
             audioMusic.volume = 0;
+            audioMusic2.volume = 0;
         }
 
 

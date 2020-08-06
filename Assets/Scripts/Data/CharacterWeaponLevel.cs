@@ -36,6 +36,10 @@ namespace VoiceActing
         }
 
         int totalExperience;
+        public int TotalExperience
+        {
+            get { return totalExperience; }
+        }
 
         #endregion
 
@@ -59,6 +63,16 @@ namespace VoiceActing
             for(int i = 1; i < level; i++)
                 totalExperience += levelData.ExperienceCurve[(i - 1)];
             nextExperience = levelData.ExperienceCurve[(level - 1)];
+        }
+        public CharacterWeaponLevel(CharacterWeaponLevelData data, int totalExp)
+        {
+            levelData = data;
+            totalExperience = totalExp;
+            CalculateLevel();
+            for (int i = 1; i < level+1; i++)
+                nextExperience += levelData.ExperienceCurve[(i - 1)];
+            nextExperience -= totalExperience;
+            Debug.Log(nextExperience);
         }
 
 

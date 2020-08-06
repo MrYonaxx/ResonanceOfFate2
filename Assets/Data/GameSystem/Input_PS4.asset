@@ -23,5 +23,6 @@ MonoBehaviour:
   stickRightHorizontal: PS4_HorizontalRight
   stickRightVertical: PS4_VerticalRight
   dpadHorizontal: PS4_HorizontalPad
+  dpadVertical: PS4_VerticalPad
   rightTrigger: PS4_R2
   leftTrigger: 
