@@ -43,7 +43,9 @@ namespace VoiceActing
         [SerializeField]
         PlayerHUD playerHudPrefab;
 
-
+        [Title("Death")]
+        [SerializeField]
+        Animator flashUI; 
 
         int partySize = 0;
         int indexSelection = 0;
@@ -346,6 +348,36 @@ namespace VoiceActing
                 party[i].CharacterStatController.OnScratchChanged -= playerHUDs[i].ScratchGauge.DrawGauge;
             }
         }
+
+
+
+
+
+
+
+
+
+        private IEnumerator DeathCoroutine()
+        {
+            // flash rouge
+            Time.timeScale = 0.1f;
+            yield return null;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         #endregion

@@ -103,6 +103,7 @@ namespace VoiceActing
         \* ======================================== */
         public CharacterBodyPartController(CharacterStatController characterStatController, List<BodyPartController> bodyPartControllers)
         {
+            Debug.Log(characterStatController.CharacterData.name);
             bodyPart = bodyPartControllers;
             mainBodyStatController = characterStatController;
             for(int i = 0; i < bodyPart.Count; i++)

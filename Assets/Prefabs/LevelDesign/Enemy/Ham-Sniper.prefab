@@ -59,6 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTags: 00000000
   bannedObject: []
+  targetable: []
 --- !u!1 &7674421134918496676
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,7 +996,7 @@ ParticleSystem:
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
+    m_Rotation: {x: 3, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -5153,6 +5154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aaeef2dd703c04db0973369aa30449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimScaling: 10
   muzzleAnimation: {fileID: 7196501695904101149, guid: d14547895feb5ee43bf2fc0b18ef3455,
     type: 3}
   onHitParticle: {fileID: 8632996020427025046, guid: bac3adcf32d64cb439972867461be11c,
@@ -5518,6 +5520,8 @@ MonoBehaviour:
     stunDamageVariance: 0
     accuracy: 0
     accuracyVariance: 0
+    feverValue: 0
+    feverValueMax: 0
     AttackElement: []
     AttackStatus: []
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
@@ -5530,6 +5534,7 @@ MonoBehaviour:
   fixDirection: 1
   stopTime: 0
   manualTarget: 0
+  actionMode: 1
   targetDebug: {fileID: 0}
 --- !u!95 &7674421136215575280
 Animator:
@@ -5719,13 +5724,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484fca72f4134e74c98463143761ca82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  user: {fileID: 7674421136693592741}
   direction: {fileID: 7674421136290415076}
   characterAnimation: {fileID: 7674421136693592737}
   attackControllerIdle: {fileID: 0}
   attackControllerDash: {fileID: 0}
   attackControllerDashForward: {fileID: 0}
   attackControllerJump: {fileID: 0}
+  feverAim: {fileID: 0}
+  attackControllerFever: {fileID: 0}
 --- !u!195 &7674421136290415073
 NavMeshAgent:
   m_ObjectHideFlags: 0

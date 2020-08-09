@@ -23,6 +23,8 @@ namespace VoiceActing
         Animator titleAnimator;
         [SerializeField]
         SaveLoadManager saveLoadManager;
+        [SerializeField]
+        string startScene;
 
         bool padDown = false;
         int index = -3;
@@ -86,8 +88,10 @@ namespace VoiceActing
 
         private void NewGame()
         {
+            saveLoadManager.PartyData.SceneName = startScene;
             StartCoroutine(StartGameCoroutine());
         }
+
 
         private void Continue()
         {

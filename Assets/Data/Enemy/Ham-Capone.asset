@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Ham-Capone
   m_EditorClassIdentifier: 
   characterFace: {fileID: 0}
-  characterName: Hamcapone
-  characterLevel: 3
+  characterName: Ham-Capone
+  characterLevel: 8
   statController:
     StatEditor:
     - columnName: Basic
       statDictionary:
       - statName: HPMax
-        statValue: 60
+        statValue: 150
         modifiable: 0
       - statName: Attack
         statValue: 1
@@ -118,7 +118,7 @@ MonoBehaviour:
         modifiable: 0
     Stats:
     - statName: HPMax
-      statValue: 60
+      statValue: 150
       modifiable: 0
     - statName: Attack
       statValue: 1

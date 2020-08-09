@@ -70,7 +70,7 @@ namespace VoiceActing
             totalExperience = totalExp;
             CalculateLevel();
             for (int i = 1; i < level+1; i++)
-                nextExperience += levelData.ExperienceCurve[(i - 1)];
+                nextExperience += levelData.ExperienceCurve[i-1];
             nextExperience -= totalExperience;
             Debug.Log(nextExperience);
         }
@@ -110,7 +110,7 @@ namespace VoiceActing
         {
             int totalExp = totalExperience;
             int finalLevel = 0;
-            while(totalExp > 0)
+            while(totalExp >= 0)
             {
                 totalExp -= levelData.ExperienceCurve[finalLevel];
                 finalLevel += 1;

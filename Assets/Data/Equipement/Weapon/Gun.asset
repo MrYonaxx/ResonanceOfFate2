@@ -44,7 +44,7 @@ MonoBehaviour:
         statValue: 1
         modifiable: 0
       - statName: Max Aim Distance
-        statValue: 7
+        statValue: 9
         modifiable: 0
       - statName: Max Magazine
         statValue: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
       statValue: 1
       modifiable: 0
     - statName: Max Aim Distance
-      statValue: 7
+      statValue: 9
       modifiable: 0
     - statName: Max Magazine
       statValue: 0

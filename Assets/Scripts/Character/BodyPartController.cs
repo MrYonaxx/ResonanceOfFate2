@@ -108,14 +108,21 @@ namespace VoiceActing
             blink = GetComponent<BlinkScript>();
         }
 
-        public virtual void InitializeBodyPart()
+        private void Awake()
         {
             statController = new CharacterStatController(partData);
+        }
+        public virtual void InitializeBodyPart()
+        {
+            if(statController == null)
+                statController = new CharacterStatController(partData);
             /*for (int i = 0; i < bodyPartBonus.Count; i++)
             {
                 characterStatController.StatController.AddStat(new Stat(bodyPartBonus[i].StatName, bodyPartBonus[i].StatValue), bodyPartBonus[i].ModifierType);
             }*/
         }
+
+
 
         public virtual bool CheckHit(float angle)
         {

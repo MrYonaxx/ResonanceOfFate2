@@ -22,6 +22,8 @@ namespace VoiceActing
         /*[SerializeField]
         Transform muzzle = null;*/
         [SerializeField]
+        float aimScaling = 10f;
+        [SerializeField]
         Transform muzzleAnimation = null;
         [SerializeField]
         GameObject onHitParticle = null;
@@ -56,7 +58,7 @@ namespace VoiceActing
             ParticleSystem.ShapeModule editableShape = part.shape;
             float variance = attack.AttackDataStat.Accuracy * (attack.AttackDataStat.AccuracyVariance * 0.01f);
             float accuracy = attack.AttackDataStat.Accuracy + Random.Range(-variance, variance);
-            editableShape.angle = 10 - (accuracy / 10f);
+            editableShape.angle = aimScaling - (accuracy / aimScaling);
         }
 
         #endregion

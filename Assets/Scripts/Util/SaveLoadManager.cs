@@ -25,6 +25,11 @@ namespace VoiceActing
         PlayerDatabase playerDatabase;
         [SerializeField]
         PartyData partyData;
+        public PartyData PartyData
+        {
+            get { return partyData; }
+        }
+
         [SerializeField]
         string saveFileName = "save";
         //[SerializeField]

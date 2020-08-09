@@ -51,7 +51,6 @@ namespace VoiceActing
                 target.Hp += rawHeal;
                 res = new DamageMessage(attack.AttackType, rawHeal, 0);
             }
-            Debug.Log(target.Scratch);
             return res;
         }
 

@@ -63,13 +63,13 @@ namespace VoiceActing
                 targetable.Add(collision.gameObject.GetComponent<Character>());
             }
         }
-        private void OnTriggerExit(Collider collision)
+        /*private void OnTriggerExit(Collider collision)
         {
             if (CheckTag(collision) == true)
             {
                 targetable.Remove(collision.gameObject.GetComponent<Character>());
             }
-        }
+        }*/
 
 
         private bool CheckTag(Collider collision)

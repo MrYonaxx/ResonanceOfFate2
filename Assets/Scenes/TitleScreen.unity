@@ -961,6 +961,7 @@ MonoBehaviour:
     type: 2}
   titleAnimator: {fileID: 359013167}
   saveLoadManager: {fileID: 1156385359}
+  startScene: Tuto1
 --- !u!4 &1156385361
 Transform:
   m_ObjectHideFlags: 0

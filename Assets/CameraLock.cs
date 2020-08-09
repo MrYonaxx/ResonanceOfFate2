@@ -230,14 +230,22 @@ namespace VoiceActing
 
         private void UpdateLockRotation()
         {
-            Vector3 originalRot = pivot.localEulerAngles;
+           /* Vector3 originalRot = pivot.localEulerAngles;// + cameraStates[stateIndex].RotationOffset;
             pivot.LookAt(lockTarget.position);
-            Vector3 newRot = pivot.localEulerAngles + cameraStates[stateIndex].RotationOffset;
-            transform.localEulerAngles = originalRot;
+            Vector3 newRot = pivot.localEulerAngles;// + cameraStates[stateIndex].RotationOffset;
+            pivot.localEulerAngles = originalRot;
             float x = Mathf.LerpAngle(pivot.localEulerAngles.x, newRot.x, smoothRotation);
             float y = Mathf.LerpAngle(pivot.localEulerAngles.y, newRot.y, smoothRotation);
             float z = Mathf.LerpAngle(pivot.localEulerAngles.z, newRot.z, smoothRotation);
-            pivot.localEulerAngles = new Vector3(x, y, z);
+            pivot.localEulerAngles = new Vector3(x, y, z);*/
+
+            Quaternion originalRot = pivot.localRotation;
+            pivot.LookAt(lockTarget.position);
+            Quaternion newRot = Quaternion.Euler(pivot.localEulerAngles.x + cameraStates[stateIndex].RotationOffset.x,
+                                                pivot.localEulerAngles.y + cameraStates[stateIndex].RotationOffset.y,
+                                                pivot.localEulerAngles.z + cameraStates[stateIndex].RotationOffset.z);
+            pivot.localRotation = originalRot;
+            pivot.localRotation = Quaternion.RotateTowards(pivot.localRotation, newRot, smoothRotation * 100);
         }
 
 

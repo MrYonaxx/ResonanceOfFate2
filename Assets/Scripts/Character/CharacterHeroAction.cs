@@ -164,6 +164,11 @@ namespace VoiceActing
             Vector3 move = right * directionX + forward * directionZ;
             move *= (speedCursor);
             cursor.Move(move * Time.deltaTime);
+            if ((cursor.transform.position - this.transform.position).magnitude > 12f)
+            {
+                cursor.transform.position = this.transform.position + (cursor.transform.position - this.transform.position).normalized * 12f;
+            }
+
 
             if (directionX != 0 || directionZ != 0)
             {

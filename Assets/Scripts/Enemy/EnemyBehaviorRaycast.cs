@@ -30,6 +30,8 @@ namespace VoiceActing
         [SerializeField]
         bool aimSpeedFix = true;
         [SerializeField]
+        bool dontCareObstruction = false;
+        [SerializeField]
         bool moveIfObstruction = false;
         [SerializeField]
         bool stopAimIfObstruction = false;
@@ -62,6 +64,8 @@ namespace VoiceActing
             List<Character> targetable = targetController.GetTarget();
             if (targetable.Count == 0)
                 return null;
+            if (dontCareObstruction == true)
+                return targetable[Random.Range(0, targetable.Count)];
             List<int> characterTargetable = new List<int>();
             for (int i = 0; i < targetable.Count; i++)
             {
