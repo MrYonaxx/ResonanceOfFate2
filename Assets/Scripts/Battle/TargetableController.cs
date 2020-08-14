@@ -41,7 +41,9 @@ namespace VoiceActing
         }
         private void OnDisable()
         {
-            if (applicationQuit == true)
+            if (targetable == null) // Pour pas avoir d'erreur si on fait disparaitre le mob durant la phase Awake des scripts
+                return;
+            if (applicationQuit == true)// Pour pas avoir d'erreur au moment de quitter l'app
                 return;
             if (hasBeenRemoved == false)
                 Untargetable();

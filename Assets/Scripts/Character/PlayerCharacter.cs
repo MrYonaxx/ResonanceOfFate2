@@ -41,6 +41,16 @@ namespace VoiceActing
             set { characterEquipement = value; characterEquipement.CharacterStatController = characterStatController; }
         }
 
+
+
+        //[SerializeField]
+        List<IInteraction> interactions = new List<IInteraction>();
+        public List<IInteraction> Interactions
+        {
+            get { return interactions; }
+            set { interactions = value; }
+        }
+
         /*[SerializeField]
         CharacterGrowthController characterGrowthController;
         public CharacterGrowthController CharacterGrowthController

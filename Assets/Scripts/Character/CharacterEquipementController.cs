@@ -22,6 +22,7 @@ namespace VoiceActing
 
         int weaponEquipped = 0;
         List<WeaponData> weapons = new List<WeaponData>(); // Switch to weapon
+        List<ArmorData> armors = new List<ArmorData>(); // armor equipped
 
         private CharacterStatController characterStatController;
         public CharacterStatController CharacterStatController
@@ -97,9 +98,11 @@ namespace VoiceActing
             SetNewLevel();
         }
 
-        public CharacterEquipementController(List<WeaponData> weaponDatas, List<CharacterWeaponLevelData> weaponLevelDatas, List<int> totalExp, CharacterStatController statController, CharacterGrowthController growth)
+        // Bon ça devient n'importe quoi, à refactor
+        public CharacterEquipementController(List<WeaponData> weaponDatas, List<ArmorData> armorDatas, List<CharacterWeaponLevelData> weaponLevelDatas, List<int> totalExp, CharacterStatController statController, CharacterGrowthController growth)
         {
             weapons = weaponDatas;
+            armors = armorDatas;
             for (int i = 0; i < weaponLevelDatas.Count; i++)
             {
                 weaponLevels.Add(new CharacterWeaponLevel(weaponLevelDatas[i], totalExp[i]));
@@ -107,6 +110,7 @@ namespace VoiceActing
             characterStatController = statController;
             characterGrowthController = growth;
             EquipWeapon(0);
+            EquipArmors();
             SetNewLevel();
         }
 
@@ -160,6 +164,62 @@ namespace VoiceActing
         {
             return weapons[weaponEquipped];
         }
+
+
+
+
+
+
+        public void EquipArmors()
+        {
+            for (int i = 0; i < armors.Count; i++)
+            {
+                EquipArmor(i, armors[i]);
+            }
+        }
+        public void EquipArmor(int index, ArmorData newArmor)
+        {
+            if (armors.Count <= index)
+                armors.Add(newArmor);
+            else
+                armors[index] = newArmor;
+            for (int i = 0; i < armors[index].StatModifiers.Count; i++)
+            {
+                characterStatController.StatController.AddStat(new Stat(armors[index].StatModifiers[i].StatName, armors[index].StatModifiers[i].StatValue), armors[index].StatModifiers[i].ModifierType);
+            }
+        }
+        public ArmorData RemoveArmor(int index)
+        {
+            if (index >= armors.Count)
+                return null;
+            if (armors[index] == null)
+                return null;
+            for (int i = 0; i < armors[index].StatModifiers.Count; i++)
+            {
+                characterStatController.StatController.RemoveStat(new Stat(armors[index].StatModifiers[i].StatName, armors[index].StatModifiers[i].StatValue), armors[index].StatModifiers[i].ModifierType);
+            }
+            ArmorData res = armors[index];
+            armors[index] = null;
+            return res;
+        }
+
+        public ArmorData GetArmor(int index)
+        {
+            if (index >= armors.Count)
+                return null;
+            return armors[index];
+        }
+
+        public List<string> GetArmors()
+        {
+            List<string> res = new List<string>(armors.Count);
+            for (int i = 0; i < armors.Count; i++)
+            {
+                res.Add(armors[i].name);
+            }
+            return res;
+        }
+
 
 
 

@@ -120,7 +120,10 @@ namespace VoiceActing
             animator.SetTrigger(triggerName);
         }
 
-
+        public void PlayAnimBool(string boolName, bool b)
+        {
+            animator.SetBool(boolName, b);
+        }
 
         public void CreateAnimation(GameObject animation)
         {

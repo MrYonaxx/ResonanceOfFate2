@@ -24,6 +24,13 @@ namespace VoiceActing
         [SerializeField]
         PlayerDatabase playerDatabase;
         [SerializeField]
+        GameVariableDatabase gameVariableDatabase;
+        [SerializeField]
+        GameVariableDatabase chestVariableDatabase;
+        [SerializeField]
+        ItemDatabase itemDatabase;
+
+        [SerializeField]
         PartyData partyData;
         public PartyData PartyData
         {
@@ -55,7 +62,7 @@ namespace VoiceActing
         {
             // On save les identifiants des character data vu qu'on peut serializer que des string et des int
             partyData.SceneName = SceneManager.GetActiveScene().name;
-            partyData.SavePartyData(playerDatabase);
+            partyData.SavePartyData(playerDatabase, gameVariableDatabase, chestVariableDatabase);
 
             string json = JsonUtility.ToJson(partyData);
             string filePath = string.Format("{0}/saves/{1}{2}.json", Application.persistentDataPath, saveFileName, index);
@@ -78,7 +85,7 @@ namespace VoiceActing
                 string dataAsJson = File.ReadAllText(filePath);
                 JsonUtility.FromJsonOverwrite(dataAsJson, partyData);
                 // On load et on recalcule tout
-                partyData.LoadPartyData(playerDatabase);
+                partyData.LoadPartyData(playerDatabase, gameVariableDatabase, chestVariableDatabase, itemDatabase);
                 return true;
             }
             return false;

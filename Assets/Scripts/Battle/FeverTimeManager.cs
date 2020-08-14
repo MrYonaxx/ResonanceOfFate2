@@ -317,7 +317,8 @@ namespace VoiceActing
         public void CancelFeverAim()
         {
             reticlePosition.gameObject.SetActive(false);
-            attackController.EndAttack();
+            if(attackController != null)
+                attackController.EndAttack();
             StopCoroutine();
             feverUpdate = false;
         }

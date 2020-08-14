@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene2.unity
     guid: f711e7a99b067b94cbb6a548412860e0
   - enabled: 1
+    path: Assets/Scenes/Tuto/Tuto1.unity
+    guid: d65de71a8c4f67849874a35c0dda5611
+  - enabled: 1
     path: Assets/Scenes/HamsterForest/HamsterForest1.unity
     guid: f06b91c8584c45c42b39120ba4c83bf6
   - enabled: 1
@@ -33,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/HamsterForest/HamsterForest3.2.unity
     guid: 4d5fc9853b450c046a0ccec3f51d47eb
   - enabled: 1
-    path: Assets/Scenes/Tuto/Tuto1.unity
-    guid: d65de71a8c4f67849874a35c0dda5611
+    path: Assets/Scenes/HamsterForest/HamsterForest3.3.unity
+    guid: ac7132dbef446b1468cf7cdde09700e1
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/HamsterForest4.unity
+    guid: cfa67eacfb68a204cbc1aefcf6ac076f
   m_configObjects: {}

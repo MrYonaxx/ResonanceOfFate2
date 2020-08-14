@@ -282,6 +282,10 @@ namespace VoiceActing
         {
             timeCollision += (Time.deltaTime * 5);
         }
+        public void CallWallCollision(float bonus)
+        {
+            timeCollision += (Time.deltaTime * 5) + bonus;
+        }
 
         public void Jump()
         {

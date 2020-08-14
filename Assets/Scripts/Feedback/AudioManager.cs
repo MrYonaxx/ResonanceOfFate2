@@ -74,11 +74,11 @@ namespace VoiceActing
             StartCoroutine(PlayMusicCoroutine(timeFade));
         }
 
-        public void PlayMusic(AudioClip music, AudioClip musicBattle, int timeFade = 1)
+        public void PlayMusic(AudioClip music, AudioClip musicBattle, float timeFade = 1)
         {
             if (music == audioMusic.clip)
             {
-                //audioMusic.volume = musicVolumeMax;
+                audioMusic.volume = musicVolumeMax;
                 return;
             }
             audioMusic2.clip = musicBattle;
@@ -86,43 +86,46 @@ namespace VoiceActing
             audioMusic.Play();
             audioMusic2.Play();
             StopAllCoroutines();
+            PlayMusicCoroutine(timeFade);
         }
 
-        private IEnumerator PlayMusicCoroutine(int timeFade)
+        private IEnumerator PlayMusicCoroutine(float timeFade)
         {
             if (timeFade <= 0)
                 timeFade = 1;
-            float speedFade = (musicVolumeMax - audioMusic.volume) / timeFade;
-            while (timeFade != 0)
+            //float speedFade = (musicVolumeMax - audioMusic.volume) / timeFade;
+            float t = 0f;
+            while (t < 1f)
             {
-                timeFade -= 1;
-                audioMusic.volume += speedFade;
-                audioMusic2.volume += speedFade;
+                t += Time.unscaledDeltaTime / timeFade;
+                audioMusic.volume = Mathf.Lerp(0, musicVolumeMax, t);
                 yield return null;
             }
             audioMusic.volume = musicVolumeMax;
-            audioMusic2.volume = musicVolumeMax;
         }
 
 
 
 
-        public void StopMusic(int timeFade = 1)
+        public void StopMusic(float timeFade = 1)
         {
             StopAllCoroutines();
             StartCoroutine(StopMusicCoroutine(timeFade));
         }
 
-        private IEnumerator StopMusicCoroutine(int timeFade)
+        private IEnumerator StopMusicCoroutine(float timeFade)
         {
             if (timeFade <= 0)
                 timeFade = 1;
-            float speedFade = audioMusic.volume / timeFade;
-            while (timeFade != 0)
+            //float speedFade = Mathf.Max(audioMusic.volume / timeFade, audioMusic2.volume / timeFade);
+            float music1Volume = audioMusic.volume;
+            float music2Volume = audioMusic2.volume;
+            float t = 0f;
+            while (t < 1f)
             {
-                timeFade -= 1;
-                audioMusic.volume -= speedFade;
-                audioMusic2.volume -= speedFade;
+                t += Time.unscaledDeltaTime / timeFade;
+                audioMusic.volume = Mathf.Lerp(music1Volume, 0, t);
+                audioMusic2.volume = Mathf.Lerp(music2Volume, 0, t);
                 yield return null;
             }
             audioMusic.volume = 0;
@@ -131,25 +134,27 @@ namespace VoiceActing
 
 
 
-        public void StopMusicWithScratch(int time)
+        public void StopMusicWithScratch(float time)
         {
             StopAllCoroutines();
-            StartCoroutine(FadeVolumeWithPitch(time));
+            StartCoroutine(StopMusicCoroutine(time));
+            StartCoroutine(FadeVolumeWithPitch(time*0.25f));
         }
 
-        private IEnumerator FadeVolumeWithPitch(int time)
+        private IEnumerator FadeVolumeWithPitch(float time)
         {
-            float speed = audioMusic.volume / time;
-            audioMusic.pitch += 1;
-            while (time != 0)
+            //float speed = Mathf.Max(audioMusic.volume / time, audioMusic2.volume / time);
+            //audioMusic.pitch += 1;
+            float t = 0f;
+            while (t < 1f)
             {
-                time -= 1;
-                audioMusic.volume -= speed;
+                t += Time.unscaledDeltaTime / time;
+                audioMusic.pitch = Mathf.Lerp(2, 1, t);
+                audioMusic2.pitch = Mathf.Lerp(2, 1, t);
                 yield return null;
-                if (audioMusic.pitch >= 1)
-                    audioMusic.pitch -= 0.01f;
             }
-            audioMusic.pitch = 1;
+            audioMusic.pitch = 1f;
+            audioMusic2.pitch = 1f;
         }
 
         // ===========================================================================================
@@ -187,7 +192,51 @@ namespace VoiceActing
 
         public void SwitchToBattle(bool b)
         {
-            trackManager.SetBool("Battle", b);
+            //trackManager.SetBool("Battle", b);
+            if(b == true)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SwitchMusicTrack(0, 0.25f, 0, 1));
+            }
+            else
+            {
+                StopAllCoroutines();
+                StartCoroutine(SwitchMusicTrack(1, 2, 0.8f, 0));
+            }
+        }
+
+
+        private IEnumerator SwitchMusicTrack(float initialWait, float timeFade, float volumeNormal, float volumeBattle)
+        {
+
+            yield return new WaitForSeconds(initialWait);
+            float music1Volume = audioMusic.volume;
+            float music2Volume = audioMusic2.volume;
+            volumeNormal *= musicVolumeMax;
+            volumeBattle *= musicVolumeMax;
+            float t = 0f;
+            while (t < 1f)
+            {
+                t += Time.unscaledDeltaTime / timeFade;
+                audioMusic.volume = Mathf.Lerp(music1Volume, volumeNormal, t);
+                audioMusic2.volume = Mathf.Lerp(music2Volume, volumeBattle, t);
+                yield return null;
+            }
+            audioMusic.volume = volumeNormal;
+            audioMusic2.volume = volumeBattle;
+
+            /*if (timeFade <= 0)
+                timeFade = 1;
+            float speedFade = (musicVolumeMax - audioMusic.volume) / timeFade;
+            while (timeFade != 0)
+            {
+                timeFade -= 1;
+                audioMusic.volume += speedFade;
+                audioMusic2.volume += speedFade;
+                yield return null;
+            }
+            audioMusic.volume = musicVolumeMax;
+            audioMusic2.volume = musicVolumeMax;*/
         }
 
 

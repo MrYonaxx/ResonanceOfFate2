@@ -116,6 +116,13 @@ namespace VoiceActing
             }
         }
 
+        private void OnEnable()
+        {
+            if (previousTarget != null)
+            {
+                animator.SetBool("Appear", true);
+            }
+        }
 
         public void DrawTargetInfo(ITargetable characterStat)
         {
@@ -134,15 +141,15 @@ namespace VoiceActing
                 }
             }
             animator.SetTrigger("Disappear");
-            if (characterStat == null)
+            if (characterStat == null)// C'est null donc ciao on draw rien
             {
+                animator.SetBool("Appear", false);
                 previousTarget = null;
-                targetDirection = null;
-                //Hide(); 
+                targetDirection = null; 
                 return;
             }
             targetDirection = characterStat.TargetDirection;
-            animator.SetTrigger("Appear");
+            animator.SetBool("Appear", true);
             textTargetName.text = characterStat.CharacterStatController.CharacterData.CharacterName;
             if (characterStat.CharacterStatController.Level <= 0)
             {
@@ -187,7 +194,6 @@ namespace VoiceActing
                 gaugeDrawers[i].gameObject.SetActive(true);
                 gaugeDrawers[i].transform.SetParent(bodyLayer[bodyPart[i].Layer-1]);
                 gaugeDrawers[i].CreateGauge(bodyPart[i].AngleMin, bodyPart[i].AngleMax);
-                Debug.Log(bodyPart[i].StatController.Hp);
                 gaugeDrawers[i].DrawHealth(bodyPart[i].StatController.Hp, bodyPart[i].StatController.GetHPMax());
 
                 bodyPart[i].StatController.OnHPChanged += gaugeDrawers[i].DrawHealth;
@@ -211,11 +217,6 @@ namespace VoiceActing
             player = playerPos;
         }
 
-
-        private void Hide()
-        {
-            animator.SetTrigger("Disappear");
-        }
 
         #endregion
 

@@ -22,6 +22,9 @@ namespace VoiceActing
         [Title("Debug")]
         [SerializeField]
         List<PlayerData> debugPartyData = new List<PlayerData>();
+        [SerializeField]
+        List<GameVariableDatabase> debugVariableDatabase = new List<GameVariableDatabase>();
+
 
         [Title("Parameter")]
         [SerializeField]
@@ -42,10 +45,6 @@ namespace VoiceActing
         Transform hudTransform;
         [SerializeField]
         PlayerHUD playerHudPrefab;
-
-        [Title("Death")]
-        [SerializeField]
-        Animator flashUI; 
 
         int partySize = 0;
         int indexSelection = 0;
@@ -116,7 +115,7 @@ namespace VoiceActing
             CreateDebugParty();
             InitializeCharacters();
         }
-        private void CreateDebugParty()
+        private void CreateDebugParty() // Sans doute à bouger un jour peut etre quand on aura un vrai jeu fini
         {
             if (partyData.GetInitialize() == false)
             {
@@ -131,6 +130,10 @@ namespace VoiceActing
                     partyData.CharacterEquipement.Add(new CharacterEquipementController(debugPartyData[i].WeaponEquipped, debugPartyData[i].WeaponLevels, partyData.CharacterStatControllers[i], partyData.CharacterGrowths[i]));
                 }
                 partyData.NextZoneEntrance = 999;
+                for (int i = 0; i < debugVariableDatabase.Count; i++)
+                {
+                    debugVariableDatabase[i].ResetDatabase();
+                }
             }
         }
 
@@ -357,12 +360,12 @@ namespace VoiceActing
 
 
 
-        private IEnumerator DeathCoroutine()
+        /*private IEnumerator DeathCoroutine()
         {
             // flash rouge
             Time.timeScale = 0.1f;
             yield return null;
-        }
+        }*/
 
 
 

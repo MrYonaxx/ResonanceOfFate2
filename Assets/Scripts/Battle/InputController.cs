@@ -34,6 +34,7 @@ namespace VoiceActing
         /* ======================================== *\
          *               ATTRIBUTES                 *
         \* ======================================== */
+        [Title("Battle Input Manager")]
         [SerializeField]
         GlobalTimeData timeData;
 
@@ -96,52 +97,6 @@ namespace VoiceActing
 
         public delegate void InputStateAction(InputState state);
         public event InputStateAction OnInputStateChanged;
-
-
-
-
-
-        //ControllerConfigurationData control;
-
-        //[SerializeField]
-        //ControllerConfigurationData controllerConfig;
-        //[SerializeField]
-        //ControllerConfigurationData controllerConfigPS4;
-
-       /* string controllerA = "A";
-        string controllerB = "B";
-        string controllerX = "X";
-        string controllerY = "Y";
-
-        string controllerR1 = "R1";
-        string controllerL1 = "L1";
-
-        string controllerLeftHorizontal = "ControllerLeftHorizontal";
-        string controllerLeftVertical = "ControllerLeftVertical";
-
-        string controllerRightHorizontal = "ControllerRightHorizontal";
-        string controllerRightVertical = "ControllerRightVertical";
-
-        string controllerDPadHorizontal = "ControllerDPadHorizontal";
-        string controllerTrigger = "ControllerTrigger";*/
-
-        /*protected void Controller()
-        {
-            control = controllerConfig;
-            string[] controllers;
-            controllers = Input.GetJoystickNames();
-            for (int i = 0; i < controllers.Length; i++)
-            {
-                Debug.Log(controllers[i]);
-                if (controllers[i] == "Wireless Controller")
-                {
-                    Debug.Log("Aye");
-                    control = controllerConfigPS4;
-                }
-            }
-        }*/
-
-
 
         #endregion
 
@@ -219,8 +174,12 @@ namespace VoiceActing
 
         private void UpdateDefault()
         {
+            if(c.Interactions.Count != 0)
+            {
+                if(InputInteraction()) return;
+            }
             InputMovement();
-            InputAim();
+            if(InputAim()) return;
             InputHeroAction();
             InputSkip();
             InputTriAttackMode();
@@ -231,18 +190,24 @@ namespace VoiceActing
         private void UpdateMovement()
         {
             InputMovement();
-            //InputSwitchCharacters();
+            if (battleEnemyManager.EnemyList.Count == 0)
+            {
+                battlePartyManager.ReducePlayerTime(-20f);
+                c.CharacterMovement.SetSpeed(c.CharacterStatController.GetStat("Speed") + 0.75f); // C'est nul, si un jour j'ajoute les status faudra utiliser ça à la place de cette ligne
+            }
+
             if (battlePartyManager.ReducePlayerTime(20f) == true) // Donc le perso n'a plus de time
             {
                 c.CharacterMovement.Move(0, 0);
                 NextTurn();
             }
+
         }
 
         private void UpdateAiming()
         {
-            InputCancelAim();
-            InputShoot();
+            if (InputCancelAim()) return;
+            if (InputShoot()) return;
         }
 
         private void UpdateHeroAction()
@@ -267,12 +232,24 @@ namespace VoiceActing
         private void UpdateTriAttack()
         {
             InputSwitchTargets();
-            InputShoot();
+            if (InputShoot()) return;
             InputTriAttackJump();
         }
 
 
 
+
+
+        private bool InputInteraction()
+        {
+            c.Interactions[0].DrawInteract();
+            if (Input.GetButtonDown(control.buttonA))
+            {
+                c.Interactions[0].Interact(c);
+                return true;
+            }
+            return false;
+        }
 
 
         private void InputMovement()
@@ -335,9 +312,9 @@ namespace VoiceActing
         // =================================================================================
         // Shoot
 
-        private void InputAim()
+        private bool InputAim()
         {
-            if(Input.GetButtonDown(control.buttonA) && aimReticle.enabled == true)
+            if(Input.GetButtonDown(control.buttonA) && aimReticle.TargetAim != null)
             {
                 timeData.TimeFlow = true;
                 InputState = InputState.Aiming;
@@ -347,11 +324,13 @@ namespace VoiceActing
                 cameraLock.SetState(1);
                 aimReticle.AddCharacterAiming(c);
                 aimReticle.StartAim();
+                return true;
             }
+            return false;
         }
-        private void InputShoot()
+        private bool InputShoot()
         {
-            if (Input.GetButtonDown(control.buttonA) && aimReticle.enabled == true)
+            if (Input.GetButtonDown(control.buttonA) && aimReticle.TargetAim != null)
             {
                 if (aimReticle.GetBulletNumber(c) >= 1 && c.CharacterAction.isAttacking() == false)
                 {
@@ -366,10 +345,12 @@ namespace VoiceActing
                     c.CharacterAction.StartShoot(c.CharacterEquipement.GetWeaponAttackData(aimReticle.GetBulletNumber(c)), aimReticle.TargetAim);
                     InputState = InputState.NoInput;
                 }
+                return true;
             }
+            return false;
         }
 
-        private void InputCancelAim()
+        private bool InputCancelAim()
         {
             if (Input.GetButtonDown(control.buttonB))
             {
@@ -387,7 +368,9 @@ namespace VoiceActing
                     InputState = InputState.Default;
                     preventB = true;
                 }
+                return true;
             }
+            return false;
         }
 
         private void EndShoot()
@@ -481,7 +464,7 @@ namespace VoiceActing
             {
                 PlaySound(heroActionStartClip);
                 timeData.TimeFlow = true;
-                if(aimReticle.enabled == true) 
+                if(aimReticle.TargetAim != null)
                 {
                     c.CharacterDirection.LookAt(aimReticle.TargetAim);
                     cameraLock.SetTarget(aimReticle.TargetAim);
@@ -551,7 +534,7 @@ namespace VoiceActing
                 battlePartyManager.ResetPlayerTurn();
                 triAttackManager.StartTriAttack(battlePartyManager.GetIndexSelection(), reverseDirection);
                 cameraLock.SetState(3);
-                if (aimReticle.enabled == true)
+                if (aimReticle.TargetAim != null)
                 {
                     cameraLock.SetTarget(aimReticle.TargetAim);
                     cameraLock.LockOn(true);

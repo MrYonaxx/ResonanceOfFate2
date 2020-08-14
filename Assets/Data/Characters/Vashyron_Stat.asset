@@ -51,7 +51,7 @@ MonoBehaviour:
       columnNameRight: Character
       statDictionary3:
       - statName: Speed
-        statValue: 0
+        statValue: 1.5
         modifiable: 0
       - statName: Jump
         statValue: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
       statValue: 1
       modifiable: 0
     - statName: Speed
-      statValue: 0
+      statValue: 1.5
       modifiable: 0
     - statName: Jump
       statValue: 0
@@ -204,5 +204,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 1
+    manual: 0
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}

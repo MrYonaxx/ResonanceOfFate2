@@ -19,11 +19,14 @@ namespace VoiceActing
         public string playerDataID;
         [SerializeField]
         public List<int> playerExperience = new List<int>();
+        [SerializeField]
+        public List<string> armorEquipped = new List<string>();
 
-        public CharacterSave(string ID, List<int> totalExperience)
+        public CharacterSave(string ID, List<int> totalExperience, List<string> armors)
         {
             playerDataID = ID;
             playerExperience = totalExperience;
+            armorEquipped = armors;
         }
     }
 
@@ -37,11 +40,22 @@ namespace VoiceActing
         \* ======================================== */
 
         // Pour les saves
-       // [SerializeField]
-       // List<string> playerDataID = new List<string>();
-       // Les données qu'on doit sauvegarder (On sauvegarde pas tout pour pouvoir modifier les stat et que les saves soient compatible)
+        // [SerializeField]
+        // List<string> playerDataID = new List<string>();
+        // Les données qu'on doit sauvegarder (On sauvegarde pas tout pour pouvoir modifier les stat et que les saves soient compatible)
         [SerializeField]
         List<CharacterSave> characterSavesData = new List<CharacterSave>();
+        [SerializeField]
+        List<GameVariable> gameVariables = new List<GameVariable>();
+        [SerializeField]
+        List<GameVariable> chestVariable = new List<GameVariable>();
+        [SerializeField]
+        List<string> inventory = new List<string>();
+        public List<string> Inventory
+        {
+            get { return inventory; }
+        }
+
         // Pour les saves
 
 
@@ -128,6 +142,7 @@ namespace VoiceActing
         public void SetInitialize()
         {
             partyInitialized = new PartyInitialized();
+            //inventory.Clear();
         }
         public bool GetInitialize()
         {
@@ -137,18 +152,23 @@ namespace VoiceActing
         }
 
         // On sauvegarde les valeurs à sauver 
-        public void SavePartyData(PlayerDatabase database)
+        public void SavePartyData(PlayerDatabase database, GameVariableDatabase variableDatabase, GameVariableDatabase chestDatabase)
         {
             characterSavesData.Clear();
             for (int i = 0; i < characterStatControllers.Count; i++)
             {
-                characterSavesData.Add(new CharacterSave(database.GetPlayerData(characterStatControllers[i].CharacterData).name, characterEquipement[i].GetWeaponTotalExp()));
+                characterSavesData.Add(new CharacterSave(database.GetPlayerData(characterStatControllers[i].CharacterData).name, characterEquipement[i].GetWeaponTotalExp(), characterEquipement[i].GetArmors()));
             }
+            gameVariables = variableDatabase.SaveVariables();
+            chestVariable = chestDatabase.SaveVariables();
         }
 
         // On utilise les valeurs qu'on a sauver pour re générer les joueurs 
-        public void LoadPartyData(PlayerDatabase database)
+        // Bon le Load c'est un peu n'importe quoi ça fait beaucoup de chose, à refactor peut etre
+        public void LoadPartyData(PlayerDatabase database, GameVariableDatabase variableDatabase, GameVariableDatabase chestDatabase, ItemDatabase itemDatabase)
         {
+            variableDatabase.LoadVariable(gameVariables);
+            chestDatabase.LoadVariable(chestVariable);
             characterStatControllers.Clear();
             characterGrowths.Clear();
             characterEquipement.Clear();
@@ -158,7 +178,13 @@ namespace VoiceActing
                 characterStatControllers.Add(new CharacterStatController(playerData.CharacterData));
                 characterGrowths.Add(new CharacterGrowthController(playerData.CharacterGrowth, characterStatControllers[i]));
 
-                characterEquipement.Add(new CharacterEquipementController(playerData.WeaponEquipped, playerData.WeaponLevels, characterSavesData[i].playerExperience, characterStatControllers[i], characterGrowths[i]));
+                // Convertit les string du json en ArmorData
+                List<ArmorData> res = new List<ArmorData>(characterSavesData[i].armorEquipped.Count);
+                for (int j = 0; j < characterSavesData[i].armorEquipped.Count; j++)
+                {
+                    res.Add((ArmorData) itemDatabase.GetItemData(characterSavesData[i].armorEquipped[j]));
+                }
+                characterEquipement.Add(new CharacterEquipementController(playerData.WeaponEquipped, res, playerData.WeaponLevels, characterSavesData[i].playerExperience, characterStatControllers[i], characterGrowths[i]));
 
             }
             partyInitialized = new PartyInitialized();

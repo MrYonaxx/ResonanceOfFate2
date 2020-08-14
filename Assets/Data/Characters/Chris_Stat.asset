@@ -51,7 +51,7 @@ MonoBehaviour:
       columnNameRight: Character
       statDictionary3:
       - statName: Speed
-        statValue: 0
+        statValue: 1.5
         modifiable: 0
       - statName: Jump
         statValue: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
       statValue: 1
       modifiable: 0
     - statName: Speed
-      statValue: 0
+      statValue: 1.5
       modifiable: 0
     - statName: Jump
       statValue: 0

@@ -166,7 +166,7 @@ namespace VoiceActing
             Target();*/
         }
 
-        public void Target()
+        /*public void Target()
         {
             if (targetable.Count == 0)
             {
@@ -177,14 +177,17 @@ namespace VoiceActing
             aimReticle.SetTarget(targetable[indexSelection].CharacterCenter);
             cameraLock.SetTarget(targetable[indexSelection].CharacterCenter);
             if (OnTargeted != null) OnTargeted.Invoke(targetable[indexSelection]);
-        }
+        }*/
 
         public void Target(ITargetable newTarget)
         {
             currentTarget = newTarget;
             aimReticle.SetTarget(currentTarget.CharacterCenter);
             cameraLock.SetTarget(currentTarget.CharacterCenter);
-            if(OnTargeted != null) OnTargeted.Invoke(currentTarget);
+            if (OnTargeted != null)
+            {
+                OnTargeted.Invoke(currentTarget);
+            }
         }
 
         public void Untarget()
@@ -236,7 +239,6 @@ namespace VoiceActing
             for (int i = 0; i < targetable.Count; i++)
             {
                 addX = cam.WorldToScreenPoint(targetable[i].CharacterCenter.position).x;
-                //Debug.Log(addX);
                 addInBetween = false;
                 for (int j = 0; j < posX.Count; j++) // On ajoute la position pour avoir une liste croissante
                 {
@@ -253,16 +255,7 @@ namespace VoiceActing
                     posX.Add(addX);
                     finalTarget.Add(targetable[i]);
                 }
-                /*if(currentTarget == targetable[i])
-                {
-
-                }*/
             }
-            /*for (int i = 0; i < posX.Count; i++)
-            {
-                Debug.Log(posX[i]);
-            }*/
-
             int finalIndex = -1;
             for (int i = 0; i < finalTarget.Count; i++)
             {
@@ -285,7 +278,6 @@ namespace VoiceActing
                 finalIndex = finalTarget.Count - 1;
             else if (finalIndex >= finalTarget.Count)
                 finalIndex = 0;
-            //Debug.Log(finalIndex);
             Target(finalTarget[finalIndex]);
 
         }

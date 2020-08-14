@@ -49,4 +49,24 @@ public class ControllerConfigurationData : ScriptableObject
         {"ControllerX", "ControllerX" },
         {"ControllerY", "ControllerY" },
     };
+
+    public void SetConfigurationData(ControllerConfigurationData d)
+    {
+        buttonA = d.buttonA;
+        buttonB = d.buttonB;
+        buttonX = d.buttonX;
+        buttonY = d.buttonY;
+        buttonRB = d.buttonRB;
+        buttonLB = d.buttonLB;
+        stickLeftHorizontal = d.stickLeftHorizontal;
+        stickLeftVertical = d.stickLeftVertical;
+        stickRightHorizontal = d.stickRightHorizontal;
+        stickRightVertical = d.stickRightVertical;
+        dpadHorizontal = d.dpadHorizontal;
+        dpadVertical = d.dpadVertical;
+        rightTrigger = d.rightTrigger;
+        leftTrigger = d.leftTrigger;
+    }
+
+
 }

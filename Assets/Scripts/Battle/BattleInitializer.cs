@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
 namespace VoiceActing
@@ -28,6 +29,10 @@ namespace VoiceActing
         GameObject hud = null;
         [SerializeField]
         InputController input = null;
+
+
+        [SerializeField]
+        UnityEvent battleStartEvent;
 
         #endregion
 
@@ -80,8 +85,9 @@ namespace VoiceActing
 
         private IEnumerator Wait()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             input.InputState = InputState.Default;
+            battleStartEvent.Invoke();
         }
 
         #endregion

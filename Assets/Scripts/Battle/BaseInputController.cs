@@ -14,7 +14,7 @@ namespace VoiceActing
 {
     public class BaseInputController: MonoBehaviour
     {
-
+        [SerializeField]
         protected ControllerConfigurationData control;
 
         [SerializeField]
@@ -25,7 +25,7 @@ namespace VoiceActing
 
         protected void Controller()
         {
-            control = controllerConfig;
+            control.SetConfigurationData(controllerConfig);
             string[] controllers;
             controllers = Input.GetJoystickNames();
             for (int i = 0; i < controllers.Length; i++)
@@ -34,7 +34,7 @@ namespace VoiceActing
                 if (controllers[i] == "Wireless Controller")
                 {
                     Debug.Log("Aye");
-                    control = controllerConfigPS4;
+                    control.SetConfigurationData(controllerConfigPS4);
                 }
             }
         }

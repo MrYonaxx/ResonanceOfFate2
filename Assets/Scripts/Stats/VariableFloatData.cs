@@ -16,8 +16,8 @@ namespace VoiceActing
     public class VariableFloatData : ScriptableObject
     {
         [Title("Variable initial Value")]
-        [SerializeField]
-        private string variableName;
+        /*[SerializeField]
+        private string variableName;*/
 
         [SerializeField]
         private float baseVar;
@@ -37,8 +37,36 @@ namespace VoiceActing
 
         [Title("Variable Memo")]
         [SerializeField]
-        [TextArea(3, 3)]
+        [TextArea(3, 10)]
         private string memo;
+
+        private List<string> callHistoric;
+
+        public void Reset()
+        {
+            var = baseVar;
+            callHistoric.Clear(); // Idéalement ne pas clear la liste quand faudra debug de manière vénèr et juste empêcher d'ajouter a l'infini 
+        }
+
+        public void Set(float value)
+        {
+            var = value;
+            callHistoric.Add(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " : =" + value);
+        }
+
+        public void Increment()
+        {
+            var++;
+            callHistoric.Add(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " : +1");
+        }
+
+        public void Decrement()
+        {
+            var--;
+            callHistoric.Add(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + " : -1");
+        }
+
+
     } 
 
 } // #PROJECTNAME# namespace

@@ -74,6 +74,7 @@ namespace VoiceActing
 
         float speedAcceleration = 1;
         Vector2 previousInput;
+        private Vector3 lastGroundedPosition;
 
         bool canInput = true;
         bool isMoving = false;
@@ -126,6 +127,13 @@ namespace VoiceActing
             return characterController.velocity;
         }
 
+        public void ResetPosition(Vector3 offset)
+        { 
+            characterController.enabled = false;
+            characterController.transform.position = lastGroundedPosition + offset;
+            characterController.enabled = true;
+        }
+
         #endregion
 
         #region Functions 
@@ -137,7 +145,12 @@ namespace VoiceActing
 
         private void Update()
         {
+            if (characterController.isGrounded == true)
+            {
+                lastGroundedPosition = this.transform.position;
+            }
             ApplyGravity();
+
         }
 
         public virtual void ApplyGravity()
@@ -150,13 +163,14 @@ namespace VoiceActing
             }*/
             else if (characterController.isGrounded == false && isJumping == false)
             {
+                //characterAnimation.PlayAnimBool("Fall", true);
                 characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
             }
             else if (characterController.isGrounded == true && isJumping == true)
             {
                 speedY = 0;
                 isJumping = false;
-                characterAnimation.State = CharacterState.Idle;
+                characterAnimation.State = CharacterState.Idle;  
             }
             else if(isJumping == true)
             {
@@ -358,6 +372,12 @@ namespace VoiceActing
             Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
             characterDirection.GetDirection().rotation = rotation;
             characterDirection.GetDirection().eulerAngles = new Vector3(90, characterDirection.GetDirection().localEulerAngles.y, characterDirection.GetDirection().localEulerAngles.z);
+        }
+
+
+        public void SetInput(bool b)
+        {
+            canInput = b;
         }
 
         #endregion

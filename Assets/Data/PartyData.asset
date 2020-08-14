@@ -12,7 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c46c2f1b127d9446a53a2d77ba1b646, type: 3}
   m_Name: PartyData
   m_EditorClassIdentifier: 
-  playerDataID: []
-  playerExperience: []
-  sceneName: Tuto1
-  nextZoneEntrance: 0
+  characterSavesData:
+  - playerDataID: Vashyron
+    playerExperience: 73010000
+  - playerDataID: Zephyr
+    playerExperience: cb010000
+  - playerDataID: Leanne
+    playerExperience: 25020000
+  gameVariables:
+  - variableName: HamsterCave
+    variableValue: 2
+  chestVariable:
+  - variableName: Chest_HamsterForest3.3_0
+    variableValue: 0
+  inventory:
+  - Lens
+  - Grip
+  - Lens
+  - CompactScopeA
+  - CompactScopeB
+  sceneName: HamsterForest3
+  nextZoneEntrance: 999

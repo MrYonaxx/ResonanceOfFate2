@@ -32,6 +32,11 @@ namespace VoiceActing
         [BoxGroup("Debug")]
         [SerializeField]
         List<EnemyController> enemyList = new List<EnemyController>();
+        public List<EnemyController> EnemyList
+        {
+            get { return enemyList; }
+        }
+
 
         List<EnemyController> attacksQueue = new List<EnemyController>();
 
@@ -189,6 +194,11 @@ namespace VoiceActing
         public void CancelQueue(EnemyController attacker)
         {
             attacksQueue.Remove(attacker);
+        }
+        public void ResetQueue()
+        {
+            attacksQueue.Clear();
+            StopAllCoroutines();
         }
 
         /*public bool CheckEnemyAttack()
