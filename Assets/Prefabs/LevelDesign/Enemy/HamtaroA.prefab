@@ -5284,7 +5284,7 @@ MonoBehaviour:
   aimScaling: 10
   muzzleAnimation: {fileID: 7196501695904101149, guid: d14547895feb5ee43bf2fc0b18ef3455,
     type: 3}
-  onHitParticle: {fileID: 8632996020427025046, guid: bac3adcf32d64cb439972867461be11c,
+  onHitParticle: {fileID: 7466821298627380584, guid: 5984d7b2ef2d81546ac409343dbe1f52,
     type: 3}
 --- !u!82 &5301043122904013592
 AudioSource:

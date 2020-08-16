@@ -61,6 +61,7 @@ namespace VoiceActing
         {
             // A refactor sans doute
             targetable.CharacterStatController.OnHPChanged += CheckDeath;
+            //
             globalTargetable.AddTargetable(targetable, targetIsEnemy);
             hasBeenRemoved = false;
         }

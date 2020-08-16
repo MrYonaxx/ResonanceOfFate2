@@ -206,6 +206,15 @@ namespace VoiceActing
 
         private void UpdateAiming()
         {
+            if (battlePartyManager.ReducePlayerTime(20f) == true) // Donc le perso n'a plus de time
+            {
+                timeData.TimeFlow = false;
+                cameraLock.LockOn(false);
+                cameraLock.SetTarget(null);
+                cameraLock.SetState(0);
+                aimReticle.StopAim(c);
+                NextTurn();
+            }
             if (InputCancelAim()) return;
             if (InputShoot()) return;
         }

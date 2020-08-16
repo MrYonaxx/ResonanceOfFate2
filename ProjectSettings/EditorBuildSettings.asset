@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Tuto/Tuto1.unity
     guid: d65de71a8c4f67849874a35c0dda5611
   - enabled: 1
+    path: Assets/Scenes/Tuto/Tuto2.unity
+    guid: 38fe40f52dedd444ab6e5637e57e8989
+  - enabled: 1
+    path: Assets/Scenes/Tuto/Tuto3.unity
+    guid: 02ba7b4aa6dca5344accda782e201208
+  - enabled: 1
     path: Assets/Scenes/HamsterForest/HamsterForest1.unity
     guid: f06b91c8584c45c42b39120ba4c83bf6
   - enabled: 1

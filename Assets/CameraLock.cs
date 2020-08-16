@@ -134,6 +134,11 @@ namespace VoiceActing
         {
             lockTarget = newTarget;
         }
+        // Appelé par des event principalement dans le tuto
+        public void SetTargetNull()
+        {
+            lockTarget = null;
+        }
 
         public Transform GetTarget()
         {
