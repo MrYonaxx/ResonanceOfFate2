@@ -8,37 +8,98 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public class MenuParty: MonoBehaviour
+    public class MenuParty: MenuBase
     {
-        #region Attributes 
+        [Title("Main Menu")]
+        [SerializeField]
+        PartyData partyData;
+        [SerializeField]
+        TypeDictionary weaponDictionary;
 
-        /* ======================================== *\
-         *               ATTRIBUTES                 *
-        \* ======================================== */
-
-
-        #endregion
-
-        #region GettersSetters 
-
-        /* ======================================== *\
-         *           GETTERS AND SETTERS            *
-        \* ======================================== */
-
-        #endregion
-
-        #region Functions 
-
-        /* ======================================== *\
-         *                FUNCTIONS                 *
-        \* ======================================== */
+        [Title("Parameter")]
+        [SerializeField]
+        MenuItemListDrawer subMenuSelectionList;
+        [SerializeField]
+        List<MenuBase> subMenu;
 
 
-        #endregion
+        [Title("UI")]
+        [SerializeField]
+        TextMeshProUGUI selectionName;
+        [SerializeField]
+        List<Image> imageCharacterFace;
+        [SerializeField]
+        List<TextMeshProUGUI> textCharacterName;
+        [SerializeField]
+        List<TextMeshProUGUI> textCharacterLevel;
+        [SerializeField]
+        List<Image> imageCharacterWeapon;
+        [SerializeField]
+        List<GaugeDrawer> gaugeCharacterHP;
+
+        [Space]
+        [SerializeField]
+        TextMeshProUGUI currentScene;
+
+
+        private void Start()
+        {
+            subMenuSelectionList.OnValidate += Validate;
+            subMenuSelectionList.OnQuit += CloseMainMenu;
+            //OpenMenu();
+        }
+
+        public override void OpenMenu()
+        {
+            base.OpenMenu();
+            DrawCharacters();
+            currentScene.text = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name; // c'est pas bon
+        }
+
+        public override void OpenMenuLate()
+        {
+            subMenuSelectionList.SetInput(true);
+        }
+
+        // Ferme le menu mais ne lance pas l'event
+        public override void CloseMenu()
+        {
+            subMenuSelectionList.SetInput(false);
+            menuPanel.gameObject.SetActive(false);
+        }
+
+        // Ferme le menu et lance l'event (généralement l'event de ce menu est celui qui renvois au jeu)
+        public void CloseMainMenu()
+        {
+            subMenuSelectionList.SetInput(false);
+            base.CloseMenu();
+        }
+
+        public void DrawCharacters()
+        {
+            for (int i = 0; i < partyData.CharacterStatControllers.Count; i++)
+            {
+                imageCharacterFace[i].sprite = partyData.CharacterStatControllers[i].CharacterData.CharacterFace;
+                textCharacterName[i].text = partyData.CharacterStatControllers[i].CharacterData.CharacterName;
+                textCharacterLevel[i].text = partyData.CharacterStatControllers[i].Level.ToString();
+                imageCharacterWeapon[i].sprite = weaponDictionary.GetSpriteIcon(partyData.CharacterEquipement[i].GetWeaponType());
+                gaugeCharacterHP[i].DrawGauge(partyData.CharacterStatControllers[i].Hp, partyData.CharacterStatControllers[i].GetHPMax());
+            }
+        }
+
+        public void Validate(int index)
+        {
+            Debug.Log("Hrm");
+            subMenu[index].OpenMenu();
+            subMenu[index].OnQuit += OpenMenu;
+            CloseMenu();
+        }
 
     } 
 

@@ -8,12 +8,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public class MenuEquipment: MenuItemListDrawer
+    public class MenuEquipment: MenuBase
     {
         #region Attributes 
 
@@ -22,15 +23,27 @@ namespace VoiceActing
         \* ======================================== */
         [Title("Menu Equipement")]
         [SerializeField]
+        ControllerConfigurationData control;
+        [SerializeField]
         PartyData partyData;
         [SerializeField]
+        ItemDatabase itemDatabase;
+        [SerializeField]
+        MenuItemListDrawer equipementListDrawer;
+        [SerializeField]
         MenuItemListDrawer inventoryListDrawer;
+
+
         [SerializeField]
         GameObject inventoryObject;
 
         [Title("UI")]
         [SerializeField]
         TextMeshProUGUI textCharacterName;
+        [SerializeField]
+        Image imageCharacterFaceOutline;
+        [SerializeField]
+        Image imageCharacterFace;
 
         [SerializeField]
         [ValueDropdown("GetStatList")]
@@ -40,10 +53,16 @@ namespace VoiceActing
         [SerializeField]
         List<TextMeshProUGUI> textNewStat;
 
-        StatController currentCharacter;
-        StatController previewCharacter;
+
+
+        StatController currentCharacterStat;
+        StatController previewCharacterStat;
+
 
         int indexCharacterSelection = 0;
+        bool canInput = false;
+        List<ItemData> itemsInventory = new List<ItemData>();
+
 
         #endregion
 
@@ -69,25 +88,49 @@ namespace VoiceActing
          *                FUNCTIONS                 *
         \* ======================================== */
 
-        protected override void Start()
+        protected void Start()
         {
-            base.Start();
+            // C'est un peu le spaghetti en vérité c'thistoire
+            equipementListDrawer.OnValidate += SwitchToInventory;
+            equipementListDrawer.OnQuit += CloseMenu;
+
             inventoryListDrawer.OnValidate += EquipItem;
             inventoryListDrawer.OnSelect += DrawItemPreview;
             inventoryListDrawer.OnQuit += SwitchToEquipement;
             DrawCharacter();
         }
 
-        protected override void Update()
-        {
-            base.Update();
 
-            if (Input.GetButtonDown(control.buttonRB))
+        public override void OpenMenu()
+        {
+            base.OpenMenu();
+            DrawCharacter();
+        }
+        public override void OpenMenuLate()
+        {
+            canInput = true;
+        }
+
+        public override void CloseMenu()
+        {
+            canInput = false;
+            base.CloseMenu();
+
+        }
+
+        protected void Update()
+        {
+            if (canInput == false)
+                return;
+            if (equipementListDrawer.InputList())
+                return;
+            else if (Input.GetButtonDown(control.buttonRB))
             {
                 indexCharacterSelection += 1;
                 if (indexCharacterSelection >= partyData.CharacterStatControllers.Count)
                     indexCharacterSelection = 0;
                 DrawCharacter();
+                return;
             }
             else if (Input.GetButtonDown(control.buttonLB))
             {
@@ -95,83 +138,120 @@ namespace VoiceActing
                 if (indexCharacterSelection < 0)
                     indexCharacterSelection = partyData.CharacterStatControllers.Count-1;
                 DrawCharacter();
+                return;
             }
 
         }
 
-        public override void Validate()
-        {
-            SwitchToInventory();
-        }
-
-        public override void Quit()
-        {
-        }
-
-
-
         public void DrawCharacter()
         {
-            canInput = true;
             textCharacterName.text = partyData.CharacterStatControllers[indexCharacterSelection].CharacterData.CharacterName;
-            currentCharacter = partyData.CharacterStatControllers[indexCharacterSelection].StatController;
-            previewCharacter = partyData.CharacterStatControllers[indexCharacterSelection].StatController;
-            DrawEquipement();
+            imageCharacterFaceOutline.sprite = partyData.CharacterStatControllers[indexCharacterSelection].CharacterData.CharacterFace;
+            imageCharacterFace.sprite = partyData.CharacterStatControllers[indexCharacterSelection].CharacterData.CharacterFace;
+            currentCharacterStat = partyData.CharacterStatControllers[indexCharacterSelection].StatController;
+            previewCharacterStat = partyData.CharacterStatControllers[indexCharacterSelection].StatController;
             DrawCharacterStat();
+            DrawEquipement();
+
+        }
+        public void DrawCharacterStat()
+        {
+            for (int i = 0; i < stat.Count; i++)
+            {
+                textOldStat[i].text = currentCharacterStat.GetValue(stat[i]).ToString();
+            }
         }
         public void DrawEquipement()
         {
             ArmorData armor;
-            for (int i = 0; i < listItem.Count; i++)
+            for (int i = 0; i < equipementListDrawer.ListItem.Count; i++)
             {
                 armor = partyData.CharacterEquipement[indexCharacterSelection].GetArmor(i);
                 if (armor == null)
                 {
-                    listItem[i].DrawText(null, "-----");
+                    equipementListDrawer.DrawItemList(i, null, "-----");
                 }
                 else
                 {
-                    listItem[i].DrawItem(armor);
+                    equipementListDrawer.DrawItemList(i, armor.ItemIcon, armor.ItemName);
                 }
             }
         }
 
-        public void DrawCharacterStat()
-        {
 
+
+        // a refaire si je fais un vrai jeu
+        public void DrawCharacterStatPreview(ArmorData armorData)
+        {
+            for (int i = 0; i < stat.Count; i++)
+            {
+                textNewStat[i].text = previewCharacterStat.GetValue(stat[i]).ToString();
+                for (int j = 0; j < armorData.StatModifiers.Count; j++)
+                {
+                    if (stat[i] == armorData.StatModifiers[j].StatName)
+                    {
+                        if(armorData.StatModifiers[j].ModifierType == StatModifierType.Flat)
+                            textNewStat[i].text = (previewCharacterStat.GetValue(stat[i]) + armorData.StatModifiers[j].StatValue).ToString();
+                        else
+                            textNewStat[i].text = (previewCharacterStat.GetValue(stat[i]) * armorData.StatModifiers[j].StatValue).ToString();
+                        break;
+                    }
+                }
+            }
         }
 
-        public void DrawCharacterStatPreview()
-        {
 
+
+
+
+        public void DrawItemPreview(int index)
+        {
+            DrawCharacterStatPreview((ArmorData) itemsInventory[index]);
         }
 
-        public void DrawItemPreview(ItemData item)
+        public void EquipItem(int index)
         {
-
-        }
-
-        public void EquipItem(ItemData item)
-        {
-            ArmorData removedItem = partyData.CharacterEquipement[indexCharacterSelection].RemoveArmor(indexSelection);
+            ArmorData removedItem = partyData.CharacterEquipement[indexCharacterSelection].RemoveArmor(equipementListDrawer.IndexSelection);
             if(removedItem != null)
                 partyData.Inventory.Add(removedItem.name);
-            partyData.CharacterEquipement[indexCharacterSelection].EquipArmor(indexSelection, (ArmorData) item);
-            partyData.Inventory.Remove(item.name);
+            partyData.CharacterEquipement[indexCharacterSelection].EquipArmor(equipementListDrawer.IndexSelection, (ArmorData)itemsInventory[index]);
+            partyData.Inventory.Remove(itemsInventory[index].name);
             SwitchToEquipement();
         }
 
 
-        public void SwitchToInventory()
+
+
+
+        public void SwitchToInventory(int index)
         {
             canInput = false;
             inventoryObject.SetActive(true);
-            inventoryListDrawer.DrawList(partyData.Inventory);
-            StartCoroutine(WaitBuffer(true));
+            DrawItemList();
+            for (int i = 0; i < stat.Count; i++)
+            {
+                textNewStat[i].gameObject.SetActive(true);
+            }
+            StartCoroutine(WaitInventoryBuffer(true));
 
         }
 
-        private IEnumerator WaitBuffer(bool b)
+        public void DrawItemList()
+        {
+            List<string> items = partyData.Inventory;
+            itemsInventory = new List<ItemData>();
+            for (int i = 0; i < items.Count; i++)
+            {
+                ItemData item = itemDatabase.GetItemData(items[i]);
+                itemsInventory.Add(item);
+                inventoryListDrawer.DrawItemList(i, item.ItemIcon, item.ItemName);
+            }
+            inventoryListDrawer.SetItemCount(items.Count);
+        }
+
+
+
+        private IEnumerator WaitInventoryBuffer(bool b)
         {
             // On attend une frame sinon unity fait l'update de l'autre menu sur la même frame (En gros ça appuie 2x sur le bouton A alors qu'on appuie qu'une fois)
             yield return null;
@@ -183,8 +263,13 @@ namespace VoiceActing
         {
             inventoryListDrawer.SetInput(false);
             inventoryObject.SetActive(false);
-            StartCoroutine(WaitBuffer(false));
+            StartCoroutine(WaitInventoryBuffer(false));
+            for (int i = 0; i < stat.Count; i++)
+            {
+                textNewStat[i].gameObject.SetActive(false);
+            }
             DrawEquipement();
+            DrawCharacter();
         }
 
 
@@ -192,6 +277,9 @@ namespace VoiceActing
 
         private void OnDestroy()
         {
+            equipementListDrawer.OnValidate -= SwitchToInventory;
+            equipementListDrawer.OnQuit -= CloseMenu;
+
             inventoryListDrawer.OnValidate -= EquipItem;
             inventoryListDrawer.OnSelect -= DrawItemPreview;
             inventoryListDrawer.OnQuit -= SwitchToEquipement;

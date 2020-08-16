@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e1ce20f4607fe46aefae967a827239, type: 3}
   m_Name: Vashyron_Stat
   m_EditorClassIdentifier: 
-  characterFace: {fileID: 0}
+  characterFace: {fileID: 21300000, guid: ed167da9c52b5c0488011a21cd24ae1e, type: 3}
   characterName: Vashyron
   characterLevel: 1
   statController:

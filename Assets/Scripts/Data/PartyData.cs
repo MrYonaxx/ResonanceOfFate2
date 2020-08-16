@@ -142,7 +142,7 @@ namespace VoiceActing
         public void SetInitialize()
         {
             partyInitialized = new PartyInitialized();
-            //inventory.Clear();
+            inventory.Clear();
         }
         public bool GetInitialize()
         {

@@ -26,3 +26,4 @@ MonoBehaviour:
   dpadVertical: PS4_VerticalPad
   rightTrigger: PS4_R2
   leftTrigger: 
+  start: PS4_Start

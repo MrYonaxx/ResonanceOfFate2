@@ -66,17 +66,16 @@ namespace VoiceActing
 
 
 
-        public bool CheckDuplicate(string name)
+        public bool CheckExist(string name)
         {
-            int count = 0;
             for (int i = 0; i < gameVariables.Count; i++)
             {
                 if (gameVariables[i].VariableName.Equals(name))
                 {
-                    count++;
+                    return true;
                 }
             }
-            return (count > 1);
+            return false;
         }
 
         public void AddGameVariable(string name, float val)

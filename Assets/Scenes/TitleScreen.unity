@@ -942,6 +942,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDatabase: {fileID: 11400000, guid: 46ad859c931d4cd48a885a53bec8698b, type: 2}
+  gameVariableDatabase: {fileID: 11400000, guid: 05734f59ed880c24b9e768f821341759,
+    type: 2}
+  chestVariableDatabase: {fileID: 11400000, guid: 7d3037c19b30d9b47a4216fee25ad8d4,
+    type: 2}
+  itemDatabase: {fileID: 11400000, guid: 8a150b156ef8fea44b5e50970281545d, type: 2}
   partyData: {fileID: 11400000, guid: da6fbc096acafd4409c8b8d9cd8254e1, type: 2}
   saveFileName: save
 --- !u!114 &1156385360
@@ -956,6 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4908684568fc8488e78d4042c3ec4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 11400000, guid: 3087a426c4018304398cb64b59b32c7f, type: 2}
   controllerConfig: {fileID: 11400000, guid: 2410eb4113dbc5c4ea0ca8c2afee44bb, type: 2}
   controllerConfigPS4: {fileID: 11400000, guid: 4f3e394005cf1da4190aef3b996beb37,
     type: 2}

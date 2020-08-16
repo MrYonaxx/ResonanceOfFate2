@@ -901,7 +901,31 @@ namespace VoiceActing
         // =================================================================================
 
 
+        // =================================================================================
+        // Menu
+        #region Menu
+        /*private bool InputMenu()
+        {
+            if (Input.GetButtonDown(control.start))
+            {
+                MenuParty menuParty = null;
+                if (battleEnemyManager.EnemyList.Count == 0)
+                {
+                    inputState = InputState.NoInput;
+                    menuParty.OpenMainMenu();
+                    return true;
+                }
+            }
+            return false;
+        }
 
+        private void QuitMenu()
+        {
+            inputState = InputState.Default;
+        }*/
+
+        #endregion
+        // =================================================================================
 
 
 

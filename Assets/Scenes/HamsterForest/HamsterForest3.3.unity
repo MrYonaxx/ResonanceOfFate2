@@ -517,7 +517,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh153082
+  m_Name: pb_Mesh587164
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2120,14 +2120,14 @@ MonoBehaviour:
   commandPrompt: {fileID: 693558053}
   textButton: {fileID: 708717115}
   promptMessage: Open
-  chestID: Chest___HamsterForest3.3___Protective Suit___1
   chestDatabase: {fileID: 11400000, guid: 7d3037c19b30d9b47a4216fee25ad8d4, type: 2}
   party: {fileID: 11400000, guid: da6fbc096acafd4409c8b8d9cd8254e1, type: 2}
-  item: {fileID: 11400000, guid: b9c89c6f81a163142afba6a4dd42eb43, type: 2}
   chestAnimator: {fileID: 234322366}
   chestPanel: {fileID: 463589879}
   objectName: {fileID: 538176896}
   objectDescription: {fileID: 1825440641}
+  chestID: Chest___HamsterForest3.3___Protective Suit___0
+  item: {fileID: 11400000, guid: b9c89c6f81a163142afba6a4dd42eb43, type: 2}
 --- !u!65 &234322362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8849,14 +8849,14 @@ MonoBehaviour:
   commandPrompt: {fileID: 693558053}
   textButton: {fileID: 708717115}
   promptMessage: Open
-  chestID: Chest___HamsterForest3.3___Compact Scope Beta___1
   chestDatabase: {fileID: 11400000, guid: 7d3037c19b30d9b47a4216fee25ad8d4, type: 2}
   party: {fileID: 11400000, guid: da6fbc096acafd4409c8b8d9cd8254e1, type: 2}
-  item: {fileID: 11400000, guid: b2331ecf1ddf6214c940fc00fae09324, type: 2}
   chestAnimator: {fileID: 1241113139}
   chestPanel: {fileID: 463589879}
   objectName: {fileID: 538176896}
   objectDescription: {fileID: 1825440641}
+  chestID: Chest___HamsterForest3.3___Compact Scope Beta___1
+  item: {fileID: 11400000, guid: b2331ecf1ddf6214c940fc00fae09324, type: 2}
 --- !u!65 &1241113141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12895,7 +12895,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh152664
+  m_Name: pb_Mesh586856
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

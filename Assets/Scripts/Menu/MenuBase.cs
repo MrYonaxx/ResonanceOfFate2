@@ -8,36 +8,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public class ItemButton: MonoBehaviour
+    public class MenuBase: MonoBehaviour
     {
         #region Attributes 
 
         /* ======================================== *\
          *               ATTRIBUTES                 *
         \* ======================================== */
-        /*ItemData itemData;
-        public ItemData ItemData
-        {
-            get { return itemData; }
-        }*/
-        [SerializeField]
-        Image itemIcon;
-        [SerializeField]
-        TextMeshProUGUI itemName;
 
         [SerializeField]
-        RectTransform rectTransform;
-        public RectTransform RectTransform
-        {
-            get { return rectTransform; }
-        }
+        protected GameObject menuPanel;
 
+        /*public event ItemAction OnSelect;
+        public event ItemAction OnValidate;*/
+        public event Action OnQuit;
 
         #endregion
 
@@ -54,21 +42,30 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-        /*public void DrawItem(ItemData item)
-        {
-            itemData = item;
-            itemIcon.sprite = item.ItemIcon;
-            itemName.text = item.ItemName;
-        }*/
 
-        public void DrawText(Sprite icon, string text)
+        public virtual void OpenMenu()
         {
-            itemIcon.sprite = icon;
-            if (icon == null)
-                itemIcon.enabled = false;
-            else
-                itemIcon.enabled = true;
-            itemName.text = text;
+            menuPanel.gameObject.SetActive(true);
+            StartCoroutine(WaitBuffer());
+        }
+
+        public virtual void CloseMenu()
+        {
+            menuPanel.gameObject.SetActive(false);
+            if (OnQuit != null) OnQuit.Invoke();
+
+        }
+
+        private IEnumerator WaitBuffer()
+        {
+            // On attend une frame sinon unity fait l'update de l'autre menu sur la même frame (En gros ça appuie 2x sur le bouton A alors qu'on appuie qu'une fois)
+            yield return null;
+            OpenMenuLate();
+        }
+
+        public virtual void OpenMenuLate()
+        {
+
         }
 
         #endregion

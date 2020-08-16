@@ -179,10 +179,9 @@ namespace VoiceActing
         }
         public void EquipArmor(int index, ArmorData newArmor)
         {
-            if (armors.Count <= index)
-                armors.Add(newArmor);
-            else
-                armors[index] = newArmor;
+            while (armors.Count <= index)
+                armors.Add(null);
+            armors[index] = newArmor;
             for (int i = 0; i < armors[index].StatModifiers.Count; i++)
             {
                 characterStatController.StatController.AddStat(new Stat(armors[index].StatModifiers[i].StatName, armors[index].StatModifiers[i].StatValue), armors[index].StatModifiers[i].ModifierType);
@@ -194,6 +193,7 @@ namespace VoiceActing
                 return null;
             if (armors[index] == null)
                 return null;
+
             for (int i = 0; i < armors[index].StatModifiers.Count; i++)
             {
                 characterStatController.StatController.RemoveStat(new Stat(armors[index].StatModifiers[i].StatName, armors[index].StatModifiers[i].StatValue), armors[index].StatModifiers[i].ModifierType);

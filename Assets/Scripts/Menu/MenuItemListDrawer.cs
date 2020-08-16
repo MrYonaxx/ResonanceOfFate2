@@ -24,8 +24,6 @@ namespace VoiceActing
         [Title("Control")]
         [SerializeField]
         protected ControllerConfigurationData control;
-        [SerializeField]
-        protected ItemDatabase itemDatabase;
 
         [Title("UI")]
         [SerializeField]
@@ -39,14 +37,23 @@ namespace VoiceActing
 
         [SerializeField]
         protected List<ItemButton> listItem = new List<ItemButton>();
+        public List<ItemButton> ListItem
+        {
+            get { return listItem; }
+        }
 
         protected int indexSelection = 0;
+        public int IndexSelection
+        {
+            get { return indexSelection; }
+        }
+
         protected int listIndexCount = 0;
         protected bool padDown = false;
 
 
-        public event ItemAction OnSelect;
-        public event ItemAction OnValidate;
+        public event ActionInt OnSelect;
+        public event ActionInt OnValidate;
         public event Action OnQuit;
 
 
@@ -85,27 +92,28 @@ namespace VoiceActing
         \* ======================================== */
         protected virtual void Start()
         {
+            canInput = false;
             indexLimit = scrollSize;
             listIndexCount = listItem.Count;
         }
 
-        public void DrawList(List<string> items)
+        public void DrawItemList(int i, Sprite icon, string text)
         {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (i <= listItem.Count)
-                    listItem.Add(Instantiate(prefabItem, listTransform));
-                ItemData item = itemDatabase.GetItemData(items[i]); // C'est très lent, peut etre faire un cache ou un truc
-                listItem[i].DrawItem(item);
-                listItem[i].gameObject.SetActive(true);
-            }
-            listIndexCount = items.Count;
-            for (int i = items.Count; i < listItem.Count; i++)
+            if (i >= listItem.Count)
+                listItem.Add(Instantiate(prefabItem, listTransform));
+            listItem[i].DrawText(icon, text);
+            listItem[i].gameObject.SetActive(true);
+        }
+
+        public void SetItemCount(int count)
+        {
+            listIndexCount = count;
+            for (int i = count; i < listItem.Count; i++)
             {
                 listItem[i].gameObject.SetActive(false);
             }
-
         }
+
         public void SetInput(bool b)
         {
             canInput = b;
@@ -115,28 +123,37 @@ namespace VoiceActing
         {
             if (canInput == false)
                 return;
+            InputList();
+        }
 
+        public bool InputList()
+        {
             if (Input.GetButtonDown(control.buttonA) == true)
+            {
                 Validate();
+                return true;
+            }
             else if (Input.GetButtonDown(control.buttonB) == true)
+            {
                 Quit();
-
+                return true;
+            }
             else if (Input.GetAxis(control.dpadVertical) > 0.8)
             {
-                //padDown = true;
                 SelectUp();
+                return true;
             }
             else if (Input.GetAxis(control.dpadVertical) < -0.8)
             {
-                //padDown = true;
                 SelectDown();
+                return true;
             }
             else if (Input.GetAxis(control.dpadVertical) == 0)
             {
                 StopRepeat();
-                //padDown = false;
+                return false;
             }
-
+            return false;
         }
 
 
@@ -161,7 +178,7 @@ namespace VoiceActing
             {
                 indexSelection = listIndexCount - 1;
             }
-            if(OnSelect != null) OnSelect.Invoke(listItem[indexSelection].ItemData);
+            if(OnSelect != null) OnSelect.Invoke(indexSelection);
             MoveScrollRect();
         }
 
@@ -184,7 +201,8 @@ namespace VoiceActing
             {
                 indexSelection = 0;
             }
-            if (OnSelect != null) OnSelect.Invoke(listItem[indexSelection].ItemData);
+
+            if (OnSelect != null) OnSelect.Invoke(indexSelection);
             MoveScrollRect();
         }
 
@@ -194,7 +212,7 @@ namespace VoiceActing
         {
             if (listIndexCount == 0)
                 return;
-            if (OnValidate != null) OnValidate.Invoke(listItem[indexSelection].ItemData);
+            if (OnValidate != null) OnValidate.Invoke(indexSelection);
         }
 
         public virtual void Quit()

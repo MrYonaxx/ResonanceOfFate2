@@ -42,6 +42,9 @@ public class ControllerConfigurationData : ScriptableObject
     [SerializeField]
     public string leftTrigger;
 
+    [SerializeField]
+    public string start;
+
     private ValueDropdownList<string> controllerValues = new ValueDropdownList<string>()
     {
         {"ControllerA", "ControllerA" },
@@ -66,6 +69,7 @@ public class ControllerConfigurationData : ScriptableObject
         dpadVertical = d.dpadVertical;
         rightTrigger = d.rightTrigger;
         leftTrigger = d.leftTrigger;
+        start = d.start;
     }
 
 

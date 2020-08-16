@@ -25,17 +25,11 @@ namespace VoiceActing
         [Space]
         [Title("Chest")]
         [SerializeField]
-        [ReadOnly]
-        string chestID = "";
-        [SerializeField]
-        [ReadOnly]
         GameVariableDatabase chestDatabase;
 
         [SerializeField]
         PartyData party;
-        //[OnValueChanged("CreateChestID")]
-        [SerializeField]
-        ItemData item;
+
         [SerializeField]
         Animator chestAnimator;
 
@@ -46,6 +40,15 @@ namespace VoiceActing
         TextMeshProUGUI objectName;
         [SerializeField]
         TextMeshProUGUI objectDescription;
+
+        [Title("Content")]
+        [SerializeField]
+        [ReadOnly]
+        string chestID = "";
+        [OnValueChanged("CreateChestID")]
+        [SerializeField]
+        ItemData item;
+
 
         #endregion
 
@@ -124,55 +127,51 @@ namespace VoiceActing
             chestDatabase.AddGameVariable(chestID, 0);
         }
 
-
+        // Cette histoire d'identifiant c'est un peu relou pour rien.
+        // Retiens que le système ne marche pas dans certains cas comme : "Si je change le contenu du coffre, l'identifiant change aussi"
+        // Donc c'est baisé
         private void Awake()
         {
 #if UNITY_EDITOR
-            base.Awake();
-            if (chestPanel == null) // Ouch
-                chestPanel = GameObject.Find("CanvasInteract/Parent/PanelTreasure");
-            if (objectName == null) // Ouch
-                objectName = GameObject.Find("CanvasInteract/Parent/PanelTreasure/PopupTreasure/ObjectIcon/ObjectName").GetComponent<TextMeshProUGUI>();
-            if (objectDescription == null) // Ouch
-                objectDescription = GameObject.Find("CanvasInteract/Parent/PanelTreasure/PopupObjectDescription/TextObjectDescription").GetComponent<TextMeshProUGUI>();
-            if (chestAnimator == null)
-                chestAnimator = GetComponent<Animator>();
-
-            if (chestDatabase == null)
-                chestDatabase = UnityEditor.AssetDatabase.LoadAssetAtPath<GameVariableDatabase>(UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets("VariableDatabaseChest")[0]));
-            //chestID = "Chest___" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "___" + item.ItemName + "___" + chestDatabase.GameVariables.Count;
-            //chestDatabase.AddGameVariable(chestID, 0);
-            if (chestDatabase.CheckDuplicate(chestID) == true) 
+            if (!UnityEditor.EditorApplication.isPlaying)
             {
-                //chestDatabase.RemoveLastVariable();
-                chestID = "Chest_" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "_" + chestDatabase.GameVariables.Count;
-                chestDatabase.AddGameVariable(chestID, 0);
-            }
-            /*if (chestID == "")
-            {
-                chestID = "Chest_" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "_" + chestDatabase.GameVariables.Count;
-                chestDatabase.AddGameVariable(chestID, 0);
-            }*/
-            /*else
-            {
-                if (chestDatabase.GetValue(chestID) == -1)
+                if (Time.frameCount != 0 && Time.renderedFrameCount != 0)//not loading scene
                 {
-                    chestID = "Chest_" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "_" + item.ItemName + "_" + chestDatabase.GameVariables.Count;
-                    chestDatabase.AddGameVariable(chestID, 0);
+                    base.Awake();
+                    if (chestPanel == null) // Ouch
+                        chestPanel = GameObject.Find("CanvasInteract/Parent/PanelTreasure");
+                    if (objectName == null) // Ouch
+                        objectName = GameObject.Find("CanvasInteract/Parent/PanelTreasure/PopupTreasure/ObjectIcon/ObjectName").GetComponent<TextMeshProUGUI>();
+                    if (objectDescription == null) // Ouch
+                        objectDescription = GameObject.Find("CanvasInteract/Parent/PanelTreasure/PopupObjectDescription/TextObjectDescription").GetComponent<TextMeshProUGUI>();
+                    if (chestAnimator == null)
+                        chestAnimator = GetComponent<Animator>();
+
+                    if (chestDatabase == null)
+                        chestDatabase = AssetDatabase.LoadAssetAtPath<GameVariableDatabase>(UnityEditor.AssetDatabase.GUIDToAssetPath(UnityEditor.AssetDatabase.FindAssets("VariableDatabaseChest")[0]));
+                    
+                    if (chestDatabase.CheckExist(chestID) == true)
+                    {
+                        Debug.Log("Je créer un nouvel identifiant dans la base de données");
+                        chestID = "Chest_" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "_" + chestDatabase.GameVariables.Count;
+                        chestDatabase.AddGameVariable(chestID, 0);
+                    }
+                    else
+                    {
+                        CreateChestID();
+                    }
                 }
-            }*/
-            /*if (chestAnimator == null)
-                chestAnimator = GetComponent<Animator>();*/
+            }
+
 #endif
-            /*if (UnityEditor.EditorApplication.isPlaying)
-            {
-                CheckOpen();
-            }*/
         }
 
         private void Start()
         {
-            CheckOpen();
+            if (EditorApplication.isPlaying)
+            {
+                CheckOpen();
+            }
         }
 
 
