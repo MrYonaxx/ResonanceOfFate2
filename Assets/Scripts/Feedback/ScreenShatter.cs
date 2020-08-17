@@ -21,7 +21,7 @@ namespace VoiceActing
          *               ATTRIBUTES                 *
         \* ======================================== */
         [SerializeField]
-        Camera cam;
+        Camera camTransition;
         [SerializeField]
         RawImage transitionCanvas;
         [SerializeField]
@@ -237,7 +237,6 @@ namespace VoiceActing
 
         public void ShatterScreen()
         {
-            Debug.Log("Hey");
             SliceNaive();
 
             texture = transitionCanvas.mainTexture;
@@ -251,7 +250,7 @@ namespace VoiceActing
 
             mat.mainTexture = texture;
 
-            cam.enabled = false;
+            camTransition.enabled = false;
             transitionCanvas.gameObject.SetActive(false);
             previousCanvas.gameObject.SetActive(false);
 

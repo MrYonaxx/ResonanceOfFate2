@@ -19,6 +19,8 @@ namespace VoiceActing
         AudioClip normal;
         [SerializeField]
         AudioClip battle;
+        [SerializeField]
+        bool battleTrack = false;
 
         bool wait = false;
 
@@ -32,8 +34,11 @@ namespace VoiceActing
 
         private void Start()
         {
-            if(wait == true)
+            if (wait == true)
+            {
                 AudioManager.Instance.PlayMusic(normal, battle);
+                AudioManager.Instance.SwitchToBattle(battleTrack);
+            }
         }
 
     } 

@@ -11087,7 +11087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80dc86de5852474cad7c97247a16217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  camTransition: {fileID: 0}
   transitionCanvas: {fileID: 0}
   previousCanvas: {fileID: 0}
   sliceNumber: 20
@@ -24494,7 +24494,7 @@ MonoBehaviour:
     RotationOffset: {x: 0, y: -20, z: 0}
   focus: {fileID: 0}
   smoothCamera: 0.3
-  smoothRotation: 0.3
+  smoothRotation: 0.2
   distanceRatio: 4
   horizontalSensibility: 60
   verticalSensibility: 80

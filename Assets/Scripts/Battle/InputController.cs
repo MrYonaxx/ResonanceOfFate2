@@ -214,6 +214,7 @@ namespace VoiceActing
                 cameraLock.SetState(0);
                 aimReticle.StopAim(c);
                 NextTurn();
+                return;
             }
             if (InputCancelAim()) return;
             if (InputShoot()) return;

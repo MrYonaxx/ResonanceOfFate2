@@ -62526,6 +62526,10 @@ PrefabInstance:
       propertyPath: previousCanvas
       value: 
       objectReference: {fileID: 9138028}
+    - target: {fileID: 1679245677, guid: abd3d00614f31a34aa9ae286c4ddfeb9, type: 3}
+      propertyPath: camTransition
+      value: 
+      objectReference: {fileID: 1565182431}
     - target: {fileID: 4966499276833232913, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
         type: 3}
       propertyPath: m_LocalPosition.x
