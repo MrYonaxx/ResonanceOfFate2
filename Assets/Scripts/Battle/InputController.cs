@@ -75,6 +75,20 @@ namespace VoiceActing
         [SerializeField]
         AudioClip heroActionStartClip;
 
+
+        [Title("À dégager peut-être aussi parce que input Controller il fait beaucoup de truc")]
+        [SerializeField]
+        public bool canMove = true;
+
+        [SerializeField]
+        public bool canAim = true;
+        //[SerializeField]
+        //bool canSwitchCharacters = true;
+        [SerializeField]
+        public bool canHeroAction = true;
+        [SerializeField]
+        public bool canTriAttack = true;
+
         PlayerCharacter c;
 
         float inputX = 0;
@@ -264,6 +278,8 @@ namespace VoiceActing
 
         private void InputMovement()
         {
+            if (canMove == false)
+                return;
             if (Input.GetAxis(control.rightTrigger) > 0.8f)
             {
                 if (Mathf.Abs(Input.GetAxis(control.stickLeftVertical)) > 0.8f)
@@ -324,7 +340,9 @@ namespace VoiceActing
 
         private bool InputAim()
         {
-            if(Input.GetButtonDown(control.buttonA) && aimReticle.TargetAim != null)
+            if (canAim == false)
+                return false;
+            if (Input.GetButtonDown(control.buttonA) && aimReticle.TargetAim != null)
             {
                 timeData.TimeFlow = true;
                 InputState = InputState.Aiming;
@@ -430,6 +448,8 @@ namespace VoiceActing
         // HERO ACTION
         private void InputHeroAction()
         {
+            if (canHeroAction == false)
+                return;
             if (Input.GetAxis(control.rightTrigger) > 0.8f)
             {
                 cameraLock.SetState(0);
@@ -513,6 +533,8 @@ namespace VoiceActing
         // Hero Action Tri
         private void InputTriAttackMode()
         {
+            if (canTriAttack == false)
+                return;
             if (Input.GetButtonDown(control.buttonY) && triAttackManager.ResonancePoint > 0)
             {
                 PlaySound(heroActionClip);

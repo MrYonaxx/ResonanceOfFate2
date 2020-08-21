@@ -51,7 +51,7 @@ namespace VoiceActing
         {
             for (int i = 0; i < savedVariables.Count; i++)
             {
-                for (int j = 0; j < variableDatabase.Count; i++)
+                for (int j = 0; j < variableDatabase.Count; j++)
                 {
                     if (variableDatabase[j].name.Equals(savedVariables[i].VariableName))
                     {

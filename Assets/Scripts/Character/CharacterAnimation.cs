@@ -73,12 +73,13 @@ namespace VoiceActing
         private void Start()
         {
             animator = GetComponent<Animator>();
-        }
-
-        private void Awake()
-        {
             globalFeedback.AddCharacter(this);
         }
+
+        /*private void Start()
+        {
+            globalFeedback.AddCharacter(this);
+        }*/
 
         private void OnDestroy()
         {

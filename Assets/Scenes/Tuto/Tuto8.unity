@@ -9008,8 +9008,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
         type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
       propertyPath: zoneName
-      value: Tuto4
+      value: Tuto9
       objectReference: {fileID: 0}
     - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
         type: 3}
@@ -9032,6 +9037,48 @@ PrefabInstance:
       propertyPath: entranceID
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: da6fbc096acafd4409c8b8d9cd8254e1,
+        type: 2}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AddCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: VoiceActing.PlayerData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517628047888778309, guid: 3ce36d7b4c91d8c40b61b64928395707,
+        type: 3}
+      propertyPath: OnSceneLoadEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bffbe1200dd27848bdee307dc856548,
+        type: 2}
     - target: {fileID: 1517628047888778310, guid: 3ce36d7b4c91d8c40b61b64928395707,
         type: 3}
       propertyPath: m_Name

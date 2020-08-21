@@ -207,6 +207,8 @@ namespace VoiceActing
                 Untarget();
                 return;
             }
+            if (cameraLock.GetFocus() == null) // Camera lock est détruit au moment du changement de scene
+                return;
             float distance = 0;
             float minDistance = 999;
             int bestIndex = 0;

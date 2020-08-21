@@ -271,7 +271,13 @@ namespace VoiceActing
                 verticalAxis += valueY * verticalSensibility * Time.deltaTime;
             }
         }
-
+        public void SetCameraAxis(float valueX, float valueY)
+        {
+            /*if (lockOn == true)
+                return;*/
+            horizontalAxis = valueX;
+            verticalAxis = valueY;
+        }
 
 
         #endregion

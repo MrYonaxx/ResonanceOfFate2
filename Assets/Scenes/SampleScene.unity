@@ -20664,7 +20664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &990331457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36475,6 +36475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normal: {fileID: 8300000, guid: b6da3f22accd1e240aeaa073363aed71, type: 3}
   battle: {fileID: 8300000, guid: 6ed90a3f686998d42a5ad5aa9730f6fc, type: 3}
+  battleTrack: 0
 --- !u!1 &1385850867
 GameObject:
   m_ObjectHideFlags: 0
@@ -52630,6 +52631,9 @@ MonoBehaviour:
   fade: {fileID: 0}
   entranceID: 0
   zoneName: SampleScene2
+  OnSceneLoadEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1994511568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56359,7 +56363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1041049530678332412
 Transform:
   m_ObjectHideFlags: 0
@@ -62798,12 +62802,12 @@ PrefabInstance:
     - target: {fileID: 6794507681747555110, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
         type: 3}
       propertyPath: party.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6794507681747555110, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
         type: 3}
       propertyPath: debugPartyData.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6794507681747555110, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
         type: 3}

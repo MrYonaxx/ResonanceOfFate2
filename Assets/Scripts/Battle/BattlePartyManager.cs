@@ -111,7 +111,7 @@ namespace VoiceActing
 
         private void Awake()
         {
-            Debug.Log(partyData.NextZoneEntrance);
+            Debug.Log("Entrée N°" + partyData.NextZoneEntrance);
             CreateDebugParty();
             InitializeCharacters();
         }
@@ -125,9 +125,10 @@ namespace VoiceActing
                 partyData.CharacterGrowths.Clear();
                 for (int i = 0; i < debugPartyData.Count; i++)
                 {
-                    partyData.CharacterStatControllers.Add(new CharacterStatController(debugPartyData[i].CharacterData));
-                    partyData.CharacterGrowths.Add(new CharacterGrowthController(debugPartyData[i].CharacterGrowth, partyData.CharacterStatControllers[i]));
-                    partyData.CharacterEquipement.Add(new CharacterEquipementController(debugPartyData[i].WeaponEquipped, debugPartyData[i].WeaponLevels, partyData.CharacterStatControllers[i], partyData.CharacterGrowths[i]));
+                    partyData.AddCharacter(debugPartyData[i]);
+                    //partyData.CharacterStatControllers.Add(new CharacterStatController(debugPartyData[i].CharacterData));
+                    //partyData.CharacterGrowths.Add(new CharacterGrowthController(debugPartyData[i].CharacterGrowth, partyData.CharacterStatControllers[i]));
+                    //partyData.CharacterEquipement.Add(new CharacterEquipementController(debugPartyData[i].WeaponEquipped, debugPartyData[i].WeaponLevels, partyData.CharacterStatControllers[i], partyData.CharacterGrowths[i]));
                 }
                 partyData.NextZoneEntrance = 999;
                 for (int i = 0; i < debugVariableDatabase.Count; i++)
@@ -155,20 +156,24 @@ namespace VoiceActing
                 party[i].CharacterStatController.OnHPChanged += playerHUDs[i].HpGauge.DrawGauge;
                 party[i].CharacterStatController.OnScratchChanged += playerHUDs[i].ScratchGauge.DrawGauge;
 
+                Debug.Log(entranceTransforms.Count);
                 if (entranceTransforms.Count > partyData.NextZoneEntrance) 
                 {
-                    party[i].transform.position = entranceTransforms[partyData.NextZoneEntrance].position + (Quaternion.Euler(0, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]);
-                    //Debug.Log(Quaternion.Euler(entranceTransforms[partyData.NextZoneEntrance].eulerAngles.x, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]);
+                    party[i].CharacterMovement.SetPosition(entranceTransforms[partyData.NextZoneEntrance].position + (Quaternion.Euler(0, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]));
+                    //party[i].transform.position = entranceTransforms[partyData.NextZoneEntrance].position + (Quaternion.Euler(0, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]);
                     party[i].CharacterDirection.SetDirection(entranceTransforms[partyData.NextZoneEntrance]);
                 }
             }
             partySize = partyData.CharacterStatControllers.Count;
-            mainCamera.transform.position = party[indexSelection].CharacterCenter.position;
+            //mainCamera.transform.position = party[indexSelection].CharacterCenter.position;
+            //mainCamera.SetCameraAxis(0, 90);
         }
 
         private void Start()
         {
             FocusCamera();
+            mainCamera.transform.position = party[indexSelection].CharacterCenter.position;
+            mainCamera.SetCameraAxis(0, party[indexSelection].CharacterDirection.DirectionTransform.localEulerAngles.y);
         }
 
 
@@ -345,7 +350,7 @@ namespace VoiceActing
 
         private void OnDestroy()
         {
-            for (int i = 0; i < partyData.CharacterStatControllers.Count; i++)
+            for (int i = 0; i < party.Count; i++)
             {
                 party[i].CharacterStatController.OnHPChanged -= playerHUDs[i].HpGauge.DrawGauge;
                 party[i].CharacterStatController.OnScratchChanged -= playerHUDs[i].ScratchGauge.DrawGauge;

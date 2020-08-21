@@ -152,7 +152,7 @@ namespace VoiceActing
         {
             for (int i = 0; i < savedVariables.Count; i++)
             {
-                for (int j = 0; j < gameVariables.Count; i++)
+                for (int j = 0; j < gameVariables.Count; j++)
                 {
                     if(gameVariables[j].VariableName.Equals(savedVariables[i].VariableName))
                     {

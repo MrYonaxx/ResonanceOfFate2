@@ -29,7 +29,6 @@ namespace VoiceActing
         GameObject onHitParticle = null;
 
 
-
         AttackData attackData = null;
 
         private AudioSource gunSound;
@@ -84,6 +83,8 @@ namespace VoiceActing
             if (other.tag != this.tag)
             {
                 Instantiate(onHitParticle, collisionEvents[0].intersection, Quaternion.identity);
+                if (attackData == null)
+                    return;
                 for (int i = 0; i < numCollisionEvents; i++)
                 {
                     CheckDamage(other);

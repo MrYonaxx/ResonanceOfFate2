@@ -172,6 +172,15 @@ namespace VoiceActing
             if (triData == null)
                 return;
 
+            t += Time.deltaTime;
+            if (t >= 1)
+            {
+                Debug.Log("Loop");
+                t = 1f;
+                this.enabled = false;
+                return;
+            }
+
             GL.PushMatrix();
 
             mat.SetPass(0);
@@ -202,14 +211,7 @@ namespace VoiceActing
             GL.Vertex3(-0.5f, -1f, 0);
             
             GL.End();*/
-            t += Time.deltaTime;
-            if (t >= 1)
-            {
-                Debug.Log("Loop");
-                t = 1f;
-                this.enabled = false;
-                return;
-            }
+
             for (int i = 0; i < triData.Count; i++)
             {
                 GL.Begin(GL.QUADS);

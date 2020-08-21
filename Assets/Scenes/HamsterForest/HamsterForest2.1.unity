@@ -3569,7 +3569,7 @@ MonoBehaviour:
   chestPanel: {fileID: 1710775697}
   objectName: {fileID: 1710775696}
   objectDescription: {fileID: 1710775695}
-  chestID: Chest___HamsterForest2.1___Protective Suit___2
+  chestID: Chest___HamsterForest2.1___Protective Suit___3
   item: {fileID: 11400000, guid: b9c89c6f81a163142afba6a4dd42eb43, type: 2}
 --- !u!65 &586333794
 BoxCollider:
@@ -3988,7 +3988,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh588726
+  m_Name: pb_Mesh271364
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

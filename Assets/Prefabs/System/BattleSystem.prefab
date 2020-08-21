@@ -32630,6 +32630,9 @@ MonoBehaviour:
   heroActionCancelClip: {fileID: 8300000, guid: 74a3b8fab9178404dad296b126786618,
     type: 3}
   heroActionStartClip: {fileID: 8300000, guid: e1b09e60128ec7343bcbecbd26a57e9a, type: 3}
+  canMove: 1
+  canAim: 1
+  canHeroAction: 1
 --- !u!114 &6794507682181374136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32643,6 +32646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 6794507682181374138}
+  triAttackManager: {fileID: 6794507680610033196}
   commandUI:
   - {fileID: 6794507681018430570}
   - {fileID: 6794507681018430570}
@@ -32651,6 +32655,14 @@ MonoBehaviour:
   - {fileID: 6794507680564573130}
   - {fileID: 6794507680473433389}
   - {fileID: 6794507682064935589}
+  moveCommand:
+  - {fileID: 6794507681436147548}
+  - {fileID: 6794507682160494735}
+  aimCommand:
+  - {fileID: 6794507681078029726}
+  triAttackCommand:
+  - {fileID: 6794507682357490232}
+  - {fileID: 6794507680967320890}
 --- !u!1 &6794507682188982203
 GameObject:
   m_ObjectHideFlags: 0

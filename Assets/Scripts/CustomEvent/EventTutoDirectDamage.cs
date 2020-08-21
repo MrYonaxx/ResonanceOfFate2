@@ -41,7 +41,7 @@ namespace VoiceActing
         \* ======================================== */
         private void Update()
         {
-            if(enemyController.CharacterStatController.Scratch > 0)
+            if(enemyController.CharacterStatController.Scratch > 10f)
             {
                 unityEvent.Invoke();
                 Destroy(this.gameObject);

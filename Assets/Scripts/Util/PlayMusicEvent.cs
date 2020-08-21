@@ -27,7 +27,10 @@ namespace VoiceActing
         public void OnEnable()
         {
             if (AudioManager.Instance != null)
+            {
                 AudioManager.Instance.PlayMusic(normal, battle);
+                AudioManager.Instance.SwitchToBattle(battleTrack);
+            }
             else
                 wait = true;
         }

@@ -134,6 +134,13 @@ namespace VoiceActing
             characterController.enabled = true;
         }
 
+        public void SetPosition(Vector3 pos)
+        {
+            characterController.enabled = false;
+            characterController.transform.position = pos;
+            characterController.enabled = true;
+        }
+
         #endregion
 
         #region Functions 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hamusuta
   m_EditorClassIdentifier: 
   characterFace: {fileID: 0}
-  characterName: 'Guard HA-MU-SU-TA '
+  characterName: ' HA-MU-5U-TA '
   characterLevel: 17
   statController:
     StatEditor:

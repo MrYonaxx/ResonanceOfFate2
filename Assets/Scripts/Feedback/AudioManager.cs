@@ -208,7 +208,6 @@ namespace VoiceActing
 
         private IEnumerator SwitchMusicTrack(float initialWait, float timeFade, float volumeNormal, float volumeBattle)
         {
-
             yield return new WaitForSeconds(initialWait);
             float music1Volume = audioMusic.volume;
             float music2Volume = audioMusic2.volume;
@@ -224,19 +223,6 @@ namespace VoiceActing
             }
             audioMusic.volume = volumeNormal;
             audioMusic2.volume = volumeBattle;
-
-            /*if (timeFade <= 0)
-                timeFade = 1;
-            float speedFade = (musicVolumeMax - audioMusic.volume) / timeFade;
-            while (timeFade != 0)
-            {
-                timeFade -= 1;
-                audioMusic.volume += speedFade;
-                audioMusic2.volume += speedFade;
-                yield return null;
-            }
-            audioMusic.volume = musicVolumeMax;
-            audioMusic2.volume = musicVolumeMax;*/
         }
 
 

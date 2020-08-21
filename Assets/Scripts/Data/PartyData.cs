@@ -151,6 +151,38 @@ namespace VoiceActing
             return true;
         }
 
+
+
+        public void AddCharacter(PlayerData character)
+        {
+            CharacterStatControllers.Add(new CharacterStatController(character.CharacterData));
+            CharacterGrowths.Add(new CharacterGrowthController(character.CharacterGrowth, CharacterStatControllers[CharacterStatControllers.Count-1]));
+            CharacterEquipement.Add(new CharacterEquipementController(character.WeaponEquipped, character.WeaponLevels, CharacterStatControllers[CharacterStatControllers.Count - 1], CharacterGrowths[CharacterGrowths.Count - 1]));
+        }
+
+        public void RemoveCharacter(PlayerData character)
+        {
+            for (int i = 0; i < CharacterStatControllers.Count; i++)
+            {
+                if(character.CharacterData == CharacterStatControllers[i].CharacterData)
+                {
+                    // A bouger dans la réserve ultimement
+                    CharacterStatControllers.RemoveAt(i);
+                    CharacterGrowths.RemoveAt(i);
+                    CharacterEquipement.RemoveAt(i);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
         // On sauvegarde les valeurs à sauver 
         public void SavePartyData(PlayerDatabase database, GameVariableDatabase variableDatabase, GameVariableDatabase chestDatabase)
         {

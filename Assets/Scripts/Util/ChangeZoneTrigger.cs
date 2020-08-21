@@ -32,6 +32,10 @@ namespace VoiceActing
         [SerializeField]
         string zoneName;
 
+        [FoldoutGroup("Event")]
+        [SerializeField]
+        UnityEngine.Events.UnityEvent OnSceneLoadEvent;
+
         bool load = false;
 
         #endregion
@@ -81,6 +85,7 @@ namespace VoiceActing
         {
             partyData.NextZoneEntrance = entranceID;
             inputController.StopInputAndTime();
+            OnSceneLoadEvent.Invoke();
             fade.SetBool("Appear", false);
             float t = 0f;
             while(t < 1f)

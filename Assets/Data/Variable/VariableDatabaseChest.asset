@@ -13,7 +13,17 @@ MonoBehaviour:
   m_Name: VariableDatabaseChest
   m_EditorClassIdentifier: 
   gameVariables:
-  - variableName: Chest___HamsterForest3.3___Protective Suit___1
+  - variableName: Chest___HamsterForest0___Protective Suit___6
     variableValue: 0
-  - variableName: Chest___HamsterForest3.3___Compact Scope Beta___1
+  - variableName: Chest___HamsterForest2.1___Protective Suit___3
+    variableValue: 0
+  - variableName: Chest___HamsterForest3.3___Compact Scope Beta___6
+    variableValue: 0
+  - variableName: Chest___HamsterForest3.2___Grip___6
+    variableValue: 0
+  - variableName: Chest___HamsterForest4___Lens___2
+    variableValue: 0
+  - variableName: Chest___HamsterForest5___Lens___6
+    variableValue: 0
+  - variableName: Chest___HamsterForest5.3___Sub-Barrel___5
     variableValue: 0

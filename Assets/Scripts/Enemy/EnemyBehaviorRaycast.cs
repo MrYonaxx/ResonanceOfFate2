@@ -36,6 +36,14 @@ namespace VoiceActing
         [SerializeField]
         bool stopAimIfObstruction = false;
 
+        [Title("Feedback")]
+        [SerializeField]
+        Bullet feedbackBullet;
+        [SerializeField]
+        Vector2 intervalBullet;
+
+        float intervalFeedback;
+
         #endregion
 
         #region GettersSetters 
@@ -115,6 +123,7 @@ namespace VoiceActing
                 }
                 else // Pas d'obstruction donc je vise
                 {
+                    UpdateFeedback(enemy, target);
                     StopMove();
                     return GetAimSpeed(enemy, target);
                 }
@@ -162,6 +171,26 @@ namespace VoiceActing
                 return enemy.CharacterStatController.GetAimSpeed();
             return enemy.CharacterStatController.GetAimSpeed(enemy.transform.position, target.transform.position);
         }
+
+
+
+        private void UpdateFeedback(Enemy enemy, Character target)
+        {
+            if (feedbackBullet == null)
+                return;
+            if (target == null)
+                return;
+            if (target.CharacterAnimation.State == CharacterState.Dash || target.CharacterAnimation.State == CharacterState.Jump)
+            {
+                intervalFeedback -= Time.deltaTime * enemy.CharacterAnimation.GetMotionSpeed();
+                if (intervalFeedback <= 0)
+                {
+                    feedbackBullet.Play(target.CharacterCenter.transform);
+                    intervalFeedback = Random.Range(intervalBullet.x, intervalBullet.y);
+                }
+            }
+        }
+
 
         #endregion
 
