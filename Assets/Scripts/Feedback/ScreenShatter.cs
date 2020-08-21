@@ -215,16 +215,12 @@ namespace VoiceActing
             for (int i = 0; i < triData.Count; i++)
             {
                 GL.Begin(GL.QUADS);
-
-                //Debug.Log("Start");
                 for (int j = 0; j < 4; j++)
                 {
                     //Debug.Log(triData[i].vertices[j]);
                     GL.MultiTexCoord(0, triData[i].uv[j]);
                     GL.Vertex(triData[i].vertices[j]);
                 }
-                //Debug.Log("End");
-
 
                 //triData[i].SetMatrix(triData[i].matrixTransform * Matrix4x4.Scale(new Vector3(0.97f, 0.97f, 0.97f)));
                 triData[i].matrixTransform = triData[i].matrixTransform * Matrix4x4.Translate(triData[i].direction * 0.1f);

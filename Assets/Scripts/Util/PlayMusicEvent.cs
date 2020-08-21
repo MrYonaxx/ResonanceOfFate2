@@ -15,12 +15,17 @@ namespace VoiceActing
     // Généralement utilisé par les ciné
     public class PlayMusicEvent: MonoBehaviour
     {
+        [HideIf("stopMusic")]
         [SerializeField]
         AudioClip normal;
+        [HideIf("stopMusic")]
         [SerializeField]
         AudioClip battle;
+        [HideIf("stopMusic")]
         [SerializeField]
         bool battleTrack = false;
+        [SerializeField]
+        bool stopMusic = false;
 
         bool wait = false;
 
@@ -28,6 +33,11 @@ namespace VoiceActing
         {
             if (AudioManager.Instance != null)
             {
+                if (stopMusic == true)
+                {
+                    AudioManager.Instance.StopMusic(2f);
+                    return;
+                }
                 AudioManager.Instance.PlayMusic(normal, battle);
                 AudioManager.Instance.SwitchToBattle(battleTrack);
             }
@@ -39,6 +49,11 @@ namespace VoiceActing
         {
             if (wait == true)
             {
+                if (stopMusic == true)
+                {
+                    AudioManager.Instance.StopMusic(2f);
+                    return;
+                }
                 AudioManager.Instance.PlayMusic(normal, battle);
                 AudioManager.Instance.SwitchToBattle(battleTrack);
             }

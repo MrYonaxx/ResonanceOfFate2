@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55565d81241b55b4f8a0e93a01d68c3c, type: 3}
   m_Name: Speed Boots
   m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 2ec81dfafbe89e246be363ab2945451a, type: 3}
   itemName: Speed Boots
   itemDescription: Increase the regular move speed by 1.
   statModifiers:

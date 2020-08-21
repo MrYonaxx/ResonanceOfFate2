@@ -87,16 +87,41 @@ namespace VoiceActing
             inputController.StopInputAndTime();
             OnSceneLoadEvent.Invoke();
             fade.SetBool("Appear", false);
-            float t = 0f;
-            while(t < 1f)
+            if (characterMovement == null) // c'est un peu opti mais bon c pas ouf quand meme
             {
-                inputController.StopInputAndTime();
-                t += Time.deltaTime;
-                characterMovement.MoveCharacterWorld(this.transform.up.x, this.transform.up.z);
-                yield return null;
+                float t = 0f;
+                while (t < 1f)
+                {
+                    inputController.StopInputAndTime();
+                    t += Time.deltaTime;
+                    yield return null;
+                }
+            }
+            else
+            {
+                float t = 0f;
+                while (t < 1f)
+                {
+                    inputController.StopInputAndTime();
+                    t += Time.deltaTime;
+                    characterMovement.MoveCharacterWorld(this.transform.up.x, this.transform.up.z);
+                    yield return null;
+                }
             }
             Debug.Log(partyData.NextZoneEntrance);
             SceneManager.LoadScene(zoneName);
+        }
+
+        public void LoadZone()
+        {
+            partyData.NextZoneEntrance = entranceID;
+            SceneManager.LoadScene(zoneName);
+        }
+
+        public void LoadZoneWithFeedback()
+        {
+            load = true;
+            StartCoroutine(LoadZoneCoroutine(null));
         }
 
         #endregion

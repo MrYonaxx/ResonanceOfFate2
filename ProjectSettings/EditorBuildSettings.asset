@@ -86,4 +86,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HamsterForest/HamsterForest7.unity
     guid: 3fc0faa2359e2464e9065dde316d8e7f
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/HamsterForest8.unity
+    guid: 353933ef5e56e974783cd454237840e6
+  - enabled: 1
+    path: Assets/Scenes/HamsterForest/ChrisBossFight.unity
+    guid: 2a887b84641d33449a732de2b1bb7d12
   m_configObjects: {}

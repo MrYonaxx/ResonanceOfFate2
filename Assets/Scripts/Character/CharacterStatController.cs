@@ -78,7 +78,7 @@ namespace VoiceActing
         protected float hp = 1;
         public float Hp
         {
-            get { return hp; }
+            get { return (int)hp; }
             set
             {
                 hp = Mathf.Clamp(value, 0, GetHPMax());

@@ -40,6 +40,7 @@ namespace VoiceActing
         [TextArea(3, 10)]
         private string memo;
 
+        [SerializeField]
         private List<string> callHistoric;
 
         public void Reset()
