@@ -33,6 +33,8 @@ namespace VoiceActing
         [SerializeField]
         TextMeshProUGUI selectionName;
         [SerializeField]
+        List<GameObject> characterPanel;
+        [SerializeField]
         List<Image> imageCharacterFace;
         [SerializeField]
         List<TextMeshProUGUI> textCharacterName;
@@ -51,6 +53,7 @@ namespace VoiceActing
         private void Start()
         {
             subMenuSelectionList.OnValidate += Validate;
+            subMenuSelectionList.OnSelect += DrawTextSelected;
             subMenuSelectionList.OnQuit += CloseMainMenu;
             //OpenMenu();
         }
@@ -85,17 +88,31 @@ namespace VoiceActing
         {
             for (int i = 0; i < partyData.CharacterStatControllers.Count; i++)
             {
+                characterPanel[i].SetActive(true);
                 imageCharacterFace[i].sprite = partyData.CharacterStatControllers[i].CharacterData.CharacterFace;
                 textCharacterName[i].text = partyData.CharacterStatControllers[i].CharacterData.CharacterName;
                 textCharacterLevel[i].text = partyData.CharacterStatControllers[i].Level.ToString();
                 imageCharacterWeapon[i].sprite = weaponDictionary.GetSpriteIcon(partyData.CharacterEquipement[i].GetWeaponType());
-                gaugeCharacterHP[i].DrawGauge(partyData.CharacterStatControllers[i].Hp, partyData.CharacterStatControllers[i].GetHPMax());
+                gaugeCharacterHP[i].DrawGauge(partyData.CharacterStatControllers[i].Hp, partyData.CharacterStatControllers[i].GetHPMax(), partyData.CharacterStatControllers[i].Hp + " / " + partyData.CharacterStatControllers[i].GetHPMax());
+            }
+
+            // C'est nul faire une classe ou un truc
+            for (int i = partyData.CharacterStatControllers.Count; i < imageCharacterFace.Count; i++)
+            {
+                characterPanel[i].SetActive(false);
             }
         }
 
+        private void DrawTextSelected(int index)
+        {
+            selectionName.text = subMenuSelectionList.ListItem[index].GetText();
+        }
+
+
         public void Validate(int index)
         {
-            Debug.Log("Hrm");
+            if (subMenu[index] == null ||index >= subMenu.Count)
+                return;
             subMenu[index].OpenMenu();
             subMenu[index].OnQuit += OpenMenu;
             CloseMenu();

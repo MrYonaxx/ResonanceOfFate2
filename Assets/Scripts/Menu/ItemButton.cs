@@ -31,6 +31,7 @@ namespace VoiceActing
         [SerializeField]
         TextMeshProUGUI itemName;
 
+
         [SerializeField]
         RectTransform rectTransform;
         public RectTransform RectTransform
@@ -60,6 +61,11 @@ namespace VoiceActing
             itemIcon.sprite = item.ItemIcon;
             itemName.text = item.ItemName;
         }*/
+
+        public string GetText()
+        {
+            return itemName.text;
+        }
 
         public void DrawText(Sprite icon, string text)
         {

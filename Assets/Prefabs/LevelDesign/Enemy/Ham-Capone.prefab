@@ -5388,7 +5388,7 @@ GameObject:
   - component: {fileID: 49328798925169060}
   - component: {fileID: 49328798925169063}
   m_Layer: 0
-  m_Name: Torus
+  m_Name: ShieldHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9349,7 +9349,7 @@ GameObject:
   - component: {fileID: 49328799260541337}
   - component: {fileID: 49328799260541336}
   m_Layer: 0
-  m_Name: Torus
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13403,7 +13403,18 @@ MonoBehaviour:
   partData: {fileID: 11400000, guid: 67a5228aa5723af40867a0688fc00b2e, type: 2}
   onDestroy:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 49328798925169056}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &49328800084411236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13521,6 +13532,8 @@ MonoBehaviour:
   dontCareObstruction: 0
   moveIfObstruction: 1
   stopAimIfObstruction: 0
+  feedbackBullet: {fileID: 0}
+  intervalBullet: {x: 0, y: 0}
 --- !u!114 &6203795056355527392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14567,7 +14580,7 @@ Transform:
   m_GameObject: {fileID: 6462765910162813123}
   m_LocalRotation: {x: 0, y: 0.60219544, z: 0, w: -0.7983487}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0, z: 1}
   m_Children:
   - {fileID: 6462765910256561740}
   - {fileID: 750149620}
@@ -14866,7 +14879,18 @@ MonoBehaviour:
   partData: {fileID: 11400000, guid: 510c718071e3d4f44905106dc7ba6f65, type: 2}
   onDestroy:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 49328799260541333}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6462765910545463794
 MonoBehaviour:
   m_ObjectHideFlags: 0

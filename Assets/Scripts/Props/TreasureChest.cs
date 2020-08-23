@@ -168,10 +168,13 @@ namespace VoiceActing
 
         private void Start()
         {
+#if UNITY_EDITOR
             if (EditorApplication.isPlaying)
             {
-                CheckOpen();
+                return;
             }
+#endif
+            CheckOpen();
         }
 
 

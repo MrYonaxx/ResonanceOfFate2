@@ -65,6 +65,14 @@ namespace VoiceActing
         [SerializeField]
         protected int scrollSize = 3;
 
+        [Title("Sound")]
+        [SerializeField]
+        protected AudioClip validateClip;
+        [SerializeField]
+        protected AudioClip selectClip;
+        [SerializeField]
+        protected AudioClip cancelClip;
+
         protected int currentTimeBeforeRepeat = -1;
         protected int currentRepeatInterval = -1;
         protected int lastDirection = 0; // 2 c'est bas, 8 c'est haut (voir numpad)
@@ -212,11 +220,13 @@ namespace VoiceActing
         {
             if (listIndexCount == 0)
                 return;
+            AudioManager.Instance.PlaySound(validateClip);
             if (OnValidate != null) OnValidate.Invoke(indexSelection);
         }
 
         public virtual void Quit()
         {
+            AudioManager.Instance.PlaySound(cancelClip);
             if (OnQuit != null) OnQuit.Invoke();
         }
 
@@ -265,6 +275,7 @@ namespace VoiceActing
 
         protected void MoveScrollRect()
         {
+            AudioManager.Instance.PlaySound(selectClip);
             if (listTransform == null)
             {
                 if (selectionTransform != null)

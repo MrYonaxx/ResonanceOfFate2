@@ -14500,6 +14500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d7183d544aa2d42b9996e089c3dc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  control: {fileID: 11400000, guid: 3087a426c4018304398cb64b59b32c7f, type: 2}
   partyManager: {fileID: 6794507681747555110}
   enemyManager: {fileID: 6794507681524889408}
   animatorLevelUp: {fileID: 6794507681426303636}
@@ -32633,6 +32634,7 @@ MonoBehaviour:
   canMove: 1
   canAim: 1
   canHeroAction: 1
+  canTriAttack: 1
 --- !u!114 &6794507682181374136
 MonoBehaviour:
   m_ObjectHideFlags: 0

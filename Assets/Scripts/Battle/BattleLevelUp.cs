@@ -21,6 +21,8 @@ namespace VoiceActing
          *               ATTRIBUTES                 *
         \* ======================================== */
         [SerializeField]
+        ControllerConfigurationData control;
+        [SerializeField]
         BattlePartyManager partyManager;
         [SerializeField]
         BattleEnemyManager enemyManager;
@@ -114,7 +116,7 @@ namespace VoiceActing
             textNextExp.text = c.GetWeaponNextExp().ToString();
             while (true)
             {
-                if (Input.GetButtonDown("A"))
+                if (Input.GetButtonDown(control.buttonA))
                     break;
                 yield return null;
             }

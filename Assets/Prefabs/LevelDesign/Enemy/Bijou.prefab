@@ -5008,9 +5008,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbb6f9c23678074d8cd22c2cd56a72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTags: 01000000
-  bannedObject:
-  - {fileID: 6045471455026718632}
+  targetTags: 
+  bannedObject: []
+  targetable:
+  - {fileID: 6045471455026718624}
 --- !u!1 &6045471454802311124
 GameObject:
   m_ObjectHideFlags: 0
@@ -5447,13 +5448,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484fca72f4134e74c98463143761ca82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  user: {fileID: 6045471455429895397}
   direction: {fileID: 6045471455026718628}
   characterAnimation: {fileID: 6045471455429895393}
   attackControllerIdle: {fileID: 0}
   attackControllerDash: {fileID: 0}
   attackControllerDashForward: {fileID: 0}
   attackControllerJump: {fileID: 0}
+  feverAim: {fileID: 0}
+  attackControllerFever: {fileID: 0}
 --- !u!195 &6045471455026718625
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5643,6 +5645,8 @@ MonoBehaviour:
     stunDamageVariance: 0
     accuracy: 0
     accuracyVariance: 0
+    feverValue: 0
+    feverValueMax: 0
     AttackElement: []
     AttackStatus: []
   feedbackManager: {fileID: 11400000, guid: 74e90496ca53f3945837d36c1eabc8ba, type: 2}
@@ -5655,6 +5659,7 @@ MonoBehaviour:
   fixDirection: 1
   stopTime: 0
   manualTarget: 0
+  actionMode: 1
   targetDebug: {fileID: 0}
 --- !u!95 &6045471455101562033
 Animator:

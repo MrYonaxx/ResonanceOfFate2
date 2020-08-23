@@ -126,7 +126,7 @@ namespace VoiceActing
             audioSource.Stop();
             isActive = false;
             intersection = false;
-            cursor.transform.localPosition = this.transform.localPosition;
+            cursor.transform.localPosition = Vector3.zero;
             cursorObject.gameObject.SetActive(false);
             HideIntersection();
             for (int i = 0; i < heroActionLines.Count; i++)
@@ -258,6 +258,10 @@ namespace VoiceActing
             {
                 intersectionPrefab.transform.position = hit.point + offset;
             }
+            else
+            {
+                intersectionPrefab.transform.position = this.transform.position + intersec - new Vector3(0, this.transform.localPosition.y, 0) + offset;
+            }
                 //intersectionPrefab.transform.localPosition = new Vector3(intersec.x, 0, intersec.y);
             //intersectionPrefab.transform.localPosition = new Vector3(intersectionPrefab.transform.localPosition.x, 0, intersectionPrefab.transform.localPosition.z);
             intersectionPrefab.SetTrigger("Feedback");
@@ -311,9 +315,14 @@ namespace VoiceActing
                 if (Physics.Raycast(startLine + (direction * size / direction.magnitude), Vector3.down, out hit, 10f, layerMask))
                 {
                     AddSpriteToLine(lineToRender, index, hit.point);
-                    index += 1;
+                    //index += 1;
                     //AddSpriteToLine(lineToRender, index, startLine + (direction * size / direction.magnitude));
                 }
+                else
+                {
+                    AddSpriteToLine(lineToRender, index, startLine + (direction * size / direction.magnitude) - new Vector3(0, this.transform.localPosition.y, 0));
+                }
+                index += 1;
             }
             for (int i = index; i < lineToRender.line.Count; i++)
             {
@@ -323,8 +332,10 @@ namespace VoiceActing
             // Draw Cursor
             if (Physics.Raycast(endLine, Vector3.down, out hit, 10f, layerMask))
                 cursorObject.transform.position = hit.point + offset;
-            else 
+            else
+            {
                 cursorObject.transform.position = endLine + offset - this.transform.localPosition;
+            }
         }
 
         private void AddSpriteToLine(HeroActionLine lineToRender, int index, Vector3 pos)

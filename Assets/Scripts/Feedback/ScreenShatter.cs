@@ -35,6 +35,9 @@ namespace VoiceActing
         List<TriData> triData;
         float t = 0f;
 
+        [SerializeField]
+        AudioClip battleStartClip;
+
         #endregion
 
         #region GettersSetters 
@@ -235,6 +238,7 @@ namespace VoiceActing
 
         public void ShatterScreen()
         {
+            AudioManager.Instance.PlaySound(battleStartClip);
             SliceNaive();
 
             texture = transitionCanvas.mainTexture;

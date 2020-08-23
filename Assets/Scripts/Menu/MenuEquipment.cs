@@ -53,6 +53,9 @@ namespace VoiceActing
         [SerializeField]
         List<TextMeshProUGUI> textNewStat;
 
+        [SerializeField]
+        TextMeshProUGUI textItemDescription;
+
 
 
         StatController currentCharacterStat;
@@ -92,6 +95,7 @@ namespace VoiceActing
         {
             // C'est un peu le spaghetti en vérité c'thistoire
             equipementListDrawer.OnValidate += SwitchToInventory;
+            equipementListDrawer.OnSelect += DrawEquipementDescription;
             equipementListDrawer.OnQuit += CloseMenu;
 
             inventoryListDrawer.OnValidate += EquipItem;
@@ -206,7 +210,15 @@ namespace VoiceActing
 
         public void DrawItemPreview(int index)
         {
+            textItemDescription.text = itemsInventory[index].ItemDescription;
             DrawCharacterStatPreview((ArmorData) itemsInventory[index]);
+        }
+
+        public void DrawEquipementDescription(int index)
+        {
+            if (partyData.CharacterEquipement[indexCharacterSelection].GetArmor(index) == null)
+                return;
+            textItemDescription.text = partyData.CharacterEquipement[indexCharacterSelection].GetArmor(index).ItemDescription;
         }
 
         public void EquipItem(int index)
@@ -278,6 +290,7 @@ namespace VoiceActing
         private void OnDestroy()
         {
             equipementListDrawer.OnValidate -= SwitchToInventory;
+            equipementListDrawer.OnSelect -= DrawEquipementDescription;
             equipementListDrawer.OnQuit -= CloseMenu;
 
             inventoryListDrawer.OnValidate -= EquipItem;

@@ -729,7 +729,17 @@ namespace VoiceActing
                 yield return new WaitForSeconds(0.4f);
                 timeData.TimeFlow = false;
                 battlePartyManager.HideOrder();
-                NextTurn();
+                if (battleEnemyManager.EnemyList.Count == 0)
+                {
+                    battlePartyManager.ResetPlayerTurn();
+                    InputState = InputState.Default;
+                    //SwitchCharactersLeft();
+                    //NewTurn();
+                }
+                else
+                {
+                    NextTurn();
+                }
                 feverTimeManager.ResetFill();
             }
         }
