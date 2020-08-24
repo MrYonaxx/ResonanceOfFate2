@@ -29,6 +29,11 @@ namespace VoiceActing
         [SerializeField]
         ItemDatabase itemDatabase;
         [SerializeField]
+        TypeDictionary dictionary;
+
+        [SerializeField]
+        ItemButton weapon;
+        [SerializeField]
         MenuItemListDrawer equipementListDrawer;
         [SerializeField]
         MenuItemListDrawer inventoryListDrawer;
@@ -52,10 +57,15 @@ namespace VoiceActing
         List<TextMeshProUGUI> textOldStat;
         [SerializeField]
         List<TextMeshProUGUI> textNewStat;
+        [SerializeField]
+        List<float> statMultiplier; // Pour donner des valeurs "propres" et pas de 1,2 chelou
 
         [SerializeField]
         TextMeshProUGUI textItemDescription;
 
+        [Title("Feedback (Note faire plusieurs canvas par menu)")]
+        [SerializeField]
+        Animator animatorFeedback;
 
 
         StatController currentCharacterStat;
@@ -133,6 +143,7 @@ namespace VoiceActing
                 indexCharacterSelection += 1;
                 if (indexCharacterSelection >= partyData.CharacterStatControllers.Count)
                     indexCharacterSelection = 0;
+                animatorFeedback.SetTrigger("Feedback");
                 DrawCharacter();
                 return;
             }
@@ -141,6 +152,7 @@ namespace VoiceActing
                 indexCharacterSelection -= 1;
                 if (indexCharacterSelection < 0)
                     indexCharacterSelection = partyData.CharacterStatControllers.Count-1;
+                animatorFeedback.SetTrigger("Feedback");
                 DrawCharacter();
                 return;
             }
@@ -157,12 +169,15 @@ namespace VoiceActing
             DrawCharacterStat();
             DrawEquipement();
 
+
+            weapon.DrawText(dictionary.GetSpriteIcon(partyData.CharacterEquipement[indexCharacterSelection].GetWeaponType()), partyData.CharacterEquipement[indexCharacterSelection].GetWeapon().WeaponName);
+
         }
         public void DrawCharacterStat()
         {
             for (int i = 0; i < stat.Count; i++)
             {
-                textOldStat[i].text = currentCharacterStat.GetValue(stat[i]).ToString();
+                textOldStat[i].text = ((int)(currentCharacterStat.GetValue(stat[i]) * statMultiplier[i])).ToString();
             }
         }
         public void DrawEquipement()
@@ -180,6 +195,7 @@ namespace VoiceActing
                     equipementListDrawer.DrawItemList(i, armor.ItemIcon, armor.ItemName);
                 }
             }
+            DrawEquipementDescription(equipementListDrawer.IndexSelection);
         }
 
 
@@ -189,15 +205,17 @@ namespace VoiceActing
         {
             for (int i = 0; i < stat.Count; i++)
             {
-                textNewStat[i].text = previewCharacterStat.GetValue(stat[i]).ToString();
+                textNewStat[i].text = ((int)(previewCharacterStat.GetValue(stat[i]) * statMultiplier[i])).ToString();
+                textNewStat[i].color = Color.white;
                 for (int j = 0; j < armorData.StatModifiers.Count; j++)
                 {
                     if (stat[i] == armorData.StatModifiers[j].StatName)
                     {
-                        if(armorData.StatModifiers[j].ModifierType == StatModifierType.Flat)
-                            textNewStat[i].text = (previewCharacterStat.GetValue(stat[i]) + armorData.StatModifiers[j].StatValue).ToString();
+                        textNewStat[i].color = Color.yellow;
+                        if (armorData.StatModifiers[j].ModifierType == StatModifierType.Flat)
+                            textNewStat[i].text = ((int)((previewCharacterStat.GetValue(stat[i]) + armorData.StatModifiers[j].StatValue) * statMultiplier[i])).ToString();
                         else
-                            textNewStat[i].text = (previewCharacterStat.GetValue(stat[i]) * armorData.StatModifiers[j].StatValue).ToString();
+                            textNewStat[i].text = ((int)((previewCharacterStat.GetValue(stat[i]) * armorData.StatModifiers[j].StatValue) * statMultiplier[i])).ToString();
                         break;
                     }
                 }
@@ -259,6 +277,8 @@ namespace VoiceActing
                 inventoryListDrawer.DrawItemList(i, item.ItemIcon, item.ItemName);
             }
             inventoryListDrawer.SetItemCount(items.Count);
+            if (itemsInventory.Count != 0)
+                DrawItemPreview(0);
         }
 
 

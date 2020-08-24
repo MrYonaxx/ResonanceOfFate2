@@ -242,13 +242,12 @@ namespace VoiceActing
             SliceNaive();
 
             texture = transitionCanvas.mainTexture;
-            mat = transitionCanvas.material;
 
-            var shader = Shader.Find("J/Shatter");
-            mat = new Material(shader);
+            /*var shader = Shader.Find("J/Shatter");
+            mat = new Material(shader);*/
             mat.SetFloat("_ScreenRatio", 1);
             mat.SetFloat("_Alpha", 1);
-            mat.hideFlags = HideFlags.HideAndDontSave;
+            //mat.hideFlags = HideFlags.HideAndDontSave;
 
             mat.mainTexture = texture;
 

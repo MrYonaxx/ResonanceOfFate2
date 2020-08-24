@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd55d1e19cb42d4f9b59e37ad9c95c0, type: 3}
   m_Name: GUN___LaunchPower
   m_EditorClassIdentifier: 
-  propertyText: Launch +
+  propertyText: 'Launch + '
   activationChance: 100
   percentage: 1
   statModifiers:
@@ -21,20 +21,20 @@ MonoBehaviour:
     modifierType: 0
   charge: 04000000080000000c0000001000000014000000180000001c0000002000000024000000280000002c00000030000000
   multiplier:
-  - 1
-  - 5
-  - 9
-  - 13
-  - 17
-  - 21
-  - 25
-  - 29
-  - 33
-  - 37
-  - 41
-  - 45
+  - 0
+  - 4
+  - 8
+  - 12
+  - 16
+  - 20
+  - 24
+  - 28
+  - 32
+  - 36
+  - 40
+  - 44
   infinite: 1
   maxLevel: -1
-  startMultiplier: 1
+  startMultiplier: 0
   chargeStep: 4
   addMultiplier: 4

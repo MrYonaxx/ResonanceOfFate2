@@ -47,6 +47,12 @@ namespace VoiceActing
         [SerializeField]
         TextMeshProUGUI textCharacterNewHP = null;
 
+
+        [SerializeField]
+        GameObject panelNewSkill = null;
+        [SerializeField]
+        TextMeshProUGUI textSkillProperty = null;
+
         [SerializeField]
         TextMeshProUGUI textNextExp = null;
 
@@ -113,7 +119,14 @@ namespace VoiceActing
             StartCoroutine(DrawTextCoroutine((int)c.CharacterGrowthController.GetStatAtLevel(statHP, oldLevel), textCharacterOldHP));
             yield return new WaitForSecondsRealtime(1f);
             StartCoroutine(DrawTextCoroutine((int)c.CharacterStatController.GetStat(statHP), textCharacterNewHP));
-            textNextExp.text = c.GetWeaponNextExp().ToString();
+            // Placeholder
+            AttackAimProperty a = c.GotNewSkill(c.CharacterStatController.Level);
+            if (a != null)
+            {
+                panelNewSkill.SetActive(true);
+                textSkillProperty.text = "Charge " + a.GetCharge(0) + "   :   " + a.GetLabel() + a.GetLabelValue(a.GetCharge(0));
+            }
+
             while (true)
             {
                 if (Input.GetButtonDown(control.buttonA))
@@ -121,6 +134,7 @@ namespace VoiceActing
                 yield return null;
             }
             Time.timeScale = 1f;
+            panelNewSkill.SetActive(false);
             animatorLevelUp.gameObject.SetActive(false);
         }
 

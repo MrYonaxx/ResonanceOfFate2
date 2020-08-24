@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd55d1e19cb42d4f9b59e37ad9c95c0, type: 3}
   m_Name: GUN___StunPower
   m_EditorClassIdentifier: 
-  propertyText: Stun  x #
+  propertyText: Stun  x
   activationChance: 0
   percentage: 1
+  statModifiers: []
   charge: 060000000c000000
   multiplier:
   - 2

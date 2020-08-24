@@ -108,6 +108,20 @@ namespace VoiceActing
             return null;
         }
 
+        public int GetCharge(int index)
+        {
+            return charge[index];
+        }
+        public int GetChargeByMagazine(int magazineNumber)
+        {
+            for (int i = charge.Length-1; i >= 0; i--)
+            {
+                if (magazineNumber >= charge[i])
+                    return charge[i];
+            }
+            return 0;
+        }
+
         public string GetLabel()
         {
             return propertyText;

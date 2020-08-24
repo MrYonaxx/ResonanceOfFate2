@@ -73,7 +73,15 @@ namespace VoiceActing
 
         public void DrawItemList()
         {
-            List<string> items = partyData.Inventory;
+            List<string> items = new List<string>(partyData.Inventory.Count);
+            for (int i = 0; i < partyData.Inventory.Count; i++)
+            {
+                items.Add(partyData.Inventory[i]);
+            }
+            for (int i = 0; i < partyData.CharacterEquipement.Count; i++)
+            {
+                items.AddRange(partyData.CharacterEquipement[i].GetArmors());
+            }
             itemsInventory = new List<ItemData>();
             for (int i = 0; i < items.Count; i++)
             {
@@ -82,6 +90,8 @@ namespace VoiceActing
                 inventoryListDrawer.DrawItemList(i, item.ItemIcon, item.ItemName);
             }
             inventoryListDrawer.SetItemCount(items.Count);
+            if (itemsInventory.Count != 0)
+                DrawItemPreview(0);
         }
 
 

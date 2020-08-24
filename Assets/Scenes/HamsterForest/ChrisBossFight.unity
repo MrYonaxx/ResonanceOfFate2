@@ -38076,7 +38076,7 @@ MonoBehaviour:
   transitionCanvas: {fileID: 1798472708}
   previousCanvas: {fileID: 913892355}
   sliceNumber: 20
-  mat: {fileID: 0}
+  mat: {fileID: 2100000, guid: 734183a032dab00439f7279902dece02, type: 2}
   battleStartClip: {fileID: 8300000, guid: 78c8fb18237b0d64b8412ad015bf99e2, type: 3}
 --- !u!1 &1463269509
 GameObject:

@@ -21,10 +21,10 @@ MonoBehaviour:
     modifierType: 0
   charge: 050000000a000000
   multiplier:
+  - 0
   - 1
-  - 2
   infinite: 0
   maxLevel: 10
-  startMultiplier: 1
+  startMultiplier: 0
   chargeStep: 5
   addMultiplier: 1

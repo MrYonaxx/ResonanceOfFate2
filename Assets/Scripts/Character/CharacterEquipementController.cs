@@ -21,6 +21,11 @@ namespace VoiceActing
         \* ======================================== */
 
         int weaponEquipped = 0;
+        public int WeaponEquipped
+        {
+            get { return weaponEquipped; }
+        }
+
         List<WeaponData> weapons = new List<WeaponData>(); // Switch to weapon
         List<ArmorData> armors = new List<ArmorData>(); // armor equipped
 
@@ -284,6 +289,12 @@ namespace VoiceActing
                 res.Add(weaponLevels[i].TotalExperience);
             }
             return res;
+        }
+
+
+        public AttackAimProperty GotNewSkill(int l)
+        {
+            return weaponLevels[weaponEquipped].GetNewSkill(l);
         }
 
 

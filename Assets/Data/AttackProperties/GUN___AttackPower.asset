@@ -21,6 +21,7 @@ MonoBehaviour:
     modifierType: 1
   charge: 050000000a0000000f00000014000000190000001e00000023000000280000002d00000032000000
   multiplier:
+  - 1
   - 2
   - 3
   - 4
@@ -30,9 +31,8 @@ MonoBehaviour:
   - 8
   - 9
   - 10
-  - 11
   infinite: 1
   maxLevel: -1
-  startMultiplier: 2
+  startMultiplier: 1
   chargeStep: 5
   addMultiplier: 1

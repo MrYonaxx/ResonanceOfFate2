@@ -1996,7 +1996,7 @@ MonoBehaviour:
     stunDamageVariance: 0
     accuracy: 0
     accuracyVariance: 0
-    feverValue: 10
+    feverValue: 12
     feverValueMax: 20
     AttackElement: []
     AttackStatus: []
@@ -2980,7 +2980,7 @@ MonoBehaviour:
     damageVariance: 0
     knockbackDamage: 0
     knockbackDamageVariance: 0
-    launchDamage: 100
+    launchDamage: 20
     launchDamageVariance: 0
     stunDamage: 0
     stunDamageVariance: 0

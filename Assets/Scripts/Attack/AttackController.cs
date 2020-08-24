@@ -81,6 +81,7 @@ namespace VoiceActing
 
         Transform target;
         Animator anim;
+        private IEnumerator lookCoroutine;
 
         //public delegate void EndAction();
         public event Action OnEndAction;
@@ -199,6 +200,8 @@ namespace VoiceActing
         // Utilisé par les players pour le fever time
         public void EndAttackFever()
         {
+            if (lookCoroutine != null)
+                StopCoroutine(lookCoroutine);
             anim.speed = 0;
             if (OnFeverAction != null)
             {
@@ -217,6 +220,8 @@ namespace VoiceActing
 
         public void EndAttack()
         {
+            if (lookCoroutine != null)
+                StopCoroutine(lookCoroutine);
             anim.speed = 1;
             feedbackManager.SetMotionSpeed(1f);
             if (actionMode == true)
@@ -247,6 +252,50 @@ namespace VoiceActing
         {
             cameraLockTransform.position = position;
         }
+
+
+
+        // Look at enemy (ptet à dégager)
+        public void LookAtTarget(float smoothRotation)
+        {
+            if (lookCoroutine != null)
+                StopCoroutine(lookCoroutine);
+            lookCoroutine = UpdateLockRotation(smoothRotation);
+            StartCoroutine(lookCoroutine);
+        }
+
+        private IEnumerator UpdateLockRotation(float smoothRotation)
+        {
+            Transform pivot = globalCamera.GetCameraAction();
+            Vector3 originalRot;
+            Vector3 newRot;
+            float x;
+            float y;
+            float z;
+            while(true)
+            {
+                originalRot = pivot.localEulerAngles;
+                pivot.LookAt(target.position);
+                newRot = pivot.localEulerAngles;
+                pivot.localEulerAngles = originalRot;
+                x = Mathf.LerpAngle(pivot.localEulerAngles.x, newRot.x, smoothRotation);
+                y = Mathf.LerpAngle(pivot.localEulerAngles.y, newRot.y, smoothRotation);
+                z = Mathf.LerpAngle(pivot.localEulerAngles.z, newRot.z, smoothRotation);
+                pivot.localEulerAngles = new Vector3(x, y, z);
+                yield return null;
+            }
+            /*Vector3 originalRot = pivot.localEulerAngles;
+            pivot.LookAt(target.position);
+            Vector3 newRot = pivot.localEulerAngles;
+            pivot.localEulerAngles = originalRot;
+            float x = Mathf.LerpAngle(pivot.localEulerAngles.x, newRot.x, smoothRotation);
+            float y = Mathf.LerpAngle(pivot.localEulerAngles.y, newRot.y, smoothRotation);
+            float z = Mathf.LerpAngle(pivot.localEulerAngles.z, newRot.z, smoothRotation);
+            pivot.localEulerAngles = new Vector3(x, y, z);
+            yield return null;*/
+        }
+
+
 
 
         #endregion

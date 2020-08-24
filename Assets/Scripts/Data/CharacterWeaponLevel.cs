@@ -81,6 +81,17 @@ namespace VoiceActing
             return levelData.GetAttackProperties(level);
         }
 
+        public AttackAimProperty GetNewSkill(int level)
+        {
+            List<AttackAimProperty> aList = levelData.GetAttackProperties(level); // C'est lourd tout ça
+            for (int i = 0; i < aList.Count; i++)
+            {
+                if (aList[i].GetCharge(0) == level)
+                    return aList[i];
+            }
+            return null;
+        }
+
         public int GetWeaponType()
         {
             return levelData.WeaponType;
