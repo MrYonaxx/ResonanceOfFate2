@@ -29,10 +29,11 @@ namespace VoiceActing
                 PlayerCharacter c = other.GetComponent<PlayerCharacter>();
                 c.CharacterDamage.Damage(c.transform.position, new AttackData(mineAttackData.AttackProcessor, null, mineAttackData));
                 //c.CharacterMovement.ResetPosition(new Vector3(0, 2, 0));
+                c.CharacterMovement.Move(0, 0);
                 c.CharacterMovement.SetInput(false);
                 c.CharacterTriAttack.CallWallCollision(99);
                 mineEvent.Invoke();
-                GetComponent<SpriteRenderer>().enabled = false;
+                //GetComponent<SpriteRenderer>().enabled = false;
                 StartCoroutine(FallCoroutine(c));
             }
         }

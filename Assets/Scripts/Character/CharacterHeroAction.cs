@@ -104,6 +104,11 @@ namespace VoiceActing
             return cursorObject.transform.position;// - this.transform.localPosition;
         }
 
+        public void ShowCursor(bool b)
+        {
+            cursorObject.gameObject.SetActive(b);
+        }
+
         #endregion
 
         #region Functions 
@@ -118,7 +123,7 @@ namespace VoiceActing
 
         public void Activate()
         {
-
+           
         }
 
         public void Desactivate()
@@ -209,8 +214,6 @@ namespace VoiceActing
         public void SetCursor(Vector3 position)
         {
             cursor.transform.position = position;
-            //cursor.transform.localPosition.y = this.transform.position.y;
-            //DrawLine(0, this.transform.position, cursor.transform.position);
             DrawLineRaycast(0, this.transform.position, cursor.transform.position);
             if (lineUpdateCoroutine != null)
                 StopCoroutine(lineUpdateCoroutine);

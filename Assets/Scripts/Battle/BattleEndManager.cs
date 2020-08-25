@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 namespace VoiceActing
 {
@@ -185,8 +186,10 @@ namespace VoiceActing
             Time.timeScale = 0f;
             yield return new WaitForSecondsRealtime(5f);
             Time.timeScale = 1f;
-            saveLoadManager.LoadPlayerProfile(0);
-            saveLoadManager.LoadScene();
+            if (saveLoadManager.LoadPlayerProfile(0) == false) // No save
+                SceneManager.LoadScene("TitleScreen");
+            else
+                saveLoadManager.LoadScene();
         }
 
         private void UpdateLockRotation(Transform pivot, PlayerCharacter p)

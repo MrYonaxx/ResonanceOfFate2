@@ -41,7 +41,7 @@ MonoBehaviour:
         statValue: 0
         modifiable: 0
       - statName: Min Aim Distance
-        statValue: 20
+        statValue: 12
         modifiable: 0
       - statName: Max Aim Distance
         statValue: 5
@@ -69,13 +69,13 @@ MonoBehaviour:
     - columnName: Attack
       statDictionary:
       - statName: Damage
-        statValue: 0
+        statValue: 100
         modifiable: 0
       - statName: Knockback Damage
-        statValue: 0
+        statValue: 30
         modifiable: 0
       - statName: Launch Damage
-        statValue: 0
+        statValue: 30
         modifiable: 0
       - statName: Stun Damage
         statValue: 0
@@ -86,13 +86,13 @@ MonoBehaviour:
       columnNameCenter: Attack Variance
       statDictionary2:
       - statName: Damage Variance
-        statValue: 0
+        statValue: 10
         modifiable: 0
       - statName: Knockback Variance
-        statValue: 0
+        statValue: 50
         modifiable: 0
       - statName: Launch Variance
-        statValue: 0
+        statValue: 50
         modifiable: 0
       - statName: Stun Variance
         statValue: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Min Aim Distance
-      statValue: 20
+      statValue: 12
       modifiable: 0
     - statName: Max Aim Distance
       statValue: 5
@@ -161,13 +161,13 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Damage
-      statValue: 0
+      statValue: 100
       modifiable: 0
     - statName: Knockback Damage
-      statValue: 0
+      statValue: 30
       modifiable: 0
     - statName: Launch Damage
-      statValue: 0
+      statValue: 30
       modifiable: 0
     - statName: Stun Damage
       statValue: 0
@@ -176,13 +176,13 @@ MonoBehaviour:
       statValue: 80
       modifiable: 0
     - statName: Damage Variance
-      statValue: 0
+      statValue: 10
       modifiable: 0
     - statName: Knockback Variance
-      statValue: 0
+      statValue: 50
       modifiable: 0
     - statName: Launch Variance
-      statValue: 0
+      statValue: 50
       modifiable: 0
     - statName: Stun Variance
       statValue: 0
@@ -205,5 +205,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 1
+    manual: 0
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}

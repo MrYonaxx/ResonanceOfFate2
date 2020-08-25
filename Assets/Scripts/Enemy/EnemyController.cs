@@ -113,6 +113,7 @@ namespace VoiceActing
         private void Start()
         {
             enemyList.AddEnemy(this);
+            StartCoroutine(SelectAttackStartup());
         }
         private void OnEnable()
         {
@@ -136,7 +137,11 @@ namespace VoiceActing
         }
 
 
-
+        private IEnumerator SelectAttackStartup()
+        {
+            yield return null;
+            SelectAttack();
+        }
 
 
 
@@ -214,9 +219,6 @@ namespace VoiceActing
             }
             // Si on en est là c'est que y'a personne à dérailler
             // Executer le pattern par défaut
-
-            //!\ Placeholder
-            //indexAttack = -1;
         }
 
         public void PerformAction()

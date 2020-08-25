@@ -70,7 +70,7 @@ namespace VoiceActing
 
         [HorizontalGroup("Parameter3")]
         [SerializeField]
-        bool actionMode = true;
+        bool actionMode = true; // Si la camera Action mode doit s'activer
 
         [Title("Debug")]
         [SerializeField]
@@ -295,8 +295,44 @@ namespace VoiceActing
             yield return null;*/
         }
 
+        public void ResetLookAtTarget(float smoothRotation)
+        {
+            if (lookCoroutine != null)
+                StopCoroutine(lookCoroutine);
+            lookCoroutine = ResetLockRotation(smoothRotation);
+            StartCoroutine(lookCoroutine);
+        }
+
+        private IEnumerator ResetLockRotation(float smoothRotation)
+        {
+            Transform pivot = globalCamera.GetCameraAction();
+            Vector3 originalRot;
+            Vector3 newRot;
+            float x;
+            float y;
+            float z;
+            while (true)
+            {
+                x = Mathf.LerpAngle(pivot.localEulerAngles.x, 0, smoothRotation);
+                y = Mathf.LerpAngle(pivot.localEulerAngles.y, 0, smoothRotation);
+                z = Mathf.LerpAngle(pivot.localEulerAngles.z, 0, smoothRotation);
+                pivot.localEulerAngles = new Vector3(x, y, z);
+                yield return null;
+            }
+        }
 
 
+        public void AttackStopTime(bool b)
+        {
+            if(b == true)
+                feedbackManager.SetMotionSpeed(0f);
+            else
+                feedbackManager.SetMotionSpeed(1f);
+        }
+        public void AttackResumeTime()
+        {
+            feedbackManager.SetMotionSpeed(1f);
+        }
 
         #endregion
 

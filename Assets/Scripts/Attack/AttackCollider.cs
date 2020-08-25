@@ -21,6 +21,8 @@ namespace VoiceActing
         \* ======================================== */
         [SerializeField]
         GameObject onHitParticle = null;
+        [SerializeField]
+        Vector3 particleOffset;
         AttackData attackData = null;
 
         List<ContactPoint> collisionEvents;
@@ -62,7 +64,9 @@ namespace VoiceActing
             var d = collider.gameObject.GetComponent<IDamageable>();
             if (d == null)
                 return;
-            d.Damage(collider.transform.position, attackData);
+            if (onHitParticle != null)
+                Instantiate(onHitParticle, collider.transform.position + particleOffset, Quaternion.identity);
+            d.Damage(collider.transform.position + particleOffset, attackData);
         }
 
         #region GettersSetters 
