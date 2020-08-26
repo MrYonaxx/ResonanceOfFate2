@@ -90,6 +90,12 @@ namespace VoiceActing
          *           GETTERS AND SETTERS            *
         \* ======================================== */
 
+        public bool CanAttackInterruptPlayer()
+        {
+            return currentBehavior.CanInterruptPlayer();
+
+        }
+
         #endregion
 
         #region Functions 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Vashyron_Gun_Levels
   m_EditorClassIdentifier: 
   weaponType: 0
-  baseLevel: 3
+  baseLevel: 10
   maxLevel: 50
   level: 000000000500000007000000
   skills:

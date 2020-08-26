@@ -61,7 +61,7 @@ namespace VoiceActing
         public event EndAttack OnEnemyDefeated;
         public event EndAttack OnWin;
 
-
+        public event EndAttack OnEnemyInterruption;
 
         int navMeshPriority = 1;
 
@@ -187,9 +187,32 @@ namespace VoiceActing
 
 
 
+
+
+
+
+
+
+
+
+
+        // ======================================================================
+        // Attack section
+
+
+
+
         public void QueueAttack(EnemyController attacker)
         {
-            attacksQueue.Add(attacker);
+            if (attacker.CanAttackInterruptPlayer())
+            {
+                if(OnEnemyInterruption != null) OnEnemyInterruption.Invoke();
+                attacker.PerformAction();
+            }
+            else
+            {
+                attacksQueue.Add(attacker);
+            }
         }
         public void CancelQueue(EnemyController attacker)
         {
@@ -200,12 +223,6 @@ namespace VoiceActing
             attacksQueue.Clear();
             StopAllCoroutines();
         }
-
-        /*public bool CheckEnemyAttack()
-        {
-            return (attacksQueue.Count != 0);
-        }*/
-
         public bool CheckEnemyAttack()
         {
             if (attacksQueue.Count != 0)
@@ -234,14 +251,6 @@ namespace VoiceActing
             attacksQueue[0].PerformAction();
             attacksQueue.RemoveAt(0);
         }
-
-
-
-
-
-
-
-
 
 
 

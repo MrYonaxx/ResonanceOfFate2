@@ -14,6 +14,9 @@ namespace VoiceActing
 {
     public class EnemyBehaviorHeroAction: EnemyBehavior
     {
+        [SerializeField]
+        EnemyNavmeshController navmeshController = null;
+
 
         [SerializeField]
         float heroActiontargetRange = 3;
@@ -29,6 +32,8 @@ namespace VoiceActing
         TargetController targetController = null;
         [SerializeField]
         bool targetNearest = false;
+
+        Vector3 destination;
 
         public override Character SelectTarget(Enemy enemy)
         {
@@ -70,7 +75,7 @@ namespace VoiceActing
             {
                 Vector3 direction = target.position + new Vector3(Random.Range(-heroActiontargetRange, heroActiontargetRange), 0, Random.Range(-heroActiontargetRange, heroActiontargetRange));
                 direction = new Vector3(direction.x - enemy.CharacterCenter.position.x, 0, direction.z - enemy.CharacterCenter.position.z).normalized;
-                Vector3 destination = enemy.CharacterCenter.position + (direction * heroActionLength);
+                destination = enemy.CharacterCenter.position + (direction * heroActionLength);
                 if (!Physics.Raycast(enemy.CharacterCenter.position, direction, heroActionLength+1, layerMask))
                 {
                     heroActionManager.SetCursor(destination);
@@ -87,25 +92,30 @@ namespace VoiceActing
         }
 
 
-       /* public override void PauseBehavior()
+        public override void PauseBehavior()
         {
-            isMoving = false;
+            heroActionManager.ShowCursor(true);
+            //isMoving = false;
             //navmeshController.StopMove();
         }
         public override void ResumeBehavior()
         {
-            triAttackManager.StartTriAttack()
+            heroActionManager.ShowCursor(false);
+            //triAttackManager.StartTriAttack()
         }
 
         public override void InterruptBehavior()
         {
-            isMoving = false;
-            //navmeshController.StopMove();
+            heroActionManager.ShowCursor(true);
+            //isMoving = false;
+            navmeshController.StopMove();
         }
 
         public override float UpdateBehavior(Enemy enemy, Character target)
         {
-            Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);
+            //navmeshController.MoveToTarget(destination);
+            return enemy.CharacterStatController.GetAimSpeed();
+            /*Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);
             if (direction.magnitude < enemy.CharacterStatController.GetMinAimDistance())
             {
                 if (isMoving == true)
@@ -115,14 +125,14 @@ namespace VoiceActing
                 }
                 return enemy.CharacterStatController.GetAimSpeed();
             }
-            navmeshController.MoveToTarget(target.transform);
+            navmeshController.MoveToTarget(destination);
             if (isMoving == false)
             {
                 enemy.CharacterAnimation.PlayTrigger("Move");
                 isMoving = true;
             }
-            return -enemy.CharacterStatController.GetAimSpeed();
-        }*/
+            return -enemy.CharacterStatController.GetAimSpeed();*/
+        }
 
     } 
 

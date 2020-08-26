@@ -132,9 +132,13 @@ namespace VoiceActing
         {
             positions.Add(pos);
         }
-        public void AddIntersectionTime(float t)
+        public void AddIntersectionTime(List<float> t)
         {
-            intersectionTime.Add(t);
+            for (int i = 0; i < t.Count; i++)
+            {
+                if (t[i] != -1)
+                    intersectionTime.Add(t[i]);
+            }
         }
 
         private void CalculateTotalTime()

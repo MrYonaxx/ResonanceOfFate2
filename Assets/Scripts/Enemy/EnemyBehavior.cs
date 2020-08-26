@@ -24,6 +24,8 @@ namespace VoiceActing
         protected WeaponData attackStats;
         [SerializeField]
         protected AttackController attackController;
+        [SerializeField]
+        protected bool canInterruptPlayer;
 
         [Title("Parameter")]
         #endregion
@@ -43,6 +45,11 @@ namespace VoiceActing
             return attackController;
         }
 
+        public bool CanInterruptPlayer()
+        {
+            return canInterruptPlayer;
+        }
+
         #endregion
 
         #region Functions 
@@ -60,6 +67,8 @@ namespace VoiceActing
             return null;
         }
 
+
+
         public virtual void PauseBehavior()
         {
 
@@ -75,6 +84,11 @@ namespace VoiceActing
         }
 
         public virtual float UpdateBehavior(Enemy enemy, Character target)
+        {
+            return 0;
+        }
+
+        public virtual float EndBehavior(Enemy enemy, Character target)
         {
             return 0;
         }

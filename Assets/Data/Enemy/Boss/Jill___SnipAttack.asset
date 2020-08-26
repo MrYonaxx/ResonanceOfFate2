@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6acb1bb41e2627f45b4b21a3e58f120d, type: 3}
-  m_Name: Chris___ShotgunAttack
+  m_Name: Jill___SnipAttack
   m_EditorClassIdentifier: 
-  weaponName: 
-  attackType: 2
-  scratchDamage: 1
+  weaponName: Sniper
+  attackType: 3
+  scratchDamage: 0
   attackProcessor: {fileID: 11400000, guid: 7ee63f799196b1f4c844b33a217266f1, type: 2}
   baseStat:
     StatEditor:
@@ -41,10 +41,10 @@ MonoBehaviour:
         statValue: 0
         modifiable: 0
       - statName: Min Aim Distance
-        statValue: 5
+        statValue: 10
         modifiable: 0
       - statName: Max Aim Distance
-        statValue: 6
+        statValue: 1
         modifiable: 0
       - statName: Max Magazine
         statValue: 0
@@ -69,36 +69,36 @@ MonoBehaviour:
     - columnName: Attack
       statDictionary:
       - statName: Damage
-        statValue: 30
+        statValue: 200
         modifiable: 0
       - statName: Knockback Damage
-        statValue: 100
+        statValue: 30
         modifiable: 0
       - statName: Launch Damage
-        statValue: 0
+        statValue: 30
         modifiable: 0
       - statName: Stun Damage
         statValue: 0
         modifiable: 0
       - statName: Accuracy
-        statValue: 600
+        statValue: 80
         modifiable: 0
       columnNameCenter: Attack Variance
       statDictionary2:
       - statName: Damage Variance
-        statValue: 20
+        statValue: 10
         modifiable: 0
       - statName: Knockback Variance
-        statValue: 0
+        statValue: 50
         modifiable: 0
       - statName: Launch Variance
-        statValue: 0
+        statValue: 50
         modifiable: 0
       - statName: Stun Variance
         statValue: 0
         modifiable: 0
       - statName: Accuracy Variance
-        statValue: 0
+        statValue: 20
         modifiable: 0
       columnNameRight: Defense
       statDictionary3:
@@ -137,10 +137,10 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Min Aim Distance
-      statValue: 5
+      statValue: 10
       modifiable: 0
     - statName: Max Aim Distance
-      statValue: 6
+      statValue: 1
       modifiable: 0
     - statName: Max Magazine
       statValue: 0
@@ -161,34 +161,34 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Damage
-      statValue: 30
+      statValue: 200
       modifiable: 0
     - statName: Knockback Damage
-      statValue: 100
+      statValue: 30
       modifiable: 0
     - statName: Launch Damage
-      statValue: 0
+      statValue: 30
       modifiable: 0
     - statName: Stun Damage
       statValue: 0
       modifiable: 0
     - statName: Accuracy
-      statValue: 600
+      statValue: 80
       modifiable: 0
     - statName: Damage Variance
-      statValue: 20
+      statValue: 10
       modifiable: 0
     - statName: Knockback Variance
-      statValue: 0
+      statValue: 50
       modifiable: 0
     - statName: Launch Variance
-      statValue: 0
+      statValue: 50
       modifiable: 0
     - statName: Stun Variance
       statValue: 0
       modifiable: 0
     - statName: Accuracy Variance
-      statValue: 0
+      statValue: 20
       modifiable: 0
     - statName: Knockback Time
       statValue: 0
@@ -205,5 +205,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 0
+    manual: 1
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}

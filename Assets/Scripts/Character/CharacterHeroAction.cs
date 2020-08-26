@@ -64,18 +64,23 @@ namespace VoiceActing
         AudioClip heroActionStartClip;
 
         List<HeroActionLine> heroActionLines = new List<HeroActionLine>();
-        List<Animator> intersectionList = new List<Animator>();
         bool isActive = false;
-        bool intersection = false;
-        public bool Intersection
-        {
-            get { return intersection; }
-        }
 
-        private float intersectionT;
-        public float IntersectionT
+        List<Animator> intersectionAnimList = new List<Animator>();
+        public List<Animator> IntersectionAnimList
+        {
+            get { return intersectionAnimList; }
+        }
+        List<float> intersectionT = new List<float>();
+        public List<float> IntersectionT
         {
             get { return intersectionT; }
+        }
+
+        bool doesIntersect = false;
+        public bool DoesIntersect
+        {
+            get { return doesIntersect; }
         }
 
         // debug
@@ -121,6 +126,21 @@ namespace VoiceActing
             audioSource = GetComponent<AudioSource>();
         }
 
+        private void Start()
+        {
+            intersectionT = new List<float>();
+            intersectionT.Add(-1);
+            intersectionAnimList.Add(Instantiate(intersectionPrefab, this.transform));
+            for (int i = 0; i < allyTransform.Count-1; i++)
+            {
+                for (int j = i+1; j < allyTransform.Count; j++)
+                {
+                    intersectionT.Add(-1);
+                    intersectionAnimList.Add(Instantiate(intersectionPrefab, this.transform));
+                }
+            }
+        }
+
         public void Activate()
         {
            
@@ -130,10 +150,10 @@ namespace VoiceActing
         {
             audioSource.Stop();
             isActive = false;
-            intersection = false;
+            doesIntersect = false;
             cursor.transform.localPosition = Vector3.zero;
             cursorObject.gameObject.SetActive(false);
-            HideIntersection();
+            HideAllIntersection();
             for (int i = 0; i < heroActionLines.Count; i++)
                 HideLine(i);
             if (lineUpdateCoroutine != null)
@@ -179,30 +199,7 @@ namespace VoiceActing
             {
                 if(audioSource.isPlaying == false)
                     audioSource.Play();
-                if (CheckIntersection(new Vector2(this.transform.position.x, this.transform.position.z),
-                                 new Vector2((cursor.transform.position - this.transform.position).x, (cursor.transform.position - this.transform.position).z),
-                                 new Vector2(allyTransform[0].transform.position.x, allyTransform[0].transform.position.z),
-                                 new Vector2((allyTransform[1].transform.position - allyTransform[0].transform.position).x, (allyTransform[1].transform.position - allyTransform[0].transform.position).z)))
-                {
-                    //DrawLine(1, allyTransform[0].transform.position + offset, allyTransform[1].transform.position + offset);
-                    if (intersection == false)
-                    {
-                        DrawLineRaycast(1, allyTransform[0].transform.position, allyTransform[1].transform.position);
-                        FeedbackLine(1);
-                        FeedbackLine(0);
-                        intersection = true;
-                    }
-                    DrawIntersection(new Vector3((cursor.transform.position - this.transform.position).x, 0, (cursor.transform.position - this.transform.position).z) * intersectionT);
-                }
-                else
-                {
-                    if (intersection == true)
-                    {
-                        intersection = false;
-                        HideLine(1);
-                        HideIntersection();
-                    }
-                }
+                CheckIntersections();
                 DrawLineRaycast(0, this.transform.position, cursor.transform.position);
             }
             else
@@ -223,7 +220,60 @@ namespace VoiceActing
 
 
 
-        private bool CheckIntersection(Vector2 cursorPosition, Vector2 cursorSegment, Vector2 allyPosition, Vector2 allySegment)
+        private void CheckIntersections()
+        {
+            Vector2 playerPos = new Vector2(this.transform.position.x, this.transform.position.z);
+            Vector2 cursorDirection = new Vector2((cursor.transform.position - this.transform.position).x, (cursor.transform.position - this.transform.position).z);
+            Vector2 allyPos;
+            Vector2 allyDirection;
+            int id = 0;
+            float intersection = 0f;
+            for (int i = 0; i < allyTransform.Count-1; i++)
+            {
+                for (int j = i+1; j < allyTransform.Count; j++)
+                {
+                    id += 1;
+                    allyPos = new Vector2(allyTransform[i].transform.position.x, allyTransform[i].transform.position.z);
+                    allyDirection = new Vector2((allyTransform[j].transform.position - allyTransform[i].transform.position).x, (allyTransform[j].transform.position - allyTransform[i].transform.position).z);
+                    intersection = CheckIntersection(playerPos, cursorDirection, allyPos, allyDirection);
+                    if (intersection >= 0) // Intersection !!!
+                    {
+                        allyTransform[i].feedback.StartAfterImage();
+                        allyTransform[j].feedback.StartAfterImage();
+                        if (intersectionT[id] == -1) // Pas d'antécédant donc faut dessiner la ligne
+                        {
+                            DrawLineRaycast(id, allyTransform[i].transform.position, allyTransform[j].transform.position);
+                            FeedbackLine(0);
+                            FeedbackLine(id);
+                            feedback.StartAfterImage();
+                            doesIntersect = true;
+                        }
+                        intersectionT[id] = intersection;
+                        DrawIntersection(id, new Vector3(cursorDirection.x, 0, cursorDirection.y) * intersection);
+                    }
+                    else
+                    {
+                        if (intersectionT[id] != -1) // Autrefois y'avait intersection donc maintenant qu'il n'y en a plus, faut effacer
+                        {
+                            HideLine(id);
+                            HideIntersection(id);
+                            intersectionT[id] = -1;
+                            allyTransform[i].feedback.EndAfterImage();
+                            allyTransform[j].feedback.EndAfterImage();
+                            for (int k = 0; k < intersectionT.Count; k++)
+                            {
+                                if (intersectionT[k] != -1)
+                                    return;
+                            }
+                            doesIntersect = false;
+                            feedback.EndAfterImage();
+                        }
+                    }
+                }
+            }
+        }
+
+        private float CheckIntersection(Vector2 cursorPosition, Vector2 cursorSegment, Vector2 allyPosition, Vector2 allySegment)
         {
             // https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
 
@@ -232,19 +282,17 @@ namespace VoiceActing
             float u = CrossProduct(new Vector2(allyPosition.x - cursorPosition.x, allyPosition.y - cursorPosition.y), cursorSegment) / rs;
             if (rs == 0 && u == 0)// Colinéaire (superposé quoi)
             {
-                Debug.Log("Quoi ?");
-                return false;
+                return -1;
             }
             else if (rs == 0 && u != 0) // Parallel 
             {
-                return false;
+                return -1;
             }
             else if (rs != 0 && (0 <= t && t <= 1) && (0 <= u && u <= 1))
             {
-                intersectionT = t;
-                return true;
+                return t;
             }
-            return false;
+            return -1;
         }
 
 
@@ -254,29 +302,36 @@ namespace VoiceActing
         }
 
 
-        private void DrawIntersection(Vector3 intersec)
+        private void DrawIntersection(int id, Vector3 intersec)
         {
-            intersectionPrefab.gameObject.SetActive(true);
+            intersectionAnimList[id].gameObject.SetActive(true);
             if (Physics.Raycast(this.transform.position + intersec, Vector3.down, out hit, 10f, layerMask))
             {
-                intersectionPrefab.transform.position = hit.point + offset;
+                intersectionAnimList[id].transform.position = hit.point + offset;
             }
             else
             {
-                intersectionPrefab.transform.position = this.transform.position + intersec - new Vector3(0, this.transform.localPosition.y, 0) + offset;
+                intersectionAnimList[id].transform.position = this.transform.position + intersec - new Vector3(0, this.transform.localPosition.y, 0) + offset;
             }
-                //intersectionPrefab.transform.localPosition = new Vector3(intersec.x, 0, intersec.y);
-            //intersectionPrefab.transform.localPosition = new Vector3(intersectionPrefab.transform.localPosition.x, 0, intersectionPrefab.transform.localPosition.z);
-            intersectionPrefab.SetTrigger("Feedback");
-            feedback.StartAfterImage();
-            for(int i = 0; i < allyTransform.Count;i++)
-            {
-                allyTransform[i].feedback.StartAfterImage();
-            }
+            intersectionAnimList[id].SetTrigger("Feedback");
         }
-        private void HideIntersection()
+        private void HideIntersection(int id)
         {
-            intersectionPrefab.gameObject.SetActive(false);
+            intersectionAnimList[id].gameObject.SetActive(false);
+            //intersectionPrefab.gameObject.SetActive(false);
+            /*feedback.EndAfterImage();
+            for (int i = 0; i < allyTransform.Count; i++)
+            {
+                allyTransform[i].feedback.EndAfterImage();
+            }*/
+        }
+
+        private void HideAllIntersection()
+        {
+            for (int i = 0; i < intersectionAnimList.Count; i++)
+            {
+                HideIntersection(i);
+            }
             feedback.EndAfterImage();
             for (int i = 0; i < allyTransform.Count; i++)
             {
@@ -284,27 +339,6 @@ namespace VoiceActing
             }
         }
 
-
-
-
-        // Line Draw
-        /*private void DrawLine(int lineID, Vector3 startLine, Vector3 endLine)
-        {
-            HeroActionLine lineToRender = GetLine(lineID);
-            Vector3 direction = endLine - startLine;
-            float size = 0;
-            int index = 0;
-            while(size < (direction.magnitude - spriteOffset))
-            {
-                size += spriteOffset;
-                AddSpriteToLine(lineToRender, index, startLine + (direction * size / direction.magnitude));
-                index += 1;
-            }
-            for(int i = index; i < lineToRender.line.Count; i++)
-            {
-                lineToRender.line[i].gameObject.SetActive(false);
-            }
-        }*/
 
         private void DrawLineRaycast(int lineID, Vector3 startLine, Vector3 endLine)
         {
@@ -318,8 +352,6 @@ namespace VoiceActing
                 if (Physics.Raycast(startLine + (direction * size / direction.magnitude), Vector3.down, out hit, 10f, layerMask))
                 {
                     AddSpriteToLine(lineToRender, index, hit.point);
-                    //index += 1;
-                    //AddSpriteToLine(lineToRender, index, startLine + (direction * size / direction.magnitude));
                 }
                 else
                 {
@@ -395,7 +427,7 @@ namespace VoiceActing
                 for (int i = 0; i < lineToRender.line.Count; i++) 
                 {
                     lineToRender.line[i].transform.rotation = globalCamera.Rotation();
-                    lineToRender.line[i].SetBool("Intersection", intersection);
+                    lineToRender.line[i].SetBool("Intersection", doesIntersect);
                     lineToRender.line[i].ResetTrigger("DirectionFeedback");
                 }
                 feedbackID = (int) Mathf.Lerp(0f, lineToRender.line.Count, t);
@@ -418,7 +450,10 @@ namespace VoiceActing
                     heroActionLines[i].line[j].transform.rotation = globalCamera.Rotation();
                 }
             }
-            intersectionPrefab.transform.rotation = globalCamera.Rotation();
+            for (int i = 0; i < intersectionAnimList.Count; i++)
+            {
+                intersectionAnimList[i].transform.rotation = globalCamera.Rotation();
+            }
         }
 
         #endregion

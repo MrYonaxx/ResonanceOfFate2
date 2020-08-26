@@ -504,8 +504,9 @@ namespace VoiceActing
                     aimReticle.SetIndexMainCharacter(0);
                 }
                 cameraLock.SetState(3);
-                if (c.CharacterHeroAction.Intersection == true)
-                    c.CharacterTriAttack.AddIntersectionTime(c.CharacterHeroAction.IntersectionT);
+                //if (c.CharacterHeroAction.Intersection == true)
+                c.CharacterTriAttack.AddIntersectionTime(c.CharacterHeroAction.IntersectionT);
+
                 c.CharacterTriAttack.AddTriAttackPosition(c.CharacterHeroAction.GetCursorPositionV3());
                 c.CharacterTriAttack.StartTriAttack();
                 c.CharacterHeroAction.Desactivate();
@@ -1018,8 +1019,18 @@ namespace VoiceActing
         {
             preventB = false;
             aimReticle.HideAimReticle();
-            timeData.TimeFlow = false;
             StopInputAndTime();
+        }
+
+
+        public void EnemyInterruption()
+        {
+            if (triAttackManager.IsTriAttacking) // Si on tri attack on va check si les copains peuvent taper
+            {
+                return;
+            }
+            EnemyAttack();
+            //battleEnemyManager.
         }
 
 

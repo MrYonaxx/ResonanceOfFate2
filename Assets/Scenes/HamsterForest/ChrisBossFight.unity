@@ -1872,7 +1872,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1821350
+  m_Name: pb_Mesh1013322
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5899,6 +5899,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6794507680626499647, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2812727
+      objectReference: {fileID: 0}
     - target: {fileID: 6794507680629058765, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -6592,7 +6597,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1822158
+  m_Name: pb_Mesh1014130
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7596,7 +7601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386098124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0.5}
+  m_LocalPosition: {x: -1, y: 0.02, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449232657}
@@ -7701,7 +7706,7 @@ MonoBehaviour:
   startAcceleration: 1
   rotationSpeed: 200
   startMoveAnimation: {fileID: 7400000, guid: 213a21b1a655fe34c8b82e4fefde7ad2, type: 2}
-  endMoveAnimation: {fileID: 0}
+  endMoveAnimation: {fileID: 7400000, guid: 34565807d0bba204b8e2fcfd2c7b6d0b, type: 2}
   jumpAnimation: {fileID: 0}
 --- !u!143 &386098130
 CharacterController:
@@ -20089,7 +20094,7 @@ MonoBehaviour:
   baseDirection: 1
   stayOnGround: 1
   fixDirection: 0
-  stopTime: 1
+  stopTime: 0
   manualTarget: 0
   actionMode: 1
   targetDebug: {fileID: 0}
@@ -20471,8 +20476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76259da2c92b634e943591f5ef6274d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackStats: {fileID: 11400000, guid: a014c85a054531b42aaf5771bba6357f, type: 2}
+  attackStats: {fileID: 11400000, guid: b5bf99805070ea344b3d5e4f3da46922, type: 2}
   attackController: {fileID: 759835244}
+  canInterruptPlayer: 0
   navmeshController: {fileID: 764704677}
   targetController: {fileID: 1466121616}
   aimSpeedFix: 0
@@ -20516,6 +20522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStats: {fileID: 11400000, guid: a9881b95201b4fb4fa698b1f5298308e, type: 2}
   attackController: {fileID: 731319261}
+  canInterruptPlayer: 0
 --- !u!1 &759835241
 GameObject:
   m_ObjectHideFlags: 0
@@ -35646,7 +35653,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1822132
+  m_Name: pb_Mesh1014104
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -37120,6 +37127,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1325742747}
     m_Modifications:
+    - target: {fileID: 4336855849495251168, guid: 8960167d67fc82a4d9e0e3c49dc3d98d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336855849495251168, guid: 8960167d67fc82a4d9e0e3c49dc3d98d,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4336855849495251169, guid: 8960167d67fc82a4d9e0e3c49dc3d98d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -56115,7 +56132,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1820630
+  m_Name: pb_Mesh1012596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -56460,7 +56477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580782752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children:
   - {fileID: 1088186463}
@@ -79269,7 +79286,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1822120
+  m_Name: pb_Mesh1014092
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -79690,6 +79707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStats: {fileID: 11400000, guid: dacb9b7513a31934886c27daff5c5f68, type: 2}
   attackController: {fileID: 1731027048}
+  canInterruptPlayer: 0
   navmeshController: {fileID: 140729199}
   targetController: {fileID: 1924280350}
   aimSpeedFix: 0
@@ -79713,6 +79731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStats: {fileID: 11400000, guid: a9881b95201b4fb4fa698b1f5298308e, type: 2}
   attackController: {fileID: 32287642}
+  canInterruptPlayer: 0
   navmeshController: {fileID: 140729199}
   targetController: {fileID: 1924280350}
   targetNearest: 1
@@ -79736,6 +79755,7 @@ MonoBehaviour:
   - enemyBehaviors:
     - {fileID: 2076410697}
     - {fileID: 2076410696}
+    - {fileID: 2076410700}
 --- !u!114 &2076410700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79749,13 +79769,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackStats: {fileID: 11400000, guid: cb81fbf65edb5ec448e08d72c854c9be, type: 2}
-  attackController: {fileID: 1731027048}
+  attackController: {fileID: 1531487513}
+  canInterruptPlayer: 1
+  navmeshController: {fileID: 140729199}
   heroActiontargetRange: 3
   heroActionLength: 7
   heroActionManager: {fileID: 249104061}
   triAttackManager: {fileID: 0}
   targetController: {fileID: 1924280350}
-  targetNearest: 1
+  targetNearest: 0
 --- !u!1 &2081285923
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Zephyr_SMG_Levels
   m_EditorClassIdentifier: 
   weaponType: 1
-  baseLevel: 3
+  baseLevel: 10
   maxLevel: 50
   level: 0000000002000000
   skills:

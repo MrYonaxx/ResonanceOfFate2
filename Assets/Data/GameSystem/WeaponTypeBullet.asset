@@ -27,6 +27,6 @@ MonoBehaviour:
   typeIcon:
   - {fileID: 21300000, guid: 9051cdc4183509c45b9aac88909ed6c6, type: 3}
   - {fileID: 21300000, guid: cd9995d2069a3084aaac7cb49f1418fb, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: cbeac5e67c674254e80dd12c22756371, type: 3}
   - {fileID: 0}
   - {fileID: 0}
