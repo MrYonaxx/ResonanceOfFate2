@@ -71,6 +71,7 @@ namespace VoiceActing
                 return;
             }
 
+            aimReticle.PauseAim();
             inputController.EnemyAttack();
             battleEnemyManager.InterruptionAttack();
             StartCoroutine(InterruptionFeedback(attack.GetAttack()));
@@ -78,9 +79,10 @@ namespace VoiceActing
 
         public void EnemyInterruptionEnd()
         {
+            aimReticle.ResumeAim();
             aimReticle.ShowAimReticle();
             inputController.ResumeInput();
-            inputController.CancelAim();
+            //inputController.CancelAim();
         }
 
 

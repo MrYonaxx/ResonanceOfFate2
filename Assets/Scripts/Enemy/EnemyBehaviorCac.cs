@@ -26,9 +26,11 @@ namespace VoiceActing
         TargetController targetController = null;
         [SerializeField]
         bool targetNearest = false;
-
+        [SerializeField]
+        float timeForInterrupt = 10;
 
         bool isMoving = false;
+        float timeBeforeInterrupt = 0;
 
         #endregion
 
@@ -53,7 +55,8 @@ namespace VoiceActing
         }*/
 
         public override Character SelectTarget(Enemy enemy)
-        {       
+        {
+            timeBeforeInterrupt = 0;
             List<Character> targetable = targetController.GetTarget();
             if (targetable.Count == 0)
                 return null;
@@ -96,11 +99,13 @@ namespace VoiceActing
             navmeshController.StopMove();
         }
 
-        public override float UpdateBehavior(Enemy enemy, Character target)
+        public override float UpdateBehavior(Enemy enemy, Character target, out bool interrupt)
         {
+            interrupt = false;
             Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);
             if (direction.magnitude < enemy.CharacterStatController.GetMinAimDistance())
             {
+                timeBeforeInterrupt = 0f;
                 if (isMoving == true)
                 {
                     navmeshController.StopMove();
@@ -113,6 +118,11 @@ namespace VoiceActing
             {
                 enemy.CharacterAnimation.PlayTrigger("Move");
                 isMoving = true;
+            }
+            timeBeforeInterrupt += Time.deltaTime;
+            if (timeBeforeInterrupt >= timeForInterrupt)
+            {
+                interrupt = true;
             }
             return -enemy.CharacterStatController.GetAimSpeed();
         }

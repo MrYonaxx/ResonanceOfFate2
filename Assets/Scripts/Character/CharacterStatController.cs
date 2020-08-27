@@ -174,7 +174,11 @@ namespace VoiceActing
         {
             float distance = (new Vector2(user.x, user.z) - new Vector2(target.x, target.z)).magnitude;
             float multiplier;
-            multiplier = 1 - ((distance - GetMinAimDistance()) / (GetMaxAimDistance() - GetMinAimDistance()));
+            float distanceAim = GetMaxAimDistance() - GetMinAimDistance();
+            if (distanceAim == 0)
+                return GetAimSpeed();
+
+            multiplier = 1 - ((distance - GetMinAimDistance()) / distanceAim);
             if (multiplier <= 0.1f)
                 multiplier = 0.1f;
             return GetAimSpeed() * multiplier;

@@ -106,8 +106,9 @@ namespace VoiceActing
 
 
 
-        public override float UpdateBehavior(Enemy enemy, Character target)
+        public override float UpdateBehavior(Enemy enemy, Character target, out bool interrupt)
         {
+            interrupt = false;
             Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);
             // La cible est à portée
             if (direction.magnitude < enemy.CharacterStatController.GetMinAimDistance())

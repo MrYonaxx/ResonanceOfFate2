@@ -32,12 +32,12 @@ namespace VoiceActing
          *               ATTRIBUTES                 *
         \* ======================================== */
         [SerializeField]
-        CharacterController cursor;
+        protected CharacterController cursor;
         [SerializeField]
         GameObject cursorObject;
 
         [SerializeField]
-        GlobalCamera globalCamera;
+        protected GlobalCamera globalCamera;
         [SerializeField]
         float speedCursor = 2;
         [SerializeField]
@@ -47,7 +47,7 @@ namespace VoiceActing
         [SerializeField]
         Animator spritePrefab;
         [SerializeField]
-        Animator intersectionPrefab;
+        protected Animator intersectionPrefab;
         [SerializeField]
         float spriteOffset;
         [SerializeField]
@@ -84,13 +84,13 @@ namespace VoiceActing
         }
 
         // debug
-        Vector3 offset = new Vector3(0, 0.2f, 0);
+        protected Vector3 offset = new Vector3(0, 0.2f, 0);
         private IEnumerator lineUpdateCoroutine;
 
         AudioSource audioSource;
 
-        int layerMask = (1 << 13);
-        RaycastHit hit;
+        protected int layerMask = (1 << 13);
+        protected RaycastHit hit;
 
         #endregion
 
@@ -114,6 +114,11 @@ namespace VoiceActing
             cursorObject.gameObject.SetActive(b);
         }
 
+        public bool IsCursorActive()
+        {
+            return cursorObject.gameObject.activeInHierarchy;// - this.transform.localPosition;
+        }
+
         #endregion
 
         #region Functions 
@@ -121,7 +126,7 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-        private void Awake()
+        protected void Awake()
         {
             audioSource = GetComponent<AudioSource>();
         }
@@ -273,7 +278,7 @@ namespace VoiceActing
             }
         }
 
-        private float CheckIntersection(Vector2 cursorPosition, Vector2 cursorSegment, Vector2 allyPosition, Vector2 allySegment)
+        protected float CheckIntersection(Vector2 cursorPosition, Vector2 cursorSegment, Vector2 allyPosition, Vector2 allySegment)
         {
             // https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
 
@@ -302,6 +307,9 @@ namespace VoiceActing
         }
 
 
+        // ================================================================================================
+        // Draw Intersection
+
         private void DrawIntersection(int id, Vector3 intersec)
         {
             intersectionAnimList[id].gameObject.SetActive(true);
@@ -315,18 +323,13 @@ namespace VoiceActing
             }
             intersectionAnimList[id].SetTrigger("Feedback");
         }
+
         private void HideIntersection(int id)
         {
             intersectionAnimList[id].gameObject.SetActive(false);
-            //intersectionPrefab.gameObject.SetActive(false);
-            /*feedback.EndAfterImage();
-            for (int i = 0; i < allyTransform.Count; i++)
-            {
-                allyTransform[i].feedback.EndAfterImage();
-            }*/
         }
 
-        private void HideAllIntersection()
+        protected virtual void HideAllIntersection()
         {
             for (int i = 0; i < intersectionAnimList.Count; i++)
             {
@@ -338,7 +341,12 @@ namespace VoiceActing
                 allyTransform[i].feedback.EndAfterImage();
             }
         }
+        // ================================================================================================
 
+
+
+        // ================================================================================================
+        // Draw Line
 
         private void DrawLineRaycast(int lineID, Vector3 startLine, Vector3 endLine)
         {
@@ -392,7 +400,7 @@ namespace VoiceActing
             }
         }
 
-        private void FeedbackLine(int lineID)
+        protected void FeedbackLine(int lineID)
         {
             HeroActionLine lineToRender = GetLine(lineID);
             for (int i = 0; i < lineToRender.line.Count; i++)
@@ -402,7 +410,7 @@ namespace VoiceActing
         }
 
 
-        private HeroActionLine GetLine(int id)
+        protected HeroActionLine GetLine(int id)
         {
             while (id >= heroActionLines.Count)
             {
@@ -441,7 +449,7 @@ namespace VoiceActing
             }
         }
 
-        private void UpdateOtherLines()
+        protected virtual void UpdateOtherLines()
         {
             for(int i = 0; i < heroActionLines.Count; i++)
             {
@@ -455,9 +463,10 @@ namespace VoiceActing
                 intersectionAnimList[i].transform.rotation = globalCamera.Rotation();
             }
         }
+        // ================================================================================================
 
         #endregion
 
-    } 
+    }
 
 } // #PROJECTNAME# namespace

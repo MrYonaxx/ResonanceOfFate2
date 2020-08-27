@@ -117,6 +117,11 @@ namespace VoiceActing
             if (isDead == true || isInvulnerable == true)
                 return;
 
+            if(characterAnimation.State == CharacterState.Dash)
+            {
+
+            }
+
             DamageMessage msg = characterBodyPartController.Damage(attackData, characterMovement.CharacterDirection.DirectionTransform);
             //DamageMessage msg = attackData.AttackProcessor.ProcessAttack(attackData.AttackDataStat, characterStatController);
             msg.SetDamagePosition(pos);

@@ -984,10 +984,12 @@ namespace VoiceActing
         {
             if (c.CharacterTriAttack.IsTriAttacking == true)
             {
+                timeData.TimeFlow = true;
                 InputState = InputState.TriAttack;
             }
             else
             {
+                CancelAim();
                 InputState = InputState.Default;
             }
         }

@@ -109,13 +109,9 @@ namespace VoiceActing
         {
             Application.targetFrameRate = -1;
             globalCamera.AssignCamera(cameraDefault, cameraAction, canvasAction);
-        }
-
-
-        private void Start()
-        {
             pivot = this.transform;
         }
+
 
         public void SetFocus(Transform newFocus)
         {

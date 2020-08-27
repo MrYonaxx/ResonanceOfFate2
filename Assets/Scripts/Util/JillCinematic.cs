@@ -42,6 +42,9 @@ namespace VoiceActing
         [SerializeField]
         Transform jillPosition;
 
+        [SerializeField]
+        UnityEngine.Events.UnityEvent unityEvent;
+
 
         #endregion
 
@@ -70,7 +73,7 @@ namespace VoiceActing
 
         public void CheckHP(float a, float b)
         {
-            if ((jill.Enemy.CharacterStatController.Hp + chris.Enemy.CharacterStatController.Hp) / (jill.Enemy.CharacterStatController.GetHPMax() + chris.Enemy.CharacterStatController.GetHPMax()) <= threshold)
+            if ((jill.Enemy.CharacterStatController.Hp - jill.Enemy.CharacterStatController.Scratch + chris.Enemy.CharacterStatController.Hp - chris.Enemy.CharacterStatController.Scratch) / (jill.Enemy.CharacterStatController.GetHPMax() + chris.Enemy.CharacterStatController.GetHPMax()) <= threshold)
             {
                 jill.Enemy.CharacterStatController.OnHPChanged -= CheckHP;
                 chris.Enemy.CharacterStatController.OnHPChanged -= CheckHP;
@@ -90,6 +93,7 @@ namespace VoiceActing
 
         public void EndCinematic()
         {
+            unityEvent.Invoke();
             enemyManager.ResetQueue();
             jill.InterruptBehavior();
             chris.InterruptBehavior();

@@ -49,7 +49,7 @@ namespace VoiceActing
         public void DrawGauge(float amount, float maxAmount, string text)
         {
             maxAmount = Mathf.Max(1, maxAmount);
-            gauge.localScale = new Vector3(amount / maxAmount, 1, 1);
+            gauge.localScale = new Vector3(Mathf.Max(0, amount / maxAmount), 1, 1);
             if (textGauge != null && text != null)
                 textGauge.text = text;
             else if (textGauge != null)

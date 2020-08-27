@@ -24,7 +24,12 @@ namespace VoiceActing
         void PauseBehavior();
         void ResumeBehavior();
 
-        float UpdateBehavior(Enemy enemy, Character target);
+
+        float UpdateBehavior(Enemy enemy, Character target, out bool interrupt);
+
+        float UpdatePausedBehavior(Enemy enemy, Character target);
+
+        bool EndBehavior(Enemy enemy, Character target);
 
     } 
 

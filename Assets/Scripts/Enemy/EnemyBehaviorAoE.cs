@@ -60,8 +60,9 @@ namespace VoiceActing
             aoeIndicator.SetActive(false);
         }
 
-        public override float UpdateBehavior(Enemy enemy, Character target)
+        public override float UpdateBehavior(Enemy enemy, Character target, out bool interrupt)
         {
+            interrupt = false;
             return enemy.CharacterStatController.GetAimSpeed();
         }
 

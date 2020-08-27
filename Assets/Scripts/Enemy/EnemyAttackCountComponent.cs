@@ -38,6 +38,8 @@ namespace VoiceActing
 
         [SerializeField]
         bool destroyAfterOneCycle = false;
+        [SerializeField]
+        bool cycleOnInterruption = false;
 
         int attackCount = 0;
 
@@ -59,6 +61,8 @@ namespace VoiceActing
         private void Start()
         {
             enemyController.Enemy.CharacterAction.OnEndAction += AddAttackCount;
+            if(cycleOnInterruption == true)
+                enemyController.OnAttackInterrupted += AddAttackCountInterruption;
         }
 
         private void AddAttackCount()
@@ -79,9 +83,23 @@ namespace VoiceActing
             }
         }
 
+        private void AddAttackCountInterruption(EnemyController enemyController, bool interruption)
+        {
+            AddAttackCount();
+        }
+
+
+        public void StopCount()
+        {
+            // Si y'a d'autre trucs sur l'objet a changer
+            Destroy(this.gameObject);
+        }
+
         private void OnDestroy()
         {
             enemyController.Enemy.CharacterAction.OnEndAction -= AddAttackCount;
+            if (cycleOnInterruption == true)
+                enemyController.OnAttackInterrupted -= AddAttackCountInterruption;
         }
 
         #endregion

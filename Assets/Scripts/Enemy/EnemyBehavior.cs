@@ -83,9 +83,15 @@ namespace VoiceActing
 
         }
 
-        public virtual float UpdateBehavior(Enemy enemy, Character target)
+        public virtual float UpdateBehavior(Enemy enemy, Character target, out bool interrupt)
         {
-            return 0;
+            interrupt = false;
+            return 0f;
+        }
+
+        public virtual float UpdatePausedBehavior(Enemy enemy, Character target)
+        {
+            return 0f;
         }
 
         public virtual bool EndBehavior(Enemy enemy, Character target)

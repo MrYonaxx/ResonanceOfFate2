@@ -24,7 +24,7 @@ namespace VoiceActing
         float heroActionLength = 5;
 
         [SerializeField]
-        CharacterHeroAction heroActionManager = null;
+        EnemyHeroAction heroActionManager = null;
         [SerializeField]
         AfterImageEffect afterImageEffect = null;
         [SerializeField]
@@ -36,9 +36,11 @@ namespace VoiceActing
         bool targetNearest = false;
 
         Vector3 destination;
+        bool isMoving = false;
 
         public override Character SelectTarget(Enemy enemy)
         {
+            canInterruptPlayer = true;
             List<Character> targetable = targetController.GetTarget();
             if (targetable.Count == 0)
                 return null;
@@ -94,54 +96,62 @@ namespace VoiceActing
 
         public override void PauseBehavior()
         {
+            canInterruptPlayer = true;
             afterImageEffect.EndAfterImage();
             heroActionManager.SetCursor(destination);
             heroActionManager.ShowCursor(true);
-            //isMoving = false;
+
+            isMoving = false;
             navmeshController.StopMove();
         }
+
         public override void ResumeBehavior()
         {
+            heroActionManager.Desactivate();
             afterImageEffect.StartAfterImage();
         }
 
         public override void InterruptBehavior()
         {
+            canInterruptPlayer = true;
             afterImageEffect.EndAfterImage();
-            //heroActionManager.SetCursor(destination);
+            heroActionManager.Desactivate();
             heroActionManager.ShowCursor(false);
-            //isMoving = false;
+
+            isMoving = false;
             navmeshController.StopMove();
         }
 
-        public override float UpdateBehavior(Enemy enemy, Character target)
+
+
+        public override float UpdateBehavior(Enemy enemy, Character target, out bool interrupt)
         {
+            interrupt = false;
             heroActionManager.SetCursor(destination);
-            navmeshController.MoveToTarget(destination);
-            return enemy.CharacterStatController.GetAimSpeed();
-            /*Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);
-            if (direction.magnitude < enemy.CharacterStatController.GetMinAimDistance())
-            {
-                if (isMoving == true)
-                {
-                    navmeshController.StopMove();
-                    isMoving = false;
-                }
-                return enemy.CharacterStatController.GetAimSpeed();
-            }
             navmeshController.MoveToTarget(destination);
             if (isMoving == false)
             {
                 enemy.CharacterAnimation.PlayTrigger("Move");
                 isMoving = true;
             }
-            return -enemy.CharacterStatController.GetAimSpeed();*/
+            if (Vector3.Distance(enemy.transform.position, destination) <= 1.2f)
+            {
+                InterruptBehavior();
+                interrupt = true;
+            }
+            return enemy.CharacterStatController.GetAimSpeed();
+        }
+
+        public override float UpdatePausedBehavior(Enemy enemy, Character target)
+        {
+            //canInterruptPlayer = !heroActionManager.CheckPlayerIntersections();
+            heroActionManager.CheckPlayerIntersections();
+            return 0;
         }
 
         public override bool EndBehavior(Enemy enemy, Character target)
         {
             afterImageEffect.EndAfterImage();
-            heroActionManager.ShowCursor(false);
             return false;
         }
 

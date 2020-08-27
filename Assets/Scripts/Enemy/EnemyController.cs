@@ -60,7 +60,7 @@ namespace VoiceActing
 
         bool pause = false;
         bool attackCharged = false;
-        //int indexAttack = -1;
+        bool updateInterruption = false;
         int phase = 0;
 
         private float aimTime = 0;
@@ -158,6 +158,14 @@ namespace VoiceActing
 
 
 
+
+
+
+
+        // =============================================================
+        // Enemy Logic
+
+
         private void Update()
         {
             if (enemy.CharacterDamage.IsDead == true)
@@ -192,7 +200,15 @@ namespace VoiceActing
 
             if (timeData.TimeFlow == true)
             {
-                AimTime += (currentBehavior.UpdateBehavior(enemy, target) * Time.deltaTime) * enemy.CharacterAnimation.GetMotionSpeed();
+                AimTime += (currentBehavior.UpdateBehavior(enemy, target, out updateInterruption) * Time.deltaTime) * enemy.CharacterAnimation.GetMotionSpeed();
+                if (updateInterruption == true)
+                {
+                    updateInterruption = false;
+                    InterruptBehavior();
+                    //ResetBehavior();
+                    SelectAttack();
+                }
+
                 if (aimTime >= 1f && attackCharged == false)
                 {
                     attackCharged = true;
@@ -204,7 +220,6 @@ namespace VoiceActing
                     if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this, currentBehavior.CanInterruptPlayer());
                 }
             }
-
         }
 
 
@@ -236,6 +251,12 @@ namespace VoiceActing
 
         public void PerformAction()
         {
+            if(currentBehavior == null) // Pour je ne sais quel raison
+            {
+                Debug.Log(this.gameObject.name);
+                ResetBehavior();
+                SelectAttack();
+            }
             // J'ai besoin de générer un attack data avec les stats de l'ennemi et les stats de l'arme
             AttackData enemyAttackData = new AttackData(currentBehavior.GetWeaponData().AttackProcessor, enemy.CharacterStatController, currentBehavior.GetWeaponData());
 
@@ -247,9 +268,16 @@ namespace VoiceActing
         public void NextPattern()
         {
             enemy.CharacterAction.OnEndAction -= NextPattern; // ??? Je saîs plus 
-            currentBehavior.EndBehavior(enemy, target);
-            ResetBehavior();
-            SelectAttack();
+            if(currentBehavior.EndBehavior(enemy, target) == true)
+            {
+                ResetBehavior();
+                SelectAttack();
+            }
+            else
+            {
+                AimTime = 0;
+            }
+
         }
 
 
@@ -264,6 +292,8 @@ namespace VoiceActing
                     currentBehavior.PauseBehavior();
                 pause = true;
             }
+            if (currentBehavior != null)
+                AimTime += currentBehavior.UpdatePausedBehavior(enemy, target) * Time.deltaTime;
         }
 
         private void ResetBehavior()

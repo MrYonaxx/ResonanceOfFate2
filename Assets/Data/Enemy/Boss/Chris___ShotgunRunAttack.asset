@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6acb1bb41e2627f45b4b21a3e58f120d, type: 3}
-  m_Name: Chris___ShotgunAttack
+  m_Name: Chris___ShotgunRunAttack
   m_EditorClassIdentifier: 
   weaponName: 
   attackType: 2
@@ -35,16 +35,16 @@ MonoBehaviour:
       columnNameCenter: Weapon
       statDictionary2:
       - statName: Aim Speed
-        statValue: 0.75
+        statValue: 0.6
         modifiable: 0
       - statName: Aim Acceleration
         statValue: 0
         modifiable: 0
       - statName: Min Aim Distance
-        statValue: 4
+        statValue: 1
         modifiable: 0
       - statName: Max Aim Distance
-        statValue: 6
+        statValue: 8
         modifiable: 0
       - statName: Max Magazine
         statValue: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
         statValue: 0
         modifiable: 0
       - statName: Knockback Resistance
-        statValue: 0
+        statValue: -50
         modifiable: 0
       - statName: Launch Resistance
         statValue: 0
@@ -131,16 +131,16 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Aim Speed
-      statValue: 0.75
+      statValue: 0.6
       modifiable: 0
     - statName: Aim Acceleration
       statValue: 0
       modifiable: 0
     - statName: Min Aim Distance
-      statValue: 4
+      statValue: 1
       modifiable: 0
     - statName: Max Aim Distance
-      statValue: 6
+      statValue: 8
       modifiable: 0
     - statName: Max Magazine
       statValue: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Knockback Resistance
-      statValue: 0
+      statValue: -50
       modifiable: 0
     - statName: Launch Resistance
       statValue: 0
@@ -205,5 +205,5 @@ MonoBehaviour:
     - statName: Recovery Time
       statValue: 0
       modifiable: 0
-    manual: 0
+    manual: 1
     statModel: {fileID: 11400000, guid: 47c2d395661043f4a901ed318e74d340, type: 2}
