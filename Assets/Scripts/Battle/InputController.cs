@@ -132,7 +132,9 @@ namespace VoiceActing
             base.Start();
             feverTimeManager.OnFeverDecision += CallFeverDecision;
             triAttackManager.SetParty(battlePartyManager.GetParty());
+
             battleEnemyManager.OnEndAttacks += NewTurn;
+
             for (int i = 0; i < battlePartyManager.GetParty().Count; i++)
             {
                 battlePartyManager.GetCharacter(i).CharacterAction.OnEndAction += EndShoot;
@@ -147,11 +149,12 @@ namespace VoiceActing
 
         private void Update()
         {
-            cameraLock.MoveCamera(Input.GetAxis(control.stickRightHorizontal), Input.GetAxis(control.stickRightVertical));
             if (c.CharacterMovement.CanInput == false)
             {
                 return;
             }
+            if(inputState != InputState.NoInput)
+                cameraLock.MoveCamera(Input.GetAxis(control.stickRightHorizontal), Input.GetAxis(control.stickRightVertical));
             switch (inputState)
             {
                 case InputState.Default:
@@ -504,7 +507,7 @@ namespace VoiceActing
                     aimReticle.SetIndexMainCharacter(0);
                 }
                 cameraLock.SetState(3);
-                //if (c.CharacterHeroAction.Intersection == true)
+
                 c.CharacterTriAttack.AddIntersectionTime(c.CharacterHeroAction.IntersectionT);
 
                 c.CharacterTriAttack.AddTriAttackPosition(c.CharacterHeroAction.GetCursorPositionV3());
@@ -675,32 +678,6 @@ namespace VoiceActing
             aimReticle.StopAim(battlePartyManager.GetCharacter(id));
             triAttackManager.EndTriAttack(id);
             StartCoroutine(EndTriAttackLag(id));
-            /*if (triAttackManager.IsTriAttacking == true) // La tri attack n'est pas fini
-            {
-                if (id == battlePartyManager.GetIndexSelection()) // C'est le joueur qu'on contrôle donc on switch vers un perso qui lui est en train de triAttaquer
-                {
-                    for (int i = 0; i < battlePartyManager.GetParty().Count - 1; i++)
-                    {
-                        SwitchCharactersRight();
-                        if (c.CharacterTriAttack.IsTriAttacking == true)
-                        {
-                            cameraLock.SetTarget(aimReticle.TargetAim);
-                            return;
-                        }
-                    }
-                }
-
-            }
-            else // La tri attack est fini on reset
-            {
-                timeData.TimeFlow = false;
-                cameraBlur.SetBool("Blur", false);
-                cameraLock.LockOn(false);
-                battlePartyManager.HideOrder();
-                cameraLock.SetState(0);
-                NextTurn();
-                feverTimeManager.ResetFill();
-            }*/
         }
 
         private IEnumerator EndTriAttackLag(int id)
@@ -1015,22 +992,21 @@ namespace VoiceActing
             }
         }
 
-        private void EnemyAttack()
+
+        public void EnemyAttack()
         {
             preventB = false;
             aimReticle.HideAimReticle();
             StopInputAndTime();
         }
 
-
-        public void EnemyInterruption()
+        public void CancelAim()
         {
-            if (triAttackManager.IsTriAttacking) // Si on tri attack on va check si les copains peuvent taper
-            {
-                return;
-            }
-            EnemyAttack();
-            //battleEnemyManager.
+            timeData.TimeFlow = false;
+            cameraLock.LockOn(false);
+            cameraLock.SetTarget(null);
+            cameraLock.SetState(0);
+            aimReticle.StopAim(c);
         }
 
 

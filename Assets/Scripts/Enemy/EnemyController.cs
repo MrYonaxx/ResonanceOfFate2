@@ -20,7 +20,7 @@ namespace VoiceActing
         public EnemyBehavior[] enemyBehaviors;
     }
 
-    public class EnemyController: MonoBehaviour
+    public class EnemyController: MonoBehaviour, IAttackPerformer
     {
         #region Attributes 
 
@@ -74,10 +74,11 @@ namespace VoiceActing
 
         public delegate void AimAction(float value, float maxValue);
         public delegate void SelectionAction(Character target);
-        public delegate void EnemyAction(EnemyController enemyController);
+        public delegate void EnemyAction(EnemyController enemyController, bool interruption);
 
 
         public event AimAction OnAimChanged;
+
         public event SelectionAction OnAttackSelected;
         public event EnemyAction OnAttackCharged;
         public event EnemyAction OnAttackInterrupted;
@@ -94,6 +95,11 @@ namespace VoiceActing
         {
             return currentBehavior.CanInterruptPlayer();
 
+        }
+
+        public AttackController GetAttack()
+        {
+            return currentBehavior.GetAttackController();
         }
 
         #endregion
@@ -190,12 +196,12 @@ namespace VoiceActing
                 if (aimTime >= 1f && attackCharged == false)
                 {
                     attackCharged = true;
-                    if (OnAttackCharged != null) OnAttackCharged.Invoke(this);
+                    if (OnAttackCharged != null) OnAttackCharged.Invoke(this, currentBehavior.CanInterruptPlayer());
                 }
                 else if (aimTime < 1f && attackCharged == true)
                 {
                     attackCharged = false;
-                    if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this);
+                    if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this, currentBehavior.CanInterruptPlayer());
                 }
             }
 
@@ -206,6 +212,7 @@ namespace VoiceActing
         {
             if (currentBehavior != null)
                 enemy.CharacterStatController.RemoveStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
+
             EnemyBehavior[] behaviors = enemyBehaviors[phase].enemyBehaviors;
             int indexAttack = Random.Range(0, behaviors.Length);
             for (int i = 0; i < behaviors.Length; i++)
@@ -232,14 +239,15 @@ namespace VoiceActing
             // J'ai besoin de générer un attack data avec les stats de l'ennemi et les stats de l'arme
             AttackData enemyAttackData = new AttackData(currentBehavior.GetWeaponData().AttackProcessor, enemy.CharacterStatController, currentBehavior.GetWeaponData());
 
-            enemy.CharacterAction.OnEndAction += NextPattern;
+            enemy.CharacterAction.OnEndAction += NextPattern; // ??? Je saîs plus 
             enemy.CharacterAction.Action(enemyAttackData, currentBehavior.GetAttackController(), target.CharacterCenter);
 
         }
 
         public void NextPattern()
         {
-            enemy.CharacterAction.OnEndAction -= NextPattern;
+            enemy.CharacterAction.OnEndAction -= NextPattern; // ??? Je saîs plus 
+            currentBehavior.EndBehavior(enemy, target);
             ResetBehavior();
             SelectAttack();
         }
@@ -277,9 +285,9 @@ namespace VoiceActing
                 AimTime = 0;
                 enemy.CharacterStatController.RemoveStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
                 currentBehavior.InterruptBehavior();
+                if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this, currentBehavior.CanInterruptPlayer());
                 currentBehavior = null;
                 attackCharged = false;
-                if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this);
             }
 
         }

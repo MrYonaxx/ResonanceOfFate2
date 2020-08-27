@@ -51,7 +51,7 @@ namespace VoiceActing
         }
         private int numberAttacker = 0;
 
-        int resonancePoint = 3;
+        int resonancePoint = 0;
         public int ResonancePoint
         {
             get { return resonancePoint; }

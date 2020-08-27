@@ -26,6 +26,8 @@ namespace VoiceActing
         [SerializeField]
         CharacterHeroAction heroActionManager = null;
         [SerializeField]
+        AfterImageEffect afterImageEffect = null;
+        [SerializeField]
         TriAttackManager triAttackManager = null;
 
         [SerializeField]
@@ -83,10 +85,8 @@ namespace VoiceActing
                     return true;
                     // Le déplacement est valide il n'y a pas d'obstruction
                 }
-                Debug.Log("J'ai hit un mur");
                 count += 1;
             }
-            Debug.Log("c dead");
             return false;
 
         }
@@ -94,26 +94,30 @@ namespace VoiceActing
 
         public override void PauseBehavior()
         {
+            afterImageEffect.EndAfterImage();
+            heroActionManager.SetCursor(destination);
             heroActionManager.ShowCursor(true);
             //isMoving = false;
-            //navmeshController.StopMove();
+            navmeshController.StopMove();
         }
         public override void ResumeBehavior()
         {
-            heroActionManager.ShowCursor(false);
-            //triAttackManager.StartTriAttack()
+            afterImageEffect.StartAfterImage();
         }
 
         public override void InterruptBehavior()
         {
-            heroActionManager.ShowCursor(true);
+            afterImageEffect.EndAfterImage();
+            //heroActionManager.SetCursor(destination);
+            heroActionManager.ShowCursor(false);
             //isMoving = false;
             navmeshController.StopMove();
         }
 
         public override float UpdateBehavior(Enemy enemy, Character target)
         {
-            //navmeshController.MoveToTarget(destination);
+            heroActionManager.SetCursor(destination);
+            navmeshController.MoveToTarget(destination);
             return enemy.CharacterStatController.GetAimSpeed();
             /*Vector3 direction = (enemy.CharacterCenter.position - target.CharacterCenter.position);
             if (direction.magnitude < enemy.CharacterStatController.GetMinAimDistance())
@@ -132,6 +136,13 @@ namespace VoiceActing
                 isMoving = true;
             }
             return -enemy.CharacterStatController.GetAimSpeed();*/
+        }
+
+        public override bool EndBehavior(Enemy enemy, Character target)
+        {
+            afterImageEffect.EndAfterImage();
+            heroActionManager.ShowCursor(false);
+            return false;
         }
 
     } 

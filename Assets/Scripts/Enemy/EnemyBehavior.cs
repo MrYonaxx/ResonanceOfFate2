@@ -88,9 +88,9 @@ namespace VoiceActing
             return 0;
         }
 
-        public virtual float EndBehavior(Enemy enemy, Character target)
+        public virtual bool EndBehavior(Enemy enemy, Character target)
         {
-            return 0;
+            return true;
         }
 
         #endregion

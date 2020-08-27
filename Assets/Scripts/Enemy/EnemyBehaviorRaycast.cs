@@ -29,16 +29,22 @@ namespace VoiceActing
         [Title("Parameter")]
         [SerializeField]
         bool aimSpeedFix = true;
+
+        [HorizontalGroup("A1")]
+        [SerializeField]
+        bool infiniteAimDistance = false;
+        [HorizontalGroup("A1")]
         [SerializeField]
         bool dontCareObstruction = false;
+
+        [HorizontalGroup("A2")]
         [SerializeField]
         bool moveIfObstruction = false;
+        [HorizontalGroup("A2")]
         [SerializeField]
         bool stopAimIfObstruction = false;
 
         [Title("Feedback")]
-        [SerializeField]
-        AudioClip aimAnimation = null;
         [SerializeField]
         Bullet feedbackBullet;
         [SerializeField]
@@ -124,6 +130,12 @@ namespace VoiceActing
                 }
             }
 
+            if(infiniteAimDistance == true)
+            {
+                UpdateFeedback(enemy, target);
+                StopMove();
+                return GetAimSpeed(enemy, target);
+            }
 
             // La cible n'est pas à portée
             navmeshController.MoveToTarget(target.transform);

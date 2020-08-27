@@ -277,6 +277,7 @@ namespace VoiceActing
                 return;*/
             horizontalAxis = valueX;
             verticalAxis = valueY;
+            pivot.localEulerAngles = new Vector3(horizontalAxis, verticalAxis, 0);
         }
 
 

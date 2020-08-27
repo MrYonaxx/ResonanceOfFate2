@@ -28,6 +28,8 @@ namespace VoiceActing
         [SerializeField]
         GameObject onHitParticle = null;
 
+        [SerializeField]
+        bool stopDash = false;
 
         AttackData attackData = null;
 
@@ -98,6 +100,13 @@ namespace VoiceActing
             if (d == null)
                 return;
             d.Damage(collisionEvents[0].intersection, attackData);
+
+            if (stopDash == true)
+            {
+                var c = other.GetComponent<PlayerCharacter>();
+                c.CharacterTriAttack.CallWallCollision(99);
+            }
+
         }
 
         #endregion

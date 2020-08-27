@@ -26,14 +26,8 @@ namespace VoiceActing
         AttackDataStat bonusAttackData;
 
         [Space]
-        /*[SerializeField]
-        Transform muzzle;*/
-
-        [Space]
         [Sirenix.Serialization.OdinSerialize]
         IAttackCollision attackCollision;
-        /*[SerializeField]
-        GameObject muzzleAnimation;*/
 
         [SerializeField]
         GlobalFeedbackManager feedbackManager;
@@ -157,6 +151,7 @@ namespace VoiceActing
                 anim = GetComponent<Animator>();
             anim.SetTrigger("Start");
             anim.SetInteger("Animation", Random.Range(0, 2));
+
             globalCamera.ActivateCameraAction(true);
             Transform cam = globalCamera.GetCameraAction();
             cam.SetParent(cameraParent, false);
@@ -284,15 +279,6 @@ namespace VoiceActing
                 pivot.localEulerAngles = new Vector3(x, y, z);
                 yield return null;
             }
-            /*Vector3 originalRot = pivot.localEulerAngles;
-            pivot.LookAt(target.position);
-            Vector3 newRot = pivot.localEulerAngles;
-            pivot.localEulerAngles = originalRot;
-            float x = Mathf.LerpAngle(pivot.localEulerAngles.x, newRot.x, smoothRotation);
-            float y = Mathf.LerpAngle(pivot.localEulerAngles.y, newRot.y, smoothRotation);
-            float z = Mathf.LerpAngle(pivot.localEulerAngles.z, newRot.z, smoothRotation);
-            pivot.localEulerAngles = new Vector3(x, y, z);
-            yield return null;*/
         }
 
         public void ResetLookAtTarget(float smoothRotation)
@@ -320,6 +306,8 @@ namespace VoiceActing
                 yield return null;
             }
         }
+
+
 
 
         public void AttackStopTime(bool b)

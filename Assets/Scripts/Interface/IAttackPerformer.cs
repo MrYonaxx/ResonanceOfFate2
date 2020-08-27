@@ -8,15 +8,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Sirenix.OdinInspector;
+using Sirenix.OdinInspector;
 
 namespace VoiceActing
 {
-    public interface IMotionSpeed
+    public interface IAttackPerformer
     {
+        AttackController GetAttack();
+        void PerformAction();
 
-        void SetCharacterMotionSpeed(float newSpeed, float time = 0);
-
-    }
+    } 
 
 } // #PROJECTNAME# namespace

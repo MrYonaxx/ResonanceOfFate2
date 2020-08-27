@@ -126,9 +126,6 @@ namespace VoiceActing
                 for (int i = 0; i < debugPartyData.Count; i++)
                 {
                     partyData.AddCharacter(debugPartyData[i]);
-                    //partyData.CharacterStatControllers.Add(new CharacterStatController(debugPartyData[i].CharacterData));
-                    //partyData.CharacterGrowths.Add(new CharacterGrowthController(debugPartyData[i].CharacterGrowth, partyData.CharacterStatControllers[i]));
-                    //partyData.CharacterEquipement.Add(new CharacterEquipementController(debugPartyData[i].WeaponEquipped, debugPartyData[i].WeaponLevels, partyData.CharacterStatControllers[i], partyData.CharacterGrowths[i]));
                 }
                 partyData.NextZoneEntrance = 999;
                 for (int i = 0; i < debugVariableDatabase.Count; i++)
@@ -160,13 +157,10 @@ namespace VoiceActing
                 if (entranceTransforms.Count > partyData.NextZoneEntrance) 
                 {
                     party[i].CharacterMovement.SetPosition(entranceTransforms[partyData.NextZoneEntrance].position + (Quaternion.Euler(0, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]));
-                    //party[i].transform.position = entranceTransforms[partyData.NextZoneEntrance].position + (Quaternion.Euler(0, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]);
                     party[i].CharacterDirection.SetDirection(entranceTransforms[partyData.NextZoneEntrance]);
                 }
             }
             partySize = partyData.CharacterStatControllers.Count;
-            //mainCamera.transform.position = party[indexSelection].CharacterCenter.position;
-            //mainCamera.SetCameraAxis(0, 90);
         }
 
         private void Start()

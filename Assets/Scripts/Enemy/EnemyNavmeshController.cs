@@ -57,6 +57,14 @@ namespace VoiceActing
             navMeshAgent.velocity = characterMovement.Velocity();
         }
 
+        public virtual void MoveToTarget(Vector3 pos)
+        {
+            navMeshAgent.destination = pos;
+            destinationVelocity = navMeshAgent.desiredVelocity;
+            characterMovement.MoveCharacterWorld(destinationVelocity.x, destinationVelocity.z);
+            navMeshAgent.velocity = characterMovement.Velocity();
+        }
+
         public virtual void StopMove()
         {
             characterMovement.CharacterAnimation.PlayTrigger("EndMove");
