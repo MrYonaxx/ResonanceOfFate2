@@ -201,7 +201,7 @@ namespace VoiceActing
             if (timeData.TimeFlow == true)
             {
                 AimTime += (currentBehavior.UpdateBehavior(enemy, target, out updateInterruption) * Time.deltaTime) * enemy.CharacterAnimation.GetMotionSpeed();
-                if (updateInterruption == true)
+                if (updateInterruption == true && aimTime < 1f)
                 {
                     updateInterruption = false;
                     InterruptBehavior();

@@ -25551,10 +25551,10 @@ MonoBehaviour:
     SmoothCamera: 0
     RotationOffset: {x: 10, y: 0, z: 0}
   - StateName: TriAttackJump
-    CameraPosition: {x: 0, y: 0.3, z: -1.3}
+    CameraPosition: {x: 0.8, y: 0.5, z: -1.5}
     PivotRotation: {x: 0, y: 0, z: 0}
     SmoothCamera: 0
-    RotationOffset: {x: 0, y: 0, z: 0}
+    RotationOffset: {x: 10, y: -10, z: 0}
   - StateName: FeverAim
     CameraPosition: {x: 0.6, y: 0.2, z: -1}
     PivotRotation: {x: 0, y: 0, z: 0}
@@ -25563,6 +25563,7 @@ MonoBehaviour:
   focus: {fileID: 0}
   smoothCamera: 0.3
   smoothRotation: 0.2
+  smoothRotationJump: 0.025
   distanceRatio: 4
   horizontalSensibility: 60
   verticalSensibility: 80

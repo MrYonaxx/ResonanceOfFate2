@@ -1618,6 +1618,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5660258735146613931, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5778868336692410072, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -4833,6 +4838,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hamidou (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845341173150412203, guid: 25a177912f1de9042be07f9507e061c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1845341173212669630, guid: 25a177912f1de9042be07f9507e061c8,
         type: 3}
@@ -12099,6 +12109,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bijou
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045471455026718632, guid: 53292e5538b353342b5863d93b797392,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6045471455026718633, guid: 53292e5538b353342b5863d93b797392,
         type: 3}

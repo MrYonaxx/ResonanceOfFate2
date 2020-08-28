@@ -5623,6 +5623,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HamtaroA (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4540024627708215529, guid: 32aa1518279c0924f938e595190ead67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7888049478310753886, guid: 32aa1518279c0924f938e595190ead67,
         type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
@@ -11293,6 +11298,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HamtaroA (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540024627708215529, guid: 32aa1518279c0924f938e595190ead67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888049478310753886, guid: 32aa1518279c0924f938e595190ead67,
         type: 3}

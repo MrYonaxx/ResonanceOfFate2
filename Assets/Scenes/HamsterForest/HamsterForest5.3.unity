@@ -8854,6 +8854,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HamtaroA
       objectReference: {fileID: 0}
+    - target: {fileID: 4540024627708215529, guid: 32aa1518279c0924f938e595190ead67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6964915170201545197, guid: 32aa1518279c0924f938e595190ead67,
         type: 3}
       propertyPath: attackStats
@@ -13413,6 +13418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ham-Sniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674421136290415080, guid: 864b7d91b439113499efdb423262dc70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7674421136290415081, guid: 864b7d91b439113499efdb423262dc70,
         type: 3}

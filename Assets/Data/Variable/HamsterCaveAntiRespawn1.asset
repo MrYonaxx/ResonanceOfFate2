@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d56ce1eb0256f4598ab0408e6047c9, type: 3}
-  m_Name: SOVariableDatabase
+  m_Script: {fileID: 11500000, guid: 764448f25b1fe9249b833f612e06ff5c, type: 3}
+  m_Name: HamsterCaveAntiRespawn1
   m_EditorClassIdentifier: 
-  gameVariables: []
-  variableDatabase:
-  - {fileID: 11400000, guid: f1d685ac25ad5584799a75efbc1b3b7b, type: 2}
-  - {fileID: 11400000, guid: 8da24d02a084ad0499da319087d9a4e3, type: 2}
+  baseVar: 0
+  var: 0
+  memo: 
+  callHistoric: []

@@ -68,6 +68,8 @@ namespace VoiceActing
         [SerializeField]
         float smoothRotation = 2;
         [SerializeField]
+        float smoothRotationJump = 0.02f;
+        [SerializeField]
         float distanceRatio = 4;
 
         [SerializeField]
@@ -89,6 +91,7 @@ namespace VoiceActing
 
         float horizontalAxis = 0;
         float verticalAxis = 0;
+        float originalSmoothRotation = 0;
 
         #endregion
 
@@ -110,6 +113,7 @@ namespace VoiceActing
             Application.targetFrameRate = -1;
             globalCamera.AssignCamera(cameraDefault, cameraAction, canvasAction);
             pivot = this.transform;
+            originalSmoothRotation = smoothRotation;
         }
 
 
@@ -274,6 +278,23 @@ namespace VoiceActing
             horizontalAxis = valueX;
             verticalAxis = valueY;
             pivot.localEulerAngles = new Vector3(horizontalAxis, verticalAxis, 0);
+        }
+
+        public void SetSmoothRotationWhenJump()
+        {
+            SetSmoothRotation(smoothRotationJump);
+        }
+
+        public void SetSmoothRotation(float newValue, float timeBefore = 0.4f)
+        {
+            smoothRotation = newValue;
+            StartCoroutine(SmoothRotationCoroutine(timeBefore));
+        }
+
+        private IEnumerator SmoothRotationCoroutine(float time)
+        {
+            yield return new WaitForSeconds(time);
+            smoothRotation = originalSmoothRotation;
         }
 
 

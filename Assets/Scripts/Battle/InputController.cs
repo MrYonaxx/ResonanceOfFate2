@@ -418,7 +418,10 @@ namespace VoiceActing
             {
                 // Le joueur est en train de courir
                 timeData.TimeFlow = true;
-                cameraLock.SetState(3);
+                if(c.CharacterAnimation.State == CharacterState.Jump)
+                    cameraLock.SetState(4);
+                else
+                    cameraLock.SetState(3);
                 aimReticle.ResetAim(c);
                 InputState = InputState.TriAttack;
                 if (triAttackManager.IsTriAttacking) // Si on tri attack on va check si les copains peuvent taper
@@ -667,6 +670,8 @@ namespace VoiceActing
                 {
                     c.CharacterAnimation.SetCharacterMotionSpeed(1f);
                 }
+                cameraLock.SetSmoothRotationWhenJump();
+                cameraLock.SetState(4);
                 c.CharacterTriAttack.Jump();
             }
         }
