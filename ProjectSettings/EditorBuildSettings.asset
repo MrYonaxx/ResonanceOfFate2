@@ -92,4 +92,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeepSpace/DeepSpace1.unity
     guid: d8300d5eb917f5f4c87114143350b623
+  - enabled: 1
+    path: Assets/Scenes/DeepSpace/SeraphicGate1.unity
+    guid: 4a3fd2bdb0375d249830e5ff07d93ba6
   m_configObjects: {}

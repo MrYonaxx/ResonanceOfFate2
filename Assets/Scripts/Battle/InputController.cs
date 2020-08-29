@@ -325,6 +325,7 @@ namespace VoiceActing
                 timeData.TimeFlow = true;
                 if (battlePartyManager.ReducePlayerTime(150f) == true) // Donc le perso n'a plus de time
                 {
+                    triAttackManager.RemoveResonance();
                     c.CharacterMovement.Move(0, 0);
                     NextTurn();
                     preventB = true;
@@ -745,6 +746,7 @@ namespace VoiceActing
                 if (battleEnemyManager.CheckEnemyAttack() == true)
                 {
                     battlePartyManager.CurrentCharacterInactive();
+                    triAttackManager.RemoveResonance();
                     EnemyAttack();
                     return;
                 }
@@ -761,6 +763,7 @@ namespace VoiceActing
                 if (battleEnemyManager.CheckEnemyAttack() == true)
                 {
                     battlePartyManager.CurrentCharacterInactive();
+                    triAttackManager.RemoveResonance();
                     EnemyAttack();
                     return;
                 }
@@ -922,33 +925,6 @@ namespace VoiceActing
         }
 
 
-
-        #endregion
-        // =================================================================================
-
-
-        // =================================================================================
-        // Menu
-        #region Menu
-        /*private bool InputMenu()
-        {
-            if (Input.GetButtonDown(control.start))
-            {
-                MenuParty menuParty = null;
-                if (battleEnemyManager.EnemyList.Count == 0)
-                {
-                    inputState = InputState.NoInput;
-                    menuParty.OpenMainMenu();
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void QuitMenu()
-        {
-            inputState = InputState.Default;
-        }*/
 
         #endregion
         // =================================================================================

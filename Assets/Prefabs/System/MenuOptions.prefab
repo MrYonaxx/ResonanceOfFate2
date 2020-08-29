@@ -5368,8 +5368,8 @@ MonoBehaviour:
   - textOptionData: {fileID: 7953974946976053293}
     isSlider: 0
     options:
-    - On
-    - Off
+    - English
+    - Francais
     sliderOption: {fileID: 0}
 --- !u!114 &7141917216548043323
 MonoBehaviour:

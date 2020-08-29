@@ -61,11 +61,8 @@ namespace VoiceActing
         public int ResonancePoint
         {
             get { return resonancePoint; }
-            set { resonancePoint = value;
-                 textResonance.text = resonancePoint.ToString();
-                 textResonanceFeedback.text = textResonance.text;
-                animatorResonanceFeedback.SetTrigger("Feedback");
-                particleResonanceFeedback.Play();
+            set { resonancePoint = Mathf.Max(value, 0);
+                 textResonance.text = resonancePoint.ToString();                
             }
         }
 
@@ -236,6 +233,7 @@ namespace VoiceActing
             }
             ResonancePoint = 0;
             triAttackReverse = reverse;
+            particleResonanceFeedback.Play();
         }
 
         public void EndTriAttack(int id)
@@ -280,6 +278,9 @@ namespace VoiceActing
         public void AddResonance()
         {
             ResonancePoint += 1;
+            textResonanceFeedback.text = textResonance.text;
+            animatorResonanceFeedback.SetTrigger("Feedback");
+            particleResonanceFeedback.Play();
         }
         public void RemoveResonance()
         {

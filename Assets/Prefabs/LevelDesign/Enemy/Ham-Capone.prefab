@@ -5279,6 +5279,7 @@ MonoBehaviour:
     type: 3}
   onHitParticle: {fileID: 8632996020427025046, guid: bac3adcf32d64cb439972867461be11c,
     type: 3}
+  stopDash: 0
 --- !u!82 &2065373547
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13415,6 +13416,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 643319904}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &49328800084411236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13526,9 +13538,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackStats: {fileID: 11400000, guid: 77151a8bb1c9e494eb43b847f9b4056b, type: 2}
   attackController: {fileID: 6462765910162813120}
+  canInterruptPlayer: 0
   navmeshController: {fileID: 6203795056355527392}
   targetController: {fileID: 694624671662404813}
   aimSpeedFix: 1
+  infiniteAimDistance: 0
   dontCareObstruction: 0
   moveIfObstruction: 1
   stopAimIfObstruction: 0

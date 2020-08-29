@@ -1101,6 +1101,7 @@ GameObject:
   - component: {fileID: 75732251}
   - component: {fileID: 75732250}
   - component: {fileID: 75732249}
+  - component: {fileID: 75732253}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -1252,6 +1253,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &75732253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75732247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 75732252}
 --- !u!1 &88263380
 GameObject:
   m_ObjectHideFlags: 0
@@ -7421,6 +7436,7 @@ GameObject:
   - component: {fileID: 191267731}
   - component: {fileID: 191267730}
   - component: {fileID: 191267729}
+  - component: {fileID: 191267733}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -7572,6 +7588,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &191267733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191267727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 191267732}
 --- !u!1001 &198258641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8217,6 +8247,7 @@ GameObject:
   - component: {fileID: 250871083}
   - component: {fileID: 250871082}
   - component: {fileID: 250871081}
+  - component: {fileID: 250871085}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -8368,6 +8399,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &250871085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250871079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 250871084}
 --- !u!1 &253167042
 GameObject:
   m_ObjectHideFlags: 0
@@ -12336,6 +12381,7 @@ GameObject:
   - component: {fileID: 473535968}
   - component: {fileID: 473535967}
   - component: {fileID: 473535966}
+  - component: {fileID: 473535970}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -12487,6 +12533,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &473535970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473535964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 473535969}
 --- !u!1 &474802034
 GameObject:
   m_ObjectHideFlags: 0
@@ -18436,6 +18496,7 @@ GameObject:
   - component: {fileID: 544144922}
   - component: {fileID: 544144921}
   - component: {fileID: 544144920}
+  - component: {fileID: 544144925}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -18587,6 +18648,20 @@ Transform:
   m_Father: {fileID: 835490383}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 359, z: -0}
+--- !u!114 &544144925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544144919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 544144923}
 --- !u!1 &553725041
 GameObject:
   m_ObjectHideFlags: 0
@@ -21850,6 +21925,7 @@ GameObject:
   - component: {fileID: 871080220}
   - component: {fileID: 871080219}
   - component: {fileID: 871080222}
+  - component: {fileID: 871080223}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -22001,6 +22077,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &871080223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871080217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 871080221}
 --- !u!1 &871332519
 GameObject:
   m_ObjectHideFlags: 0
@@ -23266,6 +23356,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HamtaroA
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540024628575816959, guid: 32aa1518279c0924f938e595190ead67,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4540024628648264613, guid: 32aa1518279c0924f938e595190ead67,
         type: 3}
@@ -26964,6 +27059,7 @@ GameObject:
   - component: {fileID: 1338113210}
   - component: {fileID: 1338113209}
   - component: {fileID: 1338113212}
+  - component: {fileID: 1338113213}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -27115,6 +27211,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1338113213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338113207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 1338113211}
 --- !u!1 &1338572715
 GameObject:
   m_ObjectHideFlags: 0
@@ -32209,6 +32319,7 @@ GameObject:
   - component: {fileID: 1838381183}
   - component: {fileID: 1838381182}
   - component: {fileID: 1838381181}
+  - component: {fileID: 1838381186}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -32360,6 +32471,20 @@ Transform:
   m_Father: {fileID: 1561794015}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 340, y: -4, z: 2}
+--- !u!114 &1838381186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838381180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 1838381184}
 --- !u!1 &1841382988
 GameObject:
   m_ObjectHideFlags: 0
@@ -38988,6 +39113,7 @@ GameObject:
   - component: {fileID: 2030673264}
   - component: {fileID: 2030673263}
   - component: {fileID: 2030673262}
+  - component: {fileID: 2030673266}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -39139,6 +39265,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &2030673266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030673260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 2030673265}
 --- !u!1 &2050556799
 GameObject:
   m_ObjectHideFlags: 0

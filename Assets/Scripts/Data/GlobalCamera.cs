@@ -22,13 +22,8 @@ namespace VoiceActing
         \* ======================================== */
         [SerializeField]
         Camera cameraDefault;
-        /*[SerializeField]
-        Vector2 clampRotation = Vector2.zero;*/
-
         [SerializeField]
         Camera cameraAction;
-        /*[SerializeField]
-        Vector2 clampRotationAction = Vector2.zero;*/
 
         [SerializeField]
         AudioListener defaultListener;
@@ -122,6 +117,11 @@ namespace VoiceActing
         public Vector3 WorldToScreenPoint(Vector3 pos)
         {
             return cameraActive.WorldToScreenPoint(pos);
+        }
+
+        public void SetCameraActive(Camera cam)
+        {
+            cameraActive = cam;
         }
 
 

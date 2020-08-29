@@ -3162,6 +3162,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 295886322}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &295886326 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6794507680626499647, guid: abd3d00614f31a34aa9ae286c4ddfeb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 295886322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &319405517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5657,7 +5663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &640290284
 Transform:
   m_ObjectHideFlags: 0
@@ -6295,6 +6301,7 @@ GameObject:
   - component: {fileID: 723148126}
   - component: {fileID: 723148125}
   - component: {fileID: 723148128}
+  - component: {fileID: 723148129}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -6446,6 +6453,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &723148129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723148123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 723148127}
 --- !u!1 &726905937
 GameObject:
   m_ObjectHideFlags: 0
@@ -10133,6 +10154,7 @@ GameObject:
   - component: {fileID: 1134771763}
   - component: {fileID: 1134771762}
   - component: {fileID: 1134771761}
+  - component: {fileID: 1134771765}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -10284,6 +10306,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1134771765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134771759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 1134771764}
 --- !u!1 &1147821723
 GameObject:
   m_ObjectHideFlags: 0
@@ -15540,6 +15576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1773123717}
   - component: {fileID: 1773123716}
+  - component: {fileID: 1773123718}
   m_Layer: 0
   m_Name: EventEnd
   m_TagString: Untagged
@@ -15598,6 +15635,20 @@ Transform:
   m_Father: {fileID: 137740742}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1773123718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773123715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 295886326}
 --- !u!1 &1789926063
 GameObject:
   m_ObjectHideFlags: 0
@@ -16072,6 +16123,7 @@ GameObject:
   - component: {fileID: 1839931436}
   - component: {fileID: 1839931435}
   - component: {fileID: 1839931434}
+  - component: {fileID: 1839931438}
   m_Layer: 31
   m_Name: CameraCinematique
   m_TagString: Untagged
@@ -16223,6 +16275,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1839931438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839931432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79032c77ae861fa459a6706a7e7ad141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalCamera: {fileID: 11400000, guid: 5e4ea5bd30e8376438244e94457fab7b, type: 2}
+  camera: {fileID: 1839931437}
 --- !u!1 &1856509543
 GameObject:
   m_ObjectHideFlags: 0

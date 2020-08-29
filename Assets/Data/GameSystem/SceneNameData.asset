@@ -42,6 +42,7 @@ MonoBehaviour:
   - Assets/Scenes/HamsterForest/HamsterForest8.unity
   - Assets/Scenes/HamsterForest/ChrisBossFight.unity
   - Assets/Scenes/DeepSpace/DeepSpace1.unity
+  - Assets/Scenes/DeepSpace/SeraphicGate1.unity
   scenesNames:
   - 
   - 
@@ -72,3 +73,4 @@ MonoBehaviour:
   - Hamster Temple - Elevator
   - Hamster Temple - Gate
   - Seraphic Gate 1F
+  - Seraphic Gate

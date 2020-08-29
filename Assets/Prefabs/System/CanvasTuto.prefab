@@ -5022,7 +5022,7 @@ MonoBehaviour:
     damage</color>.
 
 
-    Direct damage can <color=yellow>convert</color> scratch
+    Those damage can <color=yellow>convert</color> scratch
     damage to direct damage.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12909,7 +12909,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 200
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &5647681030530699982
 MonoBehaviour:
