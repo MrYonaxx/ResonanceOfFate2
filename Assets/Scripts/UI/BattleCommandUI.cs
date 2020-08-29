@@ -25,6 +25,8 @@ namespace VoiceActing
         TriAttackManager triAttackManager;
 
         [SerializeField]
+        GameObject commandPanel;
+        [SerializeField]
         GameObject[] commandUI;
 
         [Title("Specific command")]
@@ -36,7 +38,7 @@ namespace VoiceActing
         List<GameObject> triAttackCommand;
 
         int index = 0;
-
+        int show = 0;
         #endregion
 
         #region GettersSetters 
@@ -55,10 +57,15 @@ namespace VoiceActing
         public void Awake()
         {
             inputController.OnInputStateChanged += UpdateCommand;
+            show = PlayerPrefs.GetInt("ShowCommand");
+            if (show == 1)
+                commandPanel.gameObject.SetActive(false);
         }
 
         public void UpdateCommand(InputState newIndex)
         {
+            if (show == 1)
+                return;
             if ((int)newIndex == index || (int) newIndex >= commandUI.Length)
                 return;
             commandUI[index].SetActive(false);

@@ -24,8 +24,19 @@ namespace VoiceActing
         [SerializeField]
         SaveLoadManager saveLoadManager;
         [SerializeField]
+        MenuOptions menuOptions;
+        [SerializeField]
         string startScene;
 
+
+        [Title("Sound")]
+        [SerializeField]
+        protected AudioClip validateClip;
+        [SerializeField]
+        protected AudioClip selectClip;
+
+
+        bool canInput = true;
         bool padDown = false;
         int index = -3;
 
@@ -49,6 +60,7 @@ namespace VoiceActing
         {
             base.Start();
             StartCoroutine(StartLagCoroutine());
+            menuOptions.OnQuit += ReturnToTitleMenu;
         }
 
         private IEnumerator StartLagCoroutine()
@@ -59,10 +71,13 @@ namespace VoiceActing
 
         private void Update()
         {
+            if (canInput == false)
+                return;
             if (index < 0 && index >= -2)
             {
                 if (Input.GetButtonDown(control.buttonA) || Input.GetButtonDown(control.buttonB) || Input.GetButtonDown(control.buttonX) || Input.GetButtonDown(control.buttonY))
                 {
+                    AudioManager.Instance.PlaySound(validateClip);
                     StartTitle();
                 }
             }
@@ -112,19 +127,21 @@ namespace VoiceActing
 
         private void InputPad()
         {
-            if (Input.GetAxis(control.dpadVertical) > 0 && padDown == false)
+            if (Input.GetAxis(control.dpadVertical) < 0 && padDown == false)
             {
+                AudioManager.Instance.PlaySound(selectClip);
                 index += 1;
-                if (index >= 2)
+                if (index >= 4)
                     index = 0;
                 padDown = true;
                 titleAnimator.SetInteger("Selection", index);
             }
-            else if (Input.GetAxis(control.dpadVertical) < 0 && padDown == false)
+            else if (Input.GetAxis(control.dpadVertical) > 0 && padDown == false)
             {
+                AudioManager.Instance.PlaySound(selectClip);
                 index -= 1;
                 if (index < 0)
-                    index = 1;
+                    index = 3;
                 padDown = true;
                 titleAnimator.SetInteger("Selection", index);
             }
@@ -135,11 +152,26 @@ namespace VoiceActing
         {
             if (Input.GetButtonDown(control.buttonA))
             {
+                AudioManager.Instance.PlaySound(validateClip);
                 if (index == 0)
                     NewGame();
                 else if (index == 1)
                     Continue();
+                else if (index == 2)
+                {
+                    canInput = false;
+                    menuOptions.OpenMenu();
+                }
+                else if (index == 3)
+                {
+                    Application.Quit();
+                }
             }
+        }
+
+        public void ReturnToTitleMenu()
+        {
+            canInput = true;
         }
 
         #endregion

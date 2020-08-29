@@ -37,6 +37,12 @@ namespace VoiceActing
         [Title("HUD Resonance")]
         [SerializeField]
         TMPro.TextMeshProUGUI textResonance;
+        [SerializeField]
+        TMPro.TextMeshProUGUI textResonanceFeedback;
+        [SerializeField]
+        Animator animatorResonanceFeedback;
+        [SerializeField]
+        ParticleSystem particleResonanceFeedback;
 
         int indexLeader = 0;
         public int IndexLeader
@@ -57,6 +63,9 @@ namespace VoiceActing
             get { return resonancePoint; }
             set { resonancePoint = value;
                  textResonance.text = resonancePoint.ToString();
+                 textResonanceFeedback.text = textResonance.text;
+                animatorResonanceFeedback.SetTrigger("Feedback");
+                particleResonanceFeedback.Play();
             }
         }
 

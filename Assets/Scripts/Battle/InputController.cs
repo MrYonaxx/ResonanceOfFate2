@@ -145,6 +145,7 @@ namespace VoiceActing
             }
             c = battlePartyManager.GetCharacter();
             timeData.TimeFlow = false;
+            aimReticle.SetMainColor(c.CharacterEquipement.GetWeapon());
         }
 
         private void Update()

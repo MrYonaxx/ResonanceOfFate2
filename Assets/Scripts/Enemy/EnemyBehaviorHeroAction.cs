@@ -34,7 +34,9 @@ namespace VoiceActing
         [ShowIf("canJump")]
         [SerializeField]
         float jumpTimeRatio = 0.2f;
-
+        [ShowIf("canJump")]
+        [SerializeField]
+        bool autoJump = false;
 
         [Title("Targeting")]
         [SerializeField]
@@ -47,11 +49,13 @@ namespace VoiceActing
         Vector3 destination;
         bool isMoving = false;
         bool isJumping = false;
+        bool canStart = false; // Une action ne peut pas commencer si le jeu n'est pas en mode pause 
 
         int layerMask = (1 << 13) | (1 << 17);
 
         public override Character SelectTarget(Enemy enemy)
         {
+            canStart = false;
             canInterruptPlayer = true;
             List<Character> targetable = targetController.GetTarget();
             if (targetable.Count == 0)
@@ -89,7 +93,7 @@ namespace VoiceActing
             if(customPositions.Length != 0)
             {
                 // Eventuellement rajouter un test raycast pour choisir la bonne cover
-                destination = customPositions[Random.Range(0, customPositions.Length - 1)].position;
+                destination = customPositions[Random.Range(0, customPositions.Length)].position;
                 heroActionManager.SetCursor(destination);
                 heroActionManager.ShowCursor(true);
                 return true;
@@ -161,6 +165,8 @@ namespace VoiceActing
         public override float UpdateBehavior(Enemy enemy, Character target, out bool interrupt)
         {
             interrupt = false;
+            if (canStart == false)
+                return 0;
             if (Vector3.Distance(enemy.transform.position, destination) <= 1.2f && isJumping == false)
             {
                 InterruptBehavior();
@@ -172,6 +178,10 @@ namespace VoiceActing
             // Section Jump
             if (canJump == true) 
             {
+                if(autoJump == true)
+                {
+                    Jump(enemy);
+                }
                 if (isJumping == true)
                 {
                     UpdateJump(enemy, target);
@@ -201,7 +211,8 @@ namespace VoiceActing
 
         public override float UpdatePausedBehavior(Enemy enemy, Character target)
         {
-            if(isJumping == true)
+            canStart = true;
+            if (isJumping == true)
             {
                 UpdateJump(enemy, target);
                 return enemy.CharacterStatController.GetAimSpeed();

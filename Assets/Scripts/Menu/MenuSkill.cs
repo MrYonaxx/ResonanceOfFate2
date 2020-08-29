@@ -75,6 +75,12 @@ namespace VoiceActing
         [SerializeField]
         Animator animatorFeedback;
 
+        [Title("Sound")]
+        [SerializeField]
+        AudioClip soundCancel;
+        [SerializeField]
+        AudioClip soundSwitchCharacter;
+
         List<SkillButton> skillButtons = new List<SkillButton>();
         StatController currentCharacterStat;
         int indexCharacterSelection = 0;
@@ -114,6 +120,7 @@ namespace VoiceActing
 
         public override void CloseMenu()
         {
+            AudioManager.Instance.PlaySound(soundCancel);
             canInput = false;
             base.CloseMenu();
 
@@ -131,6 +138,7 @@ namespace VoiceActing
             }
             else if (Input.GetButtonDown(control.buttonRB))
             {
+                AudioManager.Instance.PlaySound(soundSwitchCharacter);
                 indexCharacterSelection += 1;
                 if (indexCharacterSelection >= partyData.CharacterStatControllers.Count)
                     indexCharacterSelection = 0;
@@ -140,6 +148,7 @@ namespace VoiceActing
             }
             else if (Input.GetButtonDown(control.buttonLB))
             {
+                AudioManager.Instance.PlaySound(soundSwitchCharacter);
                 indexCharacterSelection -= 1;
                 if (indexCharacterSelection < 0)
                     indexCharacterSelection = partyData.CharacterStatControllers.Count - 1;

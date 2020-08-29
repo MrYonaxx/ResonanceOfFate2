@@ -285,7 +285,7 @@ namespace VoiceActing
             SetSmoothRotation(smoothRotationJump);
         }
 
-        public void SetSmoothRotation(float newValue, float timeBefore = 0.4f)
+        public void SetSmoothRotation(float newValue, float timeBefore = 0.5f)
         {
             smoothRotation = newValue;
             StartCoroutine(SmoothRotationCoroutine(timeBefore));

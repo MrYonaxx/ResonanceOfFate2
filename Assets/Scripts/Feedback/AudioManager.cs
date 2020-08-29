@@ -47,6 +47,10 @@ namespace VoiceActing
             {
                 Instance = this;
                 DontDestroyOnLoad(this);
+                SetMusicVolume(PlayerPrefs.GetInt("MusicVolume"));
+                //SetSoundVolume(PlayerPrefs.GetInt("SoundVolume"));
+                audioMusic.ignoreListenerVolume = true;
+                audioMusic2.ignoreListenerVolume = true;
             }
         }
 
@@ -175,20 +179,21 @@ namespace VoiceActing
 
         public void SetMusicVolume(int value)
         {
-            musicVolumeMax = (value / 100f);
+            musicVolumeMax = (value / 10f);
             audioMusic.volume = musicVolumeMax;
         }
 
         public void SetSoundVolume(int value)
         {
-            soundVolumeMax = (value / 100f);
+            
+            soundVolumeMax = (value / 10f);
             audioSound.volume = soundVolumeMax;
         }
 
-        public void SetVoiceVolume(int value)
+        /*public void SetVoiceVolume(int value)
         {
             voiceVolumeMax = (value / 100f);
-        }
+        }*/
 
         public void SwitchToBattle(bool b)
         {

@@ -30,6 +30,8 @@ namespace VoiceActing
         GlobalCamera globalCamera;
         [SerializeField]
         TriAttackManager triAttackManager;
+        [SerializeField]
+        CameraLock cameraLock;
 
         [Title("UI")]
         [SerializeField]
@@ -88,10 +90,20 @@ namespace VoiceActing
 
         private IEnumerator InterruptionFeedback(AttackController attack)
         {
+            //cameraLock.SetTarget(attack.transform);
+            //cameraLock.LockOn(false);
+            //cameraLock.SetState(0);
             animatorInterruption.SetTrigger("Feedback");
-            animatorCanvasAction.speed = 0.2f;
-            attack.SetAnimSpeed(0.2f);
-            yield return new WaitForSeconds(0.5f);
+            /*animatorCanvasAction.speed = 0f;
+            attack.SetAnimSpeed(0);
+            globalCamera.ActivateCameraAction(false);
+            yield return new WaitForSeconds(0.4f);*/
+
+            animatorCanvasAction.speed = 0.1f;
+            attack.SetAnimSpeed(0.1f);
+            globalCamera.ActivateCameraAction(true);
+            yield return new WaitForSeconds(1f);
+
             animatorCanvasAction.speed = 1;
             float t = 0f;
             float animSpeed = 0;

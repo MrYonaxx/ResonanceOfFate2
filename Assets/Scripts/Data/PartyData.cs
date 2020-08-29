@@ -112,6 +112,13 @@ namespace VoiceActing
             set { nextZoneEntrance = value; }
         }
 
+        [SerializeField]
+        private float timer;
+        public float Timer
+        {
+            get { return timer; }
+        }
+
 
         public class PartyInitialized
         {
@@ -221,6 +228,49 @@ namespace VoiceActing
             }
             partyInitialized = new PartyInitialized();
         }
+
+
+
+        public void AddTimer()
+        {
+            timer += Time.time;
+        }
+        public void SubstractTimer()
+        {
+            timer -= Time.time;
+        }
+
+        public string GetTimeInHour()
+        {
+            float tmpTimer = timer + Time.time;
+            string hourDecade = "0";
+            string minuteDecade = "0";
+            string secondDecade = "0";
+            int hour = 0;
+            int minute = 0;
+            int second = 0;
+
+            hour = (int)(tmpTimer / 3600);
+            minute = (int)((tmpTimer / 60) % 60);
+            second = (int)(tmpTimer % 60);
+
+            if (hour >= 10)
+            {
+                hourDecade = "";
+            }
+
+            if (minute >= 10)
+            {
+                minuteDecade = "";
+            }
+            if (second >= 10)
+            {
+                secondDecade = "";
+            }
+            return hourDecade + hour + ":" + minuteDecade + minute + ":" + secondDecade + second;
+        }
+
+
 
         #endregion
 

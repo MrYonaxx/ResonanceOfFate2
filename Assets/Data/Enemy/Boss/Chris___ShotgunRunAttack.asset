@@ -35,7 +35,7 @@ MonoBehaviour:
       columnNameCenter: Weapon
       statDictionary2:
       - statName: Aim Speed
-        statValue: 0.6
+        statValue: 0.3
         modifiable: 0
       - statName: Aim Acceleration
         statValue: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
       statValue: 0
       modifiable: 0
     - statName: Aim Speed
-      statValue: 0.6
+      statValue: 0.3
       modifiable: 0
     - statName: Aim Acceleration
       statValue: 0

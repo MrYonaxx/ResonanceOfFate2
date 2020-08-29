@@ -472,6 +472,7 @@ MonoBehaviour:
   normal: {fileID: 8300000, guid: d37764a9f6656ea489fed1c0f634891b, type: 3}
   battle: {fileID: 8300000, guid: 0be3e4f33639df4449f83b5b3fbc3dec, type: 3}
   battleTrack: 0
+  stopMusic: 0
 --- !u!1 &34757959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1125,7 @@ GameObject:
   - component: {fileID: 137740742}
   - component: {fileID: 137740741}
   - component: {fileID: 137740740}
+  - component: {fileID: 137740743}
   m_Layer: 31
   m_Name: Cinematique
   m_TagString: Untagged
@@ -1222,6 +1224,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137740743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137740739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f17520105ce6d4e8302a750b83d0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  control: {fileID: 11400000, guid: 3087a426c4018304398cb64b59b32c7f, type: 2}
+  playableDirector: {fileID: 137740740}
+  timeSkip: 1110
 --- !u!1 &141801344
 GameObject:
   m_ObjectHideFlags: 0
@@ -7925,6 +7942,7 @@ MonoBehaviour:
   normal: {fileID: 8300000, guid: d37764a9f6656ea489fed1c0f634891b, type: 3}
   battle: {fileID: 8300000, guid: 0be3e4f33639df4449f83b5b3fbc3dec, type: 3}
   battleTrack: 0
+  stopMusic: 0
 --- !u!4 &857192260
 Transform:
   m_ObjectHideFlags: 0
@@ -10595,6 +10613,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2465405844519208995, guid: 38cbf4cea7d80ad499d1bbcfaba66853,
         type: 3}
+      propertyPath: allyTransform.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465405844519208995, guid: 38cbf4cea7d80ad499d1bbcfaba66853,
+        type: 3}
       propertyPath: allyTransform.Array.data[0]
       value: 
       objectReference: {fileID: 2021646872}
@@ -13060,6 +13083,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7791283387124572718, guid: c91058c96fcf5db48b068685324e65a7,
         type: 3}
+      propertyPath: allyTransform.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791283387124572718, guid: c91058c96fcf5db48b068685324e65a7,
+        type: 3}
       propertyPath: allyTransform.Array.data[1]
       value: 
       objectReference: {fileID: 53464854}
@@ -13442,6 +13470,7 @@ MonoBehaviour:
   normal: {fileID: 0}
   battle: {fileID: 0}
   battleTrack: 0
+  stopMusic: 0
 --- !u!1 &1502139322
 GameObject:
   m_ObjectHideFlags: 0

@@ -111,7 +111,6 @@ namespace VoiceActing
 
         private void Awake()
         {
-            Debug.Log("Entrée N°" + partyData.NextZoneEntrance);
             CreateDebugParty();
             InitializeCharacters();
         }
@@ -153,7 +152,6 @@ namespace VoiceActing
                 party[i].CharacterStatController.OnHPChanged += playerHUDs[i].HpGauge.DrawGauge;
                 party[i].CharacterStatController.OnScratchChanged += playerHUDs[i].ScratchGauge.DrawGauge;
 
-                Debug.Log(entranceTransforms.Count);
                 if (entranceTransforms.Count > partyData.NextZoneEntrance) 
                 {
                     party[i].CharacterMovement.SetPosition(entranceTransforms[partyData.NextZoneEntrance].position + (Quaternion.Euler(0, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.y, entranceTransforms[partyData.NextZoneEntrance].eulerAngles.z) * playerPositionOffset[i]));

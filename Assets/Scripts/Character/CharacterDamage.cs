@@ -88,6 +88,7 @@ namespace VoiceActing
         public event HitAction OnHit;
         public event Action OnLaunch;
         public event Action OnSmackdown;
+        public event Action OnInterrupt;
         public event ActionInt OnHitAerial;
         public event Action OnDead;
 
@@ -117,10 +118,10 @@ namespace VoiceActing
             if (isDead == true || isInvulnerable == true)
                 return;
 
-            if(characterAnimation.State == CharacterState.Dash)
+            /*if (characterAnimation.State == CharacterState.Dash)
             {
-
-            }
+                OnInterrupt.Invoke();
+            }*/
 
             DamageMessage msg = characterBodyPartController.Damage(attackData, characterMovement.CharacterDirection.DirectionTransform);
             //DamageMessage msg = attackData.AttackProcessor.ProcessAttack(attackData.AttackDataStat, characterStatController);

@@ -20,6 +20,8 @@ namespace VoiceActing
         [SerializeField]
         PartyData partyData;
         [SerializeField]
+        SceneNameData sceneNameData;
+        [SerializeField]
         TypeDictionary weaponDictionary;
 
         [Title("Parameter")]
@@ -48,6 +50,10 @@ namespace VoiceActing
         [Space]
         [SerializeField]
         TextMeshProUGUI currentScene;
+        [SerializeField]
+        TextMeshProUGUI playTime;
+
+        int previousMenu = -1;
 
 
         private void Start()
@@ -55,14 +61,14 @@ namespace VoiceActing
             subMenuSelectionList.OnValidate += Validate;
             subMenuSelectionList.OnSelect += DrawTextSelected;
             subMenuSelectionList.OnQuit += CloseMainMenu;
-            //OpenMenu();
         }
 
         public override void OpenMenu()
         {
             base.OpenMenu();
             DrawCharacters();
-            currentScene.text = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name; // c'est pas bon
+            currentScene.text = sceneNameData.GetSceneName();
+            playTime.text = partyData.GetTimeInHour();
         }
 
         public override void OpenMenuLate()
@@ -115,8 +121,11 @@ namespace VoiceActing
         {
             if (subMenu[index] == null ||index >= subMenu.Count)
                 return;
+            if(previousMenu > -1)
+                subMenu[previousMenu].OnQuit -= OpenMenu;
             subMenu[index].OpenMenu();
             subMenu[index].OnQuit += OpenMenu;
+            previousMenu = index;
             CloseMenu();
         }
 

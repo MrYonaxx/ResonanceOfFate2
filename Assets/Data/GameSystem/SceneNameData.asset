@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07299e13a2edb1418e74f6dd0299342, type: 3}
+  m_Name: SceneNameData
+  m_EditorClassIdentifier: 
+  scenesID:
+  - Assets/Scenes/TitleScreen.unity
+  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/Tuto/Tuto1.unity
+  - Assets/Scenes/Tuto/Tuto2.unity
+  - Assets/Scenes/Tuto/Tuto3.unity
+  - Assets/Scenes/Tuto/Tuto4.unity
+  - Assets/Scenes/Tuto/Tuto5.unity
+  - Assets/Scenes/Tuto/Tuto6.unity
+  - Assets/Scenes/Tuto/Tuto7.unity
+  - Assets/Scenes/Tuto/Tuto8.unity
+  - Assets/Scenes/Tuto/Tuto9.unity
+  - Assets/Scenes/HamsterForest/HamsterForest0.unity
+  - Assets/Scenes/HamsterForest/HamsterForest1.unity
+  - Assets/Scenes/HamsterForest/HamsterForest2.unity
+  - Assets/Scenes/HamsterForest/HamsterForest2.1.unity
+  - Assets/Scenes/HamsterForest/HamsterForest3.unity
+  - Assets/Scenes/HamsterForest/HamsterForest3.1.unity
+  - Assets/Scenes/HamsterForest/HamsterForest3.2.unity
+  - Assets/Scenes/HamsterForest/HamsterForest3.3.unity
+  - Assets/Scenes/HamsterForest/HamsterForest4.unity
+  - Assets/Scenes/HamsterForest/HamsterForest5.unity
+  - Assets/Scenes/HamsterForest/HamsterForest5.1.unity
+  - Assets/Scenes/HamsterForest/HamsterForest5.2.unity
+  - Assets/Scenes/HamsterForest/HamsterForest5.3.unity
+  - Assets/Scenes/HamsterForest/HamsterForest6.unity
+  - Assets/Scenes/HamsterForest/HamsterForest7.unity
+  - Assets/Scenes/HamsterForest/HamsterForest8.unity
+  - Assets/Scenes/HamsterForest/ChrisBossFight.unity
+  - Assets/Scenes/DeepSpace/DeepSpace1.unity
+  scenesNames:
+  - 
+  - 
+  - Mysterious Cave
+  - Mysterious Cave - Bridge
+  - Mysterious Cave - Safezone
+  - Hamster Cave
+  - Hamster Cave
+  - Hamster Cave - Maintenance Section
+  - Hamster Cave - Maintenance Bridge
+  - Hamster Cave - Maintenance Door
+  - Hamster Cave - Entrance
+  - Hamster Cave - Depth
+  - Hamster Cave - Passage
+  - Hamster Cave - Crossroads
+  - Hamster Cave - Excavation Site
+  - Hamster Cave - Temple
+  - Hamster Temple - Corridors
+  - Hamster Temple - Road to Seraph Gate
+  - Hamster Temple - Ruins
+  - Hamster Cave - Abyss
+  - Hamster Cave - Rampart
+  - Hamster Cave - House
+  - Hamster Cave - Warehouse
+  - Hamster Cave - Belvedere
+  - Hamster Cave - Stairway to heaven
+  - Hamster Cave - Altar
+  - Hamster Temple - Elevator
+  - Hamster Temple - Gate
+  - Seraphic Gate 1F

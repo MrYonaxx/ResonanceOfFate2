@@ -176,8 +176,12 @@ namespace VoiceActing
             direction = destination - characterTransform.position;
            // directionNormalize = direction.normalized;
             time = (direction.magnitude / speed) / 60f;// Pas framerate machin < ------------------ Il est là le problème
-            if(debugMarker != null)
+            if (debugMarker != null)
+            {
                 debugMarker.transform.position = destination;
+                debugMarker.SetParent(null);
+                debugMarker.gameObject.SetActive(true);
+            }
 
             currentDistance += (new Vector2(destination.x, destination.z) - PositionToVector2()).magnitude;
             characterAfterImage.StartAfterImage();
@@ -232,6 +236,7 @@ namespace VoiceActing
         }
         private void EndTriAttack()
         {
+            if(debugMarker != null) debugMarker.gameObject.SetActive(false);
             positions.Clear();
             characterAfterImage.EndAfterImage();
             characterMovement.OnCollisionWall -= CallWallCollision;

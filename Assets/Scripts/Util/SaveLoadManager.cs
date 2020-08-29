@@ -64,6 +64,8 @@ namespace VoiceActing
             partyData.SceneName = SceneManager.GetActiveScene().name;
             partyData.SavePartyData(playerDatabase, gameVariableDatabase, chestVariableDatabase);
 
+            partyData.AddTimer(); // (j'ajoute le temps pour la save puis je l'enlève une fois enregistré)
+
             string json = JsonUtility.ToJson(partyData);
             string filePath = string.Format("{0}/saves/{1}{2}.json", Application.persistentDataPath, saveFileName, index);
             Debug.Log(filePath);
@@ -74,6 +76,8 @@ namespace VoiceActing
                 Directory.CreateDirectory(fileInfo.Directory.FullName);
             }
             File.WriteAllText(filePath, json);
+
+            partyData.SubstractTimer();
         }
 
         public bool LoadPlayerProfile(int index)

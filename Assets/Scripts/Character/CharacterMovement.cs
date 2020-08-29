@@ -193,14 +193,13 @@ namespace VoiceActing
                 if (hit.normal.y <= 0.01f && hit.normal.y >= -0.01f)
                 {
                     if (OnCollisionWall != null) OnCollisionWall.Invoke();
-                    Debug.Log(gameObject.name + " " + hit.gameObject.name + " " + hit.normal);
+                    //Debug.Log(gameObject.name + " " + hit.gameObject.name + " " + hit.normal);
                 }
             }
             if (hit.transform.CompareTag("Enemy") || hit.transform.CompareTag("Player"))
             {
                 if(transform.position.y > hit.collider.bounds.center.y)
                 {
-                    Debug.Log("Atcha");
                     MoveCharacterManual((hit.collider.bounds.size.x * 0.5f) + hit.controller.radius + hit.controller.skinWidth, 0, (hit.collider.bounds.size.z * 0.5f) + hit.controller.radius + hit.controller.skinWidth);
                 }
             }

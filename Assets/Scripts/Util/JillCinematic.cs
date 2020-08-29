@@ -69,6 +69,8 @@ namespace VoiceActing
         {
             jill.Enemy.CharacterStatController.OnHPChanged += CheckHP;
             chris.Enemy.CharacterStatController.OnHPChanged += CheckHP;
+            chris.Enemy.CharacterStatController.OnScratchChanged += CheckScratch;
+            jill.Enemy.CharacterStatController.OnScratchChanged += CheckScratch;
         }
 
         public void CheckHP(float a, float b)
@@ -77,10 +79,17 @@ namespace VoiceActing
             {
                 jill.Enemy.CharacterStatController.OnHPChanged -= CheckHP;
                 chris.Enemy.CharacterStatController.OnHPChanged -= CheckHP;
+                chris.Enemy.CharacterStatController.OnScratchChanged -= CheckScratch;
+                jill.Enemy.CharacterStatController.OnScratchChanged -= CheckScratch;
                 enemyManager.ResetQueue();
                 enemyManager.QueueAttack(this, false);
             }
 
+        }
+
+        public void CheckScratch(float a, float b)
+        {
+            CheckHP(a,b);
         }
 
         public void PerformAction()

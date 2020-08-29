@@ -843,6 +843,7 @@ GameObject:
   - component: {fileID: 77840179}
   - component: {fileID: 77840178}
   - component: {fileID: 77840177}
+  - component: {fileID: 77840180}
   m_Layer: 17
   m_Name: Explosion
   m_TagString: Untagged
@@ -859,7 +860,7 @@ Transform:
   m_GameObject: {fileID: 77840175}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.19999999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0, z: 0.5}
   m_Children:
   - {fileID: 1742965226}
   - {fileID: 1832957771}
@@ -879,6 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onHitParticle: {fileID: 0}
+  particleOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &77840178
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -942,6 +944,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &77840180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77840175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8903490bc60258e46a77cf6c3ead7bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventCine:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1848747954}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &86301512
 GameObject:
   m_ObjectHideFlags: 0
@@ -12801,6 +12829,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1856509544}
     m_Modifications:
+    - target: {fileID: 133945522176112961, guid: 5a6d4be5842118c4d8fec2da0b39b781,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1686326
+      objectReference: {fileID: 0}
     - target: {fileID: 1694427794908976737, guid: 5a6d4be5842118c4d8fec2da0b39b781,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13162,6 +13195,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1856509544}
     m_Modifications:
+    - target: {fileID: 133945522176112961, guid: 5a6d4be5842118c4d8fec2da0b39b781,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1686326
+      objectReference: {fileID: 0}
     - target: {fileID: 1694427794908976737, guid: 5a6d4be5842118c4d8fec2da0b39b781,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17625,7 +17663,7 @@ MonoBehaviour:
     type: 2}
   characterCenter: {fileID: 1941344011}
   targetDirection: {fileID: 433173795}
-  explosionAnimation: {fileID: 1138940387}
+  explosionAnimation: {fileID: 1096115685}
   explosion: {fileID: 1546444220}
 --- !u!4 &1290362866
 Transform:
@@ -21218,6 +21256,7 @@ GameObject:
   - component: {fileID: 1546444222}
   - component: {fileID: 1546444221}
   - component: {fileID: 1546444220}
+  - component: {fileID: 1546444224}
   m_Layer: 17
   m_Name: Explosion
   m_TagString: Untagged
@@ -21238,6 +21277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onHitParticle: {fileID: 0}
+  particleOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &1546444221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21310,13 +21350,39 @@ Transform:
   m_GameObject: {fileID: 1546444219}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.19999999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0, z: 0.5}
   m_Children:
   - {fileID: 185604885}
   - {fileID: 535371364}
   m_Father: {fileID: 1096115683}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1546444224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546444219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8903490bc60258e46a77cf6c3ead7bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventCine:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1138940387}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1565309780
 GameObject:
   m_ObjectHideFlags: 0
@@ -23162,7 +23228,7 @@ MonoBehaviour:
     type: 2}
   characterCenter: {fileID: 729594051}
   targetDirection: {fileID: 925838922}
-  explosionAnimation: {fileID: 1848747954}
+  explosionAnimation: {fileID: 1402470167}
   explosion: {fileID: 77840177}
 --- !u!65 &1797931797
 BoxCollider:
@@ -23411,6 +23477,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1856509544}
     m_Modifications:
+    - target: {fileID: 133945522176112961, guid: 5a6d4be5842118c4d8fec2da0b39b781,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1686326
+      objectReference: {fileID: 0}
     - target: {fileID: 1694427794908976737, guid: 5a6d4be5842118c4d8fec2da0b39b781,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26860,6 +26931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onHitParticle: {fileID: 0}
+  particleOffset: {x: 0, y: 0, z: 0}
 --- !u!212 &3079992022803034175
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -26969,7 +27041,7 @@ Transform:
   m_GameObject: {fileID: 5593245457070509607}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.19999999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0, z: 0.5}
   m_Children:
   - {fileID: 1786878576109609817}
   - {fileID: 2107303031108504384}
@@ -26988,6 +27060,7 @@ GameObject:
   - component: {fileID: 3121002007181534448}
   - component: {fileID: 1069570593408898198}
   - component: {fileID: 2681792832511153324}
+  - component: {fileID: 5593245457070509608}
   m_Layer: 17
   m_Name: Explosion
   m_TagString: Untagged
@@ -26995,6 +27068,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &5593245457070509608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593245457070509607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8903490bc60258e46a77cf6c3ead7bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventCine:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 487744940}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &6063461138110605428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27203,7 +27302,7 @@ MonoBehaviour:
     type: 2}
   characterCenter: {fileID: 6063461138282323865}
   targetDirection: {fileID: 302561421}
-  explosionAnimation: {fileID: 487744940}
+  explosionAnimation: {fileID: 1012545411398997066}
   explosion: {fileID: 2681792832511153324}
 --- !u!114 &6379773228103962257
 MonoBehaviour:
