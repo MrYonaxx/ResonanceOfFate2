@@ -113,11 +113,11 @@ namespace VoiceActing
             Time.timeScale = 0f;
             yield return new WaitForSecondsRealtime(1f);
             StartCoroutine(DrawTextCoroutine(oldLevel, textCharacterOldLevel));
-            yield return new WaitForSecondsRealtime(1f);
+            yield return WaitLevelUpCoroutine(1f, c, oldLevel);
             StartCoroutine(DrawTextCoroutine(c.CharacterStatController.Level, textCharacterNewLevel));
-            yield return new WaitForSecondsRealtime(0.5f);
+            yield return WaitLevelUpCoroutine(0.5f, c, oldLevel);
             StartCoroutine(DrawTextCoroutine((int)c.CharacterGrowthController.GetStatAtLevel(statHP, oldLevel), textCharacterOldHP));
-            yield return new WaitForSecondsRealtime(1f);
+            yield return WaitLevelUpCoroutine(1f, c, oldLevel);
             StartCoroutine(DrawTextCoroutine((int)c.CharacterStatController.GetStat(statHP), textCharacterNewHP));
             // Placeholder
             AttackAimProperty a = c.GotNewSkill(c.CharacterStatController.Level);
@@ -126,16 +126,23 @@ namespace VoiceActing
                 panelNewSkill.SetActive(true);
                 textSkillProperty.text = "Charge " + a.GetCharge(0) + "   :   " + a.GetLabel() + a.GetLabelValue(a.GetCharge(0));
             }
+            SkipLevel(c, oldLevel);
+        }
 
-            while (true)
+        private IEnumerator WaitLevelUpCoroutine(float time, CharacterEquipementController c, int oldLevel)
+        {
+            float t = 0f;
+            while (t < time)
             {
+                t += Time.unscaledDeltaTime;
                 if (Input.GetButtonDown(control.buttonA))
-                    break;
+                {
+                    yield return null;
+                    SkipLevel(c, oldLevel);
+                }
                 yield return null;
             }
-            Time.timeScale = 1f;
-            panelNewSkill.SetActive(false);
-            animatorLevelUp.gameObject.SetActive(false);
+            yield return null;
         }
 
         private IEnumerator DrawTextCoroutine(int targetValue, TextMeshProUGUI text)
@@ -150,6 +157,37 @@ namespace VoiceActing
                 yield return null;
             }
             text.text = targetValue.ToString();
+        }
+
+        public void SkipLevel(CharacterEquipementController c, int oldLevel)
+        {
+            StopAllCoroutines();
+            animatorLevelUp.SetTrigger("Skip");
+            textCharacterOldLevel.text = oldLevel.ToString();
+            textCharacterNewLevel.text = c.CharacterStatController.Level.ToString();
+            textCharacterOldHP.text = ((int)c.CharacterGrowthController.GetStatAtLevel(statHP, oldLevel)).ToString();
+            textCharacterNewHP.text = ((int)c.CharacterStatController.GetStat(statHP)).ToString();
+
+            AttackAimProperty a = c.GotNewSkill(c.CharacterStatController.Level);
+            if (a != null)
+            {
+                panelNewSkill.SetActive(true);
+                textSkillProperty.text = "Charge " + a.GetCharge(0) + "   :   " + a.GetLabel() + a.GetLabelValue(a.GetCharge(0));
+            }
+            StartCoroutine(EndLevelCoroutine());
+        }
+
+        private IEnumerator EndLevelCoroutine()
+        {
+            while (true)
+            {
+                if (Input.GetButtonDown(control.buttonA))
+                    break;
+                yield return null;
+            }
+            Time.timeScale = 1f;
+            panelNewSkill.SetActive(false);
+            animatorLevelUp.gameObject.SetActive(false);
         }
 
 

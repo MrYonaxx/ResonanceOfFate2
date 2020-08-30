@@ -17,6 +17,8 @@ namespace VoiceActing
 
         [SerializeField]
         WeaponData fallAttackData;
+        [SerializeField]
+        WeaponData fallAttackDataEnemy;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -29,6 +31,14 @@ namespace VoiceActing
                 c.CharacterTriAttack.CallWallCollision(99);
                 StartCoroutine(FallCoroutine(c));
             }
+            else if (other.CompareTag("Enemy"))
+            {
+                Character c = other.GetComponent<Character>();
+                AttackData attack = new AttackData(fallAttackDataEnemy.AttackProcessor, null, fallAttackDataEnemy);
+                attack.AttackDataStat.Damage += 99999;
+                c.CharacterDamage.Damage(c.transform.position, attack);
+                StartCoroutine(DeathCoroutine(c));
+            }
         }
 
         private IEnumerator FallCoroutine(Character c)
@@ -36,13 +46,12 @@ namespace VoiceActing
             yield return new WaitForSeconds(2f);
             c.CharacterMovement.SetInput(true);
         }
-        /*private void OnTriggerExit(Collider other)
+
+        private IEnumerator DeathCoroutine(Character c)
         {
-            if (other.CompareTag("Player"))
-            {
-                other.GetComponent<PlayerCharacter>().Interactions.Remove(this);
-            }
-        }*/
+            yield return new WaitForSeconds(5f);
+            Destroy(c.gameObject);
+        }
 
     } 
 

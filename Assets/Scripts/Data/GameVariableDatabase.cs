@@ -81,6 +81,7 @@ namespace VoiceActing
         public void AddGameVariable(string name, float val)
         {
             gameVariables.Add(new GameVariable(name, val));
+            UnityEditor.EditorUtility.SetDirty(this); // Sinon ça ne serialize pas la variable
         }
         public void RemoveVariable(string name)
         {

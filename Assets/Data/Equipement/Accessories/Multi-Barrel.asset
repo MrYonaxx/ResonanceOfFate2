@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 2ec81dfafbe89e246be363ab2945451a, type: 3}
   itemName: Multi-Barrel
-  itemDescription: An additional barrel increasing damage by 10%.
+  itemDescription: Additional barrels increasing damage by 10%.
   statModifiers:
   - statName: Attack
     statValue: 0.1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 2ec81dfafbe89e246be363ab2945451a, type: 3}
   itemName: Protective Suit
-  itemDescription: An suit reducing damage taken by 15%.
+  itemDescription: A suit reducing damage taken by 15%.
   statModifiers:
   - statName: Defense
     statValue: -0.15

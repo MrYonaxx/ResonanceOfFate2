@@ -22,7 +22,7 @@ MonoBehaviour:
   charge: 050000000a000000
   multiplier:
   - 0
-  - 1
+  - 10
   infinite: 0
   maxLevel: 10
   startMultiplier: 0

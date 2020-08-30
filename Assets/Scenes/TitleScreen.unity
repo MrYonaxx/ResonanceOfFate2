@@ -1014,8 +1014,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press A Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e5500ab644220ca46a042e3280cb41aa, type: 2}
+  m_sharedMaterial: {fileID: 808794975447722136, guid: e5500ab644220ca46a042e3280cb41aa,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1728,8 +1729,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Options
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06b48aff4ac8a7047984b48cbb0ab4ce, type: 2}
+  m_sharedMaterial: {fileID: -5151215702335275820, guid: 06b48aff4ac8a7047984b48cbb0ab4ce,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2372,8 +2374,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: New game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06b48aff4ac8a7047984b48cbb0ab4ce, type: 2}
+  m_sharedMaterial: {fileID: -5151215702335275820, guid: 06b48aff4ac8a7047984b48cbb0ab4ce,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2529,8 +2532,9 @@ MonoBehaviour:
   m_text: "This is a non-profit fan game, \nResonance of Fate\u2122 / End of eternity\u2122
     is a property of tri-Ace INC. / Sega"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06b48aff4ac8a7047984b48cbb0ab4ce, type: 2}
+  m_sharedMaterial: {fileID: -5151215702335275820, guid: 06b48aff4ac8a7047984b48cbb0ab4ce,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2836,8 +2840,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06b48aff4ac8a7047984b48cbb0ab4ce, type: 2}
+  m_sharedMaterial: {fileID: -5151215702335275820, guid: 06b48aff4ac8a7047984b48cbb0ab4ce,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2992,8 +2997,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06b48aff4ac8a7047984b48cbb0ab4ce, type: 2}
+  m_sharedMaterial: {fileID: -5151215702335275820, guid: 06b48aff4ac8a7047984b48cbb0ab4ce,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

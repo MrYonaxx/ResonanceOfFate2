@@ -145,7 +145,9 @@ namespace VoiceActing
             {
                 animator.SetBool("Appear", false);
                 previousTarget = null;
-                targetDirection = null; 
+                targetDirection = null;
+                for (int i = 0; i < gaugeDrawers.Count; i++)
+                    gaugeDrawers[i].gameObject.SetActive(false);
                 return;
             }
             targetDirection = characterStat.TargetDirection;

@@ -107,6 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transparentMaterial: {fileID: 2100000, guid: 1fed0234233ed5c42ac70892f6bb10d7, type: 2}
-  time: 2
+  time: 1
   alphaValue: 0.1
   objectRenderer: {fileID: 4336855849495251199}

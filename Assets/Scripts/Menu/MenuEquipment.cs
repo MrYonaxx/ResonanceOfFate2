@@ -46,9 +46,10 @@ namespace VoiceActing
         [SerializeField]
         TextMeshProUGUI textCharacterName;
         [SerializeField]
-        Image imageCharacterFaceOutline;
+        Image[] imageCharacterFaceOutline;
         [SerializeField]
-        Image imageCharacterFace;
+        Image[] imageCharacterFace;
+
 
         [SerializeField]
         [ValueDropdown("GetStatList")]
@@ -61,11 +62,15 @@ namespace VoiceActing
         List<float> statMultiplier; // Pour donner des valeurs "propres" et pas de 1,2 chelou
 
         [SerializeField]
+        GameObject panelDescription;
+        [SerializeField]
         TextMeshProUGUI textItemDescription;
 
         [Title("Feedback (Note faire plusieurs canvas par menu)")]
         [SerializeField]
         Animator animatorFeedback;
+        [SerializeField]
+        Animator animatorCharacterRotation;
 
         [Title("Sound")]
         [SerializeField]
@@ -141,6 +146,12 @@ namespace VoiceActing
                 return;
             if (equipementListDrawer.InputList())
                 return;
+            else if (Input.GetButtonDown(control.buttonY))
+            {
+                RemoveItem();
+                DrawCharacter();
+                return;
+            }
             else if (Input.GetButtonDown(control.buttonRB))
             {
                 AudioManager.Instance.PlaySound(soundSwitchCharacter);
@@ -148,6 +159,7 @@ namespace VoiceActing
                 if (indexCharacterSelection >= partyData.CharacterStatControllers.Count)
                     indexCharacterSelection = 0;
                 animatorFeedback.SetTrigger("Feedback");
+                animatorCharacterRotation.SetTrigger("RotateRight");
                 DrawCharacter();
                 return;
             }
@@ -158,6 +170,7 @@ namespace VoiceActing
                 if (indexCharacterSelection < 0)
                     indexCharacterSelection = partyData.CharacterStatControllers.Count-1;
                 animatorFeedback.SetTrigger("Feedback");
+                animatorCharacterRotation.SetTrigger("RotateLeft");
                 DrawCharacter();
                 return;
             }
@@ -167,10 +180,17 @@ namespace VoiceActing
         public void DrawCharacter()
         {
             textCharacterName.text = partyData.CharacterStatControllers[indexCharacterSelection].CharacterData.CharacterName;
-            imageCharacterFaceOutline.sprite = partyData.CharacterStatControllers[indexCharacterSelection].CharacterData.CharacterFace;
-            imageCharacterFace.sprite = partyData.CharacterStatControllers[indexCharacterSelection].CharacterData.CharacterFace;
+
             currentCharacterStat = partyData.CharacterStatControllers[indexCharacterSelection].StatController;
             previewCharacterStat = partyData.CharacterStatControllers[indexCharacterSelection].StatController;
+            int index = indexCharacterSelection;
+            for (int i = 0; i < imageCharacterFaceOutline.Length; i++)
+            {
+                imageCharacterFace[i].sprite = partyData.CharacterStatControllers[index].CharacterData.CharacterFace;
+                imageCharacterFaceOutline[i].sprite = partyData.CharacterStatControllers[index].CharacterData.CharacterFace;
+                index += 1;
+                index = index % partyData.CharacterStatControllers.Count;
+            }
             DrawCharacterStat();
             DrawEquipement();
 
@@ -233,6 +253,7 @@ namespace VoiceActing
 
         public void DrawItemPreview(int index)
         {
+            panelDescription.SetActive(true);
             textItemDescription.text = itemsInventory[index].ItemDescription;
             DrawCharacterStatPreview((ArmorData) itemsInventory[index]);
         }
@@ -240,7 +261,12 @@ namespace VoiceActing
         public void DrawEquipementDescription(int index)
         {
             if (partyData.CharacterEquipement[indexCharacterSelection].GetArmor(index) == null)
+            {
+                panelDescription.SetActive(false);
+                textItemDescription.text = "";
                 return;
+            }
+            panelDescription.SetActive(true);
             textItemDescription.text = partyData.CharacterEquipement[indexCharacterSelection].GetArmor(index).ItemDescription;
         }
 
@@ -254,7 +280,12 @@ namespace VoiceActing
             SwitchToEquipement();
         }
 
-
+        public void RemoveItem()
+        {
+            ArmorData removedItem = partyData.CharacterEquipement[indexCharacterSelection].RemoveArmor(equipementListDrawer.IndexSelection);
+            if (removedItem != null)
+                partyData.Inventory.Add(removedItem.name);
+        }
 
 
 
