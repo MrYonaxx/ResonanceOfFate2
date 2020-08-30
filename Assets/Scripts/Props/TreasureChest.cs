@@ -75,6 +75,7 @@ namespace VoiceActing
                 canInteract = false;
             else
                 canInteract = true;
+            Debug.Log(chestDatabase.GetValue(chestID));
             DrawChest();
         }
 
@@ -168,13 +169,13 @@ namespace VoiceActing
 
         private void Start()
         {
+            CheckOpen();
 #if UNITY_EDITOR
             if (EditorApplication.isPlaying)
             {
                 return;
             }
 #endif
-            CheckOpen();
         }
 
 

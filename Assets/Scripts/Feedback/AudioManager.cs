@@ -91,6 +91,7 @@ namespace VoiceActing
             audioMusic2.Play();
             StopAllCoroutines();
             PlayMusicCoroutine(timeFade);
+            StartCoroutine(CoroutineLoop(musicBattle));
         }
 
         private IEnumerator PlayMusicCoroutine(float timeFade)
@@ -228,6 +229,17 @@ namespace VoiceActing
             }
             audioMusic.volume = volumeNormal;
             audioMusic2.volume = volumeBattle;
+        }
+
+        private IEnumerator CoroutineLoop(AudioClip a)
+        {
+            audioMusic.loop = false;
+            while (audioMusic.isPlaying)
+                yield return null;
+            Debug.Log("allo");
+            audioMusic.loop = true;
+            audioMusic.clip = a;
+            audioMusic.Play();
         }
 
 

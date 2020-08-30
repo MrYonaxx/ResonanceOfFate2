@@ -108,7 +108,6 @@ namespace VoiceActing
                     yield return null;
                 }
             }
-            Debug.Log(partyData.NextZoneEntrance);
             SceneManager.LoadScene(zoneName);
         }
 
