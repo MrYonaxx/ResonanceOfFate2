@@ -236,7 +236,6 @@ namespace VoiceActing
             audioMusic.loop = false;
             while (audioMusic.isPlaying)
                 yield return null;
-            Debug.Log("allo");
             audioMusic.loop = true;
             audioMusic.clip = a;
             audioMusic.Play();

@@ -165,6 +165,7 @@ namespace VoiceActing
 
         private void CheckLaunch(AttackData attackData)
         {
+
             if (characterMovement.IsGrounded() == true && attackData.AttackDataStat.UserPosition.y-1 <= this.transform.position.y)
             {
                 if (airborne == false)
@@ -198,6 +199,15 @@ namespace VoiceActing
             {
                 bounce = true;
                 if (OnSmackdown != null) OnSmackdown.Invoke();
+            }
+            else if (characterAnimation.State == CharacterState.Jump && airborne == false && attackData.AttackDataStat.UserPosition.y - 1 <= this.transform.position.y) // Si l'ennemi a sauté et qu'on le knockback dans les air c'est bon
+            {
+                airborne = true;
+                characterMovement.ResetSpeedY();
+                characterMovement.Jump(5f - characterStatController.GetStat(statMass));
+                if (airborneClip != null)
+                    AudioManager.Instance.PlaySound(airborneClip);
+                if (OnLaunch != null) OnLaunch.Invoke();
             }
         }
 
