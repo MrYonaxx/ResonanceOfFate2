@@ -54,6 +54,11 @@ namespace VoiceActing
 
         List<float> timePlayer = new List<float>();
         List<PlayerHUD> playerHUDs = new List<PlayerHUD>();
+        public List<PlayerHUD> PlayerHUDs
+        {
+            get { return playerHUDs; }
+        }
+
 
         public delegate void ActionCharacterChange(PlayerCharacter playerCharacter);
         public event ActionCharacterChange OnCharacterChange;

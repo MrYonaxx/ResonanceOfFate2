@@ -94,7 +94,7 @@ namespace VoiceActing
         {
             healthGauge.DrawHealthGauge(characterStat.GetHP(), characterStat.GetHPMax(), characterStat.GetScratch());
         }*/
-        public void DrawTarget(Character c)
+        public void DrawTarget(Character c, bool interruption)
         {
             textTarget.text = c.CharacterStatController.CharacterData.CharacterName[0].ToString();
         }

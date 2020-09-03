@@ -57,6 +57,11 @@ namespace VoiceActing
 
 
         Character target;
+        public Character Target
+        {
+            get { return target; }
+        }
+
 
         bool pause = false;
         bool attackCharged = false;
@@ -73,13 +78,14 @@ namespace VoiceActing
 
 
         public delegate void AimAction(float value, float maxValue);
-        public delegate void SelectionAction(Character target);
+        public delegate void SelectionAction(Character target, bool interruption);
         public delegate void EnemyAction(EnemyController enemyController, bool interruption);
 
 
         public event AimAction OnAimChanged;
 
         public event SelectionAction OnAttackSelected;
+        //public event SelectionAction OnTargetLost;
         public event EnemyAction OnAttackCharged;
         public event EnemyAction OnAttackInterrupted;
 
@@ -238,7 +244,7 @@ namespace VoiceActing
                     // Pattern sélectionné
                     currentBehavior = behaviors[indexAttack];
                     enemy.CharacterStatController.AddStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
-                    if (OnAttackSelected != null) OnAttackSelected.Invoke(target);
+                    if (OnAttackSelected != null) OnAttackSelected.Invoke(target, currentBehavior.CanInterruptPlayer());
                     return;
                 }
                 indexAttack += 1;
@@ -303,6 +309,7 @@ namespace VoiceActing
                 AimTime = 0;
                 enemy.CharacterStatController.RemoveStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
                 currentBehavior.InterruptBehavior();
+                if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this, currentBehavior.CanInterruptPlayer());
                 currentBehavior = null;
                 attackCharged = false;
             }

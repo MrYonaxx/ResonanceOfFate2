@@ -38,6 +38,7 @@ namespace VoiceActing
             get { return scratchGauge; }
         }
 
+
         [Title("Weapon")]
         [SerializeField]
         TypeDictionary weaponTypeDatabase;
@@ -65,7 +66,17 @@ namespace VoiceActing
         }
 
 
-        //bool isSelected = false;
+        [Title("TargetMarker")]
+        [SerializeField]
+        Image targetMarker;
+        [SerializeField]
+        Color colorNotTargeted;
+        [SerializeField]
+        Color colorTargeted;
+        [SerializeField]
+        Color colorTargetedInterrupt;
+
+        List<bool> targetInterrupt = new List<bool>();
 
         #endregion
 
@@ -114,6 +125,39 @@ namespace VoiceActing
         public void HideOrder()
         {
             textTriAttackOrder.text = "";
+        }
+
+        public void Target(bool interrupt)
+        {
+            targetInterrupt.Add(interrupt);
+            DrawMarker();
+        }
+
+        public void Untarget(bool interrupt)
+        {
+            targetInterrupt.Remove(interrupt);
+            DrawMarker();
+        }
+
+        public void DrawMarker()
+        {
+            if(targetInterrupt.Count == 0)
+            {
+                targetMarker.enabled = false;
+            }
+            else
+            {
+                targetMarker.enabled = true;
+                for (int i = 0; i < targetInterrupt.Count; i++)
+                {
+                    if(targetInterrupt[i] == true)
+                    {
+                        targetMarker.color = colorTargetedInterrupt;
+                        return;
+                    }
+                }
+                targetMarker.color = colorTargeted;
+            }
         }
 
         #endregion
