@@ -24373,7 +24373,7 @@ MonoBehaviour:
   gaugeMoveTime: {fileID: 6794507681473946482}
   targetMarker: {fileID: 5654234167316177625}
   colorNotTargeted: {r: 0, g: 0, b: 0, a: 0}
-  colorTargeted: {r: 0.78431374, g: 0.78431374, b: 0, a: 1}
+  colorTargeted: {r: 0.78431374, g: 0.78431374, b: 0, a: 0.7058824}
   colorTargetedInterrupt: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &6794507681473946492
 MonoBehaviour:
