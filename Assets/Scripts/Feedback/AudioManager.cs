@@ -34,6 +34,10 @@ namespace VoiceActing
         [SerializeField]
         private Animator trackManager;
 
+        [Header("Loop")]
+        [SerializeField]
+        AudioLoopManager loopManager;
+
 
         public static AudioManager Instance;
 
@@ -78,7 +82,7 @@ namespace VoiceActing
             StartCoroutine(PlayMusicCoroutine(timeFade));
         }
 
-        public void PlayMusic(AudioClip music, AudioClip musicBattle, float timeFade = 1)
+        public void PlayMusic(AudioClip music, AudioClip musicBattle, AudioClip musicLoop, AudioClip musicBattleLoop, float timeFade = 1)
         {
             if (music == audioMusic.clip)
             {
@@ -91,7 +95,10 @@ namespace VoiceActing
             audioMusic2.Play();
             StopAllCoroutines();
             PlayMusicCoroutine(timeFade);
-            StartCoroutine(CoroutineLoop(musicBattle));
+
+            loopManager.StopAllLoop();
+            loopManager.Loop(audioMusic, musicLoop);
+            loopManager.Loop(audioMusic2, musicBattleLoop);
         }
 
         private IEnumerator PlayMusicCoroutine(float timeFade)
@@ -230,18 +237,6 @@ namespace VoiceActing
             audioMusic.volume = volumeNormal;
             audioMusic2.volume = volumeBattle;
         }
-
-        private IEnumerator CoroutineLoop(AudioClip a)
-        {
-            audioMusic.loop = false;
-            while (audioMusic.isPlaying)
-                yield return null;
-            audioMusic.loop = true;
-            audioMusic.clip = a;
-            audioMusic.Play();
-        }
-
-
     } // AudioManager class
 
 } // #PROJECTNAME# namespace

@@ -469,8 +469,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0f2ac05f3c9d446989066dda0adf81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: {fileID: 8300000, guid: d37764a9f6656ea489fed1c0f634891b, type: 3}
-  battle: {fileID: 8300000, guid: 0be3e4f33639df4449f83b5b3fbc3dec, type: 3}
+  normal: {fileID: 8300000, guid: 541c86ebed657e54aa44bcb80255e766, type: 3}
+  battle: {fileID: 8300000, guid: 65977122f45ddf24093159cbc4cd54b0, type: 3}
+  normalLoop: {fileID: 8300000, guid: 59762f37024e602429c2cb5b297e50e0, type: 3}
+  battleLoop: {fileID: 8300000, guid: 2e61d24c0dd34964f8d8d037d76b56be, type: 3}
   battleTrack: 0
   stopMusic: 0
 --- !u!1 &34757959
@@ -7960,8 +7962,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0f2ac05f3c9d446989066dda0adf81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: {fileID: 8300000, guid: d37764a9f6656ea489fed1c0f634891b, type: 3}
-  battle: {fileID: 8300000, guid: 0be3e4f33639df4449f83b5b3fbc3dec, type: 3}
+  normal: {fileID: 8300000, guid: 541c86ebed657e54aa44bcb80255e766, type: 3}
+  battle: {fileID: 8300000, guid: 65977122f45ddf24093159cbc4cd54b0, type: 3}
+  normalLoop: {fileID: 8300000, guid: 59762f37024e602429c2cb5b297e50e0, type: 3}
+  battleLoop: {fileID: 8300000, guid: 2e61d24c0dd34964f8d8d037d76b56be, type: 3}
   battleTrack: 0
   stopMusic: 0
 --- !u!4 &857192260
@@ -13505,6 +13509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normal: {fileID: 0}
   battle: {fileID: 0}
+  normalLoop: {fileID: 0}
+  battleLoop: {fileID: 0}
   battleTrack: 0
   stopMusic: 0
 --- !u!1 &1502139322

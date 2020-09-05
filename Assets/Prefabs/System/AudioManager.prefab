@@ -392,6 +392,7 @@ GameObject:
   - component: {fileID: 8645882302510627816}
   - component: {fileID: 8645882302510627831}
   - component: {fileID: 8645882302510627817}
+  - component: {fileID: 4342561865452110816}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -436,6 +437,7 @@ MonoBehaviour:
   audioSound: {fileID: 8645882301147845223}
   audioVoice: {fileID: 0}
   trackManager: {fileID: 8645882302510627817}
+  loopManager: {fileID: 4342561865452110816}
 --- !u!95 &8645882302510627817
 Animator:
   serializedVersion: 3
@@ -455,3 +457,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4342561865452110816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8645882302510627830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323fd91aa25ea3946a6924c66994d141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
