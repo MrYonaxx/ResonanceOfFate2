@@ -75,6 +75,9 @@ namespace VoiceActing
         private bool isInvulnerable;
         public bool IsInvulnerable { get { return isInvulnerable; } set { isInvulnerable = value; } }
 
+        private bool isInterruptable;
+        public bool IsInterruptable { get { return isInterruptable; } set { isInterruptable = value; } }
+
         private bool isDead;
         public bool IsDead { get { return isDead; } }
 
@@ -136,6 +139,16 @@ namespace VoiceActing
             }
             if(msg.damageRaw + msg.damageScratch > 0)
                 shakeSprite.Shake(0.05f, 0.2f);
+
+            if(isInterruptable == true)
+            {
+                if (airborneClip != null)
+                    AudioManager.Instance.PlaySound(airborneClip);
+                Knockback();
+                if(OnInterrupt != null) OnInterrupt.Invoke();
+                isInterruptable = false;
+            }
+
             if (isKnockback == false && msg.knockback == true)
                 Knockback();
             else if (isKnockback == true)

@@ -134,6 +134,7 @@ namespace VoiceActing
             HeroActionLine lineToRender = GetLine(0);
             for (int i = 0; i < lineToRender.line.Count; i++)
             {
+   
                 lineToRender.line[i].SetTrigger("Reset");
             }
         }

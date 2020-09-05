@@ -30,6 +30,8 @@ namespace VoiceActing
         [SerializeField]
         Animator textSmackdown;
         [SerializeField]
+        Animator textInterrupt;
+        [SerializeField]
         Animator textWin;
 
         #endregion
@@ -61,11 +63,13 @@ namespace VoiceActing
 
         public void OnListAdd(EnemyController enemy)
         {
+            enemy.Enemy.CharacterDamage.OnInterrupt += InterruptTrigger;
             enemy.Enemy.CharacterDamage.OnLaunch += LaunchTrigger;
             enemy.Enemy.CharacterDamage.OnSmackdown += SmackdownTrigger;
         }
         public void OnListRemove(EnemyController enemy)
         {
+            enemy.Enemy.CharacterDamage.OnInterrupt -= InterruptTrigger;
             enemy.Enemy.CharacterDamage.OnLaunch -= LaunchTrigger;
             enemy.Enemy.CharacterDamage.OnSmackdown -= SmackdownTrigger;
         }
@@ -75,7 +79,10 @@ namespace VoiceActing
             battleEnemyManager.OnWin += WinTrigger;
         }
 
-
+        public void InterruptTrigger()
+        {
+            textInterrupt.SetTrigger("Feedback");
+        }
         public void LaunchTrigger()
         {
             textLaunch.SetTrigger("Feedback");

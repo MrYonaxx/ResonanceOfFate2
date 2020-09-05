@@ -14,8 +14,11 @@ namespace VoiceActing
 {
     public class EnemyBehaviorHeroAction: EnemyBehavior
     {
+        [Title("Hero Action")]
         [SerializeField]
         EnemyNavmeshController navmeshController = null;
+        [SerializeField]
+        CharacterDamage characterDamage = null;
 
         [SerializeField]
         EnemyHeroAction heroActionManager = null;
@@ -137,7 +140,7 @@ namespace VoiceActing
             if (isJumping == true)
                 return;
 
-            heroActionManager.Desactivate();
+            //heroActionManager.Desactivate();
             afterImageEffect.StartAfterImage();
         }
 
@@ -219,7 +222,7 @@ namespace VoiceActing
             }
             else
             {
-                heroActionManager.CheckPlayerIntersections();
+                characterDamage.IsInterruptable = heroActionManager.CheckPlayerIntersections();
                 return 0;
             }
         }

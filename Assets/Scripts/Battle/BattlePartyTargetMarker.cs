@@ -35,11 +35,13 @@ namespace VoiceActing
         public void OnListAdd(EnemyController enemy)
         {
             enemy.OnAttackSelected += DrawAttackTarget;
+            enemy.OnAttackEnded += DrawAttackUntarget;
             enemy.OnAttackInterrupted += DrawAttackUntarget;
         }
         public void OnListRemove(EnemyController enemy)
         {
             enemy.OnAttackSelected -= DrawAttackTarget;
+            enemy.OnAttackEnded -= DrawAttackUntarget;
             enemy.OnAttackInterrupted -= DrawAttackUntarget;
         }
 

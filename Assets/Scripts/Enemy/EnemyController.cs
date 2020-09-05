@@ -88,6 +88,7 @@ namespace VoiceActing
         //public event SelectionAction OnTargetLost;
         public event EnemyAction OnAttackCharged;
         public event EnemyAction OnAttackInterrupted;
+        public event EnemyAction OnAttackEnded;
 
         #endregion
 
@@ -309,7 +310,7 @@ namespace VoiceActing
                 AimTime = 0;
                 enemy.CharacterStatController.RemoveStat(currentBehavior.GetWeaponData().BaseStat, StatModifierType.Flat);
                 currentBehavior.InterruptBehavior();
-                if (OnAttackInterrupted != null) OnAttackInterrupted.Invoke(this, currentBehavior.CanInterruptPlayer());
+                if (OnAttackEnded != null) OnAttackEnded.Invoke(this, currentBehavior.CanInterruptPlayer());
                 currentBehavior = null;
                 attackCharged = false;
             }
