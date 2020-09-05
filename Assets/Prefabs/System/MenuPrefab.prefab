@@ -24730,8 +24730,8 @@ MonoBehaviour:
   selectionName: {fileID: 6167848218334352917}
   characterPanel:
   - {fileID: 5221241348123786701}
-  - {fileID: 6167848217889106588}
   - {fileID: 6167848219214244455}
+  - {fileID: 6167848217889106588}
   imageCharacterFace:
   - {fileID: 6167848217907228441}
   - {fileID: 4983318792439397407}

@@ -246,6 +246,12 @@ namespace VoiceActing
             if (OnEndAction != null) OnEndAction.Invoke(idAttacker);
         }
 
+        public void InterruptTriAttack()
+        {
+            StopAllCoroutines();
+            FinalizeTriAttack();
+            EndTriAttack();
+        }
 
         private void CheckIntersection()
         {

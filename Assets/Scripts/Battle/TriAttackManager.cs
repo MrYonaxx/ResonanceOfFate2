@@ -273,6 +273,14 @@ namespace VoiceActing
 
         //private IEnumerator 
 
+        public void ForceStopTriAttack()
+        {
+            for (int i = 0; i < party.Count; i++)
+            {
+                if(party[i].CharacterTriAttack.IsTriAttacking == true)
+                    party[i].CharacterTriAttack.InterruptTriAttack();
+            }
+        }
 
 
         public void AddResonance()

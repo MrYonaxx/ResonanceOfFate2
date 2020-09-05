@@ -2234,11 +2234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -2272,6 +2272,7 @@ MonoBehaviour:
   - {fileID: 287251664}
   - {fileID: 2098762839}
   tripleFeverAnim: {fileID: 253461996}
+  canvasScaler: {fileID: 573975670}
 --- !u!1 &575190629
 GameObject:
   m_ObjectHideFlags: 0
@@ -6173,6 +6174,7 @@ MonoBehaviour:
   - {fileID: 622088207}
   aimSound: {fileID: 6794507682352397209}
   chargeSound: {fileID: 8300000, guid: 620f301d90024ec47be41d7cde1af7ac, type: 3}
+  canvasScaler: {fileID: 1831463358}
 --- !u!114 &1831463361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14218,6 +14220,7 @@ MonoBehaviour:
   partyManager: {fileID: 6794507681747555110}
   enemyManager: {fileID: 6794507681524889408}
   feverTimeManager: {fileID: 573975671}
+  triAttackManager: {fileID: 6794507680610033196}
   cameraLock: {fileID: 6794507681563685037}
   aimReticle: {fileID: 6794507682352397286}
   finalPosition: {fileID: 6794507680401067564}
@@ -15407,11 +15410,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -23830,6 +23833,7 @@ MonoBehaviour:
   scratchGauge: {fileID: 6794507681435701158}
   actionGauge: {fileID: 6794507681435701157}
   textTarget: {fileID: 6794507682072478905}
+  canvasScaler: {fileID: 6794507680740359966}
 --- !u!114 &6794507681435701159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29489,6 +29493,7 @@ MonoBehaviour:
   popupDamageRaw: {fileID: 6794507681208125478}
   popupDamageScratch: {fileID: 6794507682302746989}
   transformDamageRawScratch: {fileID: 6794507680235720907}
+  canvasScaler: {fileID: 6794507681832985230}
 --- !u!114 &6794507681832985228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35026,6 +35031,7 @@ MonoBehaviour:
   - {fileID: 6794507681915697894}
   aimSound: {fileID: 6794507682352397209}
   chargeSound: {fileID: 8300000, guid: 620f301d90024ec47be41d7cde1af7ac, type: 3}
+  canvasScaler: {fileID: 6794507681904834525}
 --- !u!114 &6794507682352397210
 MonoBehaviour:
   m_ObjectHideFlags: 0

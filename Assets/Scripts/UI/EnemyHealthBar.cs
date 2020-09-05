@@ -48,8 +48,14 @@ namespace VoiceActing
         [SerializeField]
         TextMeshProUGUI textTarget;
 
+
+        [SerializeField]
+        RectTransform canvasScaler;
+
         Transform target;
         RectTransform transformGauge;
+        Vector2 ratio;
+
         #endregion
 
         #region GettersSetters 
@@ -67,15 +73,20 @@ namespace VoiceActing
         \* ======================================== */
         private void Start()
         {
+            ratio = canvasScaler.sizeDelta / new Vector2(Screen.width, Screen.height);
+            ratio = new Vector2(Mathf.Max(1, ratio.x), Mathf.Max(1, ratio.y));
+            ratio *= new Vector2(Screen.width, Screen.height);
+
             transformGauge = GetComponent<RectTransform>();
         }
 
         private void Update()
         {
+
             if (Vector3.Dot(globalCamera.Forward(), target.position - globalCamera.Position()) >= 0)
             {
                 //gameObject.SetActive(true);
-                transformGauge.anchoredPosition = globalCamera.WorldToScreenPoint(target.position);
+                transformGauge.anchoredPosition = globalCamera.WorldToViewportPoint(target.position) * ratio;
             }
             else
             {

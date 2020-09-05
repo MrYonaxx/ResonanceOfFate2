@@ -96,6 +96,9 @@ namespace VoiceActing
         [SerializeField]
         AudioClip chargeSound;
 
+        [SerializeField]
+        RectTransform canvasScaler;
+
         bool pause = false;
 
         float maxAmount = 1f;
@@ -118,6 +121,8 @@ namespace VoiceActing
 
         private IEnumerator fillCoroutine;
 
+        private Vector2 ratio;
+
         #endregion
 
         #region GettersSetters 
@@ -136,6 +141,10 @@ namespace VoiceActing
 
         public void SetTarget(Transform newTransform)
         {
+            ratio = canvasScaler.sizeDelta / new Vector2(Screen.width, Screen.height);
+            ratio = new Vector2(Mathf.Max(1, ratio.x), Mathf.Max(1, ratio.y));
+            ratio *= new Vector2(Screen.width, Screen.height);
+
             targetAim = newTransform;
             if (targetAim == null)
                 reticlePosition.anchoredPosition = new Vector2(-9999, -9999);
@@ -148,7 +157,7 @@ namespace VoiceActing
                 return;
             if (Vector3.Dot(globalCamera.Forward(), targetAim.position - globalCamera.Position()) >= 0)
             {
-                reticlePosition.anchoredPosition = Vector2.Lerp(reticlePosition.anchoredPosition, globalCamera.WorldToScreenPoint(targetAim.position), 0.5f);
+                reticlePosition.anchoredPosition = Vector2.Lerp(reticlePosition.anchoredPosition, globalCamera.WorldToViewportPoint(targetAim.position) * ratio, 0.5f);
                 //reticlePosition.anchoredPosition = globalCamera.WorldToScreenPoint(targetAim.position);
             }
             else

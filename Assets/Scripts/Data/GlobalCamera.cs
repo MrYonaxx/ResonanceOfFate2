@@ -118,6 +118,10 @@ namespace VoiceActing
         {
             return cameraActive.WorldToScreenPoint(pos);
         }
+        public Vector3 WorldToViewportPoint(Vector3 pos)
+        {
+            return cameraActive.WorldToViewportPoint(pos);
+        }
 
         public void SetCameraActive(Camera cam)
         {

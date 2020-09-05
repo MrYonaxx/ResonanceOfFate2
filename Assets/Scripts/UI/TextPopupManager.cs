@@ -49,6 +49,11 @@ namespace VoiceActing
 
         private IEnumerator popupCoroutine;
 
+
+        [SerializeField]
+        RectTransform canvasScaler;
+        Vector2 ratio;
+
         #endregion
 
         #region GettersSetters 
@@ -64,10 +69,18 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
+        private void Start()
+        {
+            ratio = canvasScaler.sizeDelta / new Vector2(Screen.width, Screen.height);
+            ratio = new Vector2(Mathf.Max(1, ratio.x), Mathf.Max(1, ratio.y));
+            ratio *= new Vector2(Screen.width, Screen.height);
+        }
+
         private void Awake()
         {
             globalDamageable.AddListener(this);
         }
+
         private void OnDestroy()
         {
             globalDamageable.RemoveListener(this);
@@ -155,7 +168,7 @@ namespace VoiceActing
                 for (int i = 0; i < popupTime.Count; i++)
                 {
                     popupTime[i] -= Time.deltaTime;
-                    popupRectTransforms[i].anchoredPosition = globalCamera.WorldToScreenPoint(popupPosition[i]);
+                    popupRectTransforms[i].anchoredPosition = globalCamera.WorldToViewportPoint(popupPosition[i]) * ratio;
 
                     if(popupTime[i] <= 0)
                     {

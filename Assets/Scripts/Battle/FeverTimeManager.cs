@@ -75,6 +75,13 @@ namespace VoiceActing
 
         private IEnumerator feverCoroutine;
 
+        [Space]
+        [Space]
+        [Space]
+        [SerializeField]
+        RectTransform canvasScaler;
+        Vector2 ratio;
+
         #endregion
 
         #region GettersSetters 
@@ -90,7 +97,12 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-
+        private void Start()
+        {
+            ratio = canvasScaler.sizeDelta / new Vector2(Screen.width, Screen.height);
+            ratio = new Vector2(Mathf.Max(1, ratio.x), Mathf.Max(1, ratio.y));
+            ratio *= new Vector2(Screen.width, Screen.height);
+        }
         private void Awake()
         {
             globalEnemyList.AddListener(this);
@@ -193,7 +205,7 @@ namespace VoiceActing
                     StopCoroutine();
                     yield break;
                 }
-                reticlePosition.anchoredPosition = Vector2.Lerp(reticlePosition.anchoredPosition, globalCamera.WorldToScreenPoint(targetAim.CharacterCenter.transform.position), 0.5f);
+                reticlePosition.anchoredPosition = Vector2.Lerp(reticlePosition.anchoredPosition, globalCamera.WorldToViewportPoint(targetAim.CharacterCenter.transform.position) * ratio, 0.5f);
                 yield return null;
             }
         }
@@ -232,7 +244,7 @@ namespace VoiceActing
             while (t < 1.5f)
             {
                 t += Time.deltaTime;
-                reticlePosition.anchoredPosition = Vector2.Lerp(reticlePosition.anchoredPosition, globalCamera.WorldToScreenPoint(targetAim.CharacterCenter.transform.position), 0.5f);
+                reticlePosition.anchoredPosition = Vector2.Lerp(reticlePosition.anchoredPosition, globalCamera.WorldToViewportPoint(targetAim.CharacterCenter.transform.position) * ratio, 0.5f);
 
                 globalCamera.GetCameraAction().position = Vector3.Lerp(globalCamera.GetCameraAction().position, destination, smoothCamera);
                 UpdateLockRotation();

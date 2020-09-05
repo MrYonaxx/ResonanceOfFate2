@@ -29,6 +29,8 @@ namespace VoiceActing
         BattleEnemyManager enemyManager;
         [SerializeField]
         FeverTimeManager feverTimeManager;
+        [SerializeField]
+        TriAttackManager triAttackManager;
 
         [Space]
         [SerializeField]
@@ -98,6 +100,8 @@ namespace VoiceActing
             cameraLock.SetFocus(finalPosition);
             cameraLock.LockOn(false);
             cameraLock.SetTarget(null);
+
+            triAttackManager.ForceStopTriAttack();
 
             StartCoroutine(EndBattleCoroutine());
         }
