@@ -186,8 +186,8 @@ namespace VoiceActing
             indexOptions[indexResolution] = PlayerPrefs.GetInt("Resolution");
             indexOptions[indexQuality] = PlayerPrefs.GetInt("Quality");
 
-            indexOptions[indexMusic] = PlayerPrefs.GetInt("MusicVolume");
-            indexOptions[indexSound] = PlayerPrefs.GetInt("SoundVolume");
+            indexOptions[indexMusic] = PlayerPrefs.GetInt("MusicVolume", 10);
+            indexOptions[indexSound] = PlayerPrefs.GetInt("SoundVolume", 10);
 
             indexOptions[indexShowCommand] = PlayerPrefs.GetInt("ShowCommand");
             indexOptions[indexLanguage] = PlayerPrefs.GetInt("Language");

@@ -51,7 +51,7 @@ namespace VoiceActing
             {
                 Instance = this;
                 DontDestroyOnLoad(this);
-                SetMusicVolume(PlayerPrefs.GetInt("MusicVolume"));
+                SetMusicVolume(PlayerPrefs.GetInt("MusicVolume", 10));
                 //SetSoundVolume(PlayerPrefs.GetInt("SoundVolume"));
                 audioMusic.ignoreListenerVolume = true;
                 audioMusic2.ignoreListenerVolume = true;
