@@ -93,6 +93,8 @@ namespace VoiceActing
         float verticalAxis = 0;
         float originalSmoothRotation = 0;
 
+        bool ignoreCommand = false; // Utilisé dans les ciné ou les moments ou on veut forcer l'attention sur quelque chose et que le joueur ne puisse pas détourner le regard
+
         #endregion
 
         #region GettersSetters 
@@ -119,6 +121,8 @@ namespace VoiceActing
 
         public void SetFocus(Transform newFocus)
         {
+            if (ignoreCommand == true)
+                return;
             focus = newFocus;
         }
 
@@ -127,6 +131,10 @@ namespace VoiceActing
             return focus;
         }
 
+        public void SetIgnoreCommand(bool b)
+        {
+            ignoreCommand = b;
+        }
 
 
 

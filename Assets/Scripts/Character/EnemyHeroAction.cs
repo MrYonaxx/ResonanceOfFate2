@@ -128,6 +128,16 @@ namespace VoiceActing
         }
 
 
+        protected override void FeedbackLine(int lineID)
+        {
+            HeroActionLine lineToRender = GetLine(lineID);
+            for (int i = 0; i < lineToRender.line.Count; i++)
+            {
+                lineToRender.line[i].SetTrigger("LineFeedback");
+                lineToRender.line[i].ResetTrigger("Reset");
+            }
+        }
+
 
         private void UnfeedbackLine()
         {

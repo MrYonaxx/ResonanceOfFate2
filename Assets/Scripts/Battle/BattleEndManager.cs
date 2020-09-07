@@ -95,13 +95,16 @@ namespace VoiceActing
             aimReticle.SetTarget(null);
             //aimReticle.enabled = false;
 
+            triAttackManager.ForceStopTriAttack();
             finalPosition.position = enemyManager.GetEnemies()[0].transform.position;
+
             cameraLock.SetState(0);
             cameraLock.SetFocus(finalPosition);
             cameraLock.LockOn(false);
             cameraLock.SetTarget(null);
+            cameraLock.SetIgnoreCommand(true);
 
-            triAttackManager.ForceStopTriAttack();
+
 
             StartCoroutine(EndBattleCoroutine());
         }
@@ -112,6 +115,7 @@ namespace VoiceActing
             yield return new WaitForSeconds(3f);
             globalFeedback.SetMotionSpeed(1f);
             AudioManager.Instance.SwitchToBattle(false);
+            cameraLock.SetIgnoreCommand(false);
             cameraLock.SetFocus(partyManager.GetCharacter().CharacterCenter.transform);
             inputController.ResumeInput();
             eventEndBattle.Invoke();

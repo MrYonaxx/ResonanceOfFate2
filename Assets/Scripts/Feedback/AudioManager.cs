@@ -84,7 +84,7 @@ namespace VoiceActing
 
         public void PlayMusic(AudioClip music, AudioClip musicBattle, AudioClip musicLoop, AudioClip musicBattleLoop, float timeFade = 1)
         {
-            if (music == audioMusic.clip)
+            if (musicLoop == audioMusic.clip)
             {
                 audioMusic.volume = musicVolumeMax;
                 return;
@@ -189,6 +189,7 @@ namespace VoiceActing
         {
             musicVolumeMax = (value / 10f);
             audioMusic.volume = musicVolumeMax;
+            audioMusic2.volume = musicVolumeMax;
         }
 
         public void SetSoundVolume(int value)
@@ -197,11 +198,6 @@ namespace VoiceActing
             soundVolumeMax = (value / 10f);
             audioSound.volume = soundVolumeMax;
         }
-
-        /*public void SetVoiceVolume(int value)
-        {
-            voiceVolumeMax = (value / 100f);
-        }*/
 
         public void SwitchToBattle(bool b)
         {

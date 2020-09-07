@@ -56,6 +56,10 @@ namespace VoiceActing
         [SerializeField]
         TextMeshProUGUI textNextExp = null;
 
+        // À dégager
+        [SerializeField]
+        AudioClip levelUpClip = null;
+
 
 
 #if UNITY_EDITOR
@@ -110,6 +114,7 @@ namespace VoiceActing
 
         private IEnumerator LevelUpCoroutine(CharacterEquipementController c, int oldLevel)
         {
+            AudioManager.Instance.PlaySound(levelUpClip);
             Time.timeScale = 0f;
             yield return new WaitForSecondsRealtime(1f);
             StartCoroutine(DrawTextCoroutine(oldLevel, textCharacterOldLevel));

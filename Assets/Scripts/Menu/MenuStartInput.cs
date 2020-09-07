@@ -27,6 +27,9 @@ namespace VoiceActing
         [SerializeField]
         BattleEnemyManager battleEnemyManager;
 
+        [SerializeField]
+        AudioClip menuClip;
+
         bool canInput = true;
 
 
@@ -63,6 +66,7 @@ namespace VoiceActing
                         canvasMainMenu.gameObject.SetActive(true);
                         menuParty.OpenMenu();
                         canInput = false;
+                        AudioManager.Instance.PlaySound(menuClip);
                     }
                 }
             }

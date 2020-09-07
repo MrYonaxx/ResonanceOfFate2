@@ -269,6 +269,8 @@ namespace VoiceActing
             float z;
             while(true)
             {
+                if (Time.timeScale == 0)
+                    yield return null;
                 originalRot = pivot.localEulerAngles;
                 pivot.LookAt(target.position);
                 newRot = pivot.localEulerAngles;

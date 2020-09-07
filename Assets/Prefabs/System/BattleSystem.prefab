@@ -15809,6 +15809,7 @@ MonoBehaviour:
   panelNewSkill: {fileID: 5279277118337184478}
   textSkillProperty: {fileID: 7743183011432641689}
   textNextExp: {fileID: 6794507680606923034}
+  levelUpClip: {fileID: 8300000, guid: d50aa4dbd6eecd74281973e481670ff4, type: 3}
 --- !u!1 &6794507680729297203
 GameObject:
   m_ObjectHideFlags: 0

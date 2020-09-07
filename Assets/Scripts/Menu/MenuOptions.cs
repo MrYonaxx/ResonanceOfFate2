@@ -285,10 +285,17 @@ namespace VoiceActing
 
         public void ActivateFullscreen()
         {
-            if(indexOptions[indexFullscreen] == 0)
+            Screen.fullScreen = true;
+            if (indexOptions[indexFullscreen] == 0)
+            {
+                Screen.fullScreen = true;
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            }
             else
+            {
+                Screen.fullScreen = false;
                 Screen.fullScreenMode = FullScreenMode.Windowed;
+            }
         }
         public void ChangeResolution()
         {

@@ -400,7 +400,7 @@ namespace VoiceActing
             }
         }
 
-        protected void FeedbackLine(int lineID)
+        protected virtual void FeedbackLine(int lineID)
         {
             HeroActionLine lineToRender = GetLine(lineID);
             for (int i = 0; i < lineToRender.line.Count; i++)
