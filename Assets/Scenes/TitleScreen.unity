@@ -2300,6 +2300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normal: {fileID: 8300000, guid: c01f5ada46077bb4993ada9e99b122e6, type: 3}
   battle: {fileID: 8300000, guid: c01f5ada46077bb4993ada9e99b122e6, type: 3}
+  normalLoop: {fileID: 8300000, guid: c01f5ada46077bb4993ada9e99b122e6, type: 3}
+  battleLoop: {fileID: 8300000, guid: c01f5ada46077bb4993ada9e99b122e6, type: 3}
   battleTrack: 0
   stopMusic: 0
 --- !u!4 &1494876370

@@ -52,7 +52,6 @@ namespace VoiceActing
                 Instance = this;
                 DontDestroyOnLoad(this);
                 SetMusicVolume(PlayerPrefs.GetInt("MusicVolume", 10));
-                //SetSoundVolume(PlayerPrefs.GetInt("SoundVolume"));
                 audioMusic.ignoreListenerVolume = true;
                 audioMusic2.ignoreListenerVolume = true;
             }
@@ -129,7 +128,6 @@ namespace VoiceActing
         {
             if (timeFade <= 0)
                 timeFade = 1;
-            //float speedFade = Mathf.Max(audioMusic.volume / timeFade, audioMusic2.volume / timeFade);
             float music1Volume = audioMusic.volume;
             float music2Volume = audioMusic2.volume;
             float t = 0f;
@@ -140,8 +138,11 @@ namespace VoiceActing
                 audioMusic2.volume = Mathf.Lerp(music2Volume, 0, t);
                 yield return null;
             }
+            loopManager.StopAllLoop();
             audioMusic.volume = 0;
+            audioMusic.clip = null;
             audioMusic2.volume = 0;
+            audioMusic2.clip = null;
         }
 
 
@@ -155,8 +156,6 @@ namespace VoiceActing
 
         private IEnumerator FadeVolumeWithPitch(float time)
         {
-            //float speed = Mathf.Max(audioMusic.volume / time, audioMusic2.volume / time);
-            //audioMusic.pitch += 1;
             float t = 0f;
             while (t < 1f)
             {
@@ -188,8 +187,10 @@ namespace VoiceActing
         public void SetMusicVolume(int value)
         {
             musicVolumeMax = (value / 10f);
-            audioMusic.volume = musicVolumeMax;
-            audioMusic2.volume = musicVolumeMax;
+            if(audioMusic.volume != 0)
+                audioMusic.volume = musicVolumeMax;
+            if(audioMusic2.volume != 0)
+                audioMusic2.volume = musicVolumeMax;
         }
 
         public void SetSoundVolume(int value)

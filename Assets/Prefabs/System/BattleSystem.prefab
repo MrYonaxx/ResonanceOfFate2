@@ -1021,6 +1021,7 @@ MonoBehaviour:
   stopTime: 0
   manualTarget: 0
   actionMode: 1
+  animationNumber: 1
   targetDebug: {fileID: 0}
 --- !u!95 &175552495
 Animator:
@@ -1212,6 +1213,7 @@ MonoBehaviour:
   stopTime: 0
   manualTarget: 0
   actionMode: 1
+  animationNumber: 1
   targetDebug: {fileID: 0}
 --- !u!1 &266762547
 GameObject:
@@ -9955,7 +9957,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -100, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6794507680241408307
 CanvasRenderer:
@@ -20733,7 +20735,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bf904f39548b86e4ebf9579448311c4f, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 

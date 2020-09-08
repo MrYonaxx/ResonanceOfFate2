@@ -520,6 +520,8 @@ AnimationClip:
     - time: 0.9166667
       value: {fileID: -8520805394362164887, guid: fe74c9a5c08eb1f42ac6bb9f676c21f9,
         type: 3}
+    - time: 1.3333334
+      value: {fileID: 0}
     attribute: m_Sprite
     path: LeanneSprite
     classID: 212
@@ -609,12 +611,13 @@ AnimationClip:
     - {fileID: -8520805394362164887, guid: fe74c9a5c08eb1f42ac6bb9f676c21f9, type: 3}
     - {fileID: 1884460892604760189, guid: fe74c9a5c08eb1f42ac6bb9f676c21f9, type: 3}
     - {fileID: -8520805394362164887, guid: fe74c9a5c08eb1f42ac6bb9f676c21f9, type: 3}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.3333334
+    m_StopTime: 1.35
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

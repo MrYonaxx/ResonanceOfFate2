@@ -176,10 +176,10 @@ namespace VoiceActing
                 return;
 
             t += Time.deltaTime;
-            if (t >= 1)
+            if (t >= 2)
             {
                 Debug.Log("Loop");
-                t = 1f;
+                t = 2f;
                 this.enabled = false;
                 return;
             }

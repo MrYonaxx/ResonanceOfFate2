@@ -24099,7 +24099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Accuraccy
+  m_text: Accuracy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06b48aff4ac8a7047984b48cbb0ab4ce, type: 2}
   m_sharedMaterial: {fileID: -5151215702335275820, guid: 06b48aff4ac8a7047984b48cbb0ab4ce,
@@ -30602,7 +30602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 30, y: -137}
+  m_AnchoredPosition: {x: 30, y: -80}
   m_SizeDelta: {x: 770, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &6167848219615656614
@@ -30781,7 +30781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Accuraccy
+  m_text: Accuracy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06b48aff4ac8a7047984b48cbb0ab4ce, type: 2}
   m_sharedMaterial: {fileID: -5151215702335275820, guid: 06b48aff4ac8a7047984b48cbb0ab4ce,
@@ -30851,7 +30851,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6167848219631840986}
-    characterCount: 9
+    characterCount: 8
     spriteCount: 0
     spaceCount: 0
     wordCount: 1

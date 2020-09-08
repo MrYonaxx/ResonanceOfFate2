@@ -73,8 +73,8 @@ namespace VoiceActing
         [SerializeField]
         protected AudioClip cancelClip;
 
-        protected int currentTimeBeforeRepeat = -1;
-        protected int currentRepeatInterval = -1;
+        protected float currentTimeBeforeRepeat = -1;
+        protected float currentRepeatInterval = -1;
         protected int lastDirection = 0; // 2 c'est bas, 8 c'est haut (voir numpad)
         protected int indexLimit = 0;
 
@@ -239,38 +239,38 @@ namespace VoiceActing
         // Check si on peut repeter l'input
         protected bool CheckRepeat()
         {
-            if (currentRepeatInterval == -1)
+            if (currentRepeatInterval == -100)
             {
-                if (currentTimeBeforeRepeat == -1)
+                if (currentTimeBeforeRepeat == -100)
                 {
-                    currentTimeBeforeRepeat = timeBeforeRepeat;
+                    currentTimeBeforeRepeat = timeBeforeRepeat * 0.016f; // (0.016f = 60 fps et opti de la division)
                     return true;
                 }
-                else if (currentTimeBeforeRepeat == 0)
+                else if (currentTimeBeforeRepeat <= 0)
                 {
-                    currentRepeatInterval = repeatInterval;
+                    currentRepeatInterval = repeatInterval * 0.016f;// (0.016f = 60 fps et opti de la division)
                 }
                 else
                 {
-                    currentTimeBeforeRepeat -= 1;
+                    currentTimeBeforeRepeat -= Time.deltaTime;
                 }
             }
-            else if (currentRepeatInterval == 0)
+            else if (currentRepeatInterval <= 0)
             {
-                currentRepeatInterval = repeatInterval;
+                currentRepeatInterval = repeatInterval * 0.016f;// (0.016f = 60 fps et opti de la division)
                 return true;
             }
             else
             {
-                currentRepeatInterval -= 1;
+                currentRepeatInterval -= Time.deltaTime;
             }
             return false;
         }
 
         public void StopRepeat()
         {
-            currentRepeatInterval = -1;
-            currentTimeBeforeRepeat = -1;
+            currentRepeatInterval = -100;
+            currentTimeBeforeRepeat = -100;
         }
 
         protected void MoveScrollRect()

@@ -75,7 +75,7 @@ namespace VoiceActing
                 canInteract = false;
             else
                 canInteract = true;
-            Debug.Log(chestDatabase.GetValue(chestID));
+            //Debug.Log(chestDatabase.GetValue(chestID));
             DrawChest();
         }
 

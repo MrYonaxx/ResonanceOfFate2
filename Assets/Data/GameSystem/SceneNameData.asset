@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenesID:
   - Assets/Scenes/TitleScreen.unity
-  - Assets/Scenes/SampleScene.unity
   - Assets/Scenes/Tuto/Tuto1.unity
   - Assets/Scenes/Tuto/Tuto2.unity
   - Assets/Scenes/Tuto/Tuto3.unity
@@ -44,8 +43,8 @@ MonoBehaviour:
   - Assets/Scenes/DeepSpace/DeepSpace1.unity
   - Assets/Scenes/DeepSpace/SeraphicGate1.unity
   - Assets/Scenes/DeepSpace/SeraphicGate2.unity
+  - Assets/Scenes/SampleScene.unity
   scenesNames:
-  - 
   - 
   - Mysterious Cave
   - Mysterious Cave - Bridge
@@ -76,3 +75,4 @@ MonoBehaviour:
   - Seraphic Gate 1F
   - Seraphic Gate
   - The end
+  - 

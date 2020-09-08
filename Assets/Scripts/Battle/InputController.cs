@@ -127,7 +127,7 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-        private void Start()
+        protected override void Start()
         {
             base.Start();
             feverTimeManager.OnFeverDecision += CallFeverDecision;

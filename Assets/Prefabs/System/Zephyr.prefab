@@ -286,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &752288879
 Transform:
   m_ObjectHideFlags: 0
@@ -356,6 +356,7 @@ MonoBehaviour:
   stopTime: 1
   manualTarget: 0
   actionMode: 0
+  animationNumber: 1
   targetDebug: {fileID: 0}
 --- !u!95 &752288880
 Animator:
@@ -891,6 +892,7 @@ MonoBehaviour:
   stopTime: 1
   manualTarget: 0
   actionMode: 1
+  animationNumber: 1
   targetDebug: {fileID: 0}
 --- !u!95 &1230295658
 Animator:
@@ -4324,6 +4326,7 @@ MonoBehaviour:
   stopTime: 1
   manualTarget: 0
   actionMode: 1
+  animationNumber: 2
   targetDebug: {fileID: 0}
 --- !u!95 &2465405845326531124
 Animator:
@@ -4432,6 +4435,7 @@ MonoBehaviour:
   stopTime: 1
   manualTarget: 0
   actionMode: 1
+  animationNumber: 1
   targetDebug: {fileID: 0}
 --- !u!95 &2465405845396048568
 Animator:
@@ -4763,7 +4767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2465405846000120867
 Transform:
   m_ObjectHideFlags: 0
@@ -4833,6 +4837,7 @@ MonoBehaviour:
   stopTime: 1
   manualTarget: 0
   actionMode: 1
+  animationNumber: 1
   targetDebug: {fileID: 0}
 --- !u!95 &2465405846000120868
 Animator:
@@ -4870,7 +4875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2465405846020354420
 Transform:
   m_ObjectHideFlags: 0
@@ -4940,6 +4945,7 @@ MonoBehaviour:
   stopTime: 1
   manualTarget: 0
   actionMode: 1
+  animationNumber: 1
   targetDebug: {fileID: 0}
 --- !u!95 &2465405846020354421
 Animator:

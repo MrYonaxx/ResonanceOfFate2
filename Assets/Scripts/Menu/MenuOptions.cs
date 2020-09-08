@@ -120,6 +120,7 @@ namespace VoiceActing
         private void Start()
         {
             optionsList.OnQuit += CloseMenu;
+            optionsList.OnValidate += ApplyOptions;
         }
 
         public override void OpenMenu()
@@ -142,6 +143,12 @@ namespace VoiceActing
             canInput = false;
             base.CloseMenu();
 
+        }
+
+        public void ApplyOptions(int i)
+        {
+            RewritePlayerPrefs();
+            ApplyChange();
         }
 
         protected void Update()
@@ -184,7 +191,7 @@ namespace VoiceActing
         {
             indexOptions[indexFullscreen] = PlayerPrefs.GetInt("Fullscreen");
             indexOptions[indexResolution] = PlayerPrefs.GetInt("Resolution");
-            indexOptions[indexQuality] = PlayerPrefs.GetInt("Quality");
+            indexOptions[indexQuality] = PlayerPrefs.GetInt("Quality", QualitySettings.names.Length-1);
 
             indexOptions[indexMusic] = PlayerPrefs.GetInt("MusicVolume", 10);
             indexOptions[indexSound] = PlayerPrefs.GetInt("SoundVolume", 10);
@@ -285,7 +292,6 @@ namespace VoiceActing
 
         public void ActivateFullscreen()
         {
-            Screen.fullScreen = true;
             if (indexOptions[indexFullscreen] == 0)
             {
                 Screen.fullScreen = true;

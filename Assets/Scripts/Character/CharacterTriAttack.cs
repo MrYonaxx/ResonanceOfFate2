@@ -243,6 +243,7 @@ namespace VoiceActing
             isTriAttacking = false;
             characterMovement.EndMove();
             characterAnimation.State = CharacterState.Idle;
+            if (OnTimeChanged != null) OnTimeChanged.Invoke(0, 0);
             if (OnEndAction != null) OnEndAction.Invoke(idAttacker);
         }
 

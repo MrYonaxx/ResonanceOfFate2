@@ -69,6 +69,13 @@ namespace VoiceActing
             index = -2;
         }
 
+        private IEnumerator StopInputCoroutine(float time)
+        {
+            canInput = false;
+            yield return new WaitForSeconds(time);
+            canInput = true;
+        }
+
         private void Update()
         {
             if (canInput == false)
@@ -97,6 +104,7 @@ namespace VoiceActing
             else if (index == -1)
             {
                 titleAnimator.SetTrigger("Menu");
+                StartCoroutine(StopInputCoroutine(1f));
             }
             index += 1;
         }

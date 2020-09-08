@@ -30,16 +30,17 @@ namespace VoiceActing
             controllers = Input.GetJoystickNames();
             for (int i = 0; i < controllers.Length; i++)
             {
+#if UNITY_EDITOR
                 Debug.Log(controllers[i]);
+#endif
                 if (controllers[i] == "Wireless Controller")
                 {
-                    Debug.Log("Aye");
                     control.SetConfigurationData(controllerConfigPS4);
                 }
             }
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
             Controller();
         }

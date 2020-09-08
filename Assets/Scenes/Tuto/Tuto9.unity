@@ -48741,7 +48741,7 @@ MonoBehaviour:
   normalLoop: {fileID: 0}
   battleLoop: {fileID: 0}
   battleTrack: 0
-  stopMusic: 0
+  stopMusic: 1
 --- !u!1 &1360446594
 GameObject:
   m_ObjectHideFlags: 0

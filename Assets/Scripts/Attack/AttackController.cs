@@ -66,6 +66,9 @@ namespace VoiceActing
         [SerializeField]
         bool actionMode = true; // Si la camera Action mode doit s'activer
 
+        [SerializeField]
+        int animationNumber = 1;
+
         [Title("Debug")]
         [SerializeField]
         Transform targetDebug;
@@ -117,7 +120,8 @@ namespace VoiceActing
             if(anim == null)
                 anim = GetComponent<Animator>();
             anim.SetTrigger("Start");
-            anim.SetInteger("Animation", Random.Range(0, 2));
+            if(animationNumber >= 2) // Le if n'est pas nécessaire, c'est juste pour éviter un warning
+                anim.SetInteger("Animation", Random.Range(0, animationNumber));
             if(stopTime == true)
                 feedbackManager.SetMotionSpeed(0f);
             target = newTarget;
