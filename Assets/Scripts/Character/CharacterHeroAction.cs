@@ -108,7 +108,10 @@ namespace VoiceActing
         {
             return cursorObject.transform.position;// - this.transform.localPosition;
         }
-
+        public Transform GetCursorTransform()
+        {
+            return cursorObject.transform;// - this.transform.localPosition;
+        }
         public void ShowCursor(bool b)
         {
             cursorObject.gameObject.SetActive(b);

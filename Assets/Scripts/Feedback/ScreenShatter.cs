@@ -178,7 +178,7 @@ namespace VoiceActing
             t += Time.deltaTime;
             if (t >= 2)
             {
-                Debug.Log("Loop");
+                //Debug.Log("Loop");
                 t = 2f;
                 this.enabled = false;
                 return;

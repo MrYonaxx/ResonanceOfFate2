@@ -819,6 +819,21 @@ namespace VoiceActing
                 SwitchTargetLeft();
             else if (Input.GetAxis(control.dpadHorizontal) < 0 && padDown == false)
                 SwitchTargetRight();
+            else if (Input.GetAxis(control.dpadVertical) > 0 && padDown == false)
+            {
+                if(InputState == InputState.HeroAction)
+                {
+                    cameraLock.SetFocus(c.CharacterHeroAction.GetCursorTransform());
+                }
+            }
+            else if (Input.GetAxis(control.dpadVertical) < 0 && padDown == false)
+            {
+                if (InputState == InputState.HeroAction || InputState == InputState.Default)
+                {
+                    cameraLock.SetFocus(c.CharacterCenter);
+                    cameraLock.SetState(0);
+                }
+            }
             else if (Input.GetAxis(control.dpadHorizontal) == 0 && padDown == true)
                 padDown = false;
         }

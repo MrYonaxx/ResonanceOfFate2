@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onHitParticle: {fileID: 0}
+  particleOffset: {x: 0, y: 0, z: 0}
 --- !u!135 &8941018979368324456
 SphereCollider:
   m_ObjectHideFlags: 0

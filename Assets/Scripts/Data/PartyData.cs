@@ -145,7 +145,10 @@ namespace VoiceActing
         /* ======================================== *\
          *                FUNCTIONS                 *
         \* ======================================== */
-
+        public void ResetPartyData()
+        {
+            partyInitialized = null;
+        }
         public void SetInitialize()
         {
             partyInitialized = new PartyInitialized();

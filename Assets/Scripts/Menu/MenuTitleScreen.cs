@@ -112,6 +112,7 @@ namespace VoiceActing
         private void NewGame()
         {
             saveLoadManager.PartyData.SceneName = startScene;
+            saveLoadManager.PartyData.ResetPartyData();
             StartCoroutine(StartGameCoroutine());
         }
 
